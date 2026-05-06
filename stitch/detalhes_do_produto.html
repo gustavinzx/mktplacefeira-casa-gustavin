@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-secondary": "#ffffff",
+                    "outline": "#707a6b",
+                    "surface-container-highest": "#e3e3de",
+                    "surface": "#faf9f4",
+                    "tertiary-fixed": "#ffdad6",
+                    "on-tertiary-fixed": "#410002",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdbce",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "tertiary-container": "#e41f25",
+                    "on-error-container": "#93000a",
+                    "secondary": "#a63b00",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-container": "#5a1c00",
+                    "inverse-surface": "#30312e",
+                    "secondary-fixed-dim": "#ffb599",
+                    "surface-variant": "#e3e3de",
+                    "surface-bright": "#faf9f4",
+                    "on-secondary-fixed": "#370e00",
+                    "primary-container": "#30852f",
+                    "outline-variant": "#bfcab9",
+                    "on-primary-fixed": "#002202",
+                    "on-primary-container": "#f8fff0",
+                    "on-surface-variant": "#40493c",
+                    "primary": "#0e6b17",
+                    "primary-fixed-dim": "#83db79",
+                    "on-surface": "#1b1c19",
+                    "tertiary": "#bb0014",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fc6c29",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e9e8e3",
+                    "inverse-primary": "#83db79",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-background": "#1b1c19",
+                    "background": "#faf9f4",
+                    "surface-tint": "#126e19",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-container": "#efeee9",
+                    "surface-dim": "#dbdad5",
+                    "primary-fixed": "#9ef892",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "margin-desktop": "80px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-stone-900/90 backdrop-blur-md border-b border-stone-100 dark:border-stone-800 shadow-sm docked full-width top-0 sticky z-40">
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto">
+<a class="text-xl font-extrabold text-green-700 dark:text-green-500 tracking-tighter" href="#">feira.casa</a>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-green-700 dark:text-green-400 font-bold font-sans text-sm Plus Jakarta Sans" href="#">Início</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-sans text-sm Plus Jakarta Sans hover:bg-stone-50 transition-colors" href="#">Explorar</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-sans text-sm Plus Jakarta Sans hover:bg-stone-50 transition-colors" href="#">Pedidos</a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-stone-500 hover:bg-stone-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8 md:py-12 mb-24 md:mb-0">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-8 text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-primary" href="#">Início</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Frutas</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">Morango Silvestre Orgânico</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Gallery Section (Bento Inspired) -->
+<div class="lg:col-span-7 grid grid-cols-4 grid-rows-4 gap-sm h-[400px] md:h-[600px]">
+<div class="col-span-4 row-span-3 rounded-xl overflow-hidden shadow-sm bg-surface-container">
+<img alt="Morangos silvestres" class="w-full h-full object-cover" data-alt="Close-up of vibrant red wild strawberries in a rustic wooden basket with soft morning light and green leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKqZ6JQxhCCJ3m1eKRG3VwE9WK6bJ1SgG1I7qL8ZzXDgOBbyZtXFJdoSgg1msl8vPn_dfS9QCfuemld81GxCEICh3E1va9zeOCm9hMQK7H75STntDyEbgcaJ4GVBgFNgtNRSYSlQ1hcObvkslW1KKe9FgSQkTmUhKwM38KgOJNAQS2yDZNS6o7tlfAoDCk4Tn951_44T9nYMfWdLtW_dz1pz1ay7reGmycmxprHTabvlc3oJzL04tJr9kDsYMmoM7ROJjNs992jBo"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-sm bg-surface-container">
+<img alt="Morangos detalhes" class="w-full h-full object-cover" data-alt="Macro photography of a single wild strawberry showing tiny seeds and dewdrops on a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC9MVcjsq3J1z9sXzTPd8_skDDopba7oD4wp_efLiLBCj3mWy_P3-JZNtn9TtZYgSI9xs06qimW3VwlgsPdHngkPsdOSbllSmQC6EIflMjJp_jK5oPTROou21xlLFH8wkrDCOVFH4GRoABn8N6ZmyGntFralW2oa6s1bc0ySdCc50-JFGWQa2dQsJPvd9sj2uuRnN6L-UZzfJbiUnupG0pMSrnYCaO8FbV4-9sLMzfFR-JhFQuvj-jsEJt4ej6yxAVScwMP_C4DMM"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-sm bg-surface-container">
+<img alt="Feira orgânica" class="w-full h-full object-cover" data-alt="Sunlit open-air market stall with fresh organic produce in wooden crates under a striped awning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1HB5huz1SXJ9IBIqf5tdJ7uy7ln68tbaq7eiPq2UlvafqZ309UDDCTbw0NDQapDAOmJU0DADKo8r-fOCm4hzJfzO4WWOnRuOZXVp0WO_n51dYCKA-Q5qPM3M4VS7LFcWTVhfd_klepjyE3BmuPB2crEA6LXa8wls_jRz5z7zeXaqPtzSahcPd9riOKJeVcOE-xpAyKnoidvrqI2hjmXTObGwxJnwWRlBomYEvsEaxiWYe8PC3ZfKYK2Zdx3Ec40PhtwTzgn0dIQQ"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-sm bg-surface-container relative">
+<img alt="Bandeja de morangos" class="w-full h-full object-cover opacity-50" data-alt="Artisanal basket of freshly picked red strawberries on a wooden table outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvRy49AyMay61hSYC7DgzG99V55VHW-Zs0sODAcgY3KID3KAJ3bhIzax1tRgzTkoDYgldjCkTUHrk-dvtfTZiFAobxyFD97ESOI5_u-iZpsHXeLcOKiiKBi1jnJXlcYTuBv-KjH-QJWnzlevTmLV4fDy_APZlcp1gyYxqrpmD-h2Ji0k5y5hL3oRtn_c6qI4VEjXGYAeBAV5R53_9EcC1a1rixmYYf_4-SIH9pl_M19TZ2SC-NW8bzTqVTpxrS8vhSxrsdeiWnDdI"/>
+<div class="absolute inset-0 flex items-center justify-center font-title-lg text-white font-bold">+2</div>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl bg-primary-container/10 flex items-center justify-center border-2 border-dashed border-primary/20">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="videocam">videocam</span>
+</div>
+</div>
+<!-- Product Info Section -->
+<div class="lg:col-span-5 flex flex-col gap-md">
+<div class="flex flex-wrap gap-xs mb-2">
+<span class="bg-primary text-white px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="leafy_canvas" style="font-variation-settings: 'FILL' 1;">eco</span>
+                        Produto Orgânico
+                    </span>
+<span class="bg-secondary text-white px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule" style="font-variation-settings: 'FILL' 1;">timer</span>
+                        Colhido Hoje
+                    </span>
+</div>
+<div class="space-y-2">
+<h1 class="font-display-lg text-display-lg text-on-surface">Morango Silvestre Orgânico</h1>
+<p class="text-on-surface-variant">Colhidos manualmente ao amanhecer para garantir o máximo de doçura e aroma natural. Sem agrotóxicos.</p>
+</div>
+<div class="py-md border-y border-outline-variant/30 flex items-end gap-2">
+<span class="font-headline-md text-headline-md text-primary">R$ 18,90</span>
+<span class="font-title-lg text-title-lg text-on-surface-variant mb-1">/ bandeja 250g</span>
+</div>
+<!-- Feirante Card -->
+<div class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-stone-100">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-dim">
+<img alt="Dona Maria" class="w-full h-full object-cover" data-alt="Portrait of a smiling elderly Brazilian woman wearing a colorful apron at a farmers market" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouR88vGAIeGeooMv8Vls86ideCjhkRxDGe4Vj6xeMMezS1PtxADZl0f1tss6sHaPjXm8XfvfPgwaNiBcdoVtFWiYBs8-efsB5UmK_oqwsGUK_oYzTRJCHfbwUIoT_MvWwL96nJ1_xuT2A7YDkmgmPdxpkLqqMAfdDZ7Tvs-I8s91nXaJTJIQJO-CsCBNfHUVnqN_DtYd9r3cDj7ZeOuDSSthgFmrSMONs23DKD1ecFlx4M0ouTrRj1_Wx0Zu4Jeu16nrnooDG_8E"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Produtor</p>
+<h3 class="font-title-lg text-title-lg text-on-surface">Barraca da Dona Maria</h3>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">4.9</span>
+<span class="text-on-surface-variant font-normal text-sm ml-1">(120 avaliações)</span>
+</div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-md">
+<div class="flex items-center border border-outline-variant rounded-full p-1 bg-white">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="w-12 text-center font-bold text-title-lg">1</span>
+<button class="w-10 h-10 flex items-center justify-center text-primary hover:bg-primary-container/10 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<p class="text-label-sm text-on-surface-variant">Restam 8 unidades</p>
+</div>
+<div class="flex gap-sm mt-2">
+<button class="flex-1 bg-primary text-on-primary py-4 rounded-xl font-title-lg font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+                            Adicionar ao Carrinho
+                        </button>
+<button class="p-4 border border-outline-variant rounded-xl text-on-surface-variant hover:bg-white hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<!-- Delivery Info -->
+<div class="mt-4 flex flex-col gap-3">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="text-body-md">Entrega grátis hoje para sua região</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+<span class="text-body-md">Garantia de frescor feira.casa</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Details Tabs/Grid -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-white p-md rounded-2xl shadow-sm border border-stone-50">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
+</div>
+<h4 class="font-title-lg text-title-lg mb-2">Origem Sustentável</h4>
+<p class="text-on-surface-variant">Cultivados em sistema de agroecologia no Vale do Paraíba, preservando a fauna e flora local.</p>
+</div>
+<div class="bg-white p-md rounded-2xl shadow-sm border border-stone-50">
+<div class="w-12 h-12 bg-secondary-container/20 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="timer">timer</span>
+</div>
+<h4 class="font-title-lg text-title-lg mb-2">Frescor Máximo</h4>
+<p class="text-on-surface-variant">Do pé para sua mesa em menos de 24 horas. Colheita diária conforme demanda.</p>
+</div>
+<div class="bg-white p-md rounded-2xl shadow-sm border border-stone-50">
+<div class="w-12 h-12 bg-tertiary-container/20 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<h4 class="font-title-lg text-title-lg mb-2">Certificação</h4>
+<p class="text-on-surface-variant">Produto com selo orgânico auditado e rastreabilidade total desde a semente.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white dark:bg-stone-950 border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[11px] font-bold Plus Jakarta Sans">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-xl px-3 py-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="text-[11px] font-bold Plus Jakarta Sans">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[11px] font-bold Plus Jakarta Sans">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[11px] font-bold Plus Jakarta Sans">Perfil</span>
+</a>
+</nav>
+</body></html>

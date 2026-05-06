@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#0e6b17",
+                "outline-variant": "#bfcab9",
+                "on-secondary": "#ffffff",
+                "on-primary": "#ffffff",
+                "secondary": "#a63b00",
+                "surface-variant": "#e3e3de",
+                "surface-container-low": "#f5f4ef",
+                "error-container": "#ffdad6",
+                "surface": "#faf9f4",
+                "surface-bright": "#faf9f4",
+                "on-tertiary-container": "#fffbff",
+                "secondary-container": "#fc6c29",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-highest": "#e3e3de",
+                "on-tertiary-fixed-variant": "#93000d",
+                "tertiary-fixed": "#ffdad6",
+                "primary-fixed-dim": "#83db79",
+                "on-tertiary-fixed": "#410002",
+                "on-primary-container": "#f8fff0",
+                "tertiary": "#bb0014",
+                "on-error": "#ffffff",
+                "on-primary-fixed": "#002202",
+                "background": "#faf9f4",
+                "surface-container-high": "#e9e8e3",
+                "on-primary-fixed-variant": "#00530b",
+                "primary-fixed": "#9ef892",
+                "tertiary-fixed-dim": "#ffb4ab",
+                "on-secondary-fixed": "#370e00",
+                "inverse-surface": "#30312e",
+                "inverse-on-surface": "#f2f1ec",
+                "secondary-fixed": "#ffdbce",
+                "primary-container": "#30852f",
+                "on-surface": "#1b1c19",
+                "surface-container": "#efeee9",
+                "on-tertiary": "#ffffff",
+                "on-background": "#1b1c19",
+                "inverse-primary": "#83db79",
+                "surface-tint": "#126e19",
+                "on-secondary-fixed-variant": "#7f2b00",
+                "on-error-container": "#93000a",
+                "on-surface-variant": "#40493c",
+                "secondary-fixed-dim": "#ffb599",
+                "outline": "#707a6b",
+                "tertiary-container": "#e41f25",
+                "surface-dim": "#dbdad5",
+                "on-secondary-container": "#5a1c00",
+                "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base": "8px",
+                "sm": "12px",
+                "margin-desktop": "80px",
+                "xl": "64px",
+                "lg": "40px",
+                "md": "24px",
+                "xs": "4px",
+                "margin-mobile": "20px",
+                "gutter": "16px"
+            },
+            "fontFamily": {
+                "body-md": ["Plus Jakarta Sans"],
+                "title-lg": ["Plus Jakarta Sans"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "label-sm": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bfcab9; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background overflow-hidden">
+<!-- Background Content (Simulated Screen 22: Settings) -->
+<div class="fixed inset-0 flex h-screen w-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<nav class="hidden lg:flex flex-col p-6 space-y-2 h-screen fixed left-0 top-0 bg-zinc-50 dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 w-64 z-10">
+<div class="font-black text-green-700 dark:text-green-500 mb-8 text-2xl">FeiraDigital</div>
+<div class="flex items-center space-x-3 mb-8 p-3 bg-white dark:bg-zinc-900 rounded-xl shadow-sm">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Close-up portrait of a friendly smiling Brazilian farmer wearing a straw hat in a sunlit field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtsquFd0aCQL4pKgtaSeQr0r1_79h5Y71NT6xkJcxqEp3BxuwsXtgwfADdk14gCF1xQf9GZzVSqKVEKM7JaHoT-Y5d4aJ0NLj1oJ0C4tHQNXB3NewVsgEF7ENmUHjzUb6hB-ncMAxEVpJkaiJIN3R7JOlAI7L4rgvj62qCotrsBcyLxX-7mSCDsR_P0ugs8xgSvErFnKLf1owmOscqD-OY-vgLt8BTa5UYrDamVh3srq_NeX06J2LRBDGZr8Dohor6abmb2C8ylHA"/>
+<div>
+<p class="font-bold text-sm">Banca do Zé</p>
+<p class="text-xs text-zinc-500">Produtor Platina</p>
+</div>
+</div>
+<a class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:translate-x-1 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:translate-x-1 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Vendas</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:translate-x-1 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium">Produtos</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:translate-x-1 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-medium">Logística</span>
+</a>
+<a class="flex items-center space-x-3 p-3 bg-green-600 text-white rounded-lg shadow-md shadow-green-200 dark:shadow-none cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Configurações</span>
+</a>
+</nav>
+<!-- Main Content Area (Blurred for Modal) -->
+<main class="flex-1 lg:ml-64 p-8 filter blur-sm">
+<header class="mb-8">
+<h1 class="font-headline-md text-headline-md text-on-background mb-2">Configurações da Banca</h1>
+<p class="text-on-surface-variant">Gerencie as informações da sua banca e horários de atendimento.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-xl border border-zinc-100 shadow-sm">
+<h2 class="font-title-lg text-title-lg mb-4">Dados Gerais</h2>
+<div class="space-y-4">
+<div class="h-10 bg-zinc-100 rounded animate-pulse"></div>
+<div class="h-10 bg-zinc-100 rounded animate-pulse"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-zinc-100 shadow-sm">
+<h2 class="font-title-lg text-title-lg mb-4">Horários de Funcionamento</h2>
+<div class="space-y-4">
+<div class="h-10 bg-zinc-100 rounded animate-pulse w-3/4"></div>
+<div class="h-32 bg-zinc-100 rounded animate-pulse"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
+<!-- Modal Container -->
+<div class="bg-surface w-full max-w-2xl max-h-[921px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20">
+<!-- Modal Header -->
+<div class="p-6 border-b border-surface-container-highest flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center space-x-3">
+<div class="bg-primary-container text-on-primary-container p-2 rounded-lg">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<h2 class="font-title-lg text-title-lg text-on-surface">Horários de Funcionamento</h2>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Configuração Semanal</p>
+</div>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+<p class="text-body-md text-on-surface-variant mb-6">Defina os períodos em que sua banca estará disponível para receber pedidos e realizar entregas.</p>
+<div class="space-y-4">
+<!-- Day Row Template: Monday -->
+<div class="bg-white dark:bg-zinc-800 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center space-x-4 min-w-[120px]">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-bold text-on-surface">Segunda</span>
+</div>
+<div class="flex-1 flex flex-wrap items-center gap-3">
+<div class="flex items-center space-x-2 bg-surface-container rounded-lg px-3 py-1.5">
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="07:00"/>
+<span class="text-zinc-400">até</span>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="12:00"/>
+</div>
+<span class="text-xs font-bold text-outline-variant">+</span>
+<div class="flex items-center space-x-2 bg-surface-container rounded-lg px-3 py-1.5">
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="14:00"/>
+<span class="text-zinc-400">até</span>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="18:00"/>
+</div>
+<button class="text-tertiary hover:bg-error-container/30 p-1.5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<button class="flex items-center space-x-1 text-primary text-xs font-bold hover:underline">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Intervalo</span>
+</button>
+</div>
+</div>
+<!-- Day Row: Tuesday -->
+<div class="bg-white dark:bg-zinc-800 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center space-x-4 min-w-[120px]">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-bold text-on-surface">Terça</span>
+</div>
+<div class="flex-1 flex items-center gap-3">
+<div class="flex items-center space-x-2 bg-surface-container rounded-lg px-3 py-1.5">
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="07:00"/>
+<span class="text-zinc-400">até</span>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="18:00"/>
+</div>
+</div>
+<button class="flex items-center space-x-1 text-primary text-xs font-bold hover:underline">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Intervalo</span>
+</button>
+</div>
+</div>
+<!-- Day Row: Wednesday -->
+<div class="bg-white dark:bg-zinc-800 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center space-x-4 min-w-[120px]">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-bold text-on-surface">Quarta</span>
+</div>
+<div class="flex-1 flex items-center gap-3">
+<div class="flex items-center space-x-2 bg-surface-container rounded-lg px-3 py-1.5">
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="07:00"/>
+<span class="text-zinc-400">até</span>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-20" type="time" value="18:00"/>
+</div>
+</div>
+<button class="flex items-center space-x-1 text-primary text-xs font-bold hover:underline">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Intervalo</span>
+</button>
+</div>
+</div>
+<!-- Day Row: Sunday (Closed) -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-zinc-100 border-dashed">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center space-x-4 min-w-[120px]">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-bold text-on-surface-variant">Domingo</span>
+</div>
+<div class="flex-1">
+<span class="text-sm italic text-on-surface-variant">Fechado para descanso e colheita</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Holiday / Special Dates -->
+<div class="mt-8 pt-6 border-t border-surface-container-highest">
+<h3 class="font-title-lg text-body-md font-bold mb-4 flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary">event_busy</span>
+<span>Exceções e Feriados</span>
+</h3>
+<div class="bg-secondary-fixed/30 p-4 rounded-xl border border-secondary/20">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="bg-secondary-container text-on-secondary p-1.5 rounded-md">
+<span class="material-symbols-outlined text-[20px]">celebration</span>
+</div>
+<div>
+<p class="font-bold text-sm">Feriado de Tiradentes</p>
+<p class="text-xs text-secondary">21 de Abril • Horário reduzido (07h - 12h)</p>
+</div>
+</div>
+<button class="p-1 hover:bg-secondary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined text-secondary">edit</span>
+</button>
+</div>
+</div>
+<button class="mt-4 w-full py-3 border-2 border-dashed border-outline-variant text-outline rounded-xl hover:bg-surface-container-low transition-colors font-bold text-sm flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined">add</span>
+<span>Adicionar data especial</span>
+</button>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-6 border-t border-surface-container-highest bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center text-xs text-on-surface-variant bg-surface-container-low px-3 py-2 rounded-full">
+<span class="material-symbols-outlined text-[16px] mr-2 text-primary">info</span>
+<span>As alterações levam até 5 min para aparecer no app</span>
+</div>
+<div class="flex items-center space-x-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl font-bold text-sm text-outline border border-outline-variant hover:bg-zinc-50 transition-colors">
+                        Cancelar
+                    </button>
+<button class="flex-1 sm:flex-none px-8 py-2.5 rounded-xl font-bold text-sm bg-primary text-on-primary shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-95">
+                        Salvar Horários
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] z-50 rounded-t-2xl">
+<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-green-600 transition-transform active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-green-600 transition-transform active:scale-90">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Feiras</span>
+</button>
+<button class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-green-600 transition-transform active:scale-90">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Cestas</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-xl px-3 py-1 transition-transform active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Perfil</span>
+</button>
+</div>
+</body></html>

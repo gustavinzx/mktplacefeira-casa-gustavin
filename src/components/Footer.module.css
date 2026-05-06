@@ -1,0 +1,200 @@
+.footer {
+  background-color: #ffffff;
+  border-top: 1px solid #f1f0ea;
+  padding: 80px 0 40px;
+  color: #40493c;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  color: #0e6b17;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.logo strong {
+  color: #a63b00;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #707a6b;
+  max-width: 320px;
+}
+
+.linksCol h4, .socialCol h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1b1c19;
+  margin-bottom: 24px;
+}
+
+.linksCol ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linksCol a {
+  color: #40493c;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.linksCol a:hover {
+  color: #0e6b17;
+}
+
+.socialCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 16px;
+}
+
+.socialIcons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #fcfbf7;
+  border-radius: 12px;
+  color: #0e6b17;
+  transition: all 0.2s;
+}
+
+.socialIcons a:hover {
+  background: #0e6b17;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.bottom {
+  border-top: 1px solid #f1f0ea;
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #707a6b;
+}
+
+.bottomActions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.madeWith {
+  font-size: 14px;
+  color: #707a6b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adminWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.adminAccess {
+  color: #e3e3de;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.adminAccess:hover {
+  color: #0e6b17;
+}
+
+.adminTooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  background-color: #1b1c19;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.adminWrapper:hover .adminTooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 60px 0 30px;
+  }
+  .container {
+    padding: 0 20px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+  .bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .bottomActions {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

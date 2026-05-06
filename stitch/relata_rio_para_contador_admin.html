@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Administrativo Master - Relatório Contábil</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-background": "#1b1c19",
+                        "inverse-surface": "#30312e",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#5a1c00",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-container-high": "#e9e8e3",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "tertiary-container": "#e41f25",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493c",
+                        "primary-container": "#30852f",
+                        "on-secondary-fixed": "#370e00",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#126e19",
+                        "background": "#faf9f4",
+                        "surface-dim": "#dbdad5",
+                        "on-tertiary-fixed": "#410002",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "primary-fixed-dim": "#83db79",
+                        "outline-variant": "#bfcab9",
+                        "secondary-fixed-dim": "#ffb599",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "primary": "#0e6b17",
+                        "secondary": "#a63b00",
+                        "surface-container-highest": "#e3e3de",
+                        "primary-fixed": "#9ef892",
+                        "outline": "#707a6b",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "secondary-container": "#fc6c29",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "tertiary": "#bb0014",
+                        "on-primary-fixed": "#002202",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-desktop": "80px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-40 border-b bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm flex justify-between items-center h-16 px-6 font-plus-jakarta-sans">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-green-700 dark:text-green-400">Painel Administrativo Master</span>
+<div class="hidden md:flex items-center bg-zinc-100 dark:bg-zinc-800 rounded-full px-4 py-1.5 gap-2">
+<span class="material-symbols-outlined text-zinc-500 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 text-zinc-600 w-64" placeholder="Buscar relatório..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-fixed overflow-hidden">
+<img alt="Avatar do Administrador" data-alt="close-up portrait of a professional male administrator in his 40s with a friendly expression and clean-cut appearance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8-EOBVO9JRgiOfKxmvsvF6GmgEnPMY37_V953ZuqorNYNEeyYVgHhK_i2qgKAQJzD4CSHCdOvuLkQOLw8Rs4O5_lWNx5TdHF4l__fd1eL-Blhz4UiRX0_QSSLiS24sqobiBqmJZeKOS2ISjSXqP8bLCPDFIbFaDb6mpi5Tzc6ihHcFw29aXR1uK4sgI-XT2cK8hJWlckbc_BdyQO3UafYh3g5oO9_P3DaP2HoViSbnsc2KV4CQ47Nt3v3SjaS9PADvi-0eBshahI"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 flex flex-col pt-20 pb-6 font-plus-jakarta-sans z-30">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-green-700">Administração</h2>
+<p class="text-xs text-zinc-500">Gestão Centralizada</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-sm font-medium">Notas Fiscais</span>
+</a>
+<!-- Active State: Relatórios -->
+<a class="flex items-center gap-3 px-4 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="text-sm font-medium">Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-sm font-medium">Gestão de Perfis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Novo Relatório
+            </button>
+<div class="mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+<a class="flex items-center gap-3 px-4 py-2 text-zinc-600 dark:text-zinc-400 hover:text-error transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 pt-16 min-h-screen bg-background">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="text-primary font-bold text-label-sm tracking-wider uppercase">Contabilidade &amp; Fiscal</span>
+<h1 class="font-display-lg text-display-lg text-on-background mt-2">Relatório para Contador</h1>
+<p class="text-on-surface-variant font-body-md mt-2">Consolidação de dados fiscais e faturamento para exportação mensal.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-high text-on-surface font-bold hover:shadow-md transition-all">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                        Enviar para Contador
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-secondary-container text-on-secondary-container font-bold hover:shadow-md transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Exportar Tudo
+                    </button>
+</div>
+</header>
+<!-- Filters Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="col-span-1 md:col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="font-title-lg text-title-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
+                        Período de Apuração
+                    </h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase">Mês</label>
+<select class="w-full bg-surface rounded-lg border-outline py-2.5 px-4 focus:ring-primary focus:border-primary">
+<option>Setembro 2023</option>
+<option>Agosto 2023</option>
+<option>Julho 2023</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase">Tipo de Dado</label>
+<select class="w-full bg-surface rounded-lg border-outline py-2.5 px-4 focus:ring-primary focus:border-primary">
+<option>Faturamento Bruto</option>
+<option>Impostos Retidos</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="font-title-lg text-title-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance">account_balance</span>
+                        Impostos
+                    </h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">ICMS / ST</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">PIS / COFINS</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">ISS Retido</span>
+</label>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<h3 class="font-title-lg text-title-lg mb-2">Formato</h3>
+<div class="flex flex-wrap gap-2">
+<button class="flex-1 py-2 px-3 bg-surface-container text-on-surface rounded-lg border border-outline-variant hover:bg-primary-fixed transition-colors font-bold text-xs">PDF</button>
+<button class="flex-1 py-2 px-3 bg-primary-container text-white rounded-lg border border-primary transition-colors font-bold text-xs">CSV</button>
+<button class="flex-1 py-2 px-3 bg-surface-container text-on-surface rounded-lg border border-outline-variant hover:bg-primary-fixed transition-colors font-bold text-xs">XML</button>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-4">Arquivo pronto para integração com softwares contábeis (Alterdata, Domínio).</p>
+</div>
+</section>
+<!-- Financial Summary Cards -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white p-8 rounded-xl border-l-8 border-primary shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-bold text-label-sm uppercase">Faturamento Total</span>
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-background">R$ 142.850,00</div>
+<div class="flex items-center gap-2 mt-2 text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                        +12.4% vs mês anterior
+                    </div>
+</div>
+<div class="bg-white p-8 rounded-xl border-l-8 border-secondary shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-bold text-label-sm uppercase">Vendas B2C (CPF)</span>
+<span class="material-symbols-outlined text-secondary" data-icon="person">person</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-background">R$ 58.420,00</div>
+<div class="text-on-surface-variant font-body-md">41% do volume total</div>
+</div>
+<div class="bg-white p-8 rounded-xl border-l-8 border-on-primary-fixed-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-bold text-label-sm uppercase">Vendas B2B (CNPJ)</span>
+<span class="material-symbols-outlined text-on-primary-fixed-variant" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-background">R$ 84.430,00</div>
+<div class="text-on-surface-variant font-body-md">59% do volume total</div>
+</div>
+</section>
+<!-- Detailed Data Table Section -->
+<section class="bg-white rounded-2xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-zinc-50/50">
+<h2 class="font-title-lg text-title-lg">Detalhamento de Notas por Categoria</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-bold uppercase">742 Notas Geradas</span>
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase">Processamento OK</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-bold text-xs uppercase">
+<th class="px-6 py-4">Data/Hora</th>
+<th class="px-6 py-4">Série / N° Nota</th>
+<th class="px-6 py-4">Cliente / Tipo</th>
+<th class="px-6 py-4">Valor Bruto</th>
+<th class="px-6 py-4">Base Cálculo ICMS</th>
+<th class="px-6 py-4">Alíquota</th>
+<th class="px-6 py-4">Imposto Devido</th>
+<th class="px-6 py-4 text-center">Ação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-6 py-4 text-sm">28/09/23 14:22</td>
+<td class="px-6 py-4 text-sm font-bold">001 - 24.892</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold">Mercado das Frutas LTDA</span>
+<span class="text-[10px] text-secondary font-bold uppercase">B2B (CNPJ)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">R$ 1.250,00</td>
+<td class="px-6 py-4 text-sm">R$ 1.250,00</td>
+<td class="px-6 py-4 text-sm">18%</td>
+<td class="px-6 py-4 text-sm font-bold text-tertiary">R$ 225,00</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-6 py-4 text-sm">28/09/23 15:05</td>
+<td class="px-6 py-4 text-sm font-bold">001 - 24.893</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold">Ana Maria Silva</span>
+<span class="text-[10px] text-primary font-bold uppercase">B2C (CPF)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">R$ 84,50</td>
+<td class="px-6 py-4 text-sm">R$ 84,50</td>
+<td class="px-6 py-4 text-sm">7%</td>
+<td class="px-6 py-4 text-sm font-bold text-tertiary">R$ 5,91</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-6 py-4 text-sm">28/09/23 15:40</td>
+<td class="px-6 py-4 text-sm font-bold">001 - 24.894</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold">Restaurante Sabor Verde</span>
+<span class="text-[10px] text-secondary font-bold uppercase">B2B (CNPJ)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">R$ 4.300,00</td>
+<td class="px-6 py-4 text-sm">R$ 4.300,00</td>
+<td class="px-6 py-4 text-sm">12%</td>
+<td class="px-6 py-4 text-sm font-bold text-tertiary">R$ 516,00</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-zinc-50 border-t border-outline-variant flex items-center justify-between">
+<span class="text-xs text-on-surface-variant font-medium italic">Mostrando 3 de 742 lançamentos contábeis.</span>
+<div class="flex gap-1">
+<button class="p-2 border border-outline-variant rounded-md hover:bg-white transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 border border-primary bg-primary text-white rounded-md text-xs font-bold">1</button>
+<button class="px-3 py-1 border border-outline-variant rounded-md text-xs font-bold hover:bg-white">2</button>
+<button class="px-3 py-1 border border-outline-variant rounded-md text-xs font-bold hover:bg-white">3</button>
+<button class="p-2 border border-outline-variant rounded-md hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bottom Note -->
+<footer class="mt-12 p-6 bg-primary-container/10 rounded-2xl border border-primary/20 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h4 class="font-bold text-on-primary-fixed-variant">Aviso Importante</h4>
+<p class="text-sm text-on-primary-fixed-variant opacity-80">Este relatório utiliza a base de dados sincronizada com a SEFAZ. Eventuais cancelamentos de notas devem ser validados diretamente no portal nacional antes do envio definitivo para o SPED Fiscal.</p>
+</div>
+</footer>
+</div>
+</main>
+</body></html>

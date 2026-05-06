@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Administrativo Master - feira.casa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-background": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-container": "#5a1c00",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffdbce",
+                    "surface-container-high": "#e9e8e3",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "tertiary-container": "#e41f25",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#40493c",
+                    "primary-container": "#30852f",
+                    "on-secondary-fixed": "#370e00",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#faf9f4",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#126e19",
+                    "background": "#faf9f4",
+                    "surface-dim": "#dbdad5",
+                    "on-tertiary-fixed": "#410002",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-low": "#f5f4ef",
+                    "primary-fixed-dim": "#83db79",
+                    "outline-variant": "#bfcab9",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary": "#0e6b17",
+                    "secondary": "#a63b00",
+                    "surface-container-highest": "#e3e3de",
+                    "primary-fixed": "#9ef892",
+                    "outline": "#707a6b",
+                    "on-surface": "#1b1c19",
+                    "inverse-primary": "#83db79",
+                    "secondary-container": "#fc6c29",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface": "#faf9f4",
+                    "tertiary": "#bb0014",
+                    "on-primary-fixed": "#002202",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "margin-desktop": "80px",
+                    "base": "8px",
+                    "xl": "64px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-40 border-b bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm flex justify-between items-center h-16 px-6 font-plus-jakarta-sans">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-green-700 dark:text-green-400">Painel Administrativo Master</span>
+<div class="hidden md:flex items-center bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-1.5 gap-2">
+<span class="material-symbols-outlined text-zinc-500" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64" placeholder="Buscar perfil..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="ml-2 w-8 h-8 rounded-full bg-zinc-200 overflow-hidden border border-zinc-300">
+<img alt="Avatar do Administrador" data-alt="Professional headshot of a mature administrator with a friendly expression in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-3oxF4eQ2LoUh2sDufovIa_za4IGkc4wKYvvcq-b5QEFyoelU5LI3o5kYmfi96rmokLJomDp5eW88iNrVuNPtUyQoPHFCqJ6IvmY93U5ibKlV5puwM9Hc5sAWiO0tI4w0ge_yi0cu-Cyf9tvvSaeq1dbEI4WJAGks6hsFkyxKcZSKKC0lEa5Ri4IoC4deQGyBmXf2ma1ZmKNCfi6BU7hkYRzrbdf8R2Kw7rRXAI1kTu1KPOPSLT4mjrYV4vevJx7KqWCCOB-PxA"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 flex flex-col pt-20 pb-6 w-64 text-sm font-medium transition-all duration-200 ease-in-out">
+<div class="px-6 mb-8">
+<p class="text-lg font-black text-green-700">Administração</p>
+<p class="text-xs text-zinc-500 font-normal">Gestão Centralizada</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Notas Fiscais</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span>Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 transition-all duration-200 ease-in-out font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+<span>Gestão de Perfis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span>Configurações</span>
+</a>
+</nav>
+<div class="px-3 mt-auto space-y-4">
+<button class="w-full py-2.5 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Novo Relatório
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<nav class="flex items-center gap-2 text-xs text-zinc-500 mb-2">
+<span class="hover:text-primary cursor-pointer">Gestão de Perfis</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-zinc-900 font-semibold">Feirante Atacadista</span>
+</nav>
+<h1 class="font-headline-md text-headline-md text-on-background">Feirante Atacadista</h1>
+<p class="font-body-md text-body-md text-outline">Configurações de permissões e matriz de acesso para grandes produtores.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline-variant text-on-surface font-semibold rounded-lg hover:bg-surface-container-low transition-colors">Cancelar</button>
+<button class="px-4 py-2 bg-primary text-on-primary font-bold rounded-lg shadow-sm hover:opacity-90 transition-opacity">Salvar Alterações</button>
+</div>
+</div>
+<!-- Profile Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Profile Identity -->
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-container flex gap-6 items-center">
+<div class="w-24 h-24 bg-secondary-container/20 rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-4xl" data-icon="store" data-weight="fill">store</span>
+</div>
+<div>
+<span class="inline-block px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded mb-2">Perfil Especializado</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Matriz de Competências B2B</h2>
+<p class="font-body-md text-body-md text-outline">Usuários vinculados a este perfil possuem ferramentas avançadas para escoamento de produção em larga escala e faturamento direto para empresas.</p>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between text-on-primary-container">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="group">group</span>
+<span class="text-xs font-bold bg-white/20 px-2 py-0.5 rounded">Ativos</span>
+</div>
+<div>
+<p class="text-3xl font-bold">142</p>
+<p class="text-xs opacity-80">Feirantes vinculados a este perfil</p>
+</div>
+</div>
+</div>
+<!-- Permissions Matrix -->
+<div class="space-y-6">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+                    Matriz de Permissões Específicas
+                </h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Category: Gestão de Estoque Atacado -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl overflow-hidden">
+<div class="p-4 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="inventory_2">inventory_2</span>
+<span class="font-semibold text-on-surface">Gestão de Estoque Atacado</span>
+</div>
+<span class="text-xs font-medium text-primary">Acesso Total</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Controle de Lotes e Validade</span>
+<span class="text-xs text-outline">Rastreabilidade completa de produtos colhidos.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Entrada por Manifestação de Carga</span>
+<span class="text-xs text-outline">Importação de NF-e via XML para estoque.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Reserva de Mercadoria</span>
+<span class="text-xs text-outline">Bloqueio de itens para pedidos B2B futuros.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Category: Faturamento B2B -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl overflow-hidden">
+<div class="p-4 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-semibold text-on-surface">Faturamento B2B</span>
+</div>
+<span class="text-xs font-medium text-secondary">Acesso Administrativo</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-secondary focus:ring-secondary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Emissão de Notas de Débito</span>
+<span class="text-xs text-outline">Faturamento quinzenal ou mensal.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-secondary focus:ring-secondary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Gestão de Crédito de Clientes</span>
+<span class="text-xs text-outline">Análise e liberação de limites para PJ.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="mt-1 rounded text-secondary focus:ring-secondary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Cancelamento de Faturas</span>
+<span class="text-xs text-outline">Ação restrita a supervisores.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Category: Preços Diferenciados -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl overflow-hidden">
+<div class="p-4 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="sell">sell</span>
+<span class="font-semibold text-on-surface">Preços Diferenciados</span>
+</div>
+<span class="text-xs font-medium text-tertiary">Acesso Condicional</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-tertiary focus:ring-tertiary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Tabela de Preços por Volume</span>
+<span class="text-xs text-outline">Descontos progressivos por quantidade.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-tertiary focus:ring-tertiary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Acordos Comerciais Individuais</span>
+<span class="text-xs text-outline">Preços travados por contrato específico.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded text-tertiary focus:ring-tertiary border-outline-variant" type="checkbox"/>
+<div>
+<span class="block font-semibold text-sm">Sazonalidade Dinâmica</span>
+<span class="text-xs text-outline">Ajuste automático de preços por safra.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Settings -->
+<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-low p-6 rounded-xl border border-surface-container">
+<h4 class="font-title-lg text-title-lg mb-4">Restrições de Horário</h4>
+<p class="text-sm text-outline mb-4">Defina o período em que este perfil pode acessar as funções de faturamento.</p>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<label class="block text-xs font-bold text-on-surface mb-1 uppercase">Início</label>
+<input class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary text-sm" type="time" value="06:00"/>
+</div>
+<div class="flex-1">
+<label class="block text-xs font-bold text-on-surface mb-1 uppercase">Fim</label>
+<input class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary text-sm" type="time" value="18:00"/>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-surface-container flex flex-col justify-between">
+<div>
+<h4 class="font-title-lg text-title-lg mb-4">Relatórios Obrigatórios</h4>
+<p class="text-sm text-outline mb-4">E-mail automático com resumo de movimentação diária para este perfil.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+<span class="text-sm font-semibold">Ativado para todos os usuários</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

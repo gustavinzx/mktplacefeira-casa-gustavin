@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.btnAdd {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.card {
+  background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.default {
+  background: linear-gradient(135deg, var(--primary) 0%, #0b4a11 100%);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.cardNumber {
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.defaultBadge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #fbbc04;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.securityNote {
+  margin-top: 24px;
+  background: var(--surface-container);
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--on-surface-variant);
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .list { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0e6b17",
+                        "outline-variant": "#bfcab9",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#a63b00",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-container": "#fc6c29",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed": "#410002",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary": "#bb0014",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002202",
+                        "background": "#faf9f4",
+                        "surface-container-high": "#e9e8e3",
+                        "on-primary-fixed-variant": "#00530b",
+                        "primary-fixed": "#9ef892",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#30312e",
+                        "inverse-on-surface": "#f2f1ec",
+                        "secondary-fixed": "#ffdbce",
+                        "primary-container": "#30852f",
+                        "on-surface": "#1b1c19",
+                        "surface-container": "#efeee9",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "surface-tint": "#126e19",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493c",
+                        "secondary-fixed-dim": "#ffb599",
+                        "outline": "#707a6b",
+                        "tertiary-container": "#e41f25",
+                        "surface-dim": "#dbdad5",
+                        "on-secondary-container": "#5a1c00",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background">
+<!-- Background Screen Simulation (SCREEN_25) -->
+<div class="fixed inset-0 z-0 flex overflow-hidden">
+<!-- Sidebar Shell -->
+<aside class="hidden lg:flex flex-col p-6 space-y-2 h-screen fixed left-0 top-0 bg-zinc-50 border-r border-zinc-200 w-64">
+<div class="font-black text-green-700 mb-8 font-title-lg">FeiraDigital</div>
+<div class="bg-green-600 text-white rounded-lg shadow-md p-3 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm">Dashboard</span>
+</div>
+<div class="text-zinc-600 hover:bg-zinc-200 transition-all p-3 rounded-lg flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm">Vendas</span>
+</div>
+<div class="text-zinc-600 hover:bg-zinc-200 transition-all p-3 rounded-lg flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm">Produtos</span>
+</div>
+</aside>
+<!-- Main Content Area (Blurred) -->
+<main class="ml-64 w-full p-margin-desktop filter blur-sm">
+<header class="flex justify-between items-center mb-lg">
+<h1 class="font-headline-md text-on-surface">Gestão de Lojistas</h1>
+<button class="bg-primary text-on-primary px-md py-sm rounded-xl font-label-sm">Novo Lojista</button>
+</header>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Skeleton for background page content -->
+<div class="col-span-12 bg-white p-lg rounded-xl shadow-sm border border-zinc-100">
+<div class="h-10 bg-zinc-100 rounded mb-md w-1/4"></div>
+<div class="space-y-sm">
+<div class="h-16 bg-zinc-50 rounded"></div>
+<div class="h-16 bg-zinc-50 rounded"></div>
+<div class="h-16 bg-zinc-50 rounded"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-zinc-900/60 backdrop-blur-sm">
+<!-- Modal Container -->
+<div class="bg-surface w-full max-w-4xl max-h-[921px] overflow-hidden rounded-xl shadow-2xl flex flex-col border border-white/20">
+<!-- Modal Header -->
+<div class="p-md md:p-lg border-b border-surface-container-highest flex justify-between items-center bg-white">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<h2 class="font-title-lg text-on-surface">Aprovação de Lojista</h2>
+<p class="text-label-sm text-outline">Protocolo: #VERIF-2023-8942</p>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-md md:p-lg space-y-lg">
+<!-- Business Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-md">
+<h3 class="font-label-sm text-secondary uppercase tracking-wider">Dados da Empresa</h3>
+<div class="bg-surface-container-low p-md rounded-xl space-y-sm">
+<div class="flex justify-between">
+<span class="text-label-sm text-outline">Razão Social</span>
+<span class="text-label-sm font-bold text-on-surface">Sítio Harmonia Orgânicos LTDA</span>
+</div>
+<div class="flex justify-between">
+<span class="text-label-sm text-outline">CNPJ</span>
+<span class="text-label-sm font-bold text-on-surface">12.345.678/0001-90</span>
+</div>
+<div class="flex justify-between">
+<span class="text-label-sm text-outline">Responsável</span>
+<span class="text-label-sm font-bold text-on-surface">José Arnaldo Silva</span>
+</div>
+<div class="flex justify-between">
+<span class="text-label-sm text-outline">E-mail</span>
+<span class="text-label-sm font-bold text-on-surface">contato@sitioharmonia.com.br</span>
+</div>
+</div>
+</div>
+<div class="space-y-md">
+<h3 class="font-label-sm text-secondary uppercase tracking-wider">Status da Verificação</h3>
+<div class="bg-white border border-outline-variant p-md rounded-xl flex items-center gap-md">
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<span class="text-label-sm font-bold text-on-surface">Documentação</span>
+<span class="text-[10px] px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full">PENDENTE</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[66%]"></div>
+</div>
+<p class="text-[11px] text-outline mt-sm">2 de 3 documentos revisados pelo sistema.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Documents Section -->
+<div class="space-y-md">
+<h3 class="font-label-sm text-secondary uppercase tracking-wider">Documentos Enviados</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Doc 1: CNPJ -->
+<div class="group bg-white border border-outline-variant p-sm rounded-xl hover:border-primary transition-all cursor-pointer">
+<div class="relative aspect-[3/4] mb-sm rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Official corporate document scan with stamps and signatures on a white background with professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB47rnVF4Ai1g_pNcRLuBvTxh2_QsUlQGZj_NtB-OR_plBNzwFTwcXCYS9fb1zrGMQW1armYK15DAuCLBzQuKCQ274rYi-AIhF_GnwD1Khi-og_t06kuZLRcfVcWSbEXyDBjqUPxm0S19h-C7CxvHp2UozOUlgKzHLuor-F6XC15xHA3U9678jGDr5w9Tj2Dc69kq3PzWL3iFqAuX7gRTTv10cxQqvJ-4y504Xsr2UHWxY98063QCaRRc1i8Owww2-Ojed58mJTrus"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-zinc-900/40 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-bold text-on-surface">Cartão CNPJ</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</div>
+<!-- Doc 2: Address -->
+<div class="group bg-white border border-outline-variant p-sm rounded-xl hover:border-primary transition-all cursor-pointer">
+<div class="relative aspect-[3/4] mb-sm rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Utility bill document with address details and company logo on a clean office desk background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTDxDBpkdLDf3VjEoWXX9BSdC26UqAEMOqLkVki_UFYJMnL1SiwGJ0N2M9ZAp0PkdlItPKgukgMNjVRscv-GNT8jyL_7O0gp5n3vpyHdhCsroLN0EcLKKR7WfGhrjQHYvVvzi6QWJbtJ8RYrdwiLzw7Mz9RO-7oKBnnR6VVcTJFoumfPVB5HNEGenLxiZzh6tPWy_yQ_4GcGUkcaHGox-R2zl_xuRjyuWMW7vj6i2UWwjEDv4eIt0pMNT-q8tsmKf0qd9fIxs-GYA"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-zinc-900/40 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-bold text-on-surface">Comprovante End.</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+</div>
+<!-- Doc 3: KYC Selfie -->
+<div class="group bg-white border border-outline-variant p-sm rounded-xl border-secondary-container ring-1 ring-secondary-container transition-all cursor-pointer">
+<div class="relative aspect-[3/4] mb-sm rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Portrait photo of a middle-aged man holding a Brazilian ID card next to his face for identity verification" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3ntwkYomWlDOw_DvJ2LcFhrgvcMCVmCjdJZyrZ_EU-F1J8-Mx_G60BGnTz_RvzGjuU9szelISqtc2rJ41UIzx-ZhEwrCHf6a6AnZRQKRGhwCfxAqpkW8uZo7dlAh9mz4iSdbHdnnWCtg37bwBYSgYibZseJcgRNfPZO4bs5PNEUc8cnz9TASwGMw_J4uNA9CAgyc8YzHxe5FPQ473tzdVr_bLoJ3Nc-meYFXy1qR2iMcvmfPjuaOkLYv8XoCzR1D0YOVQJ1bjiIU"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-zinc-900/40 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-bold text-on-surface">KYC (Selfie)</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="pending">pending</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Manual Review Check -->
+<div class="p-md bg-tertiary-fixed rounded-xl flex gap-md items-start">
+<span class="material-symbols-outlined text-tertiary" data-icon="report">report</span>
+<div class="space-y-xs">
+<p class="text-label-sm font-bold text-on-tertiary-fixed">Atenção Necessária</p>
+<p class="text-[12px] text-on-tertiary-fixed-variant leading-relaxed">
+                            O sistema detectou uma divergência sutil entre o nome no Comprovante de Endereço e a Razão Social. Por favor, valide se o endereço pertence ao sócio administrador antes de aprovar.
+                        </p>
+</div>
+</div>
+<!-- Rejection Reason (Textarea) -->
+<div class="space-y-md">
+<label class="font-label-sm text-outline block">Motivo da Reprovação (Obrigatório em caso de recusa)</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-xl p-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Ex: Documento de identidade com validade expirada ou imagem ilegível..." rows="3"></textarea>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-md md:p-lg border-t border-surface-container-highest bg-surface-container-low flex flex-col md:flex-row gap-md justify-end">
+<button class="order-2 md:order-1 px-xl py-sm rounded-xl font-label-sm text-outline hover:bg-surface-container-high transition-all active:scale-95">
+                    Cancelar
+                </button>
+<div class="order-1 md:order-2 flex flex-col md:flex-row gap-md">
+<button class="px-xl py-sm border-2 border-tertiary text-tertiary rounded-xl font-label-sm hover:bg-tertiary hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="block">block</span>
+                        Reprovar Cadastro
+                    </button>
+<button class="px-xl py-sm bg-primary text-on-primary rounded-xl font-label-sm hover:brightness-110 shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="verified" data-weight="fill">verified</span>
+                        Aprovar Cadastro
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Nav Shell (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-white border-t border-zinc-100 z-50">
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-green-50 text-green-700 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Feiras</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Cestas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Perfil</span>
+</div>
+</nav>
+</body></html>

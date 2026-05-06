@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efeee9",
+                        "on-surface-variant": "#40493c",
+                        "on-surface": "#1b1c19",
+                        "tertiary-fixed": "#ffdad6",
+                        "secondary-container": "#fc6c29",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#30852f",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed": "#410002",
+                        "inverse-surface": "#30312e",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#0e6b17",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-primary-container": "#f8fff0",
+                        "on-primary-fixed": "#002202",
+                        "primary-fixed": "#9ef892",
+                        "on-tertiary-container": "#fffbff",
+                        "outline": "#707a6b",
+                        "on-secondary-fixed": "#370e00",
+                        "on-secondary-container": "#5a1c00",
+                        "on-primary": "#ffffff",
+                        "background": "#faf9f4",
+                        "surface": "#faf9f4",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-primary-fixed-variant": "#00530b",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#bb0014",
+                        "surface-tint": "#126e19",
+                        "secondary": "#a63b00",
+                        "surface-variant": "#e3e3de",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed-dim": "#ffb599",
+                        "surface-container-highest": "#e3e3de",
+                        "surface-container-high": "#e9e8e3",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "inverse-primary": "#83db79",
+                        "surface-bright": "#faf9f4",
+                        "tertiary-container": "#e41f25",
+                        "surface-container-low": "#f5f4ef",
+                        "outline-variant": "#bfcab9",
+                        "on-background": "#1b1c19",
+                        "surface-dim": "#dbdad5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full sticky top-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="text-2xl font-black tracking-tight text-green-700 dark:text-green-500">feira.casa</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6 font-plus-jakarta text-sm font-medium">
+<a class="text-gray-500 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors" href="#">Início</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors" href="#">Produtos</a>
+<a class="text-green-700 dark:text-green-400 font-bold" href="#">Minha Conta</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-green-600 dark:text-green-400 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-green-600 dark:text-green-400 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a friendly man smiling, warm natural lighting, high-end photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeko5iXDGYX_tR0T2cRxhMaUbAIoqwRn0nNAlBJas_ZtMrjyQsIe18Yq3RVFogh96aBBC4LgLGPt8X7YU5pQG-vuXDw32mBwly3rTem2m0k-ZueFKM8ROz5-NX-ExajABwy8RmnppMKHx85pEcA1fMXFA2kpkO6U-kHDEoI3i_h2OA2hfJc1_ZPXDxuzKwxPLYcfph687WI0gVQ_Q1_W0vWl_Iop3QFY8yK4GVJPeM1F1mzrZTkGH5Qki7RlTzJHTervAzgPyX0qo"/>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-72 flex flex-col p-4 space-y-2 overflow-y-auto bg-gray-50 dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800 hidden md:flex">
+<div class="px-4 py-6 mb-2">
+<h2 class="font-headline-md text-title-lg text-green-700">Minha Conta</h2>
+<p class="font-body-md text-label-sm text-on-surface-variant">Bem-vindo à feira.casa</p>
+</div>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-plus-jakarta text-base">Meus Pedidos</span>
+</a>
+<a class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 font-bold rounded-lg px-4 py-3 flex items-center gap-3 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-plus-jakarta text-base">Meus Endereços</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-plus-jakarta text-base">Carteira</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-plus-jakarta text-base">Cupons</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-plus-jakarta text-base">Dados Pessoais</span>
+</a>
+<div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800">
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-plus-jakarta text-base">Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-72 p-6 md:p-12 min-h-screen">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-8 text-label-sm font-label-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Área do Cliente</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Meus Endereços</span>
+</nav>
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+<div>
+<h1 class="font-display-lg text-headline-md text-on-surface mb-2">Meus Endereços</h1>
+<p class="font-body-md text-on-surface-variant max-w-xl">Gerencie seus locais de entrega para receber seus produtos frescos com rapidez e comodidade.</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white font-bold px-6 py-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95 w-full md:w-auto">
+<span class="material-symbols-outlined">add_location</span>
+                    Adicionar Novo Endereço
+                </button>
+</header>
+<!-- Address Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Address Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-surface-variant group hover:border-primary-fixed transition-colors">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<div>
+<h3 class="font-title-lg text-body-md font-bold text-on-surface">Casa</h3>
+<span class="bg-primary-fixed/20 text-primary text-[10px] uppercase font-black px-2 py-0.5 rounded-full">Principal</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-tertiary transition-colors" title="Remover">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="space-y-1 font-body-md text-on-surface-variant mb-6">
+<p>Rua das Laranjeiras, 450 - Ap 122</p>
+<p>Vila Mariana, São Paulo - SP</p>
+<p>CEP: 04102-000</p>
+</div>
+<div class="pt-4 border-t border-surface-variant flex items-center gap-2 text-label-sm text-primary font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                        Endereço de entrega padrão
+                    </div>
+</div>
+<!-- Address Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-surface-variant group hover:border-primary-fixed transition-colors">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<div>
+<h3 class="font-title-lg text-body-md font-bold text-on-surface">Trabalho</h3>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-tertiary transition-colors" title="Remover">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="space-y-1 font-body-md text-on-surface-variant mb-6">
+<p>Avenida Paulista, 1000 - 15º Andar</p>
+<p>Bela Vista, São Paulo - SP</p>
+<p>CEP: 01310-100</p>
+</div>
+<button class="pt-4 border-t border-surface-variant w-full text-left text-label-sm text-on-surface-variant hover:text-primary transition-colors font-medium">
+                        Definir como principal
+                    </button>
+</div>
+<!-- Bento Grid Decorative/Utility Section -->
+<div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+<div class="md:col-span-2 relative overflow-hidden rounded-xl bg-primary-container p-8 flex flex-col justify-end min-h-[200px] group">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30 group-hover:scale-105 transition-transform duration-700" data-alt="High-angle shot of a vibrant Brazilian street market with fresh tropical fruits and vegetables in rustic wooden crates, sun-drenched atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_2S5ky0i0KOOaRYCUjCtFoHpv_nDV-Ytw4NIx-QaClGIZcns4den4zy9jwfQw-CrE0awSGMKGjRlSuF60sBmXv2pANwVjvkhdDb8Jb0tjfkCWxPfpC1WBgseqQFU2xooUxksJ4X10yoiq9JjF21xeOZUoG5UOiX3s5J_4NIkSbOnZC9AI_Por8KZY58lRHuEHQfy1DxnlRGj-QYSb2SMWhXOZ50ZfDrrciLOO292FeY1XMJSvkto8PS4J1v-ZGq_o-f37pHACDt8"/>
+<div class="relative z-10">
+<h4 class="font-headline-md text-title-lg text-white mb-2">Entrega Expressa na Feira</h4>
+<p class="font-body-md text-on-primary-container max-w-md">Seus endereços salvos facilitam o Checkout. Receba produtos colhidos hoje em menos de 4 horas.</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl flex flex-col justify-center text-center">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-secondary">
+<span class="material-symbols-outlined text-3xl">map</span>
+</div>
+<h4 class="font-title-lg text-body-md font-bold mb-2">Cobertura</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant">Atendemos toda a região metropolitana de São Paulo e arredores.</p>
+<a class="mt-4 text-primary font-bold text-label-sm hover:underline" href="#">Ver mapa de entrega</a>
+</div>
+</div>
+</div>
+<!-- Empty State Suggestion (Hidden by default but shown for UI richness) -->
+<div class="mt-16 bg-surface-dim/30 border border-dashed border-outline-variant rounded-2xl p-12 text-center hidden">
+<span class="material-symbols-outlined text-6xl text-outline-variant mb-4">location_off</span>
+<h3 class="font-title-lg text-on-surface mb-2">Nenhum endereço salvo</h3>
+<p class="font-body-md text-on-surface-variant mb-8">Parece que você ainda não cadastrou locais para entrega.</p>
+<button class="bg-primary text-white font-bold px-8 py-3 rounded-xl">Adicionar Primeiro Endereço</button>
+</div>
+</main>
+</div>
+<!-- Bottom Navigation for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex justify-around items-center h-16 px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-gray-500">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-500">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px] font-medium">Buscar</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-500">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-medium">Pedidos</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-green-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold">Perfil</span>
+</button>
+</nav>
+</body></html>

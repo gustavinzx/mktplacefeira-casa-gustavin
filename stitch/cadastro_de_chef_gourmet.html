@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f1ec",
+                        "background": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9f4",
+                        "surface": "#faf9f4",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8e3",
+                        "on-background": "#1b1c19",
+                        "outline-variant": "#bfcab9",
+                        "surface-dim": "#dbdad5",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#83db79",
+                        "inverse-surface": "#30312e",
+                        "primary-fixed-dim": "#83db79",
+                        "outline": "#707a6b",
+                        "on-tertiary-fixed": "#410002",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#0e6b17",
+                        "surface-container": "#efeee9",
+                        "secondary-container": "#fc6c29",
+                        "surface-container-highest": "#e3e3de",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "secondary-fixed": "#ffdbce",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-primary-fixed": "#002202",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "tertiary": "#bb0014",
+                        "on-surface-variant": "#40493c",
+                        "secondary": "#a63b00",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb599",
+                        "primary-container": "#30852f",
+                        "on-secondary-container": "#5a1c00",
+                        "on-secondary-fixed": "#370e00",
+                        "on-primary-container": "#f8fff0",
+                        "surface-tint": "#126e19",
+                        "on-primary-fixed-variant": "#00530b",
+                        "tertiary-container": "#e41f25",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#9ef892",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-surface": "#1b1c19",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chef-gradient {
+            background: linear-gradient(135deg, #fc6c29 0%, #ba1a1a 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Background Layer (Blurred Login Screen) -->
+<div class="fixed inset-0 z-0 flex flex-col blur-md scale-105 pointer-events-none overflow-hidden">
+<header class="bg-white/95 backdrop-blur-md border-b border-zinc-100 flex items-center justify-between px-6 py-4 w-full">
+<span class="text-2xl font-extrabold tracking-tighter text-green-600">feira.casa</span>
+<div class="flex gap-6 text-zinc-500 font-medium text-sm">
+<span>Início</span>
+<span>Feirantes</span>
+<span>Receitas</span>
+<span>Sobre</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-gutter">
+<div class="w-full max-w-md bg-white p-lg rounded-[32px] shadow-sm border border-zinc-100">
+<div class="mb-xl text-center">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">Bem-vindo de volta</h1>
+<p class="text-on-surface-variant">Acesse sua conta para continuar</p>
+</div>
+<div class="space-y-md">
+<div class="h-12 bg-surface-container rounded-xl w-full"></div>
+<div class="h-12 bg-surface-container rounded-xl w-full"></div>
+<div class="h-12 bg-primary rounded-xl w-full"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 bg-on-background/20 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+<div class="relative w-full max-w-2xl bg-surface-container-lowest rounded-[32px] shadow-[0_24px_48px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col md:flex-row">
+<!-- Side Image/Brand Panel -->
+<div class="hidden md:block w-1/3 chef-gradient relative">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay">
+<img alt="Professional chef portrait" class="w-full h-full object-cover" data-alt="Professional chef in a white uniform smiling in a bright high-end kitchen with stainless steel appliances and fresh vegetables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuN6mM2IQxYxcdrMi47_xnG1ICHA0bnqDgGLWFkdL56zfp2ay3u5_nNOBZwvvOXc9BlMNtW3z1DnBRXc0P-8EWDGbs19JiAoWTF3xOTG72dSuNGwCmyd4ypwyYwJoW6Ivfc2rJeJGqpUvwkIgx9DaXSYD7NUKCOTFxDE69Y7UO9F847gIUwYf1VyEgVdKFNe4k42D5JDcJkV89X-7bbQk271gCq95t7RUmIIhvdsTyNWeOcdeDtjXMqIyPnxAikGWm6rb4y8uJ4wE"/>
+</div>
+<div class="relative h-full flex flex-col justify-between p-lg text-white">
+<span class="text-xl font-extrabold tracking-tighter">feira.casa</span>
+<div>
+<h2 class="font-headline-md text-2xl leading-tight mb-base">Transforme sua paixão em negócio.</h2>
+<p class="text-sm opacity-90">Junte-se à nossa elite de Chefs Gourmet e leve frescor à mesa dos brasileiros.</p>
+</div>
+</div>
+</div>
+<!-- Form Content -->
+<div class="flex-1 p-lg md:p-xl bg-surface-container-low">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Candidatura de Chef</h2>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider mt-xs">Torne-se um parceiro gourmet</p>
+</div>
+<button class="p-base bg-surface-container-high rounded-full text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="space-y-md">
+<!-- Section: Identificação -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">Nome Completo</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="Como deseja ser chamado" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">Especialidade</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="Ex: Cozinha Vegana, Massas" type="text"/>
+</div>
+</div>
+<!-- Section: Portfólio -->
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">Link do Portfólio ou Redes Sociais</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">link</span>
+<input class="w-full pl-11 pr-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="instagram.com/seuusuario" type="url"/>
+</div>
+</div>
+<!-- Section: Contato -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">E-mail Profissional</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="chef@exemplo.com" type="email"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">WhatsApp de Contato</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="(11) 99999-9999" type="tel"/>
+</div>
+</div>
+<!-- Section: Segurança -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">Senha</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm text-on-surface-variant px-1">Confirmar Senha</label>
+<input class="w-full px-md py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Legal Checkbox -->
+<div class="flex items-start gap-sm pt-base">
+<div class="pt-0.5">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container" id="terms" type="checkbox"/>
+</div>
+<label class="text-label-sm text-on-surface-variant leading-relaxed" for="terms">
+                            Li e aceito os <a class="text-primary font-bold hover:underline" href="#">termos de parceria</a> e autorizo o tratamento de dados conforme a <a class="text-primary font-bold hover:underline" href="#">LGPD</a>.
+                        </label>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-[0_8px_20px_-4px_rgba(14,107,23,0.3)] hover:bg-primary-container active:scale-[0.98] transition-all duration-200 mt-md flex items-center justify-center gap-base" type="submit">
+<span>Enviar Candidatura</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+<p class="text-center text-label-sm text-outline mt-sm">
+                        Já possui conta? <a class="text-secondary font-bold hover:underline" href="#">Fazer login</a>
+</p>
+</form>
+</div>
+</div>
+</div>
+</body></html>

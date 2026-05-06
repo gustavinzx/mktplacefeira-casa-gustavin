@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Administrativo - Logística Global</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#faf9f4",
+                    "surface-bright": "#faf9f4",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary-container": "#e41f25",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary-fixed": "#ffdbce",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#bb0014",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-secondary-container": "#5a1c00",
+                    "on-primary-fixed": "#002202",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-surface": "#1b1c19",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fc6c29",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary-fixed-dim": "#83db79",
+                    "secondary-fixed-dim": "#ffb599",
+                    "error": "#ba1a1a",
+                    "surface-container": "#efeee9",
+                    "primary-container": "#30852f",
+                    "surface-tint": "#126e19",
+                    "secondary": "#a63b00",
+                    "outline-variant": "#bfcab9",
+                    "inverse-primary": "#83db79",
+                    "surface-dim": "#dbdad5",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e3e3de",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#9ef892",
+                    "on-background": "#1b1c19",
+                    "surface-container-high": "#e9e8e3",
+                    "on-surface-variant": "#40493c",
+                    "surface": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-primary-container": "#f8fff0",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-fixed": "#410002",
+                    "surface-container-highest": "#e3e3de"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "margin-desktop": "80px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f4;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 shadow-sm flex flex-col h-full overflow-y-auto z-50">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white font-bold text-xl">F</div>
+<div>
+<h1 class="text-xl font-bold text-green-700 dark:text-green-500">Admin Master</h1>
+<p class="text-xs text-gray-500">Ecossistema feira.casa</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Overview
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Usuários &amp; Perfis
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                    Gestão de Feirantes
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+                    B2B &amp; Atacado
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                    Logística
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                    Marketing
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Configurações
+                </a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-gray-100">
+<div class="flex items-center gap-3">
+<img alt="Logo feira.casa" class="w-10 h-10 rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_5CFxiA6OhGqD5wvsqNVrosDBp3rLdiAEh_87wQPNDZfFHLawwwNw3wGWnk_EM3Ip1neTZT0bCp6QPuChdrhAUdxLa_EqSWEq5F68AMRyEVtP5s419K8xUSDX5Q3s2viuSwDJtmoFXBMwvCypYkzsjGTwJLvA23-3NxNfOFDEFC5wLKhTM-0uduLadziDqjJ8HabyiQ2HfCz0MoOuRTDVJc8FjzoktkG4d6BZLfxmiGbBbpsIuBhBfAxt56cRwPXBOkzLOZwj9zA"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Admin feira.casa</p>
+<p class="text-xs text-gray-500">Logística Ativa</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 flex justify-between items-center h-16 px-6 ml-64">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-gray-50 border-none rounded-full text-sm focus:ring-2 focus:ring-green-500/20" placeholder="Buscar frotas, motoristas ou rotas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-gray-600" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-gray-600" data-icon="help">help</span>
+</button>
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-gray-600" data-icon="apps">apps</span>
+</button>
+<div class="h-8 w-px bg-gray-200 mx-2"></div>
+<div class="text-right mr-3">
+<p class="text-xs font-bold leading-none">Status da Rede</p>
+<p class="text-[10px] text-green-600">Operacional 99.8%</p>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background">Monitoramento de Logística Global</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestão em tempo real de frotas e perímetros de entrega.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-white border border-outline-variant text-on-surface font-label-sm text-label-sm rounded-lg flex items-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filtros Avançados
+                    </button>
+<button class="px-4 py-2 bg-primary text-white font-label-sm text-label-sm rounded-lg flex items-center gap-2 hover:opacity-90 shadow-sm transition-all">
+<span class="material-symbols-outlined text-sm">add_location</span>
+                        Novo Raio de Operação
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-container-high col-span-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-green-50 text-green-600 rounded-lg">local_shipping</span>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">+12%</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Frotas Ativas</p>
+<h3 class="text-headline-md font-headline-md">1,248</h3>
+<p class="text-[11px] text-gray-500 mt-2">Em trânsito agora</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-container-high col-span-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-orange-50 text-orange-600 rounded-lg">timer</span>
+<span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded-full">-5min</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tempo Médio Entrega</p>
+<h3 class="text-headline-md font-headline-md">42m</h3>
+<p class="text-[11px] text-gray-500 mt-2">Média da última hora</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-container-high col-span-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-blue-50 text-blue-600 rounded-lg">distance</span>
+<span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Estável</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Raio Médio</p>
+<h3 class="text-headline-md font-headline-md">18.4km</h3>
+<p class="text-[11px] text-gray-500 mt-2">Limite global: 24km</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-container-high col-span-1">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-red-50 text-red-600 rounded-lg">payments</span>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">Eficiente</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Taxa Frete Média</p>
+<h3 class="text-headline-md font-headline-md">R$ 14,20</h3>
+<p class="text-[11px] text-gray-500 mt-2">Baseado na demanda atual</p>
+</div>
+</div>
+<!-- Dashboard Centerpiece -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Live Map Section -->
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-surface-container-high overflow-hidden flex flex-col min-h-[500px]">
+<div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white/50 backdrop-blur-sm">
+<div>
+<h3 class="font-title-lg text-title-lg">Mapa de Operações Ativas</h3>
+<p class="text-xs text-on-surface-variant">Monitoramento de calor e saturação de demanda</p>
+</div>
+<div class="flex bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 bg-white shadow-sm rounded-md text-xs font-bold">Satélite</button>
+<button class="px-3 py-1 text-xs text-gray-500 font-medium">Vetorial</button>
+</div>
+</div>
+<div class="flex-1 relative bg-gray-100">
+<img class="w-full h-full object-cover opacity-80" data-alt="Detailed map interface with glowing delivery routes and circular boundary rings in shades of green and orange over a modern city grid" data-location="São Paulo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu-kmFyCBlKao_ongOuk19LGREgaZWMn5sovthRbaSoicUG8iyUjqIuuwyr89R25Dj-cVObwUjkH3PVswtiHGOBVZPSI_6vRGASJOXkuq8ew6Ft3bcoSiEXiOoNqafkB2aS1hgc3ojwoJOuBWPqTwg3FxaswD_jMo45x_qqdBYlpPgf0HbArctySSAyhHyYchEkBSjdKwfTYTJhar2LjyV6oYcKoEpOpE3pxaX81E1_WllmHgLMsocekDomvTUqezcvFk6-HfG-FQ"/>
+<!-- Overlay UI for Map -->
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<div class="bg-white/90 backdrop-blur p-3 rounded-lg shadow-lg border border-white max-w-xs">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<p class="text-xs font-bold">Região: São Paulo - Centro</p>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px]">
+<span>Raio Configurado</span>
+<span class="font-bold">24km</span>
+</div>
+<div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<p class="text-[10px] text-gray-500 italic">Saturação alta nos bairros: Pinheiros, Jardins.</p>
+</div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur p-4 rounded-lg shadow-lg border border-white">
+<div class="space-y-3">
+<p class="text-xs font-bold border-b pb-2 mb-2">Legenda de Performance</p>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+<span class="text-[10px]">Entrega Expressa (&lt; 20min)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-orange-500"></div>
+<span class="text-[10px]">Fluxo Normal (20-45min)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<span class="text-[10px]">Atraso Crítico (&gt; 60min)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Logistics Sidebar -->
+<div class="lg:col-span-1 space-y-gutter">
+<!-- Radius Configuration Card -->
+<div class="bg-primary-container text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-title-lg font-title-lg mb-2">Configuração de Raio</h4>
+<p class="text-sm opacity-90 mb-6">Limite atual de atendimento global para novos feirantes.</p>
+<div class="flex items-end gap-2 mb-4">
+<span class="text-4xl font-extrabold">24</span>
+<span class="text-xl font-bold mb-1">km</span>
+</div>
+<input class="w-full accent-white mb-6" max="50" min="5" type="range" value="24"/>
+<div class="flex justify-between text-xs font-bold opacity-80">
+<span>5km</span>
+<span>24km (Atual)</span>
+<span>50km</span>
+</div>
+<button class="w-full mt-6 py-3 bg-white text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all text-sm">
+                                Aplicar Alterações
+                            </button>
+</div>
+<!-- Background Pattern -->
+<div class="absolute -bottom-8 -right-8 opacity-10">
+<span class="material-symbols-outlined !text-[120px]">radar</span>
+</div>
+</div>
+<!-- Performance List -->
+<div class="bg-white rounded-xl shadow-sm border border-surface-container-high p-6">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-bold text-on-surface">Top Entregadores</h4>
+<a class="text-xs text-primary font-bold hover:underline" href="#">Ver todos</a>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Driver profile photo" class="w-10 h-10 rounded-full border border-gray-100" data-alt="Portrait of a smiling delivery courier wearing a professional green uniform and a safety helmet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJS2kFpx3V1pQDw22Y58mwNwDib_3GFefaiA7uLeRPyRuI3uspU9_X9Q7AoVau5PlDMR9QMYaxPGIqMlQayhfii7QIYN1rgbkJ2ZwJhXQMd4hisJOgegLYlDv-FneEfamJuiPk4Lu6KMlR0wrKshON4tYNKXYTnYPnaMJdm2vZ4zPLpoxFB1wq1U6G2Mh0Dm5uD4qkkyxauC2AaqEOGMcfxtRE1ZxrlTrMLbALeJmAxChRRW1q98dLYGfANNSKc6jGb8ezEB1lc2U"/>
+<div class="absolute -bottom-1 -right-1 bg-green-500 w-3 h-3 rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Carlos Alberto</p>
+<p class="text-[10px] text-gray-500">Região: Leste • 14 Entregas/dia</p>
+</div>
+<div class="text-right">
+<div class="flex items-center text-orange-500">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+<p class="text-[10px] text-green-600 font-bold">R$ 218,00</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Driver profile photo" class="w-10 h-10 rounded-full border border-gray-100" data-alt="Close up of a friendly female delivery partner with a bicycle in the background, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzss-VlhUlszQpb78ocsYFGMEiI6Xtud72phi3kVIMXETFzEh-Mtr2BUQ6YAQxILCsar1e3pZ-0V9GvUhdgXY4pPdOs_BRHvW0DnaphggnU3bdjqpmD96nUlqUT5BceVDMFakxBsSQN1BSMIeQ9BWYKaSrrV2ZJ4L-8PhxkWdHjuL3f1TYifbTwSuLaz3AB52YVCFyORTAmuS3P_T81qeTrok6OZsN__wvPsUtoG23jYdMGr-afOAQHwZlJ5VNp1dvHk-OJM6xbJc"/>
+<div class="absolute -bottom-1 -right-1 bg-green-500 w-3 h-3 rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Mariana Costa</p>
+<p class="text-[10px] text-gray-500">Região: Sul • 12 Entregas/dia</p>
+</div>
+<div class="text-right">
+<div class="flex items-center text-orange-500">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">5.0</span>
+</div>
+<p class="text-[10px] text-green-600 font-bold">R$ 195,50</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Driver profile photo" class="w-10 h-10 rounded-full border border-gray-100" data-alt="Medium shot of a focused male driver standing next to a white logistics van during daytime" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3rWi4DKyKSwp0mVRfvyBgDfSldBIjF1zJZampXPc4JNrlr6SiaBJq_VbsXxj59ci8oDvh_SduHR0XTMCs-7c93IZ85epS35wA-UB0DYxII9Bgg5vjf-oWNzM_sR1lXnA4fhUEwWN9I4LekqBaMAA8ICUOUrQv7j5ICXwnbvfDluLEhTJJSWGHLCeHRPMDv8UwrVxT7XVBpJXfMzqyMae_JoAcDlniSAcHFkz8WQx6s6xub6JVCZtLSMZSNH7fH-iQIi19Vq-E6rk"/>
+<div class="absolute -bottom-1 -right-1 bg-orange-500 w-3 h-3 rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">João Pedro</p>
+<p class="text-[10px] text-gray-500">Região: Norte • 9 Entregas/dia</p>
+</div>
+<div class="text-right">
+<div class="flex items-center text-orange-500">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+<p class="text-[10px] text-green-600 font-bold">R$ 142,30</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Shipping Rates Table -->
+<div class="mt-8 bg-white rounded-xl shadow-sm border border-surface-container-high overflow-hidden">
+<div class="p-6 border-b border-gray-100 flex justify-between items-center">
+<h4 class="font-bold text-on-surface">Gestão de Taxas de Frete por Demanda</h4>
+<button class="text-xs font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Exportar Relatório
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-gray-50 text-[10px] uppercase tracking-wider font-bold text-gray-500">
+<tr>
+<th class="px-6 py-4">Região</th>
+<th class="px-6 py-4">Distância Base</th>
+<th class="px-6 py-4">Taxa Fixa</th>
+<th class="px-6 py-4">Fator de Demanda</th>
+<th class="px-6 py-4">Frete Calculado</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 text-sm">
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 font-medium">São Paulo - Centro</td>
+<td class="px-6 py-4">0 - 5km</td>
+<td class="px-6 py-4">R$ 8,90</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-red-50 text-red-600 rounded-md text-[10px] font-bold">Alta (1.4x)</span></td>
+<td class="px-6 py-4 font-bold">R$ 12,46</td>
+<td class="px-6 py-4"><span class="flex items-center gap-1 text-green-600 text-[10px] font-bold"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> Automático</span></td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-gray-200 rounded transition-colors"><span class="material-symbols-outlined text-sm">edit</span></button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 font-medium">São Paulo - Zona Sul</td>
+<td class="px-6 py-4">5 - 15km</td>
+<td class="px-6 py-4">R$ 14,90</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-50 text-green-600 rounded-md text-[10px] font-bold">Normal (1.0x)</span></td>
+<td class="px-6 py-4 font-bold">R$ 14,90</td>
+<td class="px-6 py-4"><span class="flex items-center gap-1 text-green-600 text-[10px] font-bold"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> Automático</span></td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-gray-200 rounded transition-colors"><span class="material-symbols-outlined text-sm">edit</span></button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 font-medium">São Paulo - Periferia</td>
+<td class="px-6 py-4">15 - 24km</td>
+<td class="px-6 py-4">R$ 22,00</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-[10px] font-bold">Baixa (0.9x)</span></td>
+<td class="px-6 py-4 font-bold">R$ 19,80</td>
+<td class="px-6 py-4"><span class="flex items-center gap-1 text-gray-400 text-[10px] font-bold"><div class="w-1.5 h-1.5 rounded-full bg-gray-400"></div> Manual</span></td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-gray-200 rounded transition-colors"><span class="material-symbols-outlined text-sm">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Actions -->
+<button class="fixed bottom-8 right-8 bg-secondary-container text-white p-4 rounded-full shadow-xl hover:scale-110 transition-transform flex items-center justify-center z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</body></html>

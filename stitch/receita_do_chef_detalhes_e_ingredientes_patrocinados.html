@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#a63b00",
+                        "secondary-fixed-dim": "#ffb599",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#002202",
+                        "inverse-on-surface": "#f2f1ec",
+                        "background": "#faf9f4",
+                        "on-primary-fixed-variant": "#00530b",
+                        "surface": "#faf9f4",
+                        "on-tertiary-fixed": "#410002",
+                        "tertiary": "#bb0014",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "on-primary-container": "#f8fff0",
+                        "outline": "#707a6b",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary-container": "#fffbff",
+                        "primary-fixed": "#9ef892",
+                        "primary-container": "#30852f",
+                        "surface-container-low": "#f5f4ef",
+                        "outline-variant": "#bfcab9",
+                        "surface-tint": "#126e19",
+                        "surface-container-high": "#e9e8e3",
+                        "on-surface": "#1b1c19",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary": "#0e6b17",
+                        "surface-dim": "#dbdad5",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "inverse-primary": "#83db79",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#370e00",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffdad6",
+                        "inverse-surface": "#30312e",
+                        "secondary-container": "#fc6c29",
+                        "surface-bright": "#faf9f4",
+                        "on-surface-variant": "#40493c",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#5a1c00",
+                        "surface-variant": "#e3e3de",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#e41f25"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "margin-desktop": "80px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .recipe-gradient {
+            background: linear-gradient(180deg, rgba(27,28,25,0) 0%, rgba(27,28,25,0.8) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md font-plus-jakarta-sans antialiased shadow-sm border-b border-stone-100 dark:border-slate-800 fixed top-0 z-50 w-full">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tight text-green-700 dark:text-green-400">feira.casa</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600 transition-colors" href="#">Início</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Receitas</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Painel Chef</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-stone-500 hover:text-green-600 transition-colors"><span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span></button>
+<button class="p-2 text-stone-500 hover:text-green-600 transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-stone-500 hover:text-green-600 transition-colors"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32">
+<!-- Hero Section -->
+<section class="relative h-[614px] w-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Top view of a rustic wooden table with a vibrant Mediterranean salad bowl, fresh basil leaves, and artisanal olive oil in warm natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRqOYViyUKgjX_G8wSM0k9gd0Kv4fhH15c7nPddPMFYOwnNrGDJC57oFkyaz4lpplcN27a5CsLCOjJsUR9_dOX_MlohNlCsr1LcEJDHp0Idrt2IE_rX-1twQEmL0yhZ0qRzr3QqZWTOsVFplSv2u9S_sdd3H4_Qvv5lMclH1pPUUTVvpkzwH3mGXP03gw808DKflgEZXn5i1OOubYUuTuGy4o-Lq0S0hHnCu2fxhp8P5S_gqtAEU8iDE4vu-wTyeDx9_cfCNZ0nEA"/>
+<div class="absolute inset-0 recipe-gradient flex flex-col justify-end px-margin-mobile md:px-margin-desktop pb-12">
+<div class="max-w-4xl">
+<span class="inline-block px-3 py-1 bg-secondary text-white rounded-full text-label-sm mb-4">Destaque da Estação</span>
+<h1 class="font-display-lg text-display-lg text-white mb-4">Salada Tropical com Manga e Mel do Produtor</h1>
+<div class="flex items-center gap-6 text-white/90">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="schedule">schedule</span>
+<span class="text-label-sm">25 MINUTOS</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="restaurant">restaurant</span>
+<span class="text-label-sm">FÁCIL</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+<span class="text-label-sm">4 PORÇÕES</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop mt-lg">
+<!-- Chef Profile & Intro -->
+<div class="flex flex-col md:flex-row gap-lg items-start mb-xl">
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-6">
+<img class="w-16 h-16 rounded-full object-cover border-2 border-primary" data-alt="Professional chef smiling in a rustic kitchen setting, wearing a clean white apron with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX22l3e8wEekpUgmsOZVDkLNUMs_GYvodMPaPfq4KtXdQNsqlgijDDc8pEkKLH-gVGx7WlI9s9sopd7-cIwi5Avk9W9DiwZ9iqM1uVYRKxSIfOjlhCSszZ7fCRYVYQtRNZd6XUDUyBPSs5_9LOxS7ZuU6Yr-9bUVZNHeKoipuLic6rnMSvNdKlBKr5X4Sj_EM7V1WyEJfa7Losm2WxczVoi1Ol3ovSVYBWAKR1ELLQolfzSQP1lcuywUDiwpzs3_6DthF6htkZcyg"/>
+<div>
+<p class="font-label-sm text-primary">RECEITA POR</p>
+<h3 class="font-title-lg text-title-lg">Chef Thiago Silva</h3>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant max-w-2xl">
+                        "Essa receita é uma homenagem às manhãs de sol na feira do Pacaembu. O segredo está na doçura da manga rosa e no frescor das folhas colhidas no mesmo dia. Um prato leve que traz a abundância da nossa terra direto para a sua mesa."
+                    </p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl flex gap-4 items-center">
+<div class="p-3 bg-primary-container rounded-lg text-white">
+<span class="material-symbols-outlined" data-icon="ecg_heart">ecg_heart</span>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-primary">Saudável &amp; Orgânico</p>
+<p class="text-label-sm text-on-surface-variant">Rico em Vitaminas A e C</p>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Ingredients List -->
+<div class="lg:col-span-5">
+<h2 class="font-headline-md text-headline-md mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_basket">shopping_basket</span>
+                        Ingredientes
+                    </h2>
+<ul class="space-y-6">
+<li class="flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-surface-container transition-all">
+<span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+<span class="text-body-md">2 maços de alface crespa orgânica</span>
+</li>
+<!-- Sponsored Product Ingredient -->
+<li class="relative">
+<div class="absolute -top-3 left-4 px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full z-10 shadow-sm">PATROCINADO PELA BANCA DO ZÉ</div>
+<div class="p-5 bg-white border-2 border-secondary-container/30 rounded-2xl shadow-[0_4px_20px_rgba(252,108,41,0.08)] flex flex-col gap-4">
+<div class="flex gap-4">
+<img class="w-24 h-24 rounded-xl object-cover" data-alt="Close-up of ripe organic mangoes with vibrant yellow and red skin, slightly dewy, on a wooden basket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbXafGN7YuRw71K9HZyC98uWIW3Jeb0KXaxFoO93dihELNaXgxQ2ltlTXZkGb5-8jZryLUrhZu6t8AN7z0DdZTWRuNjfgnCywQohuGsP-wgjA1OvTfEs17UsAfiNQT7jjMm3T2sEwf7JaSmVDKosM5UvR2S7SYO0f2LGs0yS05kvrcBMASgrB1lWfV3GIW6R721Z6PDY9onKkSMbFOs9hKgev7maO1zodf5UrUGw8cPlF9sqrfXTjx_W0_b1pjvYHB7TnGI7w-vhA"/>
+<div class="flex-1">
+<h4 class="font-title-lg text-title-lg leading-tight">Manga Rosa Extra Doce</h4>
+<p class="text-label-sm text-on-surface-variant mb-2">Banca do Zé • Colhido hoje</p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-secondary">R$ 8,90</span>
+<span class="text-label-sm text-on-surface-variant">/unid</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-secondary text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary-container transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+                                    Adicionar à Cesta
+                                </button>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-surface-container transition-all">
+<span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+<span class="text-body-md">1/2 xícara de castanha-do-pará picada</span>
+</li>
+<!-- Another Sponsored Ingredient -->
+<li class="relative">
+<div class="absolute -top-3 left-4 px-3 py-1 bg-primary-container text-white text-[10px] font-bold rounded-full z-10 shadow-sm">DIRETO DO PRODUTOR</div>
+<div class="p-5 bg-white border-2 border-primary-container/20 rounded-2xl shadow-sm flex flex-col gap-4">
+<div class="flex gap-4">
+<img class="w-24 h-24 rounded-xl object-cover" data-alt="Bunch of fresh organic carrots with green tops, vibrant orange color, laying on a burlap sack" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT9gm4vuMwd5yipV_qePUuGqdGJnp5SJh3jGnZwMOtSjwv7pyGsDhROayrPiC286_2JHU_Mtc2-5GYvRGRYY52QkbV5kQWPHwGk8zLe1TjVCD_BIX_SBP2hM3XyIvHBFb2SWa4wHqZee-sTu_gbo1vaNbHBw-V6nGhTwN2IaWSEoyXec0dnVyxBKoXYXuOqOXoJ4owEH5wQkaC75Yayj6d6LQ1LBq2z6Zuu0PVym92MrqfTU-OKtb2gS21pjaKnAIRWl-cgJ1ifKI"/>
+<div class="flex-1">
+<h4 class="font-title-lg text-title-lg leading-tight">Cenoura Baby Crocante</h4>
+<p class="text-label-sm text-on-surface-variant mb-2">Horta do Vale • Orgânico Certificado</p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-primary">R$ 6,50</span>
+<span class="text-label-sm text-on-surface-variant">/maço</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+                                    Adicionar à Cesta
+                                </button>
+</div>
+</li>
+<li class="flex items-start gap-4 p-4 rounded-xl border border-transparent hover:border-surface-container transition-all">
+<span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+<span class="text-body-md">Molho de iogurte com hortelã</span>
+</li>
+</ul>
+</div>
+<!-- Preparation Steps -->
+<div class="lg:col-span-7">
+<h2 class="font-headline-md text-headline-md mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="cooking">cooking</span>
+                        Modo de Preparo
+                    </h2>
+<div class="space-y-12">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-display-lg text-primary text-2xl">1</div>
+<div class="flex-1 pt-2">
+<h4 class="font-title-lg text-title-lg mb-2">Higienização</h4>
+<p class="text-body-md text-on-surface-variant">Lave bem as folhas de alface em água corrente e deixe-as de molho em solução clorada por 15 minutos. Seque bem para manter a crocância.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-display-lg text-primary text-2xl">2</div>
+<div class="flex-1 pt-2">
+<h4 class="font-title-lg text-title-lg mb-2">Preparo das Frutas</h4>
+<p class="text-body-md text-on-surface-variant">Descasque a manga e corte-as em cubos médios ou fatias finas. Rale a cenoura baby no ralo grosso para dar textura à salada.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-display-lg text-primary text-2xl">3</div>
+<div class="flex-1 pt-2">
+<h4 class="font-title-lg text-title-lg mb-2">Montagem Final</h4>
+<p class="text-body-md text-on-surface-variant">Em uma travessa grande, disponha as folhas rasgadas com as mãos. Espalhe a cenoura e os cubos de manga. Finalize com as castanhas-do-pará e o molho de hortelã por cima.</p>
+</div>
+</div>
+<!-- Pro Tip Card -->
+<div class="bg-primary-fixed text-on-primary-fixed p-6 rounded-2xl border-l-4 border-primary">
+<div class="flex items-center gap-2 mb-2 font-bold uppercase tracking-wider text-[12px]">
+<span class="material-symbols-outlined" data-icon="tips_and_updates">tips_and_updates</span>
+                                Dica do Chef
+                            </div>
+<p class="text-body-md">Para um toque extra de sabor, doure levemente as castanhas na frigideira antes de colocar na salada. Isso libera os óleos essenciais e aumenta a crocância!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- More Recipes Suggestions -->
+<section class="mt-xl bg-surface-container-low py-xl">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md mb-2">Que tal mais frescor?</h2>
+<p class="text-on-surface-variant">Outras receitas sugeridas pelo Chef Thiago</p>
+</div>
+<a class="text-primary font-bold hover:underline flex items-center gap-1" href="#">
+                        Ver todas as receitas
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Recipe Card 1 -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Colorful bowl of roasted root vegetables with rosemary and sea salt, soft focus garden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXa13t-znMlF1crSmpLlu81EwFEqj2T7HV_UQGbZ8lUEPGMhNeGweBEH3qdQFy8NTaQohYc0Id92O3nRSpYzqb1_htxuq8G9Sw0zNUpsnDe0DTdr5QwiyvUv-ejCzWHz1ltbWgI18hTmEP2s2vYSXtVjNLLEir-m63CvaTioujrfMyVX9CotxFbWAgrUPR5GKypzljvIl-zNIOo6CsIhQ-AvyCViBMu0f7xbWfAeYCPKgrc9HQf_l4HA7sN2l55NXxNkK88YPldqw"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-label-sm">Vegano</div>
+</div>
+<div class="p-6">
+<h4 class="font-title-lg text-title-lg mb-2 group-hover:text-primary transition-colors">Mix de Raízes Assadas</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 45 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="restaurant">restaurant</span> Fácil</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Green smoothie bowl topped with sliced kiwi, chia seeds, and granola in a white ceramic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNmF5qs9UP-j5ThsoLRHCdce_TXtaPnDC_HbSSBRV_h-unVKb9sqxkKRD8WKVO0_6No3OGDCXn-hjHAzlR23EtKTvs0WWIipqJJIKAa3eSQnvmphZq7Ve73_n5qHdrVkWs5rAw8MrDdBvBUrn7Nql_mKJWgHJah9JUOxMDGvusjM-k9uoXhSByds-qNP8EqN9K-ZQTFlzorVOp8gOY0TiNHXJXue6XvnpR0iw7qqCyx2Sr8rQbefI94vUjmqJojzOMCxrCdNsIl7g"/>
+</div>
+<div class="p-6">
+<h4 class="font-title-lg text-title-lg mb-2 group-hover:text-primary transition-colors">Smoothie Bowl de Verão</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 10 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="restaurant">restaurant</span> Iniciante</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative h-48">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Pasta dish with fresh cherry tomatoes, basil, and mozzarella pearls on a rustic ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHWEBNgJ10ieZKkgKtGHp0Mhsd45H7Ywopp8O-1fG4TJ22-BZnKd80HHNgt9Pugh30niahoH2OJLPVj3jbGMjAtpnGaolEq56lVGuvCiFkkhEUiCawn_LghQe_XUsuqGvqQWU5hBkp2cYWO71CNna3nB11-9VeXrh2dpPoNZQOGkT47eIJA7ATr1F-2Sn5P257UYmpkMbrWgRqkXBUe2RIGWpQMLKP-IWp632ahNJ4O56HEZjWAjRLtMrGK_GdlEd-H599ePiVOPE"/>
+</div>
+<div class="p-6">
+<h4 class="font-title-lg text-title-lg mb-2 group-hover:text-primary transition-colors">Penne Mediterrâneo</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 30 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="restaurant">restaurant</span> Médio</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-slate-900 flex justify-around items-center px-4 pt-3 pb-6 border-t border-stone-100 dark:border-slate-800 shadow-[0_-8px_30px_rgb(0,0,0,0.04)] z-50 rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-2xl px-5 py-2 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Receitas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="outdoor_grill">outdoor_grill</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Painel Chef</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Cesta</span>
+</a>
+</nav>
+</body></html>

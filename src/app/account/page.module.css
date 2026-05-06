@@ -1,0 +1,95 @@
+.welcome {
+  margin-bottom: 40px;
+}
+
+.welcome h1 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.welcome p {
+  color: var(--on-surface-variant);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: white;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cardHeader h3 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 18px;
+}
+
+.orderInfo {
+  padding: 16px;
+  background: var(--surface-container-low);
+  border-radius: var(--radius-md);
+}
+
+.orderId {
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.orderStatus {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+.addressText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+
+.section h2 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historyItem {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-1);
+}
+
+.historyIcon {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-container);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}

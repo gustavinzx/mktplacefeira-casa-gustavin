@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efeee9",
+                        "on-surface-variant": "#40493c",
+                        "primary-fixed-dim": "#83db79",
+                        "outline-variant": "#bfcab9",
+                        "on-background": "#1b1c19",
+                        "background": "#faf9f4",
+                        "primary-fixed": "#9ef892",
+                        "on-surface": "#1b1c19",
+                        "tertiary-container": "#e41f25",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#a63b00",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary-fixed": "#410002",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#faf9f4",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "inverse-surface": "#30312e",
+                        "surface-tint": "#126e19",
+                        "surface-container-low": "#f5f4ef",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbdad5",
+                        "secondary-container": "#fc6c29",
+                        "on-secondary-fixed": "#370e00",
+                        "primary-container": "#30852f",
+                        "tertiary-fixed": "#ffdad6",
+                        "tertiary": "#bb0014",
+                        "outline": "#707a6b",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e3e3de",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8e3",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-secondary-container": "#5a1c00",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-primary-container": "#f8fff0",
+                        "on-tertiary-container": "#fffbff",
+                        "primary": "#0e6b17",
+                        "on-primary-fixed": "#002202",
+                        "surface-bright": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#83db79",
+                        "surface-variant": "#e3e3de",
+                        "secondary-fixed-dim": "#ffb599"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { @apply border-primary text-primary bg-primary-fixed; }
+        .step-inactive { @apply border-outline-variant text-on-surface-variant bg-surface-container; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased">
+<!-- Top Navigation (Shell suppressed as per Transactional/Onboarding rule, keeping only Brand Identity) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-sm px-6 h-16 flex items-center border-b border-zinc-100">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold text-green-600 tracking-tight font-headline-md">Feira Digital</span>
+</div>
+</header>
+<main class="pt-24 pb-xl px-gutter max-w-4xl mx-auto">
+<!-- Stepper Section -->
+<nav aria-label="Progresso do Cadastro" class="mb-lg">
+<div class="flex items-center justify-between relative">
+<!-- Line background -->
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-outline-variant -translate-y-1/2 z-0"></div>
+<!-- Step 1 (Completed) -->
+<div class="z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white ring-4 ring-background">
+<span class="material-symbols-outlined text-base">check</span>
+</div>
+<span class="font-label-sm text-primary">Dados Básicos</span>
+</div>
+<!-- Step 2 (Active) -->
+<div class="z-10 flex flex-col items-center gap-xs">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary-fixed border-2 border-primary text-primary font-bold ring-4 ring-background">2</div>
+<span class="font-label-sm text-primary">Identidade</span>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container border-2 border-outline-variant text-on-surface-variant ring-4 ring-background">3</div>
+<span class="font-label-sm text-on-surface-variant">Banca</span>
+</div>
+<!-- Step 4 (Pending) -->
+<div class="z-10 flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container border-2 border-outline-variant text-on-surface-variant ring-4 ring-background">4</div>
+<span class="font-label-sm text-on-surface-variant">Revisão</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<div class="space-y-md">
+<div class="text-center md:text-left mb-md">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">Verificação de Identidade</h1>
+<p class="text-on-surface-variant max-w-2xl">Para garantir a segurança de todos na feira, precisamos confirmar que você é você mesmo. Seus dados estão protegidos pela LGPD e criptografados.</p>
+</div>
+<!-- Informational Banner -->
+<div class="bg-primary-fixed/30 border border-primary-fixed-dim rounded-xl p-md flex gap-md items-start">
+<div class="bg-white p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="shield_person">shield_person</span>
+</div>
+<div>
+<h3 class="font-title-lg text-primary text-sm mb-1">Por que isso é necessário?</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Verificamos todos os feirantes para criar um ambiente de confiança. Isso evita fraudes e garante que os clientes recebam produtos de produtores reais e comprometidos.</p>
+</div>
+</div>
+<!-- KYC Upload Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-md">
+<!-- Document Front -->
+<div class="glass-card border-2 border-dashed border-outline-variant rounded-xl p-md flex flex-col items-center text-center group hover:border-primary transition-colors cursor-pointer">
+<div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center mb-md group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant" data-icon="id_card">id_card</span>
+</div>
+<h4 class="font-title-lg text-lg mb-xs">Frente do Documento</h4>
+<p class="text-sm text-on-surface-variant mb-md">RG ou CNH. Garanta que todas as informações estejam legíveis.</p>
+<button class="bg-secondary text-white px-md py-sm rounded-lg font-label-sm flex items-center gap-xs active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">upload</span>
+                        Enviar Foto
+                    </button>
+</div>
+<!-- Document Back -->
+<div class="glass-card border-2 border-dashed border-outline-variant rounded-xl p-md flex flex-col items-center text-center group hover:border-primary transition-colors cursor-pointer">
+<div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center mb-md group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant" data-icon="contact_page">contact_page</span>
+</div>
+<h4 class="font-title-lg text-lg mb-xs">Verso do Documento</h4>
+<p class="text-sm text-on-surface-variant mb-md">Certifique-se de que o código de barras ou QR Code esteja nítido.</p>
+<button class="bg-secondary text-white px-md py-sm rounded-lg font-label-sm flex items-center gap-xs active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">upload</span>
+                        Enviar Foto
+                    </button>
+</div>
+<!-- Selfie Section - Full Width -->
+<div class="md:col-span-2 glass-card border-2 border-dashed border-outline-variant rounded-xl p-lg flex flex-col md:flex-row items-center gap-lg group hover:border-primary transition-colors cursor-pointer">
+<div class="relative w-48 h-48 flex-shrink-0">
+<img alt="Exemplo de selfie para verificação" class="w-full h-full object-cover rounded-2xl grayscale" data-alt="Illustration showing a clear selfie example of a person holding their identification document next to their face under good lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOlpnd6uRzBtKMFI_k_A6i8_KjcEXeHWQ2RA5pXqGpPTpywHXWY7LyRCyXHRBi9LP93I14Cu6O9XHo7jyYG1NdUeEjFlw6IRmoYQZ7QvqyllZCOoWTFQg2-atc7SxZmTTpm8b0oKh_aFYdnzdR3Vy_04UfpwhrdNFC88fLdyidNOeTpG3pUMQS0addZ3S0b1YWxAnJBBNwlSWTeKNKFsluvGxVi2epNA8yG9rQBJmX8590_oBr9Y9vrbBGRdDfTgCK-786MrlIbhg"/>
+<div class="absolute inset-0 bg-primary/20 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl">photo_camera</span>
+</div>
+</div>
+<div class="text-center md:text-left">
+<h4 class="font-headline-md text-title-lg mb-xs">Selfie com Documento</h4>
+<p class="text-body-md text-on-surface-variant mb-md">Tire uma foto sua segurando o documento ao lado do rosto. O seu rosto e os dados do documento devem estar perfeitamente visíveis.</p>
+<div class="flex flex-wrap gap-sm justify-center md:justify-start">
+<span class="bg-surface-container px-sm py-1 rounded-full text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">wb_sunny</span> Luz Natural
+                            </span>
+<span class="bg-surface-container px-sm py-1 rounded-full text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">remove_red_eye</span> Sem óculos
+                            </span>
+<span class="bg-surface-container px-sm py-1 rounded-full text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">face</span> Rosto Descoberto
+                            </span>
+</div>
+<button class="mt-lg bg-primary text-white px-xl py-md rounded-xl font-bold shadow-lg hover:shadow-primary/20 active:scale-95 transition-all w-full md:w-auto">
+                            Abrir Câmera
+                        </button>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-md pt-xl">
+<button class="text-on-surface-variant font-semibold px-md py-sm hover:text-on-surface transition-colors">
+                    Voltar ao Passo Anterior
+                </button>
+<button class="w-full md:w-auto bg-primary text-white px-xl py-md rounded-xl font-bold text-lg shadow-xl shadow-primary/10 hover:bg-primary-container transition-all flex items-center justify-center gap-sm group">
+                    Continuar para Banca
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 flex flex-col items-center gap-4 text-center bg-zinc-50 border-t border-zinc-200">
+<div class="font-bold text-zinc-900 font-headline-md">Feira Digital</div>
+<p class="text-sm font-['Plus_Jakarta_Sans'] text-zinc-500 max-w-md">© 2024 Feira Digital - Conectando o campo à cidade. Sua segurança é nossa maior prioridade.</p>
+<div class="flex gap-md mt-sm">
+<a class="text-zinc-500 hover:text-green-600 transition-colors text-sm" href="#">Privacidade</a>
+<a class="text-zinc-500 hover:text-green-600 transition-colors text-sm" href="#">Termos de Uso</a>
+<a class="text-zinc-500 hover:text-green-600 transition-colors text-sm" href="#">Ajuda</a>
+</div>
+</footer>
+</body></html>

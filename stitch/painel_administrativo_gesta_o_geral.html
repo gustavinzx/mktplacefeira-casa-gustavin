@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Administrativo - feira.casa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#f8fff0",
+                        "background": "#faf9f4",
+                        "surface-container-high": "#e9e8e3",
+                        "primary-fixed": "#9ef892",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#00530b",
+                        "outline": "#707a6b",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#83db79",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fc6c29",
+                        "primary": "#0e6b17",
+                        "surface-bright": "#faf9f4",
+                        "on-background": "#1b1c19",
+                        "on-primary-fixed": "#002202",
+                        "surface-container-low": "#f5f4ef",
+                        "inverse-surface": "#30312e",
+                        "tertiary-container": "#e41f25",
+                        "secondary": "#a63b00",
+                        "tertiary-fixed": "#ffdad6",
+                        "tertiary": "#bb0014",
+                        "outline-variant": "#bfcab9",
+                        "on-secondary-container": "#5a1c00",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#83db79",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dbdad5",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary-fixed": "#410002",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "surface-container": "#efeee9",
+                        "on-surface-variant": "#40493c",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1b1c19",
+                        "surface-variant": "#e3e3de",
+                        "secondary-fixed-dim": "#ffb599",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e3de",
+                        "surface": "#faf9f4",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-on-surface": "#f2f1ec",
+                        "surface-tint": "#126e19",
+                        "primary-container": "#30852f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "xl": "64px",
+                        "margin-desktop": "80px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "md": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar Anchor -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col p-4 gap-2 h-screen w-64 border-r border-stone-200 bg-stone-50 font-plus-jakarta text-sm z-50">
+<div class="mb-8 px-4 py-2">
+<span class="text-xl font-black text-green-700 tracking-tight">Admin Central</span>
+<p class="text-xs text-stone-500">feira.casa Management</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-green-700 bg-green-50 rounded-lg font-semibold hover:translate-x-1 transition-transform cursor-pointer" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 rounded-lg transition-all hover:translate-x-1 cursor-pointer" href="#">
+<span class="material-symbols-outlined">ad_units</span>
+<span>Banners</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 rounded-lg transition-all hover:translate-x-1 cursor-pointer" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span>Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 rounded-lg transition-all hover:translate-x-1 cursor-pointer" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span>Gestão ADM</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-100 rounded-lg transition-all hover:translate-x-1 cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto p-4 flex items-center gap-3 bg-white rounded-xl shadow-sm border border-stone-200">
+<img alt="Admin Profile" class="w-10 h-10 rounded-full object-cover" data-alt="professional headshot of a middle-aged male administrator with a friendly expression in a bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcxH1v5gOlG1eiUul-OVZB5kIhxPaZrF1dYYFfVdh8J5IudGoIo27Kj3lqzvhSPEZZneXw9ryFb_gOobF_1ZnjkedFs21rmasMwQFDF__FSbiXCF1kWNhocoScX4qfaHubGmwKmcd951NMAgMja33BDKBfQ0XVxKwHEwtT_rc0mIC1cTxbw8Sd5-gnoDw3ZYbPDNUpLx0bm7PZ9M1BV4gVIJj2Bt5EOMRTgPS6qx1VzO6T3gSC-BlwOc0zooFAawQhDNGpLaV3N9c"/>
+<div>
+<p class="font-bold text-xs">Ricardo Silva</p>
+<p class="text-[10px] text-stone-400">Master Admin</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 p-8 min-h-screen">
+<header class="flex justify-between items-center mb-8">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Visão Geral</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Bem-vindo de volta, Ricardo. Aqui está o resumo da feira hoje.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                    Últimos 30 dias
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm shadow-sm active:scale-95 duration-150">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Exportar Relatório
+                </button>
+</div>
+</header>
+<!-- Metrics Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white p-6 rounded-xl border border-stone-100 shadow-sm flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-green-50 text-green-700 rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-green-600 font-bold text-xs flex items-center gap-1">
+                        +12.5% <span class="material-symbols-outlined text-[14px]">trending_up</span>
+</span>
+</div>
+<p class="text-stone-500 font-label-sm text-label-sm uppercase tracking-wider">Vendas Totais</p>
+<h3 class="font-headline-md text-headline-md">R$ 42.850,00</h3>
+<div class="w-full bg-stone-100 h-1 rounded-full mt-2">
+<div class="bg-green-500 h-1 rounded-full w-3/4"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-stone-100 shadow-sm flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+<span class="material-symbols-outlined">potted_plant</span>
+</div>
+<span class="text-green-600 font-bold text-xs flex items-center gap-1">
+                        +8 novos <span class="material-symbols-outlined text-[14px]">person_add</span>
+</span>
+</div>
+<p class="text-stone-500 font-label-sm text-label-sm uppercase tracking-wider">Novos Feirantes</p>
+<h3 class="font-headline-md text-headline-md">124</h3>
+<div class="w-full bg-stone-100 h-1 rounded-full mt-2">
+<div class="bg-orange-400 h-1 rounded-full w-1/2"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-stone-100 shadow-sm flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+<span class="material-symbols-outlined">shopping_basket</span>
+</div>
+<span class="text-blue-600 font-bold text-xs">Ativos agora</span>
+</div>
+<p class="text-stone-500 font-label-sm text-label-sm uppercase tracking-wider">Pedidos do Dia</p>
+<h3 class="font-headline-md text-headline-md">312</h3>
+<div class="w-full bg-stone-100 h-1 rounded-full mt-2">
+<div class="bg-blue-500 h-1 rounded-full w-2/3"></div>
+</div>
+</div>
+</section>
+<!-- Main Dashboard Layout: Bento Style -->
+<div class="bento-grid">
+<!-- Approvals Table (Col Span 8) -->
+<section class="col-span-8 bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-stone-100 flex justify-between items-center">
+<h2 class="font-title-lg text-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-600">verified_user</span>
+                        Aprovações Pendentes
+                    </h2>
+<a class="text-primary font-label-sm text-label-sm hover:underline" href="#">Ver todos</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-stone-50 border-b border-stone-100">
+<tr>
+<th class="px-6 py-4 font-label-sm text-label-sm text-stone-500 uppercase tracking-wider">Solicitante</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-stone-500 uppercase tracking-wider">Tipo</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-stone-500 uppercase tracking-wider">Localidade</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-stone-500 uppercase tracking-wider">Data</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-stone-500 uppercase tracking-wider text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-50">
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs">JM</div>
+<div>
+<p class="font-semibold text-sm">João Maria - Orgânicos</p>
+<p class="text-xs text-stone-400">joao.m@horta.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-50 text-green-700 rounded-full text-[10px] font-bold uppercase tracking-tighter">Novo Feirante</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">Atibaia, SP</td>
+<td class="px-6 py-4 text-sm text-stone-500">Hoje, 10:45</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1 hover:bg-green-50 text-green-600 rounded" title="Aprovar">
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+<button class="p-1 hover:bg-red-50 text-red-600 rounded" title="Recusar">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-stone-50/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 font-bold text-xs">FB</div>
+<div>
+<p class="font-semibold text-sm">Feira do Bairro Novo</p>
+<p class="text-xs text-stone-400">Associação Moradores</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-[10px] font-bold uppercase tracking-tighter">Sugerir Feira</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">Curitiba, PR</td>
+<td class="px-6 py-4 text-sm text-stone-500">Ontem, 16:20</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1 hover:bg-green-50 text-green-600 rounded">
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+<button class="p-1 hover:bg-red-50 text-red-600 rounded">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Growth Chart Placeholder (Col Span 4) -->
+<section class="col-span-4 bg-white rounded-xl border border-stone-100 shadow-sm p-6">
+<h2 class="font-title-lg text-title-lg mb-6">Crescimento Semanal</h2>
+<div class="flex items-end justify-between h-48 gap-2">
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[40%] hover:bg-primary transition-colors cursor-pointer group relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold hidden group-hover:block">Seg</span>
+</div>
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[60%] hover:bg-primary transition-colors cursor-pointer group relative"></div>
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[35%] hover:bg-primary transition-colors cursor-pointer group relative"></div>
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[85%] hover:bg-primary transition-colors cursor-pointer group relative"></div>
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[55%] hover:bg-primary transition-colors cursor-pointer group relative"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[100%] cursor-pointer group relative">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-black text-primary">Sáb</span>
+</div>
+<div class="flex-1 bg-stone-100 rounded-t-lg h-[75%] hover:bg-primary transition-colors cursor-pointer group relative"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-stone-50">
+<div class="flex justify-between items-center">
+<span class="text-xs text-stone-500">Melhor dia: Sábado</span>
+<span class="text-xs font-bold text-green-600">+14% vs anterior</span>
+</div>
+</div>
+</section>
+<!-- Banner Management (Col Span 12) -->
+<section class="col-span-12 bg-white rounded-xl border border-stone-100 shadow-sm p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-title-lg text-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">image</span>
+                        Gestão de Banners
+                    </h2>
+<button class="px-4 py-2 border-2 border-dashed border-outline-variant rounded-xl font-label-sm text-label-sm text-stone-500 hover:border-primary hover:text-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+                        Novo Banner
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Hero Banner -->
+<div class="md:col-span-2 group relative overflow-hidden rounded-xl border border-stone-200 aspect-[21/9]">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Hero Banner" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="vibrant farmer's market scene with overhead view of fresh produce, warm natural lighting, high resolution photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2zz9mSEXnF3-SX-ZvYRLKxO6upzzpBNAFtg0YXC4VLErBtqEJmU4cKeIQEPEGFrNmqNLyZXJ6GD9ldqzOgJ7fv_yf9e0EsInTgqvQ7JsC1YcaeTTQDxJLZxERyAEyxRnaZuRe5MCnAMcVtwi052fjM9WD6v3rrThL43O5iQtHeaa7bap4Xzm70qN6QNZFFhqnlrNaur9I0U_fvJQxJ-FK1AD2oWZfGTS7fJAGxF1awu1O37L9mchvfrC_vYEc-wriZJuigH_iydE"/>
+<div class="absolute bottom-4 left-6 z-20 text-white">
+<span class="px-2 py-0.5 bg-orange-600 rounded text-[10px] font-bold uppercase mb-2 block w-fit">Banner Hero Principal</span>
+<h4 class="font-title-lg text-title-lg">Frescor Direto da Horta</h4>
+<p class="text-xs opacity-80">Ativo até 31/12/2024</p>
+</div>
+<div class="absolute top-4 right-4 z-20 flex gap-2">
+<button class="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-red-500"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<!-- Sub-banner 1 -->
+<div class="group relative overflow-hidden rounded-xl border border-stone-200 aspect-square">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Sub-banner 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="close up of rustic wicker basket filled with colorful fresh organic vegetables and fruits in bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3lm3uzSi-Ce3p26rwoAJ9OT3N36Tn48Knmu1dKYWsf-GFr33LTO3_I5D-QJ4d2Ya0pilMnI05vVi7uK1YRzvZ5Pw2JxhLXhhZGKMqu50OVooV-tIFeHq-IKcGfkyOfMpAJUmFavw9paSE_nW0wyCY8F5jyzaRZeUd4JJlQD-CKIV0n3HOIneHWTTdHwW33vMHUGg_or2dsOVtuaQUAmTC0LLKqtMwPvY1a4BLldaKhJMXFemu32PR7WYEc4wPsdO7gSv_c2ILU-E"/>
+<div class="absolute bottom-4 left-6 z-20 text-white">
+<span class="px-2 py-0.5 bg-secondary rounded text-[10px] font-bold uppercase mb-2 block w-fit">Sub-banner Lateral</span>
+<h4 class="font-title-lg text-sm">Ofertas de Inverno</h4>
+</div>
+<div class="absolute top-4 right-4 z-20 flex gap-1">
+<button class="p-1.5 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40"><span class="material-symbols-outlined text-xs">edit</span></button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Anchor -->
+<footer class="ml-64 w-auto py-8 px-12 flex flex-col md:flex-row justify-between items-center gap-4 bg-stone-100 border-t border-stone-200 text-stone-700 font-plus-jakarta text-xs uppercase tracking-wider">
+<p class="text-stone-500 lowercase">© 2024 feira.casa - Cultivando conexões reais.</p>
+<div class="flex gap-6">
+<a class="text-stone-500 hover:text-green-600 underline transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="text-stone-500 hover:text-green-600 underline transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-stone-500 hover:text-green-600 underline transition-colors opacity-80 hover:opacity-100" href="#">Shipping Info</a>
+<a class="text-stone-500 hover:text-green-600 underline transition-colors opacity-80 hover:opacity-100" href="#">Trust Badges</a>
+</div>
+</footer>
+</body></html>

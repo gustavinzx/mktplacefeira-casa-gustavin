@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#002202",
+                      "inverse-primary": "#83db79",
+                      "surface-container-low": "#f5f4ef",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#126e19",
+                      "secondary": "#a63b00",
+                      "on-tertiary-container": "#fffbff",
+                      "primary-fixed-dim": "#83db79",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c19",
+                      "tertiary-container": "#e41f25",
+                      "tertiary-fixed": "#ffdad6",
+                      "surface-variant": "#e3e3de",
+                      "error": "#ba1a1a",
+                      "background": "#faf9f4",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#7f2b00",
+                      "outline-variant": "#bfcab9",
+                      "secondary-container": "#fc6c29",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "secondary-fixed": "#ffdbce",
+                      "inverse-on-surface": "#f2f1ec",
+                      "on-tertiary-fixed": "#410002",
+                      "surface-container-highest": "#e3e3de",
+                      "secondary-fixed-dim": "#ffb599",
+                      "on-primary-container": "#f8fff0",
+                      "on-surface": "#1b1c19",
+                      "primary-fixed": "#9ef892",
+                      "on-tertiary-fixed-variant": "#93000d",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#efeee9",
+                      "primary-container": "#30852f",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#370e00",
+                      "tertiary": "#bb0014",
+                      "surface-dim": "#dbdad5",
+                      "inverse-surface": "#30312e",
+                      "on-surface-variant": "#40493c",
+                      "outline": "#707a6b",
+                      "on-secondary-container": "#5a1c00",
+                      "on-primary-fixed-variant": "#00530b",
+                      "primary": "#0e6b17",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#faf9f4",
+                      "surface-bright": "#faf9f4",
+                      "surface-container-high": "#e9e8e3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "xs": "4px",
+                      "margin-desktop": "80px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "md": "24px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "title-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Chef's Panel (Blurred Background Content) -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none filter blur-md grayscale-[20%] opacity-50">
+<!-- TopNavBar Mockup -->
+<header class="bg-white/90 px-4 py-3 border-b border-zinc-100 flex justify-between items-center">
+<span class="text-2xl font-black tracking-tight text-[#4BA046]">feira.casa</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-zinc-400">shopping_basket</span>
+<span class="material-symbols-outlined text-zinc-400">notifications</span>
+</div>
+</header>
+<main class="max-w-7xl mx-auto p-md space-y-md">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Painel do Chef</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gerencie suas receitas e produtos artesanais.</p>
+</div>
+</div>
+<!-- Bento Grid Mockup for Recipes -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="col-span-1 md:col-span-2 h-64 bg-surface-container-high rounded-xl p-md border border-outline-variant flex flex-col justify-end">
+<img alt="" class="hidden" data-alt="vibrant tropical salad with mango slices, fresh greens, and citrus vinaigrette in a rustic ceramic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCNyGMUfg07QcRMaRzIS8yTsux_5HgX1EtsQ8Vrtbpz0-UvEpLIz3oodDOAiHZf1j4rfhPfIyTkAkEBHCigs16Nv4mLV-xiri2JB7BkiELn33889UqRkX8OKer3fowhKwwLWpjBLrkLQ6xQ9azT_gXvzke69AZRln2psSZKo0UEPKmz1tOSGtNJR2bNJK4md3ux5xjMLs59e7iZ4DG_fXo9X-ZcyPXTvhNCyTq2xwh0PObw_lnEXDBZO98gBUx92f8A5zRq9Xs84k"/>
+<div class="bg-white/80 backdrop-blur-md p-sm rounded-lg border border-white/40">
+<h3 class="font-title-lg text-title-lg text-primary">Salada Tropical</h3>
+<p class="font-body-md text-body-md">Ativo no Marketplace</p>
+</div>
+</div>
+<div class="h-64 bg-surface-container-high rounded-xl p-md border border-outline-variant flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-2">add_circle</span>
+<p class="font-label-sm text-label-sm">Nova Receita</p>
+</div>
+</div>
+<!-- Dashboard Stats Mockup -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="p-sm bg-white border border-zinc-100 rounded-lg shadow-sm">
+<p class="text-zinc-500 font-label-sm text-label-sm uppercase tracking-wider">Vendas</p>
+<p class="font-headline-md text-headline-md text-on-surface">R$ 1.240</p>
+</div>
+<div class="p-sm bg-white border border-zinc-100 rounded-lg shadow-sm">
+<p class="text-zinc-500 font-label-sm text-label-sm uppercase tracking-wider">Visualizações</p>
+<p class="font-headline-md text-headline-md text-on-surface">842</p>
+</div>
+<div class="p-sm bg-white border border-zinc-100 rounded-lg shadow-sm">
+<p class="text-zinc-500 font-label-sm text-label-sm uppercase tracking-wider">Pedidos</p>
+<p class="font-headline-md text-headline-md text-on-surface">12</p>
+</div>
+<div class="p-sm bg-white border border-zinc-100 rounded-lg shadow-sm">
+<p class="text-zinc-500 font-label-sm text-label-sm uppercase tracking-wider">Avaliação</p>
+<p class="font-headline-md text-headline-md text-on-surface">4.9</p>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-[2px] z-[60] flex items-center justify-center p-4">
+<!-- Confirmation Modal -->
+<div class="bg-surface-container-lowest w-full max-w-sm rounded-[24px] shadow-2xl border border-outline-variant overflow-hidden flex flex-col items-center text-center p-md space-y-md">
+<!-- Warning Icon -->
+<div class="w-16 h-16 bg-error-container rounded-full flex items-center justify-center text-error mb-base">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<!-- Modal Content -->
+<div class="space-y-sm">
+<h2 class="font-title-lg text-title-lg text-on-surface">Excluir Receita?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant px-2">
+                    Tem certeza que deseja excluir a receita <span class="font-bold text-on-surface">"Salada Tropical"</span>? Esta ação não pode ser desfeita.
+                </p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col w-full gap-sm pt-xs">
+<!-- Primary Action: Delete -->
+<button class="w-full bg-tertiary hover:bg-on-tertiary-fixed-variant active:scale-95 transition-all text-on-tertiary font-label-sm text-label-sm py-4 rounded-xl shadow-lg shadow-error/20 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                    Excluir
+                </button>
+<!-- Secondary Action: Cancel -->
+<button class="w-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm py-4 rounded-xl transition-colors">
+                    Cancelar
+                </button>
+</div>
+<!-- Extra info -->
+<div class="pt-base border-t border-outline-variant w-full">
+<div class="flex items-center justify-center gap-2 text-zinc-400">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span class="text-[10px] uppercase font-bold tracking-widest">Painel Seguro do Chef</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Suppressed BottomNavBar for Modal state -->
+<nav class="fixed bottom-0 left-0 right-0 flex justify-around items-center px-4 pt-3 pb-8 w-full bg-white dark:bg-zinc-950 border-t border-zinc-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] opacity-20 pointer-events-none">
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold mt-1">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold mt-1">Feiras</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold mt-1">Pedidos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#4BA046] bg-green-50/50 rounded-2xl px-4 py-1.5">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold mt-1">Perfil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#e41f25",
+                    "secondary": "#a63b00",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "outline-variant": "#bfcab9",
+                    "on-secondary-container": "#5a1c00",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#83db79",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dbdad5",
+                    "secondary-fixed": "#ffdbce",
+                    "on-tertiary-fixed": "#410002",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-container": "#efeee9",
+                    "on-surface-variant": "#40493c",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1b1c19",
+                    "surface-variant": "#e3e3de",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e3e3de",
+                    "surface": "#faf9f4",
+                    "on-secondary-fixed": "#370e00",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-tint": "#126e19",
+                    "primary-container": "#30852f",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#f8fff0",
+                    "background": "#faf9f4",
+                    "surface-container-high": "#e9e8e3",
+                    "primary-fixed": "#9ef892",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "outline": "#707a6b",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#83db79",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fc6c29",
+                    "primary": "#0e6b17",
+                    "surface-bright": "#faf9f4",
+                    "on-background": "#1b1c19",
+                    "on-primary-fixed": "#002202",
+                    "surface-container-low": "#f5f4ef",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xl": "64px",
+                    "margin-desktop": "80px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 shadow-sm docked full-width top-0 z-50 fixed w-full h-16 flex justify-between items-center px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-emerald-700 dark:text-emerald-500 tracking-tight">feira.casa Atacado</span>
+<div class="hidden md:flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full px-4 py-2 w-96">
+<span class="material-symbols-outlined text-zinc-400 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full" placeholder="Buscar produtos no atacado..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex flex-col items-end">
+<span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Unidade logada</span>
+<span class="text-sm font-medium text-emerald-600">Seletor de CNPJ</span>
+</div>
+<div class="flex gap-4">
+<div class="p-2 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors cursor-pointer relative">
+<span class="material-symbols-outlined text-zinc-600">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
+</div>
+<div class="p-2 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-zinc-600">settings</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center border-2 border-emerald-200 overflow-hidden">
+<img alt="Avatar do Gestor Corporativo" class="w-full h-full object-cover" data-alt="professional portrait of a corporate manager smiling in a clean office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOfLM_30t8iQTVSFB0hQfm_btHqux16y6xU8dkX0RB_YzgNvtzexpnsYnUnsEJVj0JwhfZV9gImadNOyWiAEEUBcH9A0D-bgYwJAClpQAoeSFzWlXq2Ebkx_oXQ9sjnyensfDtYY8BNqslikRY9zowiKjuaZvRHbcHWnnxFlil9nPf2fnn5sxrs3FXNZPDClr0NZjgoR3JWmgxc78dIUbmFl2guApKMGyJrDZaZUUsQQmHgNbhP-BtMssnF9KO_IL2cfeqPRyM39o"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="bg-zinc-50 dark:bg-zinc-900 h-screen w-64 border-r border-zinc-200 dark:border-zinc-800 fixed left-0 top-0 flex flex-col h-full pt-16 z-40 hidden lg:flex">
+<div class="px-6 py-6 border-b border-zinc-200/50 dark:border-zinc-800/50">
+<h2 class="text-lg font-extrabold text-emerald-800 dark:text-emerald-200">Portal B2B</h2>
+<p class="text-[12px] text-zinc-500">Gestão de Suprimentos</p>
+</div>
+<nav class="flex-1 px-3 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-semibold border-r-4 border-emerald-600" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium">Catálogo Atacado</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-medium">Faturamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-medium">Contratos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-medium">Suporte</span>
+</a>
+</nav>
+<div class="p-4 border-t border-zinc-200 dark:border-zinc-800">
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-error-container hover:text-on-error-container transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Log out</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:pl-64 pt-16 flex flex-col min-h-screen">
+<div class="flex-1 flex flex-col lg:flex-row">
+<!-- Catalog Feed -->
+<section class="flex-1 p-6 md:p-8">
+<!-- Header Stats -->
+<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Catálogo de Atacado</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Preços exclusivos para pedidos em volume direto do produtor.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-4 py-2 bg-primary-container text-on-primary-container rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+                            Frete Grátis B2B
+                        </span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">payments</span>
+                            Boleto 30/60/90
+                        </span>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+<!-- Product Card 1: Sale Item -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col hover:shadow-md transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Tomate Italiano" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="close-up of vibrant red italian tomatoes in a rustic wooden crate with warm sunlight and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUP0tuymRzIk0NIbVV6XdIQ9iNCceSznYw81wFDULiGKgLtTny6Ftju9G8uXjabMhAnyuiTK8jm9DcJAYWwsjkX_33pu4738iGwNqsc5yk-z2m3Twb2RcQCK9U5uNw84a6g_fPliFncyLVvLFX02ycDGCxdQe1aBnyCbWIe-2rQ39wY41W7dKkM1QmG6Ua2eNQ2PB5mvxcio3XlxPalqquPktzpSjlAWWEDoENRlq5ckaOvEHzdU_NKwMYHh4isMWxTne-2M9c0S0"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1">
+<span class="bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Oferta Especial</span>
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Orgânico</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Tomate Italiano Selecionado</h3>
+<p class="text-xs text-on-surface-variant">Caixa 20kg • Origem: Holambra/SP</p>
+</div>
+<span class="text-tertiary font-bold text-lg">R$ 145,00<span class="text-xs font-normal">/cx</span></span>
+</div>
+<!-- Progressiv Pricing Table -->
+<div class="mt-4 bg-surface-container-low rounded-lg p-3">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Tabela de Desconto por Volume</p>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">1-10 cxs</p>
+<p class="text-sm font-bold text-on-surface">R$ 145,00</p>
+</div>
+<div class="text-center p-2 rounded bg-primary-fixed border border-primary">
+<p class="text-xs text-on-primary-fixed-variant">11-50 cxs</p>
+<p class="text-sm font-bold text-on-primary-fixed-variant">R$ 128,50</p>
+<span class="text-[8px] bg-primary text-white px-1 rounded">-12%</span>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">51+ cxs</p>
+<p class="text-sm font-bold text-on-surface">R$ 115,00</p>
+<span class="text-[8px] bg-secondary text-white px-1 rounded">-21%</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-5 flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg bg-white">
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<input class="w-12 text-center border-none focus:ring-0 font-bold text-on-surface" type="number" value="12"/>
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Adicionar
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col hover:shadow-md transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Cenoura Maço" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="overhead view of freshly harvested carrots with green tops tied in bunches on a clean rustic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVSazqG6yNnj38SPOWTk5H4N9gSqdurPKOQXxH13zdd0_4elt2PShZasLw_uCI7aQJEowQGWcYJw-gKEsH6zmugTF1KMAWNYKmXSrnr2K1C4RaVdFrDQgMWzECnoTbSVTIRrjaUUtsYJqYI9o_jTOl6nygtNcBl3Ds4go2g5R7dVgL1v5gkRRukHiSiQ-qi97uSRxLx22rlZ72PWv3Bgp7h9HoZaChm9edRP-jCGN1uEy4uSVzAw4qD6zLsMhNNx9G4Dm6o5rizR4"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Colhido Hoje</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Cenoura Extra Lavada</h3>
+<p class="text-xs text-on-surface-variant">Saco 18kg • Tipo: AAA</p>
+</div>
+<span class="text-on-surface font-bold text-lg">R$ 92,00<span class="text-xs font-normal">/sc</span></span>
+</div>
+<div class="mt-4 bg-surface-container-low rounded-lg p-3">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Tabela de Desconto por Volume</p>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">1-5 scs</p>
+<p class="text-sm font-bold text-on-surface">R$ 92,00</p>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">6-20 scs</p>
+<p class="text-sm font-bold text-on-surface">R$ 88,50</p>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">21+ scs</p>
+<p class="text-sm font-bold text-on-surface">R$ 82,00</p>
+<span class="text-[8px] bg-primary text-white px-1 rounded">-10%</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-5 flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg bg-white">
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<input class="w-12 text-center border-none focus:ring-0 font-bold text-on-surface" type="number" value="1"/>
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Adicionar
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col hover:shadow-md transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Batata Inglesa" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="large sack of potatoes in a professional storage facility with clean industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfdLSucXNxkfif0WmML1Rui9ANODgtGdIt_QEY3b0Gy6qzx8tAYGK3a9oYsK5wugzQlzfVban0tAFBkAzOwKo3mPHQhRy7l28YxmtVRVj9FkINF0QBh1wDvldckYpCt5cs-RixQ8PpZfKdXome0Amd4tFZs5qiUvh3EWg7Qx9fqqW9bl6iBHz4OTDHtmK5l3EPafNz9bxVzTNtISntuvdmcd7cOpoFQFrf_qGS65ZMKXH_mm5lABwnqzQZ5pgY74Bu0-gRrUtE8y8"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1">
+<span class="bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Melhor Preço</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Batata Inglesa Lisa</h3>
+<p class="text-xs text-on-surface-variant">Saco 50kg • Origem: Piedade/SP</p>
+</div>
+<span class="text-on-surface font-bold text-lg">R$ 210,00<span class="text-xs font-normal">/sc</span></span>
+</div>
+<div class="mt-4 bg-surface-container-low rounded-lg p-3">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Tabela de Desconto por Volume</p>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">1-10 scs</p>
+<p class="text-sm font-bold text-on-surface">R$ 210,00</p>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">11-30 scs</p>
+<p class="text-sm font-bold text-on-surface">R$ 195,00</p>
+</div>
+<div class="text-center p-2 rounded bg-primary-fixed border border-primary">
+<p class="text-xs text-on-primary-fixed-variant">31+ scs</p>
+<p class="text-sm font-bold text-on-primary-fixed-variant">R$ 178,00</p>
+<span class="text-[8px] bg-primary text-white px-1 rounded">-15%</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-5 flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg bg-white">
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<input class="w-12 text-center border-none focus:ring-0 font-bold text-on-surface" type="number" value="35"/>
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Adicionar
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col hover:shadow-md transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Alface Americana" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="fresh crisp iceberg lettuce in individual plastic wraps ready for wholesale distribution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvQe-djvrPLEyPl2EAMwZxZGp7dLpjBZxtnqQXLS-CyLw4S5LBYr1ZgtPyUksLUuT12aYNj_PVxnEnXmUlFYmwAhNeq1Ho5rlljFxIv8Tro8eJboVsZlGbF-E0o-RRy6FNwkSTymnpT7UCQVCP2m6QcPTzC0Tgk6ExFt9Ap-XwsfMliflaZ3aGdYqoZLBeYfy3nltqQkWmb1n7QHqpwuTOaynMlMv1z7DIC0RFEYJGt_64OmbkVMyBnriZG3YXVRKPg43IYeC7o_c"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Alta Demanda</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Alface Americana</h3>
+<p class="text-xs text-on-surface-variant">Caixa 12 unid • Hidropônica</p>
+</div>
+<span class="text-on-surface font-bold text-lg">R$ 54,00<span class="text-xs font-normal">/cx</span></span>
+</div>
+<div class="mt-4 bg-surface-container-low rounded-lg p-3">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Tabela de Desconto por Volume</p>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">1-15 cxs</p>
+<p class="text-sm font-bold text-on-surface">R$ 54,00</p>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">16-40 cxs</p>
+<p class="text-sm font-bold text-on-surface">R$ 49,00</p>
+</div>
+<div class="text-center p-2 rounded bg-white border border-outline-variant">
+<p class="text-xs text-on-surface-variant">41+ cxs</p>
+<p class="text-sm font-bold text-on-surface">R$ 44,50</p>
+<span class="text-[8px] bg-primary text-white px-1 rounded">-17%</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-5 flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg bg-white">
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<input class="w-12 text-center border-none focus:ring-0 font-bold text-on-surface" type="number" value="1"/>
+<button class="px-3 py-2 text-zinc-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Adicionar
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sticky Cart Sidebar -->
+<aside class="w-full lg:w-[380px] bg-white border-l border-zinc-200 p-6 flex flex-col h-auto lg:h-[calc(100vh-64px)] sticky top-16">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Pedido Atual</h2>
+</div>
+<span class="text-xs font-bold px-2 py-1 bg-zinc-100 rounded text-zinc-600">3 ITENS</span>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4">
+<!-- Cart Item 1 -->
+<div class="flex gap-4 p-3 rounded-lg bg-surface-container-low border border-transparent hover:border-outline-variant transition-all group">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Tomate Thumbnail" class="w-full h-full object-cover" data-alt="thumbnail of fresh red tomatoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnobBjhn7C_Lu89Yp0I45YADqy8GVPg-4kAujnUHmfO0J71S9rHcQioc7bM4QR0C7glDrbQ_io5Y2czDKfz37OY3Kqzb_tnPSRq9VVy9vQ-oDl8gqC_9fFQVDZZJa3N3G4f-S_wUjXfl0-FQvGn9dKM9Lib333KXQYwDXZImWuibUG411J0INqdHrNRI6iEWYpvd0YRPgT0cRPzLJY6Uz2le-FCSO7D09D7d3dZGc-fOpw_rE3JTTwCHjbuobu-q3d6QOcM_L6I8Y"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">Tomate Italiano</p>
+<button class="text-zinc-400 hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<p class="text-[10px] text-on-surface-variant">12 cxs x R$ 128,50</p>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs font-bold text-primary">Volume Médio Applied</span>
+<span class="text-sm font-extrabold text-on-surface">R$ 1.542,00</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-4 p-3 rounded-lg bg-surface-container-low border border-transparent hover:border-outline-variant transition-all">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Batata Thumbnail" class="w-full h-full object-cover" data-alt="thumbnail of potatoes in storage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTfktV6o-9yGSUsTkttIZH4rT5pMbNI79WtKZtgca6-_I4CX0QoWfV47sE60vLIJsaaoWDqJBEy92z9WzYXoAs37c7ScTvg0W7w-OHJQK6lKs0U7NuUaNEOnJDQXfQ9hTgWm7D14m2URP4OP4I4ooxfZ-s1zDtOlUShinF-DDZ5tj8NtgUeNfi_YRC7fG8McSoGXKv1uQxJF1VzYbSvyh6AGB4IHkT1rgBuDn383GSZPncLwQDL9uaL1gv-txLj5bZJ1ymR1cGIxQ"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">Batata Inglesa</p>
+<button class="text-zinc-400 hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<p class="text-[10px] text-on-surface-variant">35 scs x R$ 178,00</p>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs font-bold text-secondary">Volume Alto Applied</span>
+<span class="text-sm font-extrabold text-on-surface">R$ 6.230,00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Summary -->
+<div class="mt-8 pt-6 border-t border-zinc-200">
+<div class="space-y-2 mb-6">
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Subtotal Bruto</span>
+<span class="line-through">R$ 9.090,00</span>
+</div>
+<div class="flex justify-between text-sm text-primary font-bold">
+<span>Economia em Atacado</span>
+<span>- R$ 1.318,00</span>
+</div>
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Frete (Logística B2B)</span>
+<span class="text-primary font-bold">GRÁTIS</span>
+</div>
+<div class="flex justify-between pt-4">
+<span class="font-title-lg text-title-lg text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-on-surface">R$ 7.772,00</span>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-extrabold text-lg hover:bg-primary-container transition-all flex items-center justify-center gap-3 shadow-lg shadow-primary/20">
+                            Finalizar Pedido B2B
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full border-2 border-outline text-on-surface py-3 rounded-xl font-bold hover:bg-zinc-50 transition-all">
+                            Salvar como Cotação
+                        </button>
+</div>
+<div class="mt-6 flex items-center gap-3 p-3 bg-emerald-50 rounded-lg">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<p class="text-[11px] text-emerald-800 leading-tight">Suas condições de pagamento para <strong>CNPJ 12.345...</strong> estão habilitadas para este pedido.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- FAB for quick search (Mobile) -->
+<button class="lg:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center z-50">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</body></html>

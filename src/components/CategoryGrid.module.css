@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  items: center;
+  gap: 12px;
+  cursor: pointer;
+  min-width: 100px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-4px);
+}
+
+.iconWrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.item:hover .iconWrapper {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+@media (max-width: 600px) {
+  .iconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary": "#a63b00",
+                    "tertiary": "#bb0014",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#e41f25",
+                    "surface-tint": "#126e19",
+                    "surface-bright": "#faf9f4",
+                    "inverse-primary": "#83db79",
+                    "outline-variant": "#bfcab9",
+                    "on-primary-container": "#f8fff0",
+                    "inverse-surface": "#30312e",
+                    "outline": "#707a6b",
+                    "primary-fixed": "#9ef892",
+                    "on-secondary-container": "#5a1c00",
+                    "surface-container": "#efeee9",
+                    "surface-container-high": "#e9e8e3",
+                    "secondary-container": "#fc6c29",
+                    "on-primary-fixed": "#002202",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#30852f",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#370e00",
+                    "surface-container-highest": "#e3e3de",
+                    "surface": "#faf9f4",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#410002",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#0e6b17",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#40493c",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-container-low": "#f5f4ef",
+                    "on-surface": "#1b1c19",
+                    "background": "#faf9f4",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-dim": "#dbdad5",
+                    "secondary-fixed": "#ffdbce",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary-fixed-dim": "#83db79",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-variant": "#e3e3de",
+                    "on-background": "#1b1c19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "sm": "12px",
+                    "margin-desktop": "80px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .product-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(18, 110, 25, 0.04);
+        }
+        body {
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface bg-background">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-20 max-w-screen-2xl mx-auto bg-white dark:bg-stone-900 border-b border-stone-100 dark:border-stone-800 shadow-sm font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 cursor-pointer active:scale-95 duration-200">feira.casa</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-500 transition-colors cursor-pointer active:scale-95 duration-200" href="#">Categorias</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-500 transition-colors cursor-pointer active:scale-95 duration-200" href="#">Ofertas</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-500 transition-colors cursor-pointer active:scale-95 duration-200" href="#">Produtores</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-500 transition-colors cursor-pointer active:scale-95 duration-200" href="#">Orgânicos</a>
+</div>
+</div>
+<div class="flex-1 max-w-md mx-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="w-full bg-stone-50 border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary-container/20 text-on-surface text-sm" type="text" value="Tomate"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer active:scale-95 duration-200 text-stone-600">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer active:scale-95 duration-200 text-stone-600">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer active:scale-95 duration-200 text-stone-600 relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-secondary-container text-white text-[10px] flex items-center justify-center rounded-full font-bold">3</span>
+</button>
+</div>
+</nav>
+<main class="pt-28 pb-20 px-6 max-w-screen-2xl mx-auto flex gap-8">
+<!-- Sidebar Filters -->
+<aside class="hidden lg:block w-72 flex-shrink-0 space-y-8">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-title-lg text-on-surface">Filtros</h3>
+<button class="text-emerald-600 font-label-sm hover:underline">Limpar tudo</button>
+</div>
+<!-- Category -->
+<div class="mb-8">
+<p class="font-label-sm uppercase tracking-wider text-stone-500 mb-4">Categoria</p>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Frutas e Legumes</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Temperos</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Grãos e Cereais</span>
+</label>
+</div>
+</div><div class="mb-8">
+<p class="font-label-sm uppercase tracking-wider text-stone-500 mb-4">Distância da Feira</p>
+<div class="flex flex-wrap gap-2 mb-2">
+<button class="px-4 py-2 rounded-full border border-stone-200 text-on-surface font-semibold text-sm hover:border-primary transition-colors cursor-pointer">Até 2km</button>
+<button class="px-4 py-2 rounded-full border border-stone-200 text-on-surface font-semibold text-sm hover:border-primary transition-colors cursor-pointer">Até 5km</button>
+<button class="px-4 py-2 rounded-full border border-stone-200 text-on-surface font-semibold text-sm hover:border-primary transition-colors cursor-pointer">Até 10km</button>
+<button class="px-4 py-2 rounded-full bg-primary text-white font-semibold text-sm shadow-sm cursor-pointer">Até 24km</button>
+</div>
+<p class="text-[10px] text-stone-400 italic">*24km é o alcance máximo para entrega.</p>
+</div>
+<!-- Price Range -->
+<div class="mb-8">
+<p class="font-label-sm uppercase tracking-wider text-stone-500 mb-4">Preço</p>
+<div class="flex items-center gap-2 mb-4">
+<div class="flex-1 relative">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-stone-400 text-xs">R$</span>
+<input class="w-full pl-7 py-1.5 border-stone-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Mín" type="text"/>
+</div>
+<div class="flex-1 relative">
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-stone-400 text-xs">R$</span>
+<input class="w-full pl-7 py-1.5 border-stone-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Máx" type="text"/>
+</div>
+</div>
+</div>
+<!-- Feirantes -->
+<div class="mb-8">
+<p class="font-label-sm uppercase tracking-wider text-stone-500 mb-4">Feirante</p>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Sítio Santo Antônio</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Horta da Vovó</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-stone-300 text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface group-hover:text-primary transition-colors">Fazenda Aurora</span>
+</label>
+</div>
+</div>
+<!-- Features -->
+<div class="mb-4">
+<label class="flex items-center justify-between cursor-pointer p-3 rounded-lg bg-emerald-50/50 border border-emerald-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="font-label-sm text-emerald-800">Apenas Orgânicos</span>
+</div>
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-stone-200 rounded-full peer-checked:bg-emerald-500 relative transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-all peer-checked:after:translate-x-5"></div>
+</label>
+</div>
+</div>
+<!-- Seller Badge Promo -->
+<div class="bg-gradient-to-br from-secondary-container to-secondary p-6 rounded-xl text-white relative overflow-hidden group">
+<div class="relative z-10">
+<h4 class="font-title-lg mb-2">Seja um Produtor</h4>
+<p class="text-sm opacity-90 mb-4">Venda seus produtos direto do campo para o consumidor.</p>
+<button class="bg-white text-secondary px-4 py-2 rounded-lg font-label-sm hover:bg-stone-100 transition-colors">Saiba mais</button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-white/20 text-8xl rotate-12 group-hover:scale-110 transition-transform">potted_plant</span>
+</div>
+</aside>
+<!-- Main Content -->
+<section class="flex-1">
+<!-- Results Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="font-headline-md text-on-surface">Resultados para 'Tomate'</h1>
+<p class="text-stone-500 font-body-md">24 itens encontrados em 12 feirantes locais</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-sm text-stone-500 hidden sm:inline">Ordenar por:</span>
+<select class="bg-white border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:ring-emerald-500 focus:border-emerald-500 shadow-sm min-w-[180px]">
+<option>Mais Relevantes</option>
+<option>Menor Preço</option>
+<option>Maior Desconto</option>
+<option>Melhor Avaliação</option>
+</select>
+</div>
+</div>
+<!-- Sponsored Section -->
+<div class="mb-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<h2 class="font-label-sm uppercase tracking-widest text-secondary">Destaques Patrocinados</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Sponsored Card 1 -->
+<div class="flex bg-white rounded-2xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-2/5 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="vibrant organic vine-ripened tomatoes in a wooden crate with warm sunlight highlighting textures and fresh green stems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD3XRyPj_xLKLeU17yffOnkd9_GhzXlDfZxvZLisn9zvU5nEhv-80X12nuVjiCvyWxpHGM0CFNUEm4Azi4Et9N8vsyQiINIK6ghReRjVqymsKmCmTPw_dXxxgySgpcJplvZINnR3hUTa9M42Lepyo29YTBUJBaCOaBYkcUKItbHYnmWZ_6lbS83R2sNuZkYeLbWIDXFXZofC7JKF1uSNnMfGI6yDZq1_TApSZ6A8Bak8j6likkh_u0ME3ivlBAVGZVe697K6NW0pA"/>
+<span class="absolute top-3 left-3 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Patrocinado</span>
+</div>
+<div class="w-3/5 p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-emerald-600 mb-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Orgânico Certificado</span>
+</div>
+<h3 class="font-title-lg text-on-surface mb-1">Tomate Sweet Grape</h3>
+<p class="text-xs text-stone-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">store</span>
+                                    Sítio Vale das Flores
+                                </p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div>
+<span class="text-stone-400 line-through text-xs">R$ 14,90</span>
+<div class="font-headline-md text-emerald-700 leading-none">R$ 12,50<span class="text-sm font-normal text-stone-500"> / 500g</span></div>
+</div>
+<button class="bg-secondary-container hover:bg-secondary text-white p-2.5 rounded-xl transition-colors active:scale-95">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sponsored Card 2 -->
+<div class="flex bg-white rounded-2xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-2/5 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close-up of fresh red italian tomatoes on the vine on a rustic kitchen table with dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP4i2ZwUFBpwySBz6Uy2udmFD4gttNI_fH1zyAlIUUOwAYdTXydvKjVMKaD5JJE0CBQUwD4o1a1p9z_9-IzkM-RoZaU9ofKY_9mbEDIMIgHO7Ex3ZJuzeFB-Ifw1idoS9ypfcwtVdlkE6vTb6L6m13979_Q7KfMesqbMQIjA-MR0b_-geJhz8Diqnj_juYki4YoaNHgafPLLI86BPHH_2RWXML1pEuGcCwveVEGOTiEe_kVrAA6PQ-RqWAMbFEWWj2-OTKYaIlOCw"/>
+<span class="absolute top-3 left-3 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Patrocinado</span>
+</div>
+<div class="w-3/5 p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-emerald-600 mb-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Colhido Hoje</span>
+</div>
+<h3 class="font-title-lg text-on-surface mb-1">Tomate Italiano</h3>
+<p class="text-xs text-stone-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">store</span>
+                                    Horta da Família Lima
+                                </p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div>
+<div class="font-headline-md text-emerald-700 leading-none">R$ 8,90<span class="text-sm font-normal text-stone-500"> / kg</span></div>
+</div>
+<button class="bg-secondary-container hover:bg-secondary text-white p-2.5 rounded-xl transition-colors active:scale-95">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Results Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card Loop (Simulated 8 cards) -->
+<!-- Card 1 -->
+<div class="bg-white rounded-2xl overflow-hidden product-card-shadow group border border-stone-50 flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="overhead view of ripe red cherry tomatoes mixed with fresh herbs on a clean white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1vaq_fwM7KsnDlmvJyJCOy1jEZxhKc8AA6JeM-fYCBDW6YhTE2hKpLaVPPlV7jfxLN13tWApJrOVwnWF13VgMwUMCII7_elOoZFpFiXZyvOMz3Gt94Y9iPliTK5gA_KMP1iFAIYrxlHSlZTW0wkxf0sT01IQLfuVQajkwnWdoZUPNG_cPOZLCNZWjRPoioHyGCvS_w_uSZJY_jqYwiCzdEe0sLP-VDwkYa4A-uw_LgUypLD-KWuAvzivvr5ZglZ2mQOYDPGibfS8"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-tertiary-container hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.8</span>
+<span class="text-xs text-stone-400">(42)</span>
+</div>
+<h4 class="font-title-lg text-on-surface mb-1 truncate">Tomate Cereja Orgânico</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-1">Direto do Sítio Aurora - Mogi das Cruzes</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="text-emerald-700 font-headline-md text-xl leading-none">R$ 9,90 <span class="text-xs font-normal text-stone-400">/ 250g</span></div>
+<button class="p-2 bg-stone-50 hover:bg-emerald-50 text-emerald-600 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-2xl overflow-hidden product-card-shadow group border border-stone-50 flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="large heirloom tomatoes in shades of red and orange sliced open to show juicy interior texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtkOHOEpiVz9f1k4D_Nmac8t31u2nmqVI81PyXoUWwgXC_-1106RTzITG9BpEgGkB4h27Wm_bwVKmeLwURFuHEBrM-Tl3Q2gvLIiiFcQ-Z2KzmiuB_N67aJ1Rx23paDXEMB5nADlEvBJtUYYtxPTnA0bRv9T8Op3p1TH67i238Injt-j260sejDiAp4KawYS0onAlMdpR_hHagJ7ZEHALveJVuk0HPwcPr4wu3Th1JXzvqI7axmCaUQMb3sEJVCjYMXATO6z6twYo"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-stone-400 hover:text-tertiary-container hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.5</span>
+<span class="text-xs text-stone-400">(18)</span>
+</div>
+<h4 class="font-title-lg text-on-surface mb-1 truncate">Tomate Débora Selecionado</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-1">Barraca do Seu Zé - CEAGESP</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="text-emerald-700 font-headline-md text-xl leading-none">R$ 6,50 <span class="text-xs font-normal text-stone-400">/ kg</span></div>
+<button class="p-2 bg-stone-50 hover:bg-emerald-50 text-emerald-600 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-2xl overflow-hidden product-card-shadow group border border-stone-50 flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="sun-dried tomatoes in olive oil with garlic and herbs in a glass jar glowing under soft warm kitchen light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFfIgaWFy0q45u3Vec3DwbQjuq90Tw2GBtY6M5qMsA4B4UBX8MsesP2kKXpUoaFhtDOa8kIknYher8pXt_NLydNoMdIz92OMa9wla_Gk3EPg-Pfintb3hnYbtPl1O6OB6eJH_z3iA1imaiIqrx_7sNHCh8zzzzIx1lYG7Ljet9efwM9U83UCt_9Kkz_N7FNmtcqGJM0w1fpwZMbiAHnicHTk2Wi6flxJsF66dlDqIFCwtBTj5U14k6h7bFKly4PYEYqRvjysoCl6c"/>
+<div class="absolute top-3 left-3 bg-secondary-container text-white text-[10px] font-bold px-2 py-1 rounded">-15%</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">5.0</span>
+<span class="text-xs text-stone-400">(9)</span>
+</div>
+<h4 class="font-title-lg text-on-surface mb-1 truncate">Tomate Seco Artesanal</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-1">Conservas da Ilha</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-stone-400 line-through">R$ 28,00</span>
+<div class="text-emerald-700 font-headline-md text-xl leading-none">R$ 23,80 <span class="text-xs font-normal text-stone-400">/ pote</span></div>
+</div>
+<button class="p-2 bg-stone-50 hover:bg-emerald-50 text-emerald-600 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white rounded-2xl overflow-hidden product-card-shadow group border border-stone-50 flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="vibrant cluster of small yellow pear tomatoes in a rustic basket with soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbsz3USpVq7pm0uZJOv8LIx9YGsr8pQmKqsjOj4MP96LsvZnTBny0zUkZwE7ilp6aLC3um0rWzX-rsaqZ0W1b6iE5wCQFFKx2Pbi8dVYKFojMxnMRNjhBqy2ktHhgyibyd9jJUWyBF1S45qrMz5Tx052krHIv25VSnmzj4SbrCQJc7EfCfGgg1G9rhdhX0HcLqDMMc0qONW1FknH62Bi1Y3zqWVhLg6ZfbnZM4ZufEIvQrSb1WFwsxXBgAQctT9OCjL6SgFOKT7dQ"/>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.7</span>
+<span class="text-xs text-stone-400">(25)</span>
+</div>
+<h4 class="font-title-lg text-on-surface mb-1 truncate">Tomate Amarelo Gourmet</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-1">Fazenda Sol Nascente</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="text-emerald-700 font-headline-md text-xl leading-none">R$ 11,20 <span class="text-xs font-normal text-stone-400">/ 300g</span></div>
+<button class="p-2 bg-stone-50 hover:bg-emerald-50 text-emerald-600 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex items-center justify-center gap-2">
+<button class="p-2 rounded-lg border border-stone-200 text-stone-400 hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors font-bold">2</button>
+<button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors font-bold">3</button>
+<span class="px-2 text-stone-400">...</span>
+<button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors font-bold">6</button>
+<button class="p-2 rounded-lg border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 lg:px-24 grid grid-cols-1 md:grid-cols-4 gap-8 bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 font-['Plus_Jakarta_Sans'] text-sm leading-relaxed">
+<div class="md:col-span-1">
+<span class="text-xl font-extrabold text-emerald-700 dark:text-emerald-500 mb-4 block">feira.casa</span>
+<p class="text-stone-500 dark:text-stone-400 mb-6">Do campo direto para sua mesa. Apoiando produtores locais e levando saúde para sua família.</p>
+<div class="flex gap-4">
+<a class="text-stone-400 hover:text-emerald-600 transition-colors" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="text-stone-400 hover:text-emerald-600 transition-colors" href="#"><span class="material-symbols-outlined">camera_indoor</span></a>
+<a class="text-stone-400 hover:text-emerald-600 transition-colors" href="#"><span class="material-symbols-outlined">video_library</span></a>
+</div>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-on-surface">Links Rápidos</p>
+<ul class="space-y-2">
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Sobre Nós</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Como Funciona</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Seja um Produtor</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-on-surface">Ajuda &amp; Suporte</p>
+<ul class="space-y-2">
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Ajuda</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Política de Privacidade</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 hover:text-orange-500 transition-colors underline-offset-4 hover:underline" href="#">Termos de Uso</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-on-surface">Newsletter</p>
+<p class="text-xs text-stone-500">Receba ofertas e dicas de receitas semanais.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-white border-stone-200 rounded-lg text-sm px-3 py-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Seu e-mail" type="email"/>
+<button class="bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-emerald-800 transition-colors">Assinar</button>
+</div>
+</div>
+<div class="md:col-span-4 border-t border-stone-200 dark:border-stone-800 pt-8 mt-4 text-center">
+<p class="text-stone-500 dark:text-stone-400">© 2024 feira.casa - Do campo direto para sua mesa.</p>
+</div>
+</footer>
+</body></html>

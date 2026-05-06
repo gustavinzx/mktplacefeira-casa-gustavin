@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad6",
+                    "secondary-container": "#fc6c29",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#30852f",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#efeee9",
+                    "on-surface-variant": "#40493c",
+                    "on-surface": "#1b1c19",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffdbce",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary": "#0e6b17",
+                    "primary-fixed-dim": "#83db79",
+                    "on-tertiary-fixed": "#410002",
+                    "inverse-surface": "#30312e",
+                    "on-primary-container": "#f8fff0",
+                    "inverse-on-surface": "#f2f1ec",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-secondary-container": "#5a1c00",
+                    "on-primary": "#ffffff",
+                    "background": "#faf9f4",
+                    "on-primary-fixed": "#002202",
+                    "primary-fixed": "#9ef892",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#bb0014",
+                    "surface": "#faf9f4",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-variant": "#e3e3de",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-tint": "#126e19",
+                    "secondary": "#a63b00",
+                    "secondary-fixed-dim": "#ffb599",
+                    "surface-container-highest": "#e3e3de",
+                    "surface-container-high": "#e9e8e3",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-background": "#1b1c19",
+                    "surface-dim": "#dbdad5",
+                    "inverse-primary": "#83db79",
+                    "surface-bright": "#faf9f4",
+                    "tertiary-container": "#e41f25",
+                    "surface-container-low": "#f5f4ef",
+                    "outline-variant": "#bfcab9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="bg-white/90 dark:bg-stone-900/90 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm docked full-width top-0 z-50 flex justify-between items-center w-full px-6 py-3 fixed">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black tracking-tight text-emerald-700 dark:text-emerald-400">feira.casa Chef</span>
+<div class="hidden md:flex gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-['Plus_Jakarta_Sans'] font-medium hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors px-3 py-2 rounded-lg" href="#">Dashboard</a>
+<a class="text-emerald-700 dark:text-emerald-400 font-bold font-['Plus_Jakarta_Sans'] px-3 py-2 rounded-lg" href="#">My Store</a>
+<a class="text-stone-500 dark:text-stone-400 font-['Plus_Jakarta_Sans'] font-medium hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors px-3 py-2 rounded-lg" href="#">My Recipes</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<img alt="Chef Gourmet Profile Avatar" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="Professional chef portrait in a clean white uniform with a warm confident smile in a modern kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa_mPeUZFzG1BYXbG3ES0Q2SO9XBC_KJCEiqSebqR3FUP956X-DLEQCEl5eVLi2EfG5exGTybvWrQxZKeQrLvfwVW1YOOG-kHn_ZfAu1n0K31co8DCg2eQP44X1Yd7U3Qp3zvfOb-1aUMFu46D4Fx2p1C9KtGap7ZTsdCvZ9BbRtrphunKXpBqvMuOm47wlLwPpeO9M6VMqM8CqehRLg1zigFF8mMn5qrW02Q6vOk_4jNjt0cKVtOreTeSWnrb2JqGrNv1V-QKp7w"/>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800 shadow-inner flex flex-col pt-20 pb-6 hidden lg:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-emerald-800 dark:text-emerald-200 leading-none">Chef Gourmet</h3>
+<p class="text-xs text-stone-500">Gourmet Services</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all px-4 py-3 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border-r-4 border-emerald-600 font-semibold px-4 py-3 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                My Store
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all px-4 py-3 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                My Recipes
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all px-4 py-3 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="px-6 mb-6">
+<button class="w-full bg-secondary-container text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New Dish
+            </button>
+</div>
+<div class="border-t border-stone-200 dark:border-stone-800 pt-4">
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 px-4 py-2 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                Support
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 px-4 py-2 flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 px-6 md:px-12 pb-12">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Storefront Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-2">
+                    Manage your culinary presence on feira.casa. Switch between your ready-to-eat signed dishes and premium gourmet experiences.
+                </p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-high p-1 rounded-xl">
+<button class="bg-surface-container-lowest text-primary font-bold px-6 py-2 rounded-lg shadow-sm">Overview</button>
+<button class="text-on-surface-variant font-medium px-6 py-2 rounded-lg hover:bg-surface-container transition-colors">Analytics</button>
+</div>
+</header>
+<!-- Bento Grid Stats -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+<div class="col-span-1 md:col-span-2 bg-primary-container text-on-primary-container p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[200px]">
+<div class="z-10">
+<p class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest">Total Monthly Revenue</p>
+<h2 class="font-display-lg text-display-lg mt-2">R$ 14.850</h2>
+</div>
+<div class="z-10 flex items-center gap-2 font-label-sm text-label-sm">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span>12% Increase from last month</span>
+</div>
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 p-8 rounded-3xl flex flex-col justify-between">
+<div class="w-12 h-12 bg-secondary-fixed rounded-xl flex items-center justify-center text-on-secondary-fixed mb-4">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill">star</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md leading-none">4.9</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Average Rating</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 p-8 rounded-3xl flex flex-col justify-between">
+<div class="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center text-on-primary-fixed mb-4">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md leading-none">342</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Active Orders</p>
+</div>
+</div>
+</section>
+<!-- Signed Dishes Section -->
+<section class="mb-16">
+<div class="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="restaurant_menu">restaurant_menu</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Signed Dishes</h2>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                    Manage Inventory <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative h-64 overflow-hidden">
+<img alt="Gourmet Salad Bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Top-down vibrant healthy bowl with roasted salmon, avocado, quinoa and fresh organic greens on a white ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbi9GMuXbqbTfV_u_RG_3DwRV7i3qFOlxiCeWLDtVJdyNJ4481faCnF9J9fgiBIgeUShbjO3vgddJEJXHMk31lSXDi1unHFaci9Vx_GX1EWdKWm9sLxillXajhBTAq2j8R7YB4GI5PJXurAey4f37hRDh3Y_JC9UQxRWijRmEp2izN7ffLynCoUW_gDdtHG_GIsUoGtSBq7ZmrAkutAb-o0zN-Jfw5wgF4Y_6D9euzF5TkEW4KVTMk3GfQjNc30alFpmPwxAKlPHA"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-on-primary-container font-label-sm text-[10px] uppercase px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse"></span> Active
+                            </span>
+</div>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-lg text-title-lg">Organic Salmon &amp; Quinoa Bowl</h3>
+<span class="font-bold text-primary">R$ 68,00</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-6">
+                            Wild-caught salmon with tri-color quinoa, farm-fresh avocado and our signature lemon-tahini dressing.
+                        </p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="local_fire_department">local_fire_department</span>
+<span class="font-label-sm text-on-surface-variant">Popular Choice</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group opacity-75 grayscale-[0.3]">
+<div class="relative h-64 overflow-hidden">
+<img alt="Braised Short Ribs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Slow-braised beef short ribs on a bed of creamy polenta with red wine reduction drizzle and microgreens garnish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4dY1ISaYK_PYKEwBrRy4Hx528oHFhXhu57XyoqVKCfTX4XOqJLEGukhq2-DQn9CnHcLs7C_NcvKctWNjhjpYUPG9N7dWmGZHK9lYaZK6H8BdeYWTPMaskJm7m308lZ1Y89RpbZOQ03GLXjyPMzWqLi3kXRUvEucqQ-USuAsfyXylVNyTuw6RFEJBOT2wxbgoTac0sslCU9GOktqhoE4FMiCsLwcMYfMWcTffl4I4dhT2cE2z8dEuxUoIsWRhSR-5-gykk8XC-WL8"/>
+<div class="absolute top-4 left-4">
+<span class="bg-stone-500 text-white font-label-sm text-[10px] uppercase px-3 py-1 rounded-full">Inactive</span>
+</div>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-on-surface hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-lg text-title-lg">12h Braised Short Ribs</h3>
+<span class="font-bold text-primary">R$ 115,00</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-6">
+                            Slow-cooked Angus beef served over creamy Parmesan polenta and honey-glazed baby carrots.
+                        </p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-stone-400" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-on-surface-variant">Out of Stock</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Add New Placeholder -->
+<button class="border-2 border-dashed border-outline-variant rounded-[2rem] flex flex-col items-center justify-center gap-4 hover:bg-surface-container-high transition-colors min-h-[400px]">
+<div class="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="add_circle">add_circle</span>
+</div>
+<span class="font-title-lg text-title-lg text-on-surface-variant">Add New Dish</span>
+</button>
+</div>
+</section>
+<!-- Gourmet Services Section -->
+<section>
+<div class="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="celebration">celebration</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Gourmet Services</h2>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-white"><span class="material-symbols-outlined" data-icon="filter_list">filter_list</span></button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-bold">Add Service</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Service 1 -->
+<div class="bg-surface-container-low rounded-[2.5rem] p-4 flex flex-col md:flex-row gap-6 items-center border border-outline-variant/20 hover:border-primary-container transition-all">
+<img alt="Private Chef Experience" class="w-full md:w-48 h-48 rounded-[2rem] object-cover" data-alt="Elegant chef plating a sophisticated dessert in a luxury home kitchen setting with ambient evening lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYVNv-ihK5WRveMFFflFB-mMFgkminTZDH_Sz5T1XRSRaP1TnPcv6kRq0hhFHiUZXBsh-8AE84-XoL52TDenSxFM7X4b1G_y_2M8VEP_UuobD1uo8aWjdzTBE9OKvkv1sYGzQeVTBEByvxOsJjOX58uypVaBQ5Tqv0kPIHF9W7UUkMEif-RbadDZsbZcUn_bxQPgfcKSwLMt5mBoYIU2JK-dt98kE1fTwWY9ghbu9UUy3dx-TVTvfRLlAOh9mMI2BYYzVd9-taZHE"/>
+<div class="flex-1 py-2 pr-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-lg text-title-lg">Private Home Dinner (6-10 guests)</h3>
+<span class="bg-secondary-container/10 text-secondary-container font-bold px-3 py-1 rounded-lg">R$ 2.400+</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            A complete 5-course tasting menu experience in the comfort of your home, including staff and cleanup.
+                        </p>
+<div class="flex items-center gap-4">
+<span class="bg-white px-3 py-1 rounded-full font-label-sm text-on-surface-variant flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm" data-icon="verified" data-weight="fill">verified</span> High Demand
+                            </span>
+<span class="bg-white px-3 py-1 rounded-full font-label-sm text-on-surface-variant flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span> 4h duration
+                            </span>
+</div>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="bg-surface-container-low rounded-[2.5rem] p-4 flex flex-col md:flex-row gap-6 items-center border border-outline-variant/20 hover:border-primary-container transition-all">
+<img alt="Cooking Workshop" class="w-full md:w-48 h-48 rounded-[2rem] object-cover" data-alt="Group of people laughing and learning to cook around a large wooden table with fresh ingredients and wine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkkXa08W04pVAg7GH_cXwojS1eh4cTh50wS8GZUNSDE77MBm-jMq8-sTbwWKjCEcheEoSrG9S3s1HplkvtmK0iCglML4iENnBdbdrvoyYQ_7EwwUn9V0-bwtNGOSU4jFgWFBW9NOLw8zhNgqovXdktIE0rFryFw2Q_iBXkhuh1tMRuNS3KpQKyOcF1L49m799pVVc4aUgcF1yT_ig--7OgjBWFKrGcDGZD4beaBP9CVZkuxgrf1WvpS5JOHCu1gCqWfuL0JbHlJOc"/>
+<div class="flex-1 py-2 pr-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-lg text-title-lg">Artisanal Bread Workshop</h3>
+<span class="bg-secondary-container/10 text-secondary-container font-bold px-3 py-1 rounded-lg">R$ 350 / pax</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Learn the secrets of sourdough fermentation. Includes a starter kit and your own fresh baked loaf.
+                        </p>
+<div class="flex items-center gap-4">
+<span class="bg-white px-3 py-1 rounded-full font-label-sm text-on-surface-variant flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm" data-icon="group">group</span> Max 12
+                            </span>
+<span class="bg-white px-3 py-1 rounded-full font-label-sm text-on-surface-variant flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm" data-icon="event_available">event_available</span> Weekends
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB (Suppressed on management screens but included as reference if needed elsewhere) -->
+<!-- <button class="fixed bottom-8 right-8 bg-secondary-container text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined" data-icon="add">add</span>
+    </button> -->
+<!-- Mobile Navigation -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 px-6 py-2 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-emerald-700">
+<span class="material-symbols-outlined" data-icon="storefront" data-weight="fill">storefront</span>
+<span class="text-[10px] font-bold">Store</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-[10px] font-bold">Recipes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+</div>
+</body></html>

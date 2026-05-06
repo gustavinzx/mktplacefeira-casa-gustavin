@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0e6b17",
+                        "outline-variant": "#bfcab9",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#a63b00",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-container": "#fc6c29",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed": "#410002",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary": "#bb0014",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002202",
+                        "background": "#faf9f4",
+                        "surface-container-high": "#e9e8e3",
+                        "on-primary-fixed-variant": "#00530b",
+                        "primary-fixed": "#9ef892",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#30312e",
+                        "inverse-on-surface": "#f2f1ec",
+                        "secondary-fixed": "#ffdbce",
+                        "primary-container": "#30852f",
+                        "on-surface": "#1b1c19",
+                        "surface-container": "#efeee9",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "surface-tint": "#126e19",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493c",
+                        "secondary-fixed-dim": "#ffb599",
+                        "outline": "#707a6b",
+                        "tertiary-container": "#e41f25",
+                        "surface-dim": "#dbdad5",
+                        "on-secondary-container": "#5a1c00",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Background Content (Gestão de Devoluções) -->
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col p-6 space-y-2 h-screen fixed left-0 top-0 h-full w-64 border-r border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+<div class="font-black text-green-700 dark:text-green-500 mb-8 font-['Plus_Jakarta_Sans'] text-2xl">FeiraDigital</div>
+<div class="flex items-center gap-3 p-3 mb-6 bg-white dark:bg-zinc-900 rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a friendly Brazilian farmer wearing a straw hat in a sunny rural environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOihBWyUAHsxgijrp1D1EqymRGjb2Zzg-j6iypmqKQDZHp_OzN3UT2514-3ZNtYQm_azzAHerC0Yyv3u2qq9q6ILNik4lU47XVPm3LO0TrTC4cp17k02dKufY_-rLYeRMgiWPSN1_aY5C_HdChyRXI507nb02e298L2-mFb_8W5EalYK9YipK-lneWzft8tuUBVFzpjkGzb2Kzj3_Ohxj_tVHJ9YmJF1-gUhSTCsI-b9w39fL24zW85wTtCHqqqDmhe3aE7uuP6Cg"/>
+</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Banca do Zé</div>
+<div class="text-[10px] text-zinc-500 uppercase tracking-wider">Produtor Platina</div>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 bg-green-600 text-white rounded-lg shadow-md shadow-green-200 dark:shadow-none cursor-pointer">
+<span class="material-symbols-outlined">assignment_return</span>
+<span class="font-medium">Devoluções</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium">Produtos</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-medium">Logística</span>
+</div>
+</nav>
+</aside>
+<!-- Main Content (Blurred) -->
+<main class="flex-1 lg:ml-64 p-8 filter blur-sm">
+<header class="flex justify-between items-center mb-8">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Gestão de Devoluções</h1>
+<p class="font-body-md text-body-md text-outline">Acompanhe e gerencie solicitações de reembolso</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-white px-4 py-2 rounded-lg border border-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-sm text-label-sm">Filtros</span>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-white p-6 rounded-xl border border-zinc-100 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg"></div>
+<div>
+<div class="font-bold">Solicitação #1284 - Ana Silva</div>
+<div class="text-sm text-outline">Motivo: Produto Danificado</div>
+</div>
+</div>
+<div class="px-4 py-2 bg-primary text-white rounded-lg">Ver Detalhes</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Overlay / Backdrop -->
+<div class="fixed inset-0 bg-zinc-900/40 backdrop-blur-sm z-[60] flex items-center justify-center p-4 md:p-8">
+<!-- Modal Container -->
+<div class="bg-white dark:bg-zinc-900 w-full max-w-5xl max-h-[921px] rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+<!-- Left Side: Product & Evidence -->
+<div class="w-full md:w-1/2 p-6 md:p-8 border-b md:border-b-0 md:border-r border-zinc-100 dark:border-zinc-800 overflow-y-auto">
+<div class="flex items-center justify-between mb-6">
+<div>
+<span class="bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full mb-2 inline-block">Solicitação de Devolução</span>
+<h2 class="font-headline-md text-title-lg text-on-surface">Pedido #8842</h2>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Product Info Card -->
+<div class="bg-surface-container-low p-4 rounded-xl mb-6 flex gap-4 border border-surface-container">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A crate of fresh organic vibrant red tomatoes recently harvested from a local farm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC57LH02POPA9u2-_N5bYWUf0XdSqOIdDOHdS9X3ft-kxVVlUWVLZUz6IVqPPCz-6iIubkRPjgTHHkEovj4R4CB0yHf0ozkbnQCQxCqYGjSw2Wxfbx6qJ_fPTjEy7M5ngDLrfIVAYRTLgDp-E7WGhdwj7FngquJKrD7gM_lHncy3BsdAo3kbt7tnCq6PrZ-jg6T4iB1LSwbF-jlmC7c4-Idus5iqjhGGT6-6ni8k2Mcm35oRkEU2e6cBzHrkeazNQ3v-Hp8Q98hOww"/>
+</div>
+<div class="flex-1">
+<h3 class="font-title-lg text-body-md font-bold text-on-surface">Cesta de Tomates Orgânicos (5kg)</h3>
+<p class="text-outline font-label-sm">Comprado em: 12 Out, 2023</p>
+<p class="text-primary font-bold mt-1 text-body-md">R$ 42,90</p>
+</div>
+</div>
+<!-- Reason Section -->
+<div class="mb-8">
+<h4 class="font-label-sm text-label-sm text-outline mb-2 uppercase tracking-wider">Motivo da Devolução</h4>
+<div class="p-4 bg-error-container/30 border border-error-container rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<p class="font-body-md text-on-surface text-sm">
+                                "Os tomates chegaram muito machucados e alguns já estavam passando do ponto. Não é a qualidade que costumo receber da Banca do Zé."
+                            </p>
+</div>
+</div>
+</div>
+<!-- Evidence Photos -->
+<div class="mb-6">
+<h4 class="font-label-sm text-label-sm text-outline mb-3 uppercase tracking-wider">Fotos do Cliente</h4>
+<div class="grid grid-cols-3 gap-3">
+<div class="aspect-square rounded-xl overflow-hidden cursor-zoom-in border border-zinc-200">
+<img class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" data-alt="Close-up of bruised and damaged organic tomatoes inside a wooden delivery box showing spoilage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCs9fWyaxFv-YN53nxJkB3vUMhGf55TDU3TFhcUKwz_OEiW7i_IW4c53ACjg8Z3rrpVXBKeGnmpR6QRlC0zDzFOJMyzrX-zvQnfdp9gBwNS_tN4MB3Cl1dgJ7jsh926sujt3CzTpOrNYDCQaSI--WRYG_XPYNc5J596qsuvTQg726N_Y0t1W2yZbIZVx8n1SJdCjhYf1RsiwrrSWJj7fI5A-0_Nz4ECeHRpWiglpx_Wo70HLlcqihxOtDKT_y-qBrMAoazyteyI40"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden cursor-zoom-in border border-zinc-200">
+<img class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" data-alt="Open cardboard box with crushed vegetable packaging and damaged produce inside" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU2GloX7COQQ_6xQyGNjOAnbMLt9pSp72WHbyViYeUcWhZXgs6EafwFI4gfUeSAlmA9SQk2Oln1YE8-xczbdZL1Nn0imLouQIIBzEEotWbinuXXokRHw9ECoiU6c8d5_kGHEmKPDJfpXUoo9xjOuNur0fanC6lUpdAwuZdXCRS2ZlKfUqEQvr7b6SLsSKAE3WPrPD6NlEGH7L7p2M1JyqaIi9KpI04xmjGWQZN1ODAqsvaaZ9HTeeLbjvDwYgfCilhaoTuUlJWAxY"/>
+</div>
+<div class="aspect-square rounded-xl bg-surface-container-high flex flex-col items-center justify-center text-outline border border-dashed border-outline-variant">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+<span class="text-[10px] mt-1">+2 fotos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Chat & Actions -->
+<div class="w-full md:w-1/2 flex flex-col h-full">
+<!-- Chat Header -->
+<div class="p-4 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-white font-bold text-xs">AS</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Ana Silva</div>
+<div class="text-[10px] text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                            Online agora
+                        </div>
+</div>
+</div>
+<!-- Chat Messages Area -->
+<div class="flex-1 p-6 overflow-y-auto space-y-4 bg-surface-container-lowest">
+<!-- Date Separator -->
+<div class="flex justify-center">
+<span class="text-[10px] bg-surface-container px-3 py-1 rounded-full text-outline font-medium uppercase">Hoje</span>
+</div>
+<!-- Client Msg -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-surface-container p-3 rounded-2xl rounded-tl-none text-sm text-on-surface">
+                            Olá Zé, infelizmente os tomates não chegaram bons hoje. Enviei as fotos acima para você ver.
+                        </div>
+<span class="text-[10px] text-outline mt-1 ml-1">09:12</span>
+</div>
+<!-- Seller Msg -->
+<div class="flex flex-col items-end ml-auto max-w-[85%]">
+<div class="bg-primary p-3 rounded-2xl rounded-tr-none text-sm text-white shadow-sm">
+                            Poxa Ana, peço mil desculpas! Tivemos um problema com a logística da entrega hoje cedo.
+                        </div>
+<span class="text-[10px] text-outline mt-1 mr-1">09:15</span>
+</div>
+<!-- Client Msg -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-surface-container p-3 rounded-2xl rounded-tl-none text-sm text-on-surface">
+                            Entendo, acontece. Gostaria do reembolso dessa cesta para eu poder comprar de novo na feira de quarta-feira.
+                        </div>
+<span class="text-[10px] text-outline mt-1 ml-1">09:18</span>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-4 border-t border-zinc-100 dark:border-zinc-800">
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-xl py-3 pl-4 pr-12 focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Escreva uma mensagem..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800 flex gap-3">
+<button class="flex-1 py-3 px-4 border border-outline-variant text-on-surface font-label-sm rounded-xl hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">block</span>
+                        Recusar
+                    </button>
+<button class="flex-[2] py-3 px-4 bg-primary text-white font-label-sm rounded-xl hover:opacity-90 shadow-lg shadow-green-200 dark:shadow-none transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                        Aprovar Reembolso
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

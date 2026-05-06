@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#002202",
+                        "inverse-primary": "#83db79",
+                        "surface-container-low": "#f5f4ef",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#126e19",
+                        "secondary": "#a63b00",
+                        "on-tertiary-container": "#fffbff",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "tertiary-container": "#e41f25",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-variant": "#e3e3de",
+                        "error": "#ba1a1a",
+                        "background": "#faf9f4",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "outline-variant": "#bfcab9",
+                        "secondary-container": "#fc6c29",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed": "#ffdbce",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-tertiary-fixed": "#410002",
+                        "surface-container-highest": "#e3e3de",
+                        "secondary-fixed-dim": "#ffb599",
+                        "on-primary-container": "#f8fff0",
+                        "on-surface": "#1b1c19",
+                        "primary-fixed": "#9ef892",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "primary-container": "#30852f",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#370e00",
+                        "tertiary": "#bb0014",
+                        "surface-dim": "#dbdad5",
+                        "inverse-surface": "#30312e",
+                        "on-surface-variant": "#40493c",
+                        "outline": "#707a6b",
+                        "on-secondary-container": "#5a1c00",
+                        "on-primary-fixed-variant": "#00530b",
+                        "primary": "#0e6b17",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#faf9f4",
+                        "surface-bright": "#faf9f4",
+                        "surface-container-high": "#e9e8e3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-desktop": "80px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "md": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+<!-- Screen 74 Context: Meus Pedidos (Background) -->
+<header class="bg-white/90 backdrop-blur-md border-b border-zinc-100 shadow-sm sticky top-0 z-40">
+<div class="flex justify-between items-center px-4 py-3 max-w-7xl mx-auto">
+<span class="text-2xl font-black tracking-tight text-[#4BA046]">feira.casa</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-zinc-500">shopping_basket</span>
+<span class="material-symbols-outlined text-zinc-500">notifications</span>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto p-4 md:p-8">
+<h1 class="font-display-lg text-display-lg mb-8 text-on-surface">Meus Pedidos</h1>
+<div class="space-y-4">
+<div class="bg-white rounded-[24px] p-6 shadow-sm border border-zinc-100 flex justify-between items-center blur-[2px]">
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase">Pedido #4829</p>
+<p class="font-title-lg text-title-lg">12 de Outubro, 2023</p>
+</div>
+<span class="bg-green-50 text-primary px-4 py-1 rounded-full font-label-sm text-label-sm">Entregue</span>
+</div>
+</div>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<!-- Modal Container -->
+<div class="bg-white dark:bg-zinc-900 w-full max-w-4xl max-h-[921px] rounded-[32px] shadow-2xl flex flex-col overflow-hidden relative">
+<!-- Header -->
+<div class="p-6 md:p-8 border-b border-surface-container-high flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary" data-icon="receipt_long">receipt_long</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Detalhes do Pedido</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Pedido #4829 • Realizado em 12/10/2023 às 08:45</p>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="close">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
+<!-- Timeline Status -->
+<section>
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-6">Status da Entrega</h3>
+<div class="relative flex justify-between">
+<!-- Progress Line -->
+<div class="absolute top-5 left-0 w-full h-[2px] bg-surface-container-high -z-0">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Confirmado</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined" data-icon="local_shipping" style="font-variation-settings: 'wght' 700;">local_shipping</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Em Trânsito</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-outline flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Entregue</span>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Products List (Left 2/3) -->
+<div class="md:col-span-2 space-y-4">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Itens do Pedido (4)</h3>
+<div class="space-y-3">
+<!-- Product Item 1 -->
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest rounded-2xl border border-surface-container">
+<img class="w-16 h-16 rounded-xl object-cover" data-alt="Close-up of fresh vibrant green organic kale leaves with water droplets, natural soft outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnsBqXJ0JIWvKEBsSNA8RR6Hxe94ZBtAYLKWXcjPg6-nFSVqj2jcxK4FnICEfNGNkXTNrduz7xjjsyoVoYDjXTyMiTb4RipLbyB9OShfYJ4Na35Kj85IIMTx-jpKD3HHct0AR785Ag7splibb8giUW2GSmNIFQuxwyWWXDHLyhnLDhdhK9tdLh5MUhYgYHtFSn7umhzBCqua7jJQ8-TFq1t7zuYI77MTVTuTJGr-wTWIpS-3rSCOoRHbKfGwhbPuAC8vJ2bheGIMU"/>
+<div class="flex-1">
+<h4 class="font-title-lg text-[16px] leading-tight text-on-surface">Couve Manteiga Orgânica</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant">1 Maço • R$ 4,50</p>
+</div>
+<span class="font-title-lg text-[16px] text-on-surface">R$ 4,50</span>
+</div>
+<!-- Product Item 2 -->
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest rounded-2xl border border-surface-container">
+<img class="w-16 h-16 rounded-xl object-cover" data-alt="Basket of fresh bright orange carrots with green tops on a rustic wooden table, bright morning sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzutok1KS_rFCHy0KDr8XbPE2Iy1RgFtz2z4b8uO9Kcfh-Qov0SM7TYgPjcjB0YAjhxV24fVm4il3Iljo0qZrn0pL3dKIp41BM35Dmiy2iO1tG48A-0TRrwGpwLluz6lXYzRB1s0AfgdURUotOu-rcApxOv2yxtMqlixDz9oi7mZKdP7B1S1jUvTpRyvF3vLGjKIsNVZH0CqHwMxh25ZwXfJvQehT8Bp9mZ7o_Bk0RPFHh-BRiSvUmPTVqNdAW91HYJKq6rJ0ucl8"/>
+<div class="flex-1">
+<h4 class="font-title-lg text-[16px] leading-tight text-on-surface">Cenoura Baby (500g)</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant">2 Unidades • R$ 6,20</p>
+</div>
+<span class="font-title-lg text-[16px] text-on-surface">R$ 12,40</span>
+</div>
+<!-- Product Item 3 -->
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest rounded-2xl border border-surface-container">
+<img class="w-16 h-16 rounded-xl object-cover" data-alt="Sliced fresh red strawberries on a white ceramic plate, bright natural light, top-down view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYyqRkWpPUcdbQvTytwd-VwwOkAsQ-Cv9bh-doWHjtm_rujvvSVg5gBe5zlRLtmsInw8OE2k02HUVAWb-q5oZCjSTqxEXqAhxkSQo4E067fbGP0uDCGlmsdBhBvLQPPZCmJ3tUL--vgG3pBf72K_FZcHS3s8UzTWXm1cmCjhKZOK0NfMuIZ7sATOvHyVse4IfbgZxXuJLZUoY7lhIho5FCiDfBJDXftSubSmwbYJ0rK-vy5wO2ldhvLmJZciuifhqjV0MYjujBxak"/>
+<div class="flex-1">
+<h4 class="font-title-lg text-[16px] leading-tight text-on-surface">Morango do Produtor</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant">1 Bandeja • R$ 8,90</p>
+</div>
+<span class="font-title-lg text-[16px] text-on-surface">R$ 8,90</span>
+</div>
+</div>
+</div>
+<!-- Order Summary & Address (Right 1/3) -->
+<div class="space-y-6">
+<!-- Address -->
+<div class="bg-surface-container-low p-5 rounded-[24px] space-y-3">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+                                Entrega
+                            </h3>
+<div class="font-body-md text-label-sm text-on-surface leading-relaxed">
+<p class="font-bold">Casa • Trabalho</p>
+<p>Rua das Flores, 123 - Apto 42</p>
+<p>Pinheiros, São Paulo - SP</p>
+<p>05409-000</p>
+</div>
+</div>
+<!-- Totals -->
+<div class="bg-white border border-surface-container-high p-5 rounded-[24px] space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-on-surface">R$ 25,80</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Frete</span>
+<span class="font-body-md text-primary font-semibold">Grátis</span>
+</div>
+<div class="pt-4 border-t border-surface-container-high flex justify-between items-center">
+<span class="font-title-lg text-title-lg text-on-surface">Total</span>
+<span class="font-title-lg text-title-lg text-secondary">R$ 25,80</span>
+</div>
+<div class="bg-orange-50 p-3 rounded-xl flex gap-3 items-center">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+<p class="font-label-sm text-label-sm text-on-secondary-container">Pago via Pix</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 md:px-8 md:py-6 bg-surface-container-lowest border-t border-surface-container-high flex flex-col md:flex-row gap-4 justify-end">
+<button class="px-8 py-3 rounded-full border border-outline text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors active:scale-95">
+                    Fechar
+                </button>
+<button class="px-8 py-3 rounded-full bg-secondary text-white font-label-sm text-label-sm flex items-center justify-center gap-2 hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="reorder">reorder</span>
+                    Repetir Pedido
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation (Shared Component) -->
+<nav class="fixed bottom-0 left-0 right-0 flex justify-around items-center px-4 pt-3 pb-8 w-full bg-white border-t border-zinc-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Feiras</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#4BA046] bg-green-50/50 rounded-2xl px-4 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Pedidos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 px-4 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Perfil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#f8fff0",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#bfcab9",
+                    "primary-fixed": "#9ef892",
+                    "on-surface-variant": "#40493c",
+                    "surface-tint": "#126e19",
+                    "surface-container-highest": "#e3e3de",
+                    "inverse-primary": "#83db79",
+                    "surface-bright": "#faf9f4",
+                    "on-secondary": "#ffffff",
+                    "background": "#faf9f4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "outline": "#707a6b",
+                    "on-secondary-container": "#5a1c00",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-tertiary-fixed": "#410002",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-surface": "#1b1c19",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-container-high": "#e9e8e3",
+                    "secondary-fixed": "#ffdbce",
+                    "tertiary": "#bb0014",
+                    "surface-dim": "#dbdad5",
+                    "on-primary-fixed": "#002202",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container": "#efeee9",
+                    "primary": "#0e6b17",
+                    "secondary-container": "#fc6c29",
+                    "error-container": "#ffdad6",
+                    "surface": "#faf9f4",
+                    "primary-fixed-dim": "#83db79",
+                    "primary-container": "#30852f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e3e3de",
+                    "tertiary-container": "#e41f25",
+                    "secondary-fixed-dim": "#ffb599",
+                    "secondary": "#a63b00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-background": "#1b1c19",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "margin-desktop": "80px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #faf9f4; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .upload-dashed { border: 2px dashed #bfcab9; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Header / TopAppBar -->
+<header class="bg-white dark:bg-zinc-950 flex justify-between items-center w-full px-4 h-16 docked full-width top-0 border-b border-zinc-100 dark:border-zinc-800 shadow-sm shadow-emerald-900/5 z-50 sticky">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 cursor-pointer active:scale-95 transition-transform">arrow_back</span>
+<span class="text-xl font-extrabold text-emerald-700 dark:text-emerald-500 tracking-tight">Feira.casa</span>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors p-2 rounded-full cursor-pointer">help_outline</span>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-md pb-xl">
+<!-- Stepper Component -->
+<section class="mb-lg">
+<div class="flex items-center justify-between relative w-full max-w-xl mx-auto">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-highest -translate-y-1/2 z-0">
+<div class="h-full bg-primary w-1/2 rounded-full transition-all duration-500"></div>
+</div>
+<!-- Step 1: Concluded -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Cadastro</span>
+</div>
+<!-- Step 2: Active -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-primary-container border-4 border-white flex items-center justify-center text-on-primary-container shadow-xl">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Identidade</span>
+</div>
+<!-- Step 3: Future -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Produtos</span>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="space-y-lg">
+<div class="text-center md:text-left">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">A cara da sua banca</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Personalize como os clientes verão seu espaço. Fotos nítidas e vibrantes atraem mais compradores.</p>
+</div>
+<!-- Identity Designer Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Upload Controls -->
+<div class="lg:col-span-5 space-y-md">
+<!-- Logotipo Upload -->
+<div class="bg-white p-md rounded-xl shadow-sm border border-surface-container-high">
+<label class="font-title-lg text-title-lg text-on-surface block mb-base">Logotipo da Banca</label>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md">Formato quadrado (ex: 512x512px). PNG ou JPG.</p>
+<div class="upload-dashed rounded-xl p-md flex flex-col items-center justify-center text-center bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed-variant mb-base group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Clique para enviar logo</span>
+</div>
+</div>
+<!-- Banner Upload -->
+<div class="bg-white p-md rounded-xl shadow-sm border border-surface-container-high">
+<label class="font-title-lg text-title-lg text-on-surface block mb-base">Banner de Fundo</label>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md">Retangular largo. Mostre sua produção ou banca montada.</p>
+<div class="upload-dashed rounded-xl p-md flex flex-col items-center justify-center text-center bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant mb-base group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">image</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Escolher banner panorâmico</span>
+</div>
+</div>
+</div>
+<!-- Right: Live Preview -->
+<div class="lg:col-span-7">
+<div class="sticky top-md">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-sm block">Pré-visualização da Banca</span>
+<div class="bg-white rounded-[32px] shadow-lg border border-surface-container-high overflow-hidden relative min-h-[400px]">
+<!-- Banner Preview -->
+<div class="h-48 w-full bg-surface-container-highest relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="vibrant farmers market stand with fresh organic vegetables and rustic wooden crates in soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbKtOANtZJogQzYv_Yh62sd9p-Xn3VNEDOdP8QhR4NnL9rO7dSLR3PnPDV67kpSDUf03GKm5n1gr210AVZEMnv70hMHmohxc66_d-lPzIIrV04F9qMq2_Sg5GMi4WFaeLzRhbE1U1Q0s5kj-CgHwaAa5lJEkHkxQWSsnDZWPyG9wIzukIsiznQsq8spJw2HOeHcMeo9ez7qChEWnAkeTPahzgNrvA2qhyN1MBkdMKV76RR567IoWm-VjRQpM0L0nZeqpH0HVvtTh0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<!-- Logo Overlap -->
+<div class="absolute -bottom-10 left-8">
+<div class="w-24 h-24 rounded-2xl bg-white p-1.5 shadow-xl border border-white">
+<div class="w-full h-full rounded-xl bg-primary-fixed-dim flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="hand-drawn rustic logo of a small farm with a basket of vegetables in earthy green and orange tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9hQIGn5EMpD-gL3PojZ2Z7fmDb0Ek-vpDd8_tq5ixDvHq95PO8dzVm7NF3sG1nTrdMeCDt7luaouBRUjNhZsdL72iNyJytljWcVrNlum_F4bIjoIgPoRyoHw0JlNjFi0UccOQI4ihLilAplx02hBsEekVuLNe4nFzn6e2lxhDU7pNmmlHZA7P88D5pJzpooFR_70uiCb4xK-AwdOawJ5ZAFTEhYBV0MVLCVgrdYsN9ZLuZ1zMje2Do3lPcckyXlroQCUteP62Fjk"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Mockup -->
+<div class="pt-14 px-8 pb-md">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-headline-md text-title-lg text-on-surface">Minha Banca Deliciosa</h2>
+<div class="flex items-center gap-1 text-secondary mt-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">Novo Feirante</span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="px-3 py-1 rounded-full bg-primary-fixed/30 text-on-primary-fixed-variant font-label-sm text-label-sm">
+                                            Orgânico
+                                        </div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">
+                                    Colhemos o que há de melhor em nossa horta familiar para levar o frescor da terra direto para sua mesa.
+                                </p>
+<div class="h-[1px] bg-surface-container-high w-full mb-md"></div>
+<div class="grid grid-cols-2 gap-base">
+<div class="h-20 bg-surface-container-low rounded-xl animate-pulse"></div>
+<div class="h-20 bg-surface-container-low rounded-xl animate-pulse"></div>
+</div>
+</div>
+<!-- Glassmorphism Badge -->
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md border border-white/30 px-4 py-2 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-[18px]">visibility</span>
+<span class="text-white font-label-sm text-label-sm">Modo de Exibição</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-lg flex items-center justify-between pt-md border-t border-surface-container-high">
+<button class="flex items-center gap-2 px-md py-sm rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all active:scale-95">
+<span class="material-symbols-outlined">west</span>
+                Voltar
+            </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-lg py-sm rounded-full font-title-lg text-label-sm shadow-lg shadow-primary/20 flex items-center gap-2 active:scale-95 transition-all">
+                Próximo Passo
+                <span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</main>
+<!-- Success Feedback (Hidden) -->
+<div class="fixed bottom-gutter right-gutter bg-emerald-100 border border-emerald-200 p-md rounded-xl shadow-xl flex items-center gap-md transform translate-y-32 transition-transform hidden" id="feedback-success">
+<div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">done_all</span>
+</div>
+<div>
+<p class="font-title-lg text-label-sm text-emerald-900">Upload Concluído!</p>
+<p class="font-body-md text-label-sm text-emerald-700">Imagens processadas com sucesso.</p>
+</div>
+</div>
+</body></html>

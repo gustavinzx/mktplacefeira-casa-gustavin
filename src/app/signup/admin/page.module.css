@@ -1,0 +1,261 @@
+.page {
+  min-height: 100vh;
+  background: white;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  min-height: 100vh;
+}
+
+.visualSide {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+}
+
+.visualSide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14, 107, 23, 0.9), rgba(14, 107, 23, 0.2));
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+.visualContent {
+  position: relative;
+  z-index: 10;
+  padding: 80px;
+  color: white;
+  max-width: 600px;
+}
+
+.visualHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.shieldIcon {
+  color: var(--primary-fixed);
+}
+
+.visualHeader h1 {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.visualContent p {
+  font-size: 20px;
+  line-height: 1.4;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.indicators {
+  display: flex;
+  gap: 8px;
+}
+
+.indicators div {
+  height: 4px;
+  width: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.indicators .indActive {
+  width: 48px;
+  background: white;
+}
+
+.formSide {
+  background: var(--surface);
+  padding: 40px 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.btnBack {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -1px;
+}
+
+.formContainer {
+  max-width: 440px;
+  width: 100%;
+  margin: auto;
+}
+
+.titleArea h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.titleArea p {
+  color: var(--on-surface-variant);
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroup label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+}
+
+.inputWrapper {
+  height: 48px;
+  background: white;
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.inputWrapper input, .inputWrapper select {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.btnSubmit {
+  height: 56px;
+  background: var(--primary);
+  color: white;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+
+.btnSubmit:hover:not(:disabled) {
+  background: #0b5a13;
+  transform: translateY(-2px);
+}
+
+.btnSubmit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.error {
+  background: #fde8e8;
+  color: #c81e1e;
+  border: 1px solid #f8b4b4;
+}
+
+.success {
+  background: #def7ec;
+  color: #03543f;
+  border: 1px solid #84e1bc;
+}
+
+.footer {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin-bottom: 16px;
+}
+
+.footer a {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.copyright {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--outline);
+}
+
+@media (max-width: 1100px) {
+  .main { grid-template-columns: 1fr; }
+  .visualSide { display: none; }
+  .formSide { padding: 40px; }
+}

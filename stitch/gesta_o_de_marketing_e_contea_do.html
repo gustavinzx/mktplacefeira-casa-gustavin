@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#faf9f4",
+                    "surface-bright": "#faf9f4",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary-container": "#e41f25",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary-fixed": "#ffdbce",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#bb0014",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-secondary-container": "#5a1c00",
+                    "on-primary-fixed": "#002202",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-surface": "#1b1c19",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fc6c29",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary-fixed-dim": "#83db79",
+                    "secondary-fixed-dim": "#ffb599",
+                    "error": "#ba1a1a",
+                    "surface-container": "#efeee9",
+                    "primary-container": "#30852f",
+                    "surface-tint": "#126e19",
+                    "secondary": "#a63b00",
+                    "outline-variant": "#bfcab9",
+                    "inverse-primary": "#83db79",
+                    "surface-dim": "#dbdad5",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e3e3de",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#9ef892",
+                    "on-background": "#1b1c19",
+                    "surface-container-high": "#e9e8e3",
+                    "on-surface-variant": "#40493c",
+                    "surface": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-primary-container": "#f8fff0",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-fixed": "#410002",
+                    "surface-container-highest": "#e3e3de"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "margin-desktop": "80px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 shadow-sm flex flex-col z-50">
+<div class="p-6">
+<h1 class="text-xl font-bold text-green-700 dark:text-green-500">Admin Master</h1>
+<p class="text-xs text-gray-500 font-medium mt-1">Ecossistema feira.casa</p>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Usuários &amp; Perfis
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                Gestão de Feirantes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+                B2B &amp; Atacado
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                Logística
+            </a>
+<!-- Active Navigation Mapping to Marketing -->
+<a class="flex items-center gap-3 px-4 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 font-['Plus_Jakarta_Sans'] font-medium text-sm transition-all opacity-90" href="#">
+<span class="material-symbols-outlined" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+                Marketing
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Configurações
+            </a>
+</nav>
+<div class="p-4 border-t border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<img alt="Logo feira.casa" class="w-10 h-10 rounded-full" data-alt="close up professional headshot of a smiling administrator in a bright office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9KRF006HhW9JL9H8MSWLQKdLIvhNPR-QuI3-gqfgWksJu31iKaIOwmff0EN1lWvso_2XvKGL8vqC_XhCY_6FiwqN7yBzLNUhMFyhTZkplg0LWZcICehHqDBO-pSqtcy_56Ekl5T1x3nQM4krnZzVSBGEntqhfw1IDRcPekCFu0rFVtv5aoJL3XsU91D6_3Peci7aKa3Q4bXXM54GiLGFspDsm4xdkDzgFYc-fFZdNa6i_LlyaY6ZYxVAn19GKnk-rvWmOvlt9LsE"/>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white">Admin Central</p>
+<p class="text-xs text-gray-500">Logado agora</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 h-16 flex justify-between items-center px-6">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" data-icon="search">search</span>
+<input class="w-full bg-gray-50 dark:bg-gray-900 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 ring-green-500/20 outline-none" placeholder="Pesquisar campanhas, banners ou receitas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400" data-icon="help">help</span>
+</button>
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400" data-icon="apps">apps</span>
+</button>
+<div class="h-8 w-[1px] bg-gray-200 mx-2"></div>
+<img alt="Avatar do Administrador" class="w-8 h-8 rounded-full border-2 border-green-100" data-alt="headshot of a person with a professional and friendly expression for a user profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClVZjLkg4-IQyq0GQBTHL3mHiGSIWg_wFubjeifoJvtKPhtT-lts096KHR9WcZwZ_DCy19MWaBvvYCyzLVvplW8hVYK2PsDqZDLHQSTque8xWdml4rmpLBE6lYKcjckOPXItB3xlGnIW2X-pAOfY9ZoQEbr_1mJQteWsjKXnXrgJn5LeS9cIf2V3ss08nFo6sLhnI8agEj88tSVpXh7vfkLXK8FRsGbnDC6zSSoxcQb7KW4Y-sUUJT_Xw5lPSlWZARN-JHvcr8JeU"/>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Gestão de Marketing</h2>
+<p class="font-body-md text-body-md text-outline">Controle a vitrine visual e o conteúdo editorial do ecossistema.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Criar Nova Campanha
+                </button>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-12 gap-6 mb-10">
+<!-- Performance Overview -->
+<div class="col-span-12 lg:col-span-4 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-green-50 rounded-lg">
+<span class="material-symbols-outlined text-green-600" data-icon="trending_up">trending_up</span>
+</div>
+<span class="text-xs font-bold text-green-600">+12.4% este mês</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1 uppercase tracking-wider">CTR Global Banners</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-gray-900">4.82%</span>
+<span class="text-sm text-gray-400">vs. 4.10% avg.</span>
+</div>
+<div class="mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-orange-50 rounded-lg">
+<span class="material-symbols-outlined text-orange-600" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<span class="text-xs font-bold text-orange-600">Alta conversão</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1 uppercase tracking-wider">Produtos Patrocinados</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-gray-900">142</span>
+<span class="text-sm text-gray-400">itens em destaque</span>
+</div>
+<div class="mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-[82%] rounded-full"></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-red-50 rounded-lg">
+<span class="material-symbols-outlined text-red-600" data-icon="timer">timer</span>
+</div>
+<span class="text-xs font-bold text-red-600">3 expirando hoje</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1 uppercase tracking-wider">Tabloides Ativos</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-gray-900">28</span>
+<span class="text-sm text-gray-400">regiões cobertas</span>
+</div>
+<div class="mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 w-[40%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Tabs Section -->
+<div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden mb-10">
+<div class="flex border-b border-gray-100 px-6">
+<button class="px-6 py-4 text-green-600 border-b-2 border-green-600 font-bold text-sm">Banners Home</button>
+<button class="px-6 py-4 text-gray-500 hover:text-green-600 font-medium text-sm transition-colors">Tabloides Regionais</button>
+<button class="px-6 py-4 text-gray-500 hover:text-green-600 font-medium text-sm transition-colors">Curadoria do Chef</button>
+<button class="px-6 py-4 text-gray-500 hover:text-green-600 font-medium text-sm transition-colors">Push Notifications</button>
+</div>
+<!-- Banners List -->
+<div class="p-6">
+<div class="flex justify-between items-center mb-6">
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-tighter">Ativos (4)</span>
+<span class="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-bold uppercase tracking-tighter">Agendados (2)</span>
+<span class="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-bold uppercase tracking-tighter">Arquivados</span>
+</div>
+<button class="text-sm font-semibold text-green-600 flex items-center gap-1">
+                            Ver todos os banners
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Banner Card 1: Hero -->
+<div class="group relative bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-green-300 transition-all">
+<div class="aspect-[21/9] w-full bg-gray-200 relative">
+<img class="w-full h-full object-cover" data-alt="vibrant farmer market display with fresh colorful vegetables and rustic wooden crates under soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOWTZ81vQkoIaagWeBIg91kekT2sTBYSNJH7mYVnEGEhIFh5oby8nRBZDHTdqWxSGCWYKBjhyJfz9G6ht3iOc4MjYq7TVLsX_OfMIxFIauw7_dimE9sJZkgN8gl1dUT2LZJBzeayBPNQlP5OI5L2vs0KdsIEuElyrX1ygu4wRIOPmIP9J86-5jzKu30onGmjiTC6CRHuphl107gAsLOr1SbUENyH_IeQXP0J8UB3B-dnis79NJegnWznCD9t6Bs6JWbLdeoOkMvFk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2">POSIÇÃO: HERO PRINCIPAL</span>
+<h4 class="text-white font-bold text-lg leading-tight">Festival de Inverno: Hortifruti com 30% OFF</h4>
+</div>
+</div>
+<div class="p-4 flex justify-between items-center bg-white">
+<div class="flex gap-4">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Impressões</p>
+<p class="font-bold text-gray-800">12.4k</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Cliques</p>
+<p class="font-bold text-gray-800">842</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">CTR</p>
+<p class="font-bold text-green-600">6.8%</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-gray-500" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-gray-500" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Banner Card 2: Sub-banner -->
+<div class="group relative bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-green-300 transition-all">
+<div class="aspect-[21/9] w-full bg-gray-200 relative">
+<img class="w-full h-full object-cover" data-alt="extreme close up of ripe organic strawberries with water droplets in high resolution food photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHvQI4-q4tnCrMXlREjBjnSNfugLcbyYhxEvWfYA-Y6kUxlHVFZWcaWEHEqJQYAdzPNbtDcSPCBkcDvBT-8yW3fSi0WM-52-2vCjWca8qQBmd-0ii3EsMxkzI7TBUpzZBBs6EPNUiQ39YCoDb2KvynyXkrlipH9cJMv19JsA4cCbAb1YeDRs374dQq6YiRLRqS6jwjQyXh4uUIv3_9Diny_HfHXMr2MTP0ne2PpEyEdk16syswcy403QntMzGHWGsUHuAAuCENx_k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+<span class="bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2">POSIÇÃO: SUB-BANNER 01</span>
+<h4 class="text-white font-bold text-lg leading-tight">Frutas Vermelhas da Estação: Direto do Produtor</h4>
+</div>
+</div>
+<div class="p-4 flex justify-between items-center bg-white">
+<div class="flex gap-4">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Impressões</p>
+<p class="font-bold text-gray-800">8.1k</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Cliques</p>
+<p class="font-bold text-gray-800">312</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">CTR</p>
+<p class="font-bold text-green-600">3.8%</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-gray-500" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-gray-500" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Tabloids and Chef -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Tabloides por Região -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600" data-icon="map">map</span>
+                            Tabloides Semanais
+                        </h3>
+<button class="text-sm text-green-600 font-bold">Gerenciar Regiões</button>
+</div>
+<div class="bg-white rounded-xl border border-gray-100 shadow-sm divide-y divide-gray-50">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="font-bold text-gray-900">São Paulo - Capital</p>
+<p class="text-xs text-gray-400">Expira em 2 dias (Quinta-feira)</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Publicado</span>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="font-bold text-gray-900">Rio de Janeiro - Z. Sul</p>
+<p class="text-xs text-gray-400">Expira em 2 dias (Quinta-feira)</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Publicado</span>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<div>
+<p class="font-bold text-gray-900">Campinas e Região</p>
+<p class="text-xs text-gray-400">Próxima edição agendada: 12/06</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold">Agendado</span>
+</div>
+</div>
+</div>
+<!-- Curadoria do Chef -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-red-600" data-icon="skillet">skillet</span>
+                            Receitas do Chef
+                        </h3>
+<button class="text-sm text-green-600 font-bold">Nova Receita</button>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<img class="w-24 h-24 rounded-lg object-cover" data-alt="professional plated gourmet salad with fresh ingredients and artisan presentation on a clean white plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADZTwgem9b_mzzlQTIk0K88MBIb33vXTHWzOZpJL6d2ZFQlEbXBBv-IWJnoVWL2L1emJO1jwueq8kuCF3OodvQmEFn0gzq7EDjOgcp3_AO6u8jW6JAdeRO1Y43X35hEJAEsw1Z4Sp9Luew7-oqO0X6K0CoQF2bj1WVjdLfMl-bwEYejg1NV6ZQIFQGOsHKmZBguZoYbrLH-gNy5Sua5qEr-oe6CBUil6sy-xMQjE8jtiZKxVpNKxF3b-VBvVXYgr7l8HI093I7qI4"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-gray-900">Salada Tropical de Verão</h4>
+<span class="material-symbols-outlined text-gray-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<p class="text-sm text-gray-500 line-clamp-1 mb-2">Um prato refrescante que utiliza o Azeite Borriello em destaque.</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-gray-400 uppercase">Patrocínio:</span>
+<span class="text-[10px] font-black text-green-700">Azeite Borriello Premium</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<img class="w-24 h-24 rounded-lg object-cover" data-alt="chef preparing homemade pasta in a bright professional kitchen with flour on wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeK87eOKEZS8bcD5ETF0-GKwqdvbOGb7kPuHR3A8mq5FODN1guU6JwUFc4tqcNu0b3RbqgkQTdzWqAjBQ2S5IDbYqc-RQjXaUHVvESX850UvTGzS16NoRBe20TpEQdfjdznsi0qDKEZNzLG8nuDhnTFKmhN6Pltyphbe9AKewTUys-R3KARIdwYr75kvh7zdg_Qmf_glpbGUmaImoMOQvgGYorDmcqwU09NrD3XtE5XH2Y5S7VzO9bxJA8SAJ9NORdmdoZKE0p6PM"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-gray-900">Nhoque de Batata Doce</h4>
+<span class="material-symbols-outlined text-gray-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<p class="text-sm text-gray-500 line-clamp-1 mb-2">Receita prática utilizando batatas da Fazenda Santa Rita.</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-gray-400 uppercase">Patrocínio:</span>
+<span class="text-[10px] font-black text-green-700">Fazenda Santa Rita</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only for Marketing Screen) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</body></html>

@@ -1,0 +1,162 @@
+.card {
+  background: white;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+
+.imageContainer {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.demandBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+
+.categoryBadge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--on-surface);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.content {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.provider {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--on-surface);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.details {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  font-weight: 600;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--outline-variant);
+}
+
+.priceArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 11px;
+  color: var(--on-surface-variant);
+  font-weight: 600;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--on-surface);
+}
+
+.price span {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.btnBook {
+  background: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.btnBook:hover {
+  background: #0b5a13;
+  transform: translateX(4px);
+}

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#370e00",
+                        "on-error": "#ffffff",
+                        "secondary": "#a63b00",
+                        "surface-container-low": "#f5f4ef",
+                        "inverse-surface": "#30312e",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#0e6b17",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "surface-dim": "#dbdad5",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#83db79",
+                        "tertiary-container": "#e41f25",
+                        "on-tertiary-fixed": "#410002",
+                        "on-secondary-container": "#5a1c00",
+                        "surface-container": "#efeee9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002202",
+                        "inverse-primary": "#83db79",
+                        "secondary-fixed-dim": "#ffb599",
+                        "inverse-on-surface": "#f2f1ec",
+                        "tertiary-fixed": "#ffdad6",
+                        "secondary-container": "#fc6c29",
+                        "surface-bright": "#faf9f4",
+                        "surface": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e9e8e3",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-tertiary-container": "#fffbff",
+                        "background": "#faf9f4",
+                        "primary-fixed": "#9ef892",
+                        "surface-container-highest": "#e3e3de",
+                        "outline-variant": "#bfcab9",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary": "#bb0014",
+                        "secondary-fixed": "#ffdbce",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-surface-variant": "#40493c",
+                        "error-container": "#ffdad6",
+                        "outline": "#707a6b",
+                        "primary-container": "#30852f",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "surface-tint": "#126e19",
+                        "on-surface": "#1b1c19",
+                        "surface-variant": "#e3e3de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: #f0fdf4;
+            color: #15803d;
+            border-right: 4px solid #16a34a;
+            font-weight: 700;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md sticky top-0 z-50 border-b border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-[1920px] mx-auto">
+<div class="text-xl font-bold text-green-700 dark:text-green-400 flex items-center gap-2 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+                Feira Atacado
+            </div>
+<div class="hidden md:flex flex-1 max-w-xl mx-8">
+<div class="relative w-full">
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 px-10 focus:ring-2 focus:ring-primary text-body-md" placeholder="Buscar produtores ou produtos em atacado..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-full relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-tertiary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</button>
+<button class="p-2 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-full">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-lg">H</div>
+<div>
+<p class="font-title-lg text-sm text-green-700 leading-none">Portal B2B</p>
+<p class="text-[10px] text-zinc-500 mt-1">CNPJ: 00.000.000/0001-00</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-['Plus_Jakarta_Sans']">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 font-bold hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="storefront" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="text-sm font-['Plus_Jakarta_Sans']">Catálogo</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-sm font-['Plus_Jakarta_Sans']">Meus Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-sm font-['Plus_Jakarta_Sans']">Faturamento</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+<span class="text-sm font-['Plus_Jakarta_Sans']">Dados Empresa</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-zinc-200 dark:border-zinc-800">
+<div class="bg-secondary-container/10 p-4 rounded-xl border border-secondary-container/20">
+<p class="text-xs font-bold text-on-secondary-container uppercase mb-1">Status do Limite</p>
+<div class="h-2 w-full bg-zinc-200 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-3/4"></div>
+</div>
+<p class="text-[10px] text-zinc-600 mt-2">75% do crédito B2B utilizado</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 p-4 md:p-8 pb-24 lg:pb-8">
+<!-- Hero Banner Bento Style -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="md:col-span-2 relative h-64 md:h-80 rounded-3xl overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="close-up of fresh organic vegetables in wooden crates at a morning market with warm sunlight and shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK55aZE7MaX3YHsaZQDFFFo5zDwJis9M1jmdB_fI-5iqw8BBFtTQAazRHUPxYfqmHve_JgdDn42XeGtDpsUqq4-hYjWPef-fvUqntmvGfNeaR2JBaaoXrl9xPogX97my02LPE6RbSUeHar9RdzQ_oQYGEM-GA96ahqfDH51XJEsfV33ZQGj5Arw4SnzpfhT_Or_GYsWqtg3dYXDCzMyvLXP1Cc8XJOi58ZdH6zsu4AfHf_j_bUFsQX5pqTetgRJu35hfyziVJds4g"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-center px-10">
+<span class="inline-block bg-secondary text-white text-label-sm px-3 py-1 rounded-full w-fit mb-4 uppercase tracking-wider">Oferta da Semana</span>
+<h1 class="font-display-lg text-white mb-2">Hortifruti Fresco <br/>Direto do Produtor</h1>
+<p class="text-white/80 font-body-md max-w-sm mb-6">Condições exclusivas para faturamentos acima de R$ 5.000,00.</p>
+<button class="bg-primary text-white font-bold py-3 px-8 rounded-full w-fit hover:bg-primary/90 transition-colors shadow-lg">Explorar Ofertas</button>
+</div>
+</div>
+<div class="bg-primary-container rounded-3xl p-8 flex flex-col justify-between text-on-primary-container relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-white mb-2">Pedido Mínimo</h3>
+<p class="text-on-primary-container/90">Aproveite frete grátis para sua região em pedidos acima de R$ 1.200,00.</p>
+</div>
+<div class="bg-white/20 backdrop-blur-md rounded-2xl p-4 relative z-10 flex items-center justify-between">
+<div>
+<p class="text-label-sm uppercase opacity-80">Próxima Saída</p>
+<p class="font-bold">Amanhã, 04:00</p>
+</div>
+<span class="material-symbols-outlined text-4xl" data-icon="local_shipping">local_shipping</span>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Filters & Category Row -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-2 md:pb-0">
+<button class="px-5 py-2 rounded-full bg-primary text-white font-semibold text-sm whitespace-nowrap">Todos</button>
+<button class="px-5 py-2 rounded-full bg-white border border-zinc-200 text-zinc-600 hover:border-primary hover:text-primary transition-all text-sm whitespace-nowrap">Frutas</button>
+<button class="px-5 py-2 rounded-full bg-white border border-zinc-200 text-zinc-600 hover:border-primary hover:text-primary transition-all text-sm whitespace-nowrap">Verduras</button>
+<button class="px-5 py-2 rounded-full bg-white border border-zinc-200 text-zinc-600 hover:border-primary hover:text-primary transition-all text-sm whitespace-nowrap">Legumes</button>
+<button class="px-5 py-2 rounded-full bg-white border border-zinc-200 text-zinc-600 hover:border-primary hover:text-primary transition-all text-sm whitespace-nowrap">Orgânicos</button>
+<button class="px-5 py-2 rounded-full bg-white border border-zinc-200 text-zinc-600 hover:border-primary hover:text-primary transition-all text-sm whitespace-nowrap">Temperos</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 rounded-xl text-sm font-semibold hover:bg-zinc-50">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                        Filtros
+                    </button>
+<select class="bg-white border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-primary focus:border-primary">
+<option>Mais Vendidos</option>
+<option>Menor Preço</option>
+<option>Novidades</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-white rounded-3xl border border-zinc-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover" data-alt="close-up of vibrant red tomatoes on a wooden table with dramatic lighting and natural textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeKpoVUzmwXDZjpFYUThEMWYs5xweQ6iv3IQQ9gg4nGFBH2HBQS6PMNiNXx-HjPj8mRFnYgfx7wKEzCbAJN06YKykkWqhQZQjYISj2WSZdohoMuGiB5uxbDv0NgDkQqaWa-5rXiDl404cddMfQQweQM7mVAL6NnbMffFuz7AP84_4oNonbyMRrVJpJkmIxWiU5jzZb2AyrkM2Zhls-MMg9HgxB5XnWwuy-EOt_1zS1GnTaedYjvg_mOuVpuj3wEnHyBHHPei3M08E"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-tight">Colhido hoje</span>
+<span class="bg-secondary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-tight">-15% Atacado</span>
+</div>
+<button class="absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-5">
+<p class="text-label-sm text-zinc-400 mb-1">Fazenda Sol Nascente</p>
+<h4 class="font-title-lg text-lg mb-2">Tomate Italiano Extra</h4>
+<div class="flex items-end gap-2 mb-3">
+<div>
+<p class="text-[10px] text-zinc-500 line-through">Unid: R$ 8,90</p>
+<p class="font-headline-md text-primary text-2xl leading-none">R$ 5,45<span class="text-sm font-normal text-zinc-400">/kg</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl mb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-zinc-600">Mín. Atacado:</span>
+<span class="text-[11px] font-bold text-secondary">20 kg (1 Caixa)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-zinc-600">Preço Fardo:</span>
+<span class="text-[11px] font-bold text-primary">R$ 109,00</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-2xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                            Adicionar ao Pedido
+                        </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white rounded-3xl border border-zinc-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover" data-alt="close-up of orange organic carrots with green leaves on a rustic background with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBCdh4uNZhlnVheT_IoF9OXMXItAr7vcy67P5Hlz7b2MZ5TSxOk8YhY_HdVNENnB8OSaNGJd7nx_OTZPdcHLVkEipVy4UsL8LDv3HkFl-abIFQNQJW9w_m8hgtpVWapbwduCDKJA50V2qD7Sx8ZPskEMDBMY6xXxdZz0bS7ERbdcYCrDX3dowhCjeNu2G3gMS6eOFIGwbahsHc_7v1F7bdG-NpjC1zk3pgRVxOZ3K-yYcCsOu_F7hFBYDyJR7Ojc5m4lyiA6XL_2M"/>
+<div class="absolute top-3 left-3">
+<span class="bg-zinc-800/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-tight">Orgânico Certificado</span>
+</div>
+</div>
+<div class="p-5">
+<p class="text-label-sm text-zinc-400 mb-1">Horta Comunitária Vale</p>
+<h4 class="font-title-lg text-lg mb-2">Cenoura Baby Selecionada</h4>
+<div class="flex items-end gap-2 mb-3">
+<div>
+<p class="text-[10px] text-zinc-500 line-through">Unid: R$ 6,50</p>
+<p class="font-headline-md text-primary text-2xl leading-none">R$ 4,20<span class="text-sm font-normal text-zinc-400">/kg</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl mb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-zinc-600">Mín. Atacado:</span>
+<span class="text-[11px] font-bold text-secondary">10 kg (1 Saco)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-zinc-600">Preço Fardo:</span>
+<span class="text-[11px] font-bold text-primary">R$ 42,00</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-2xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                            Adicionar ao Pedido
+                        </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white rounded-3xl border border-zinc-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover" data-alt="close-up of fresh green broccoli florets with soft lighting and natural textures in a clean environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4Jsti2xqX5av6w4DT7I6uKZIaszSP7EJPxE-_R1_0ExyvrzJXRTYNWeZN8UuCuv46bWxsMSdCK-52wh-fNFt6p07S3_BZIkHkMTtlvb4xAc0WnPPuikl9-Tk23KtLTNJJjBYvdT1f3VF-Plwezwo_7t626uZ3zSzfVo--xT1-C79oHYkShoMwnIuiK0Tq9MKhpwX2ma6B06PvK3Wo39JX4V7vUbSqJyUaikkTxqiNvgq6IVVpn_Uf0bnzll3b6weXRWCwSrXUPJE"/>
+<div class="absolute top-3 left-3">
+<span class="bg-secondary/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-tight">Estoque Limitado</span>
+</div>
+</div>
+<div class="p-5">
+<p class="text-label-sm text-zinc-400 mb-1">Sítio das Flores</p>
+<h4 class="font-title-lg text-lg mb-2">Brócolis Ninja Fresco</h4>
+<div class="flex items-end gap-2 mb-3">
+<div>
+<p class="text-[10px] text-zinc-500 line-through">Unid: R$ 12,00</p>
+<p class="font-headline-md text-primary text-2xl leading-none">R$ 7,80<span class="text-sm font-normal text-zinc-400">/unid</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl mb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-zinc-600">Mín. Atacado:</span>
+<span class="text-[11px] font-bold text-secondary">12 unid. (1 Caixa)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-zinc-600">Preço Fardo:</span>
+<span class="text-[11px] font-bold text-primary">R$ 93,60</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-2xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                            Adicionar ao Pedido
+                        </button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white rounded-3xl border border-zinc-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+<div class="relative h-48">
+<img class="w-full h-full object-cover" data-alt="close-up of fresh potatoes in a burlap sack with rustic farm setting and warm morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE_rsiwUWTN2RbeVXL-UNjjynbmF9x27CwSaEbiSslveelkDnH49yxzhUXWGAoOTQVdQY3ELuoZR7MVkadeaj_cYkLYz0RfUOvooYos5liK21SzvgJgHtHVXNJmWkNXUQ3v8kKNsB-F92LFn9FpAHtuBcXTUzynR63kM-SPF27MTFojNeRPqOwmok9v_BYmMLMcVQL85lZNnVJ2H8YSleRRSaYWYtVRhZcpZE8Of-DJFmb_vHksK0wRoXNom9pjQ7Jft-0ZVVH8rw"/>
+</div>
+<div class="p-5">
+<p class="text-label-sm text-zinc-400 mb-1">Agropecuária Santos</p>
+<h4 class="font-title-lg text-lg mb-2">Batata Ágata Lavada</h4>
+<div class="flex items-end gap-2 mb-3">
+<div>
+<p class="text-[10px] text-zinc-500 line-through">Unid: R$ 7,50</p>
+<p class="font-headline-md text-primary text-2xl leading-none">R$ 3,90<span class="text-sm font-normal text-zinc-400">/kg</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl mb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-zinc-600">Mín. Atacado:</span>
+<span class="text-[11px] font-bold text-secondary">50 kg (1 Fardo)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-zinc-600">Preço Fardo:</span>
+<span class="text-[11px] font-bold text-primary">R$ 195,00</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-2xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                            Adicionar ao Pedido
+                        </button>
+</div>
+</div>
+</div>
+<!-- Dashboard Insights (Asymmetric Layout) -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-3xl border border-zinc-100 shadow-sm col-span-1 lg:col-span-1">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-title-lg">Últimos Pedidos</h3>
+<a class="text-primary text-sm font-bold" href="#">Ver todos</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-3 rounded-2xl hover:bg-zinc-50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">#ORD-28492</p>
+<p class="text-[10px] text-zinc-500">Ontem às 14:20</p>
+</div>
+<p class="text-sm font-bold text-primary">R$ 2.450,00</p>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-2xl hover:bg-zinc-50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">#ORD-28485</p>
+<p class="text-[10px] text-zinc-500">12 Mai, 2024</p>
+</div>
+<p class="text-sm font-bold text-secondary">R$ 1.120,50</p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-green-600 to-green-800 p-8 rounded-3xl text-white col-span-1 md:col-span-2 relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md mb-2">Seu impacto local</h3>
+<p class="opacity-80 mb-6 max-w-md text-body-md">Ao comprar no atacado do Portal feira.casa, você está apoiando diretamente 12 famílias de produtores locais neste mês.</p>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+<p class="text-2xl font-bold">12</p>
+<p class="text-[10px] uppercase font-bold opacity-70">Produtores</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+<p class="text-2xl font-bold">450kg</p>
+<p class="text-[10px] uppercase font-bold opacity-70">Volume</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+<p class="text-2xl font-bold">R$ 15k</p>
+<p class="text-[10px] uppercase font-bold opacity-70">Investido</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-10" data-icon="nature">nature</span>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 py-3 pb-safe z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[11px] font-medium font-['Plus_Jakarta_Sans']">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-600 dark:text-green-400 bg-green-50/50 dark:bg-green-900/20 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-[11px] font-medium font-['Plus_Jakarta_Sans']">Mercado</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[11px] font-medium font-['Plus_Jakarta_Sans']">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[11px] font-medium font-['Plus_Jakarta_Sans']">Perfil</span>
+</a>
+</nav>
+<!-- FAB (Floating Action Button) - Semantic for Quick Bulk Order -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-secondary text-white rounded-full shadow-2xl flex items-center justify-center lg:bottom-10 lg:right-10 hover:scale-110 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl" data-icon="list_alt">list_alt</span>
+</button>
+</body></html>

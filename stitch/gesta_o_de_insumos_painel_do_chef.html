@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#5a1c00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dbdad5",
+                    "outline": "#707a6b",
+                    "surface-container-low": "#f5f4ef",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "surface": "#faf9f4",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-surface-variant": "#40493c",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary-fixed": "#410002",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e9e8e3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-tint": "#126e19",
+                    "primary-container": "#30852f",
+                    "on-background": "#1b1c19",
+                    "secondary": "#a63b00",
+                    "on-surface": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "inverse-primary": "#83db79",
+                    "surface-variant": "#e3e3de",
+                    "surface-bright": "#faf9f4",
+                    "outline-variant": "#bfcab9",
+                    "background": "#faf9f4",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-highest": "#e3e3de",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffdbce",
+                    "on-primary-fixed": "#002202",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-container": "#e41f25",
+                    "primary": "#0e6b17",
+                    "primary-fixed": "#9ef892",
+                    "secondary-container": "#fc6c29",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "primary-fixed-dim": "#83db79"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "margin-desktop": "80px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f4;
+            color: #1b1c19;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfcab9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Gestão Feirante / Chef) -->
+<aside class="hidden md:flex flex-col h-screen w-64 border-r border-stone-100 bg-white sticky top-0">
+<div class="px-6 py-8">
+<h1 class="text-xl font-bold text-green-600 font-display-lg tracking-tight">Gestão Feirante</h1>
+<p class="text-stone-500 font-label-sm uppercase tracking-widest mt-1">Painel de Controle</p>
+</div>
+<nav class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+<!-- Dashboard Item (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-green-50 text-green-700 border-r-4 border-green-600 font-semibold transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-body-md text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-50 hover:pl-5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
+<span class="font-body-md text-sm">Produtos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-50 hover:pl-5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="moped">moped</span>
+<span class="font-body-md text-sm">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-50 hover:pl-5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-md text-sm">Extrato</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-stone-50 hover:pl-5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings_account_box">settings_account_box</span>
+<span class="font-body-md text-sm">Configurações</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full bg-secondary text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:brightness-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                Nova Oferta
+            </button>
+<div class="mt-6 flex items-center gap-3 p-2 border-t border-stone-100">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover" data-alt="close up profile photo of a professional chef in white uniform smiling in a high-end kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJohJMvYzFnBrke6otkNdbdsAB1gH3vQDPBMLydXquszPoGylFv3pBJ02IHJqxMpRg1cA4j-pxrzzR1_ZoHawMBaBOZRzKdDNmpa9-k5PzyJ44B4aOkIZavbdWNlL_ZZULEh5mxZzEgC4Hkbdm3Al9ZUfo1wy9UQLiPGufCx-rHnxzd2i2V6Tcu4Y5sK-jOnKMChu0GX1l1MKgv0-B0mPRXbtaOvQXk7kkm8sCL045P6McFTx-4rWJ5B7qbKwG9tq2HsFGfJStUrI"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Chef Ricardo</p>
+<p class="text-[10px] text-stone-400">Restaurante Aroma</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full pb-24 md:pb-8">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-100 px-4 md:px-12 h-16 flex justify-between items-center w-full shadow-sm">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-stone-600">menu</span>
+<span class="text-2xl font-black text-green-600 tracking-tighter">feira.casa</span>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-green-600" placeholder="Buscar insumos..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-600 hover:text-orange-500 transition-colors"><span class="material-symbols-outlined" data-icon="location_on">location_on</span></button>
+<button class="text-stone-600 hover:text-orange-500 transition-colors relative">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</button>
+<button class="text-stone-600 hover:text-orange-500 transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="max-w-7xl mx-auto px-4 md:px-12 pt-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h2 class="font-display-lg text-headline-md text-on-surface">Gestão de Insumos</h2>
+<p class="font-body-md text-on-surface-variant">Controle seu estoque e planeje suas reposições com inteligência.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 bg-white border border-outline-variant text-on-surface font-semibold px-4 py-2 rounded-xl hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                        Relatórios
+                    </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition-all">
+<span class="material-symbols-outlined" data-icon="sync_alt">sync_alt</span>
+                        Vincular Recorrência
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="md:col-span-2 bg-gradient-to-br from-green-600 to-green-700 p-6 rounded-[2rem] text-white flex flex-col justify-between shadow-lg shadow-green-200">
+<div>
+<p class="font-label-sm uppercase opacity-80 tracking-widest">Status Geral do Estoque</p>
+<h3 class="font-display-lg text-headline-md mt-2">Saudável</h3>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-green-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up of fresh vibrant green spinach leaves with morning dew drops" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO1OnHLejRszdQwk8s6DzSlMvcRlnbLtka7Ut5QKFD0jQ9DE6A1zb-T1bMQ4iokQ94ASvi1rBTRGb9swAkhFylcvjT8U1nG0E0iCFQu5IuoQdWcABEHVKC6qorxXdJM5qix4tB7FXgGbLkI9pTl7jdah5LqZeQfnxtDKWxgFfZSN_MhKXoh2Od8H1bz2MTgjQf7MiS9hqv9OavNTaRGTne0FmFoRsjRc6OugH9jjog1eM4zOeHaC-eKFgeEEFKuaDMpv-4WBCnLAc"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-red-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="vibrant red organic tomatoes in a wooden crate with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKXJguK9P5CLZf5W_lEdeW1JDaaMz4EOx0vvZqmKJJxo2zO99BUZy3qA2RE7KZWEIx3H4U3ucluhKj7INVXU9wJW4oBKzGvnfy0eGAEAdHKin9SFQ-PcQkEHDDWDg4-a2TVBuxHcg9snfvn4Ota9Gp2YbZNNnVMS5wS5D_beKZeX89KdXzsXhn0atIGF5LgH0qNQwAp4jZ3m1pF21Wj_byUYkP0WXbmoErdXykuEJIrKFY83UrJYx_3nQuXkZUjgAwBilPpqkUF90"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-orange-200 overflow-hidden flex items-center justify-center text-orange-800 text-xs font-bold">+12</div>
+</div>
+<span class="text-sm font-medium">85% itens em dia</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-[2rem] border border-stone-100 shadow-sm flex flex-col justify-between">
+<div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mb-4">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="text-stone-500 font-label-sm uppercase">Alertas Críticos</p>
+<h4 class="text-3xl font-bold text-on-surface">04 itens</h4>
+<p class="text-error text-xs font-semibold mt-1">Reposição imediata necessária</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-[2rem] border border-stone-100 shadow-sm flex flex-col justify-between">
+<div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mb-4">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<p class="text-stone-500 font-label-sm uppercase">Próxima Entrega</p>
+<h4 class="text-3xl font-bold text-on-surface">Amanhã</h4>
+<p class="text-primary text-xs font-semibold mt-1">08:00 - 10:00</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Stock Management Table -->
+<div class="lg:col-span-2">
+<div class="bg-white rounded-[2rem] border border-stone-100 shadow-sm overflow-hidden">
+<div class="px-8 py-6 border-b border-stone-50 flex justify-between items-center">
+<h3 class="text-title-lg font-bold">Insumos Frequentes</h3>
+<button class="text-primary font-bold text-sm">Ver Todos</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-stone-500 font-label-sm">
+<tr>
+<th class="px-8 py-4">PRODUTO</th>
+<th class="px-4 py-4 text-center">NÍVEL</th>
+<th class="px-4 py-4">REQUERIDO</th>
+<th class="px-8 py-4 text-right">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-50">
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-stone-100">
+<img class="w-full h-full object-cover" data-alt="overhead shot of various organic vegetables including carrots, broccoli, and peppers on a rustic surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA33VcKarmhi_nuEedogwumMuEN-h-IpPKd7x8aQPySvD_HYHoAmIVF1t2snaW0yZodzZbFyb9ZinJO7tjmk_vDQz9AQ6BbxWcBb4F4puqfsALbz587BqkQdCD0mi7NzwDm62ZUwHi5xzCMeB_KGzZNaCq2-DM1STRXZ3tGoG6-OG5e-9KpFb9wTcyHyzA6fMQTfGce6VvGT82DthcZpTRg35_oFbqBbrI1EByKPRkDR0xiQFk2ODxzOhghTPDcdbK6lsWJdqZM_UA"/>
+</div>
+<div>
+<p class="font-bold text-sm">Mix de Folhas Nobres</p>
+<p class="text-[10px] text-stone-400">Orgânico • Diário</p>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 15%;"></div>
+</div>
+<p class="text-[10px] text-error font-bold mt-1 text-center">Crítico</p>
+</td>
+<td class="px-4 py-4 text-sm font-semibold">5kg</td>
+<td class="px-8 py-4 text-right">
+<button class="bg-secondary-container/10 text-secondary font-bold text-xs py-2 px-4 rounded-lg hover:bg-secondary-container hover:text-white transition-all">Repor Agora</button>
+</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-stone-100">
+<img class="w-full h-full object-cover" data-alt="close up of rustic artisanal sourdough bread loaf with a flour dusting and golden crust" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlDVW5P89ZX_qUlj4NW1pUjbfQccGJ-nKsIHCkoVDZaurPrz9iQFam9mvQ-uGFls1XxqldrmFnDXNfBZWmTvYWns50hGTPo4bWjO7NphZptqwDZZTXtfvxA3G98v4cUaKTjRvJ25D_YRrKrC7wZM3FsKH1EjD1g21vedQzRkwH9-wSs1UE2SuMCmdj_3A2MqjQ1uKc_XUx8FR-3Gd3foYRmHFAjgqNrbCo_yl33XK07Fz34rLJi6RfdkYZrRKXORbB1VDKd8rtqC0"/>
+</div>
+<div>
+<p class="font-bold text-sm">Trigo Integral Artesanal</p>
+<p class="text-[10px] text-stone-400">Moinho local • Semanal</p>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-yellow-400 h-full" style="width: 45%;"></div>
+</div>
+<p class="text-[10px] text-yellow-600 font-bold mt-1 text-center">Médio</p>
+</td>
+<td class="px-4 py-4 text-sm font-semibold">20kg</td>
+<td class="px-8 py-4 text-right">
+<button class="bg-secondary-container/10 text-secondary font-bold text-xs py-2 px-4 rounded-lg hover:bg-secondary-container hover:text-white transition-all">Repor Agora</button>
+</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-stone-100">
+<img class="w-full h-full object-cover" data-alt="close-up of fresh red strawberries in a rustic basket with soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClDrOZ3weCBPcfjhMI42pWXYcCvDWgdFoj59ok7rXiiTufguAZpgN89apnBPoH65nj0rkZ061Kwg3rxX4VspoPAol5GREjZ6RZIqWQuECY11rfsqSBxVZQLwzTkfslhJDcS4qAUv5AJ-A-b5LBDunNF1OUUPTC42pa9gTsymN1h2hQBneF0bHMzusY8qetsp9caOLBUHFkr7LjBYtIhh8baBAfzghxII_fbmidnR3oOnjWg1stm9SGvx9ZKt9uqe8fd4rRn1cybAo"/>
+</div>
+<div>
+<p class="font-bold text-sm">Morango Silvestre</p>
+<p class="text-[10px] text-stone-400">Sazonal • 2x/Semana</p>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full" style="width: 90%;"></div>
+</div>
+<p class="text-[10px] text-green-600 font-bold mt-1 text-center">Abundante</p>
+</td>
+<td class="px-4 py-4 text-sm font-semibold">2kg</td>
+<td class="px-8 py-4 text-right">
+<button class="bg-stone-100 text-stone-400 font-bold text-xs py-2 px-4 rounded-lg cursor-not-allowed">Repor Agora</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Sponsored Products / Offers -->
+<div class="space-y-6">
+<div class="bg-white p-6 rounded-[2rem] border border-stone-100 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-title-lg font-bold">Patrocinados</h3>
+<span class="text-[10px] font-bold text-stone-400 uppercase">Sugestões de IA</span>
+</div>
+<div class="space-y-4">
+<!-- Sponsored Item 1 -->
+<div class="group relative bg-surface-container-low p-3 rounded-2xl border border-transparent hover:border-orange-200 transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="fresh green herbs like rosemary and thyme in a ceramic pot with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzCyRwTcp-gax8j8qkuWEMz2c0oIOHMDI1MrTpj0FlEdKcuhC5_cVNvVADEivLt4o7z7hETRNYKxcoQeZ9QKJUqsUtjVRzNY9MuYGCUkSaww9_bPli1Ah1s9LqMDjdPDYdhMvIuhmCGVe61CN-nreoCOGP0-7XaeW8y0juflKXuMOYDjgSBwewss0VSY3_ktK3kbSSQbIinIYseCEeGdkWlMHiu7-n25sd9uLoGBajQQyDL78xp4KzP8EyxTs3NMgIT5sL4Q8gpx8"/>
+</div>
+<div class="flex-1">
+<span class="bg-orange-100 text-orange-700 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">OFERTA DO DIA</span>
+<h4 class="font-bold text-sm mt-1">Azeite Extra Virgem (5L)</h4>
+<p class="text-xs text-stone-500">Produtor Serra da Mantiqueira</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-primary font-bold">R$ 245,00</span>
+<button class="text-on-secondary-container"><span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sponsored Item 2 -->
+<div class="group relative bg-surface-container-low p-3 rounded-2xl border border-transparent hover:border-orange-200 transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="variety of fresh mushrooms including shiitake and oyster in a paper bag on a concrete surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdr5LmqoyEY1xO9joVpbpDd4v2evYe7mrJKvM9Be-qzjIUnBpOpBMgJM8_ux0gnuqTglQs2Uj-n02orXV5MXt8NngSmFOR_1F1vkcXJ2ldRxxoHgCOS-ZHtcbTdxKwdeUXyA0OZe4GvvMBGJoN2JV0h_wev7rHdCjt5MgLj7PyZqgqkZwKKaZKv6sW2_ofC7hDcvL7A1H7LP_nOeAvyAzv9Og1UnfAvXsKubabNomPx_bFzMBfXIjMJOrCu8gwalzgtkah2lhZbSE"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm mt-1">Mix Cogumelos Paris</h4>
+<p class="text-xs text-stone-500">Cultivo Hidropônico Local</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-primary font-bold">R$ 48,90/kg</span>
+<button class="text-on-secondary-container"><span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-stone-50">
+<div class="bg-gradient-to-r from-secondary-container to-secondary p-4 rounded-2xl text-white">
+<p class="text-[10px] font-bold uppercase opacity-80 mb-1">Clube do Chef</p>
+<p class="text-xs font-medium leading-tight">Ganhe 15% de desconto vinculando pedidos recorrentes de hortifruti.</p>
+<button class="mt-3 w-full bg-white text-secondary font-bold text-xs py-2 rounded-lg">Saiba Mais</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-safe-bottom h-20 bg-white shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl border-t border-stone-100">
+<a class="flex flex-col items-center justify-center text-green-600 bg-green-50 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Cesta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Perfil</span>
+</a>
+</nav>
+</body></html>

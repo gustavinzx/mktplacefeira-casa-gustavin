@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad6",
+                    "secondary-container": "#fc6c29",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#30852f",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#efeee9",
+                    "on-surface-variant": "#40493c",
+                    "on-surface": "#1b1c19",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffdbce",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary": "#0e6b17",
+                    "primary-fixed-dim": "#83db79",
+                    "on-tertiary-fixed": "#410002",
+                    "inverse-surface": "#30312e",
+                    "on-primary-container": "#f8fff0",
+                    "inverse-on-surface": "#f2f1ec",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-secondary-container": "#5a1c00",
+                    "on-primary": "#ffffff",
+                    "background": "#faf9f4",
+                    "on-primary-fixed": "#002202",
+                    "primary-fixed": "#9ef892",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#bb0014",
+                    "surface": "#faf9f4",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-variant": "#e3e3de",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-tint": "#126e19",
+                    "secondary": "#a63b00",
+                    "secondary-fixed-dim": "#ffb599",
+                    "surface-container-highest": "#e3e3de",
+                    "surface-container-high": "#e9e8e3",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-background": "#1b1c19",
+                    "surface-dim": "#dbdad5",
+                    "inverse-primary": "#83db79",
+                    "surface-bright": "#faf9f4",
+                    "tertiary-container": "#e41f25",
+                    "surface-container-low": "#f5f4ef",
+                    "outline-variant": "#bfcab9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-white/90 dark:bg-stone-900/90 backdrop-blur-md shadow-sm border-b border-stone-200 dark:border-stone-800 docked full-width top-0 z-50 fixed w-full px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-black tracking-tight text-emerald-700 dark:text-emerald-400">feira.casa Chef</h1>
+<div class="hidden md:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="pl-10 pr-4 py-2 bg-stone-100 border-none rounded-full text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search orders, dishes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span></button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+</div>
+<div class="h-8 w-px bg-stone-200 mx-2"></div>
+<img alt="Chef Gourmet Profile Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-primary" data-alt="professional portrait of a chef in a white uniform smiling in a bright modern kitchen with fresh vegetables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgowEEX-yAAJf06lBBGBEktao6zMAwFvT0QjuMp-RWoJR8GVV3kru0U7AgPV1zkWXAY3GI-MWVTl5pQZ00DEAY1dW04V9kfq-UyNQIqWdY7QHPDRTibEhjr_sq527CoIxAsIYFu95G--YYeVgvg0VBvhr2iKPjB6XR_EAbEMl9A6X5WnwOE7_WSMb9ed-WtGPd9Zez1Sp2d-Gx_FF8gdDC-uteSr-YIjHvWjJp3eyY4aJElFmg74pBvCS6_K86vYT4O_qOza48pPM"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 pb-6 w-64 bg-stone-50 dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800 shadow-inner z-40 hidden md:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<p class="text-lg font-bold text-emerald-800 dark:text-emerald-200 leading-none">Chef Gourmet</p>
+<p class="text-xs text-stone-500">Gourmet Services</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border-r-4 border-emerald-600 font-semibold px-4 py-3 flex items-center gap-3 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 px-4 py-3 flex items-center gap-3 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span> My Store
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 px-4 py-3 flex items-center gap-3 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span> My Recipes
+            </a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-emerald-600 px-4 py-3 flex items-center gap-3 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span> Settings
+            </a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-secondary text-white font-bold py-3 rounded-xl shadow-lg hover:bg-on-secondary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span> Add New Dish
+            </button>
+<div class="border-t border-stone-200 pt-4 space-y-1">
+<a class="text-stone-600 dark:text-stone-400 px-4 py-2 flex items-center gap-3 text-sm hover:text-emerald-600" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span> Support
+                </a>
+<a class="text-stone-600 dark:text-stone-400 px-4 py-2 flex items-center gap-3 text-sm hover:text-error" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span> Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 px-6 pb-12">
+<div class="max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary">Dashboard Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Welcome back, Chef. Here's what's happening today.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high text-on-surface font-title-lg text-base px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                        Last 30 Days
+                    </button>
+<button class="bg-primary text-on-primary font-title-lg text-base px-6 py-2 rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="col-span-1 md:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-stone-100 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="text-primary text-label-sm font-bold bg-primary-fixed px-2 py-1 rounded">+12.5%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-sm">Total Sales</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">R$ 14.280,00</h3>
+</div>
+</div>
+<div class="col-span-1 md:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-stone-100 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<span class="text-secondary text-label-sm font-bold bg-secondary-fixed px-2 py-1 rounded">+8.2%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-sm">Orders Completed</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">154</h3>
+</div>
+</div>
+<div class="col-span-1 md:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-stone-100 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-tertiary-container rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-tertiary text-label-sm font-bold bg-tertiary-fixed px-2 py-1 rounded">+2.4%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-sm">New Customers</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">42</h3>
+</div>
+</div>
+<div class="col-span-1 md:col-span-1 bg-primary text-on-primary p-6 rounded-xl shadow-lg flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-primary-fixed text-label-sm">Store Performance</p>
+<h3 class="font-headline-md text-headline-md">Top Rated</h3>
+<div class="flex gap-1 mt-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill">star</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-9xl" data-icon="emoji_events">emoji_events</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Sales Performance Chart (Visual Simulation) -->
+<div class="lg:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-stone-100">
+<div class="flex items-center justify-between mb-6">
+<h4 class="font-title-lg text-title-lg text-on-surface">Sales Performance</h4>
+<select class="bg-transparent border-none text-on-surface-variant text-sm font-medium focus:ring-0 cursor-pointer">
+<option>Dishes</option>
+<option>Services</option>
+</select>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 px-2">
+<!-- Simulated Chart Bars -->
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-24 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-16 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-28 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-20 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-30 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-secondary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-secondary-container rounded-t-lg h-32 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-secondary-container/20 rounded-t-lg relative group h-32">
+<div class="absolute bottom-0 w-full bg-secondary-container rounded-t-lg h-26 group-hover:opacity-80 transition-all"></div>
+</div>
+<span class="text-xs font-medium text-stone-400">Sun</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-secondary-container text-on-secondary p-8 rounded-xl shadow-lg relative overflow-hidden flex flex-col items-start justify-center min-h-[200px]">
+<h4 class="font-title-lg text-title-lg mb-2 relative z-10">New Recipe?</h4>
+<p class="font-body-md text-sm mb-4 opacity-90 relative z-10">Document your latest culinary creation and share it with your audience.</p>
+<button class="bg-white text-secondary font-bold px-6 py-2 rounded-lg hover:bg-opacity-90 transition-all relative z-10">Create Now</button>
+<span class="material-symbols-outlined absolute -right-6 -bottom-6 text-9xl opacity-20 rotate-12" data-icon="menu_book">menu_book</span>
+</div>
+<div class="bg-surface-container text-on-surface p-6 rounded-xl border border-stone-200">
+<h4 class="font-title-lg text-title-lg mb-4">Quick Links</h4>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center gap-2 p-4 bg-white rounded-lg hover:bg-primary-fixed transition-colors border border-stone-100">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-xs font-bold">Update Menu</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 bg-white rounded-lg hover:bg-primary-fixed transition-colors border border-stone-100">
+<span class="material-symbols-outlined text-primary" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs font-bold">Stock Check</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 bg-white rounded-lg hover:bg-primary-fixed transition-colors border border-stone-100">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="text-xs font-bold">Deliveries</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 bg-white rounded-lg hover:bg-primary-fixed transition-colors border border-stone-100">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<span class="text-xs font-bold">Insights</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Orders Section -->
+<div class="mt-8 bg-white rounded-xl shadow-sm border border-stone-100 overflow-hidden">
+<div class="px-8 py-6 border-b border-stone-100 flex items-center justify-between">
+<h4 class="font-title-lg text-title-lg text-on-surface">Recent Orders</h4>
+<a class="text-primary font-bold text-sm hover:underline" href="#">View All Orders</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-stone-50 border-b border-stone-100">
+<tr>
+<th class="px-8 py-4 font-bold text-on-surface-variant text-label-sm uppercase tracking-wider">Customer</th>
+<th class="px-8 py-4 font-bold text-on-surface-variant text-label-sm uppercase tracking-wider">Dishes</th>
+<th class="px-8 py-4 font-bold text-on-surface-variant text-label-sm uppercase tracking-wider">Status</th>
+<th class="px-8 py-4 font-bold text-on-surface-variant text-label-sm uppercase tracking-wider">Amount</th>
+<th class="px-8 py-4 font-bold text-on-surface-variant text-label-sm uppercase tracking-wider">Date</th>
+<th class="px-8 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100">
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-8 h-8 rounded-full" data-alt="close-up portrait of a young woman with a warm smile in natural outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl2aGXlu7O3YAWwHTqf6B1mUDoztpJti6MMks-3tOXafJKpeC34fs0U2d-WJEwKwDaomiwB1wDYvH-YnxwYaYWufpzqHly6PD7UjxCNbif4iPVFC0LAXqJk99IjZXSOCn80Y_A-DuDY14-GkEba9bep4jzTb55jpgRPdQZ7HZscq7oo8J9SxWtnD_G5dvtfnSzGIFiCzcoiNb6heUgwAG0as3AeGp7ZeblnnSdbWcQvjhb1qzQoqCrpD6cKI0MD4QOwAxB3FgCUW8"/>
+<span class="font-medium text-on-surface">Mariana Silva</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Feijoada Gourmet, Farofa Especial</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-primary-fixed text-on-primary-fixed-variant">Preparing</span>
+</td>
+<td class="px-8 py-4 font-bold text-on-surface">R$ 125,50</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Today, 11:45</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 hover:bg-stone-200 rounded-full transition-colors"><span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-8 h-8 rounded-full" data-alt="close-up portrait of a man with glasses and a friendly expression in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH-21JI0CHuuMdfgvK5-AkUWUV3HMxiDN910GPMLwbmEp5Hqaa6zqTvBs96EPoyaJGnZuU-yP8zxiyxRxg-Xg4qiapDiGBcmd4OlftalozknAeoYzNehK5IliyGJF7lYNU4gGYsY1G4hyD7uZTdjMWnhO7kbToRHL5yPxPfHQM07EAxO8xWbH_HgDoDzoLNxCAh67wMnn7FgB8lxFFgGa5YeR9E5VFmdTkhuH0UZlQz_ByRmMSK8EHsXdVMcy4n8_Xh6_GDn583j4"/>
+<span class="font-medium text-on-surface">Ricardo Gomes</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Risoto de Funghi (x2)</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-secondary-fixed text-on-secondary-fixed-variant">On the way</span>
+</td>
+<td class="px-8 py-4 font-bold text-on-surface">R$ 89,00</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Today, 10:30</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 hover:bg-stone-200 rounded-full transition-colors"><span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-8 h-8 rounded-full" data-alt="middle-aged man with salt and pepper hair smiling warmly at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgS0sbgbXwvsQwgWf-wC1Qf8d3csqbbxbdIXy2x-EG4BFwMqNyozHnlIltnSfOj0gE6fTcD2mYdXk6FIW5anmXHO2Bd32XBJYjgAzJwwenkyT36O_BQiD3my25tvUIhXVjLzutW0tdflAwLY3-DQGIjyzQjc7l8su0nW2ewkvV4wO4yJOgSJLsMkjAKGoU8FMLFCNcL2SvCQRlm26g42TJqdFLaBnd3apMEysULEgi2LTNiP88htLoa4TwvsG3uMmKdnSwW7BgCZg"/>
+<span class="font-medium text-on-surface">João Mendes</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Lasanha de Berinjela</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-surface-container-highest text-on-surface-variant">Delivered</span>
+</td>
+<td class="px-8 py-4 font-bold text-on-surface">R$ 45,90</td>
+<td class="px-8 py-4 text-sm text-on-surface-variant">Yesterday, 19:15</td>
+<td class="px-8 py-4 text-right">
+<button class="p-2 hover:bg-stone-200 rounded-full transition-colors"><span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 flex justify-around items-center py-3 z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="text-[10px] font-bold">Store</span>
+</a>
+<button class="bg-primary text-white p-3 rounded-full -translate-y-6 shadow-xl border-4 border-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-[10px] font-bold">Recipes</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</a>
+</nav>
+</body></html>

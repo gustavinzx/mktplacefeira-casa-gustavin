@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Entrar - feira.casa B2B</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#370e00",
+                        "on-error": "#ffffff",
+                        "secondary": "#a63b00",
+                        "surface-container-low": "#f5f4ef",
+                        "inverse-surface": "#30312e",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#0e6b17",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "surface-dim": "#dbdad5",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#83db79",
+                        "tertiary-container": "#e41f25",
+                        "on-tertiary-fixed": "#410002",
+                        "on-secondary-container": "#5a1c00",
+                        "surface-container": "#efeee9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002202",
+                        "inverse-primary": "#83db79",
+                        "secondary-fixed-dim": "#ffb599",
+                        "inverse-on-surface": "#f2f1ec",
+                        "tertiary-fixed": "#ffdad6",
+                        "secondary-container": "#fc6c29",
+                        "surface-bright": "#faf9f4",
+                        "surface": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e9e8e3",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-tertiary-container": "#fffbff",
+                        "background": "#faf9f4",
+                        "primary-fixed": "#9ef892",
+                        "surface-container-highest": "#e3e3de",
+                        "outline-variant": "#bfcab9",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary": "#bb0014",
+                        "secondary-fixed": "#ffdbce",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-surface-variant": "#40493c",
+                        "error-container": "#ffdad6",
+                        "outline": "#707a6b",
+                        "primary-container": "#30852f",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "surface-tint": "#126e19",
+                        "on-surface": "#1b1c19",
+                        "surface-variant": "#e3e3de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-margin-desktop">
+<main class="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant">
+<!-- Left Column: Branding & Benefits -->
+<section class="relative hidden lg:flex flex-col justify-between p-xl bg-primary text-on-primary">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7bjP_1ooVwtjUFibG3YjSNpbCTlcAltAIYF0pmAhvMyiUWMUfASc3lGrLdeiLxJ-pik287MPsumGFOwp5uG_mEdT8L8bDgowKdfuuZ6MK_hhgMxS9hknjygWWKAyqDBLOCevJCKZESG-hORc2XjhN-vqHkHg1UN7zO8Dh-gnoTSplmntLpkMMK8_-MHBcLW6_2vVWnLim8oN1plbMA0grCIqpN5X5CXOMysMOvcR8B6ECrkoAX-DgetTNbtN4_IOAhWDgcoxvUwg');"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-base mb-xl">
+<span class="material-symbols-outlined text-4xl" data-weight="fill">storefront</span>
+<h1 class="font-display-lg text-title-lg tracking-tighter">feira.casa <span class="font-light">B2B</span></h1>
+</div>
+<div class="space-y-lg">
+<h2 class="font-display-lg text-display-lg">Direto da horta para o seu negócio.</h2>
+<p class="font-body-md text-body-md opacity-90 max-w-md">
+                        Abasteça seu restaurante, mercado ou hortifruti com a maior rede de produtores locais do Brasil. Frescor garantido e preços competitivos.
+                    </p>
+</div>
+</div>
+<div class="relative z-10 grid grid-cols-1 gap-md">
+<!-- Bento Style Benefits Cards -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="p-md bg-on-primary/10 backdrop-blur-md rounded-xl border border-on-primary/20">
+<span class="material-symbols-outlined mb-base">payments</span>
+<h3 class="font-title-lg text-[18px] mb-xs">Faturamento</h3>
+<p class="font-body-md text-label-sm opacity-80">Prazos flexíveis de 15, 30 ou 45 dias no boleto bancário.</p>
+</div>
+<div class="p-md bg-secondary-container text-on-secondary-container rounded-xl">
+<span class="material-symbols-outlined mb-base">trending_down</span>
+<h3 class="font-title-lg text-[18px] mb-xs">Preço de Atacado</h3>
+<p class="font-body-md text-label-sm opacity-90">Economize até 35% comprando em escala industrial.</p>
+</div>
+</div>
+<div class="p-md bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 flex items-center gap-md">
+<img alt="Fresh vegetables in a basket" class="w-20 h-20 rounded-lg object-cover shadow-md" data-alt="Close-up of vibrant fresh organic vegetables including carrots, peppers and greens in a rustic wooden basket with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDDW8WyCRsHmNVVC33mXM27xXs3Lf2TwHi_v1pxk8ngHjXQksuzS9PyUoXrXVuezXAUyQl058QpwV_--9v8gZy_xmmWRh8v1JIOYB7nZt84DJTbcbfOfsv2QvZwWKAfm3mdwqffVcmpGqFomRtjrJT3qRdWcJyKpXhloFrwh6r56fuXqanRtByqEL7o09jqqDFTAn448NeG81jlUbw1J6r813QxKquN-BrCMi2YENq5uiw_TgnLrNs6rCYtvsKTAt_2N0c_YKkjFM"/>
+<div>
+<h4 class="font-title-lg text-body-md">Logística Própria</h4>
+<p class="font-body-md text-label-sm opacity-80">Entrega refrigerada em até 24h para toda região metropolitana.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Forms -->
+<section class="p-md md:p-xl flex flex-col justify-center bg-surface">
+<div class="max-w-md mx-auto w-full">
+<!-- Mobile Logo -->
+<div class="lg:hidden flex items-center gap-base mb-lg justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">storefront</span>
+<span class="font-display-lg text-title-lg text-primary tracking-tighter">feira.casa</span>
+</div>
+<!-- Tabs (Mockup Toggle) -->
+<div class="flex gap-md border-b border-outline-variant mb-lg">
+<button class="pb-base px-xs font-title-lg text-body-md text-primary border-b-2 border-primary">Entrar</button>
+<button class="pb-base px-xs font-title-lg text-body-md text-outline hover:text-on-surface transition-colors">Criar Conta B2B</button>
+</div>
+<div class="space-y-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Seja bem-vindo de volta</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Acesse o portal de compras da sua empresa.</p>
+</div>
+<form class="space-y-md">
+<!-- Login Fields -->
+<div class="space-y-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs" for="email">E-mail corporativo</label>
+<input class="w-full px-md py-base bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md text-body-md" id="email" placeholder="nome@empresa.com.br" type="email"/>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-sm text-label-sm text-on-surface-variant" for="password">Senha</label>
+<a class="text-label-sm text-primary hover:underline" href="#">Esqueceu a senha?</a>
+</div>
+<input class="w-full px-md py-base bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md text-body-md" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded-lg font-title-lg text-body-md shadow-sm hover:bg-primary/90 transition-all active:scale-[0.98] flex items-center justify-center gap-base" type="submit">
+                            Entrar no Portal
+                            <span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+<div class="relative py-md">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant"></div></div>
+<div class="relative flex justify-center text-label-sm uppercase tracking-widest"><span class="bg-surface px-md text-outline">ou continue com</span></div>
+</div>
+<div class="grid grid-cols-1 gap-sm">
+<button class="flex items-center justify-center gap-base w-full px-md py-base bg-white border border-outline-variant rounded-lg font-title-lg text-body-md hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+                                Login com Certificado Digital
+                             </button>
+</div>
+</form>
+<!-- Registration Teaser (Hidden in Login State) -->
+<div class="p-md bg-surface-container-high rounded-xl mt-xl border border-outline-variant/30">
+<div class="flex items-start gap-md">
+<div class="bg-primary-container p-xs rounded-full">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">business_center</span>
+</div>
+<div>
+<h4 class="font-title-lg text-label-sm text-on-surface">Novo por aqui?</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant mt-xs">Cadastre seu CNPJ e aproveite benefícios exclusivos de faturamento e entrega prioritária.</p>
+<a class="inline-block mt-sm font-title-lg text-label-sm text-primary hover:underline" href="#">Abrir conta corporativa gratuita</a>
+</div>
+</div>
+</div>
+</div>
+<footer class="mt-xl text-center">
+<p class="font-label-sm text-label-sm text-outline">
+                        © 2024 feira.casa Tecnologia LTDA. <br/>
+                        Sistema de Gestão de Abastecimento B2B.
+                    </p>
+</footer>
+</div>
+</section>
+</main>
+<!-- Optional Support Floating Action Button -->
+<div class="fixed bottom-md right-md lg:bottom-xl lg:right-xl">
+<button class="bg-secondary text-on-secondary p-md rounded-full shadow-lg flex items-center gap-sm hover:scale-105 transition-transform active:scale-95 group">
+<span class="material-symbols-outlined" data-weight="fill">chat</span>
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 whitespace-nowrap font-title-lg text-label-sm">Falar com Consultor B2B</span>
+</button>
+</div>
+</body></html>

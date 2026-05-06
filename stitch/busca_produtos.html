@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>feira.casa - Resultados da Busca</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#2f1500",
+                      "on-primary": "#ffffff",
+                      "primary": "#4CAF50",
+                      "tertiary-fixed": "#ffe08b",
+                      "surface-dim": "#ead6c9",
+                      "on-secondary-fixed-variant": "#6e3900",
+                      "surface": "#fff8f5",
+                      "outline-variant": "#bfc9bd",
+                      "primary-fixed": "#a5f5b2",
+                      "surface-tint": "#1c6c38",
+                      "primary-container": "#2d7a44",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#cda72c",
+                      "inverse-on-surface": "#ffeee2",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#3a2e25",
+                      "on-background": "#231a11",
+                      "inverse-primary": "#8ad898",
+                      "primary-fixed-dim": "#8ad898",
+                      "on-secondary-container": "#713b00",
+                      "on-surface-variant": "#404940",
+                      "surface-bright": "#fff8f5",
+                      "on-primary-fixed-variant": "#005225",
+                      "on-tertiary-fixed-variant": "#584400",
+                      "secondary-container": "#ffa454",
+                      "surface-container-low": "#fff1e8",
+                      "tertiary-fixed-dim": "#ebc246",
+                      "on-surface": "#231a11",
+                      "background": "#fff8f5",
+                      "on-secondary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#ffb77d",
+                      "surface-container": "#feeadc",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#745b00",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#b7ffc1",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#f3dfd1",
+                      "secondary-fixed": "#ffdcc3",
+                      "on-tertiary-container": "#4f3d00",
+                      "secondary": "#904d00",
+                      "surface-container-high": "#f8e5d7",
+                      "outline": "#707a6f",
+                      "surface-container-highest": "#f3dfd1",
+                      "on-primary-fixed": "#00210b",
+                      "on-tertiary-fixed": "#241a00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "stack-md": "16px",
+                      "unit": "8px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "label-bold": ["Be Vietnam Pro"],
+                      "body-md": ["Be Vietnam Pro"],
+                      "headline-xl": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "label-sm": ["Be Vietnam Pro"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bfc9bd; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-800 shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-4 md:px-8 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-6">
+<img alt="feira.casa" class="h-8 md:h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0uiKqM4uVpJy99VblYQHR8HnUo2-_f87iXpRxTRmkYSlYyM-v3j3CxOeI4tL3QzH_u6H2JtFOwpEobEj7QAD6uAHHhDqkuWa3wCQK-kMA7kjZpbWQ9JVvgy4aHP86VOB4_B9owhomdHi3NW-cxyhuAPWntaQg4e_Zbb4kuxG4KPeCMiXkkbCOnsMxL6Td2FZYFVBEV2sia3YMWr8y17TvBNS8AMQbasacTo4NmUGBdEbxbElu0d3m97dMJ34PVGIEPzDvviL_AeM"/>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-zinc-500 dark:text-zinc-400 font-['Plus_Jakarta_Sans'] text-sm font-medium hover:text-primary transition-colors" href="#">Início</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-['Plus_Jakarta_Sans'] text-sm transition-colors" href="#">Buscar</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-['Plus_Jakarta_Sans'] text-sm font-medium hover:text-primary transition-colors" href="#">Feiras</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-['Plus_Jakarta_Sans'] text-sm font-medium hover:text-primary transition-colors" href="#">Feirantes</a>
+</nav>
+</div>
+<!-- Current Location (Header Priority) -->
+<div class="hidden sm:flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="location_on">location_on</span>
+<span class="font-label-bold text-label-sm text-on-surface">Vila Madalena, São Paulo</span>
+<span class="material-symbols-outlined text-zinc-400 text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+<button class="p-2 rounded-full hover:bg-zinc-50 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined text-zinc-600" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-zinc-50 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined text-zinc-600" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32">
+<!-- Search Results Header -->
+<div class="mb-8">
+<div class="relative w-full max-w-2xl mx-auto md:mx-0 shadow-lg rounded-2xl">
+<input class="w-full h-14 pl-14 pr-6 rounded-2xl border-none ring-1 ring-outline-variant bg-white text-body-lg focus:ring-2 focus:ring-primary transition-all" placeholder="O que você quer colher hoje na feira?" type="text"/>
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-tertiary text-2xl" data-icon="search">search</span>
+</div>
+<p class="mt-4 font-headline-md text-on-background">32 resultados encontrados em <span class="text-primary italic">"frutas orgânicas"</span></p>
+</div>
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 space-y-8">
+<div class="space-y-6">
+<!-- Categories -->
+<div>
+<h3 class="font-label-bold text-on-surface mb-4">Categorias</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary">Frutas e Legumes</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary">Padaria e Bolos</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary">Laticínios e Ovos</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary">Temperos e Ervas</span>
+</label>
+</div>
+</div>
+<!-- Price Slider -->
+<div>
+<h3 class="font-label-bold text-on-surface mb-4">Faixa de Preço</h3>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between mt-2 text-label-sm text-zinc-500">
+<span>R$ 0</span>
+<span>R$ 100+</span>
+</div>
+</div>
+<!-- Distance -->
+<div>
+<h3 class="font-label-bold text-on-surface mb-4">Distância da Feira</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 rounded-full border border-outline-variant text-label-sm bg-white hover:border-primary transition-colors">Até 2km</button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-white text-label-sm font-bold">Até 5km</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant text-label-sm bg-white hover:border-primary transition-colors">Até 10km</button>
+</div>
+</div>
+<!-- Quick Toggles -->
+<div class="pt-4 border-t border-outline-variant/30">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-label-bold text-on-surface">Apenas Orgânicos</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<section class="flex-grow">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group bg-white rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all overflow-hidden flex flex-col">
+<div class="relative aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3Z3346K6x6nEZ2VqtWNKpyc54SILZqygR4kMPiO4JpniMw2P9ONROaLp0HgyxnFpBnHwKp9K1Bn4Wa_Sotxjs_CNtPd7WdYVk9Y2Jzh17ekS1MXZlz-erJf1tGz5NdzQP4DBwkkAHwHtu5u5OTYU0rR8P-QZe0wBKkhoweuUeci-bxQJgmkagVYttUkrh39e0bkzGrVqVS8uyI2PLg4uRjHv-s19e6TJU5BLu7gx5G_OLQYuTe0JCYWZkw6eW1Gswnqlmtz6wZE"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Orgânico</span>
+</div>
+<button class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-primary hover:bg-white transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-lg text-on-surface group-hover:text-primary transition-colors line-clamp-1">Morango Silvestre Premium</h4>
+<span class="text-primary font-black text-lg">R$ 18,90</span>
+</div>
+<p class="text-label-sm text-zinc-500 mb-4">unidade / bandeja 250g</p>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-6 h-6 rounded-full bg-zinc-200 overflow-hidden border border-white">
+<img alt="" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY649QnQ2gp7dRElpEj576PEPgc_vCKo4DSVhnooqmr5Uhtet6mCA6cvAqFHnxu3_oBHoxWQZ7xIXi4vm-ud1DlIIG9TnDymmUOEFJUZ4pijboMWf9_jCxszf_N34czOR_tMmfqUYDPsi1_Ss8qlxWoOutZWjxug60rfvEcpLRgYBw4N1UgCbkcB7rx9hJY9hNADtr-PYhLYSCmd0mXAmeMyjjAn75ZWvO3PXjaC39UjonhcIHnTsqhPvfpVvRKuSxLqUtPfHqioM"/>
+</div>
+<span class="text-label-sm font-medium text-on-surface-variant">Barraca da Dona Maria</span>
+</div>
+<button class="w-full mt-auto py-3 bg-primary text-white font-label-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_2px_0_#388E3C] active:shadow-none active:translate-y-[2px] transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_basket">shopping_basket</span>
+                                Adicionar ao Carrinho
+                            </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all overflow-hidden flex flex-col">
+<div class="relative aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbeGbLH202D-DEtBihv2g4b3P3HzDf44Ywlhkc4Od27r2eJ1C4JpBLw5jRexk65QkzUYQzFQCUwpvM48M2tiYMA_fjvnEuaJKcJqa1v6L7tPbULLSXWzOfgxNYRVCmpUfpdfw7PBoIfsQsduvr-4KPfFDrTGaEIlDLIufEjhOBZA8rwP6F4IOrpvh5hZE1S4YzXWnLVAkMe9i8cK4Z2Er9-SR0MuL7bZAZ837CJpOJDmsjdyGk8DLXYfqRMyACkyVBntBQy1Mn0lo"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="px-3 py-1 bg-on-secondary-fixed-variant text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Feirante Local</span>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-lg text-on-surface group-hover:text-primary transition-colors line-clamp-1">Mix de Folhas Verdes</h4>
+<span class="text-primary font-black text-lg">R$ 8,50</span>
+</div>
+<p class="text-label-sm text-zinc-500 mb-4">preço por kg</p>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-6 h-6 rounded-full bg-zinc-200 overflow-hidden border border-white">
+<img alt="" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYPLoc4tHdmmlvfDGYErN4sqFsc9p-hagtD_v58llUXXHTvyIKkW_D_fPjpzTHJdzFTbe6MVoTk2P0EXEwy9U19KnDLN-v8f6VqYbOUoXOfeCIkO9D8GXUXjdANryuwmGdZmD7zwdvLZIpfJeYvmcFQaqJy6cbacXWQEXj_6RxwNgB5BuGK4LqRP_uEq0JtOWyGQohGM-GXoLKG79rjmxZbVsVTSpGOnRaEZmUqmaKb3M8DMCLiuoga7UK60ov1rqRT2L566ssWpE"/>
+</div>
+<span class="text-label-sm font-medium text-on-surface-variant">Horta do Seu Jorge</span>
+</div>
+<button class="w-full mt-auto py-3 bg-primary text-white font-label-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_2px_0_#388E3C] active:shadow-none active:translate-y-[2px] transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_basket">shopping_basket</span>
+                                Adicionar ao Carrinho
+                            </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all overflow-hidden flex flex-col">
+<div class="relative aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ZZUw-qtBY79IFPkOCYiLPw-PGX0SzH-Q7rfN-CGeMGHLcLBEHRJLQjcSdwq8bEWzcs6fVjVrtEW9m8xyBX7n7EhvaTHhVHpFBcYd2a-N8p3h3LGxUfDsaznZWmSCJioU9dehcRexPZa1kIRMPZdFWoqzUz45abQ88wi1Ad77AzS3NHU9CsGoTRYNDkMvKKtOkArTBxXrTXd2551keL_dHQHbbAZl2tT8UdaALl5Qp6w3-hBbOvTHg1wX_b1dKANQ6OytqarXEDU"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase tracking-wider">Promoção na Feira</span>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-lg text-on-surface group-hover:text-primary transition-colors line-clamp-1">Limão Siciliano Orgânico</h4>
+<div class="flex flex-col items-end">
+<span class="text-primary font-black text-lg">R$ 12,90</span>
+<span class="text-[10px] text-error line-through">R$ 15,90</span>
+</div>
+</div>
+<p class="text-label-sm text-zinc-500 mb-4">preço por kg</p>
+<div class="flex items-center gap-2 mb-6">
+<div class="w-6 h-6 rounded-full bg-zinc-200 overflow-hidden border border-white">
+<img alt="" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAqRmd0mvdelPKp0v-hMapvG6-QDvYwa8c5Qnpm6pl2Bg61dKndMjwnSWRZ8U0sVytdhwraalwH8wj7IEorewtNE7oaNmKGkrEcisp921bxNkpeEIf2sNcNrYi-O7a6hMPgn8v2y45QLnFiyWRRbkypWLiUQ1KRKZbqB4EYO2rVMzftxIEkNJgnxtiZKDq2Q0b170il66bYWvzSnMc78eKVgi7RIgqMIRgJYL8oYMbLQAPerhYnDGPYJbuxqhnL3eziZY_LEhAM9Q"/>
+</div>
+<span class="text-label-sm font-medium text-on-surface-variant">Barraca da Dona Maria</span>
+</div>
+<button class="w-full mt-auto py-3 bg-primary text-white font-label-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_2px_0_#388E3C] active:shadow-none active:translate-y-[2px] transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_basket">shopping_basket</span>
+                                Adicionar ao Carrinho
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.04)] z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-4 py-1 group transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-green-50 dark:bg-green-950/30 rounded-xl px-4 py-1 group transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined active-tab" data-icon="search">search</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider mt-1">Buscar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-4 py-1 group transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider mt-1">Feiras</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-4 py-1 group transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider mt-1">Carrinho</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-4 py-1 group transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

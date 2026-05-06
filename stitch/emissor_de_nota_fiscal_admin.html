@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emissor NFe - Painel Administrativo Master</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-background": "#1b1c19",
+                        "inverse-surface": "#30312e",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#5a1c00",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-container-high": "#e9e8e3",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "tertiary-container": "#e41f25",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493c",
+                        "primary-container": "#30852f",
+                        "on-secondary-fixed": "#370e00",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#126e19",
+                        "background": "#faf9f4",
+                        "surface-dim": "#dbdad5",
+                        "on-tertiary-fixed": "#410002",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "primary-fixed-dim": "#83db79",
+                        "outline-variant": "#bfcab9",
+                        "secondary-fixed-dim": "#ffb599",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "primary": "#0e6b17",
+                        "secondary": "#a63b00",
+                        "surface-container-highest": "#e3e3de",
+                        "primary-fixed": "#9ef892",
+                        "outline": "#707a6b",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "secondary-container": "#fc6c29",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "tertiary": "#bb0014",
+                        "on-primary-fixed": "#002202",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-desktop": "80px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-40 border-b bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-green-700 dark:text-green-400">Painel Administrativo Master</span>
+<div class="hidden md:flex bg-surface-container px-4 py-2 rounded-full items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64" placeholder="Buscar pedidos ou notas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined text-zinc-500" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined text-zinc-500" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Avatar do Administrador" class="w-full h-full object-cover" data-alt="professional corporate headshot of a smiling administrator in a brightly lit office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVu-1-IvkyJs8blNdX-WPvmYrycgrwQc6hmQVHefxl0-URlvwHZxhs310PH3FmmHXafx6bZvbspD3TwkLVyw0k-wHoIZ7x_ACoH3dA0A7y4YzBHEow9IKPIY27dZ35q8z_oHe1s0nEphUgXMRvt2KbpFUF4g0cbSvIAUfvXt3UvLw4fIJ6vbOvryDJkHNCcT-RJyUzJZNEPimF6AhvX0-a4l5cCkdF2fLShY81AhKQPfqDHTgiLY_svyuau7zW8enCrfVsprYDptM"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 flex flex-col pt-20 pb-6 w-64 transition-all duration-200 ease-in-out">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-green-700">Administração</h2>
+<p class="text-xs text-zinc-500">Gestão Centralizada</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-sm font-semibold">Notas Fiscais</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="text-sm font-medium">Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-sm font-medium">Gestão de Perfis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="px-3 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-secondary-container text-white rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all font-bold">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Novo Relatório
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 mt-4 text-zinc-600 dark:text-zinc-400 hover:bg-error-container/10 hover:text-error rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-background">Emissor de Notas Fiscais</h1>
+<p class="font-body-md text-body-md text-outline">Gerencie o faturamento e a emissão de documentos eletrônicos (NFe) dos pedidos.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline rounded-lg font-label-sm text-label-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filtros Avançados
+                    </button>
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg font-label-sm text-label-sm hover:brightness-110 shadow-sm transition-all">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+                        Emitir Pendentes
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+</span>
+<span class="text-xs font-bold text-primary px-2 py-1 bg-primary-fixed/20 rounded-full">Pendente</span>
+</div>
+<p class="text-sm text-outline mb-1">Aguardando Emissão</p>
+<h3 class="text-2xl font-bold">14 Pedidos</h3>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-green-50 rounded-lg text-green-700">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</span>
+<span class="text-xs font-bold text-green-700 px-2 py-1 bg-green-100 rounded-full">Sucesso</span>
+</div>
+<p class="text-sm text-outline mb-1">Emitidas Hoje</p>
+<h3 class="text-2xl font-bold">42 Notas</h3>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-error-container rounded-lg text-error">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+</span>
+<span class="text-xs font-bold text-error px-2 py-1 bg-error-container/20 rounded-full">Erro</span>
+</div>
+<p class="text-sm text-outline mb-1">Falha na Sefaz</p>
+<h3 class="text-2xl font-bold">03 Ocorrências</h3>
+</div>
+</div>
+<!-- Orders Table Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-zinc-50 border-b border-outline-variant">
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline">PEDIDO</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline">FEIRANTE / PRODUTOR</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline">DATA FAT.</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline">STATUS NFE</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline">DOCUMENTOS</th>
+<th class="px-6 py-4 font-label-sm text-label-sm text-outline text-right">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Success -->
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4">
+<span class="font-bold text-on-background">#88421</span>
+<p class="text-xs text-outline">R$ 342,90</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed text-xs font-bold">SM</div>
+<div>
+<p class="text-sm font-semibold">Sítio das Morangas</p>
+<p class="text-xs text-outline">CNPJ: 12.345.../0001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">12 Out, 09:45</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-green-50 text-green-700">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Emitida
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-1.5 bg-surface-container rounded-md text-outline hover:text-primary transition-colors flex items-center gap-1 text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> XML
+                                        </button>
+<button class="p-1.5 bg-surface-container rounded-md text-outline hover:text-primary transition-colors flex items-center gap-1 text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-[16px]" data-icon="picture_as_pdf">picture_as_pdf</span> DANFE
+                                        </button>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-on-background">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Pending -->
+<tr class="hover:bg-zinc-50/50 transition-colors bg-amber-50/10">
+<td class="px-6 py-4">
+<span class="font-bold text-on-background">#88422</span>
+<p class="text-xs text-outline">R$ 1.204,00</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">HM</div>
+<div>
+<p class="text-sm font-semibold">Horta do Marcão</p>
+<p class="text-xs text-outline">CNPJ: 98.765.../0001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">12 Out, 10:12</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                                        Pendente
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-1.5 bg-surface-container/50 rounded-md text-outline/40 cursor-not-allowed flex items-center gap-1 text-[10px] font-bold uppercase" disabled="">
+<span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> XML
+                                        </button>
+<button class="p-1.5 bg-surface-container/50 rounded-md text-outline/40 cursor-not-allowed flex items-center gap-1 text-[10px] font-bold uppercase" disabled="">
+<span class="material-symbols-outlined text-[16px]" data-icon="picture_as_pdf">picture_as_pdf</span> DANFE
+                                        </button>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-white rounded-md font-label-sm text-label-sm hover:brightness-110 shadow-sm transition-all">
+                                        Emitir NFe
+                                    </button>
+</td>
+</tr>
+<!-- Row 3: Error -->
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4">
+<span class="font-bold text-on-background">#88418</span>
+<p class="text-xs text-outline">R$ 89,50</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-zinc-200 flex items-center justify-center text-zinc-500 text-xs font-bold">AF</div>
+<div>
+<p class="text-sm font-semibold">Agro Familiar LTDA</p>
+<p class="text-xs text-outline">CNPJ: 55.444.../0001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">11 Out, 17:30</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-error-container text-error">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                                        Erro Sefaz
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] text-error font-medium italic">Instabilidade na SEFAZ/SP</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+<button class="p-2 text-outline hover:text-on-background">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Success -->
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4">
+<span class="font-bold text-on-background">#88415</span>
+<p class="text-xs text-outline">R$ 512,20</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center text-white text-xs font-bold">OR</div>
+<div>
+<p class="text-sm font-semibold">Orgânicos Reais</p>
+<p class="text-xs text-outline">CNPJ: 22.333.../0001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">11 Out, 15:20</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-green-50 text-green-700">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Emitida
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-1.5 bg-surface-container rounded-md text-outline hover:text-primary transition-colors flex items-center gap-1 text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> XML
+                                        </button>
+<button class="p-1.5 bg-surface-container rounded-md text-outline hover:text-primary transition-colors flex items-center gap-1 text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-[16px]" data-icon="picture_as_pdf">picture_as_pdf</span> DANFE
+                                        </button>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-on-background">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-zinc-50">
+<p class="text-xs font-medium text-outline">Mostrando 4 de 56 resultados</p>
+<div class="flex gap-2">
+<button class="p-2 rounded border border-outline-variant hover:bg-white transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-white text-xs font-bold flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-white text-xs font-bold flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-white text-xs font-bold flex items-center justify-center transition-colors">3</button>
+<button class="p-2 rounded border border-outline-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Help / Banner -->
+<div class="mt-10 p-6 bg-gradient-to-r from-secondary to-tertiary-container rounded-2xl text-white flex flex-col md:flex-row items-center gap-6 overflow-hidden relative">
+<div class="relative z-10">
+<h4 class="font-title-lg text-title-lg mb-2">Configure sua Certificação Digital</h4>
+<p class="text-white/80 font-body-md text-body-md max-w-xl">
+                        Mantenha seu certificado A1 atualizado para evitar interrupções no faturamento. 
+                        O seu certificado atual expira em <strong>15 dias</strong>.
+                    </p>
+<button class="mt-4 px-6 py-2 bg-white text-secondary font-bold rounded-lg hover:bg-surface-container transition-all">
+                        Atualizar Certificado
+                    </button>
+</div>
+<div class="hidden md:block absolute -right-10 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[180px]" data-icon="verified_user">verified_user</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="h-14 w-14 bg-secondary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-[32px]" data-icon="support_agent">support_agent</span>
+<span class="absolute right-full mr-4 px-3 py-1 bg-on-background text-white text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Ajuda Fiscal</span>
+</button>
+</div>
+</body></html>

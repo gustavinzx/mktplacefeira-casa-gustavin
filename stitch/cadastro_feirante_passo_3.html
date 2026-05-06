@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#f8fff0",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#bfcab9",
+                    "primary-fixed": "#9ef892",
+                    "on-surface-variant": "#40493c",
+                    "surface-tint": "#126e19",
+                    "surface-container-highest": "#e3e3de",
+                    "inverse-primary": "#83db79",
+                    "surface-bright": "#faf9f4",
+                    "on-secondary": "#ffffff",
+                    "background": "#faf9f4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "outline": "#707a6b",
+                    "on-secondary-container": "#5a1c00",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-tertiary-fixed": "#410002",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-surface": "#1b1c19",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-container-high": "#e9e8e3",
+                    "secondary-fixed": "#ffdbce",
+                    "tertiary": "#bb0014",
+                    "surface-dim": "#dbdad5",
+                    "on-primary-fixed": "#002202",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container": "#efeee9",
+                    "primary": "#0e6b17",
+                    "secondary-container": "#fc6c29",
+                    "error-container": "#ffdad6",
+                    "surface": "#faf9f4",
+                    "primary-fixed-dim": "#83db79",
+                    "primary-container": "#30852f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e3e3de",
+                    "tertiary-container": "#e41f25",
+                    "secondary-fixed-dim": "#ffb599",
+                    "secondary": "#a63b00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-background": "#1b1c19",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "margin-desktop": "80px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active {
+            background-color: #0e6b17;
+            color: white;
+        }
+        .step-completed {
+            background-color: #30852f;
+            color: white;
+        }
+        .step-inactive {
+            background-color: #efeee9;
+            color: #707a6b;
+        }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md">
+<!-- Top Navigation Anchor -->
+<header class="bg-white dark:bg-zinc-950 shadow-sm shadow-emerald-900/5 docked full-width top-0 border-b border-zinc-100 dark:border-zinc-800 z-40 sticky">
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-xl font-extrabold text-emerald-700 dark:text-emerald-500 tracking-tight font-['Plus_Jakarta_Sans']">Feira.casa</h1>
+</div>
+<button class="active:scale-95 transition-transform text-zinc-500 dark:text-zinc-400">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-md">
+<!-- Stepper Component -->
+<div class="flex items-center justify-center gap-sm mb-lg">
+<div class="flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center step-completed">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Perfil</span>
+</div>
+<div class="h-[2px] w-12 bg-primary-container"></div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center step-completed">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Produtos</span>
+</div>
+<div class="h-[2px] w-12 bg-primary-container"></div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-10 h-10 rounded-full flex items-center justify-center step-active border-2 border-primary-container">
+<span class="font-label-sm text-label-sm">3</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Feiras</span>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Selecione as feiras que você participa</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Isso ajuda os clientes locais a encontrarem sua banca nas datas certas.</p>
+</div>
+<!-- Search and Action Bar -->
+<div class="flex flex-col md:flex-row gap-gutter mb-md items-center">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Buscar feira por nome ou bairro..." type="text"/>
+</div>
+<button class="w-full md:w-auto flex items-center justify-center gap-xs px-md py-3 bg-white border-2 border-primary text-primary font-bold rounded-xl active:scale-95 transition-all hover:bg-primary-container hover:text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="add_location">add_location</span>
+                Adicionar Feira
+            </button>
+</div>
+<!-- Bento Grid Feiras -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+<!-- Card 1 (Selected) -->
+<div class="group relative bg-white border-2 border-primary rounded-xl p-md shadow-sm hover:shadow-md transition-all cursor-pointer ring-4 ring-primary-container/20">
+<div class="absolute top-4 right-4 text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-start gap-gutter">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up of colorful fresh fruits and vegetables in rustic wooden crates at an outdoor market" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkfCxBLtIW36WFDZ2dVSxX-Fd02-octbS4XYTKEAh12b1n44nLda8ZSpyr5xLCSxLFVlT4lYI_tiLJpn8bUnD1hvSWsZ8ZIBhZDDlk3xSQGHcE02qhMh46muHITFJ2qL4Y1KC0lzEPOMOUe_Mr1f-CT59YCBWjCWIKGiYtEDk-G-vnKX6ItKFFFbgCPhLHhkxgay-owvIiADPOfdQjyNlMjqEs9vKtJ-Q-mkFPRZAK7x-VihZqDFaIVFg38NRLRLEUr6ehPm_1Dzg"/>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Feira da Glória</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Glória, Rio de Janeiro
+                        </p>
+<div class="mt-sm inline-flex items-center gap-1 px-3 py-1 bg-secondary-fixed text-on-secondary-container rounded-full text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span> Domingo
+                        </div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:border-primary-container transition-all cursor-pointer">
+<div class="flex items-start gap-gutter">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="vibrant street market scene with fresh produce stall and shoppers in the background with warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6VLv1bHB4CbW7SFg885wQ_c_f3k01Bd6Yyl95sigNsuU7sYjS33IeUB2Q0vYdtmw6UgiZ7w9x9SzTNH9-rKX-ScerdivWrssd9UbvyTED2eNrbgMrrWSybruDTHyLATa5kOMRh8J1vRA8isjknbBHay0pbSZg6-4YMvAeQ9NCPXN8j-keO1WM2TgjPzmTZB5Mx9ppvfUHP-EUTJ29ymmwW0OLD52SddSCSlYXyY9-zTF7gz1Xb0pekeXodMiGGWgQ0bM0l2myTmo"/>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Feira da Praça XV</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Centro, Rio de Janeiro
+                        </p>
+<div class="mt-sm inline-flex items-center gap-1 px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span> Sábado
+                        </div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:border-primary-container transition-all cursor-pointer">
+<div class="flex items-start gap-gutter">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up shot of organic green vegetables and tomatoes neatly arranged at a farmer market stall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEq8Hpoccl50kMU_LgDaRJdd6jTU7-W-D9QvWLAHMgQ9p0Ni2vRLo4KGwIv8zWBEpiuWgdH0GQ-K9yvpE6vCMB8Pk5psBLufYwHIfbJIx8PfhC-mJlwTuzBDdLdwFMrzE7Ip958eFrEzL6fmfiUVXmKdMBgbql_AqSoZ4wl1vqFY-bvW5ahD_IWINk3mJcLoJQCGx8MXdYYBpOdyfVqaKFme2vWeKcQXQEpfY9YCQVbwqTceUM1jyN50yeS0fZ8PjoF9Ux6ZEUbMM"/>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Circuito Carioca Orgânico</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Botafogo, Rio de Janeiro
+                        </p>
+<div class="mt-sm inline-flex items-center gap-1 px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span> Terça-feira
+                        </div>
+</div>
+</div>
+</div>
+<!-- Card 4 (Selected) -->
+<div class="group relative bg-white border-2 border-primary rounded-xl p-md shadow-sm hover:shadow-md transition-all cursor-pointer ring-4 ring-primary-container/20">
+<div class="absolute top-4 right-4 text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-start gap-gutter">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="overhead view of a traditional street fair with yellow and blue canopies and rows of fresh fruits" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwzDejMwRfKUfqdMfBW_tTaZSRl1rEjxjqfaMyFjFBC5i1aMKPq2qv2XCPaxQjLmR8iwZJm4jLwPk08Bz66UezyXkAw-5Ob0CxPTr4ZUyEha3WyV0tbmPCdrIQ-l351nAQY8PNR2t-ttqH3mit7Pnv49ETWBW-FwvXkf1usPTT670UXHnND1_EdlJcC-_WFhTgD2vvz0bpmJf5vaSR41bMHjECubsSsTiuINGM270_hAxgkuJ7LOpAX-MMu50AjUXjgrOZYzTD8Cw"/>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Feira da Tijuca</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Praça Saens Peña, Tijuca
+                        </p>
+<div class="mt-sm inline-flex items-center gap-1 px-3 py-1 bg-secondary-fixed text-on-secondary-container rounded-full text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span> Sexta-feira
+                        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-xl flex flex-col items-center gap-sm">
+<button class="w-full md:w-80 bg-primary text-on-primary font-bold py-4 rounded-xl shadow-lg hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2">
+                Finalizar Cadastro
+                <span class="material-symbols-outlined" data-icon="done_all">done_all</span>
+</button>
+<button class="text-outline hover:text-primary font-semibold transition-colors">
+                Voltar para etapa anterior
+            </button>
+</div>
+</main>
+<!-- Modal Mockup (Hidden by default, shown for visual reference of the task) -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-gutter hidden">
+<div class="bg-white w-full max-w-lg rounded-2xl shadow-xl overflow-hidden">
+<div class="p-md border-b border-surface-container flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg">Sugerir Nova Feira</h3>
+<button class="material-symbols-outlined text-outline" data-icon="close">close</button>
+</div>
+<div class="p-md space-y-sm">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Nome da Feira</label>
+<input class="w-full p-3 rounded-lg border border-outline-variant outline-none focus:border-primary" type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Bairro</label>
+<input class="w-full p-3 rounded-lg border border-outline-variant outline-none focus:border-primary" type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Dia da Semana</label>
+<select class="w-full p-3 rounded-lg border border-outline-variant outline-none focus:border-primary bg-white">
+<option>Domingo</option>
+<option>Segunda</option>
+<option>Terça</option>
+<option>Quarta</option>
+<option>Quinta</option>
+<option>Sexta</option>
+<option>Sábado</option>
+</select>
+</div>
+</div>
+<div class="p-md bg-surface-container-low flex justify-end gap-sm">
+<button class="px-md py-2 font-bold text-outline">Cancelar</button>
+<button class="px-md py-2 bg-primary text-on-primary rounded-lg font-bold">Enviar Sugestão</button>
+</div>
+</div>
+</div>
+<!-- Spacer for Bottom Navigation -->
+<div class="h-24"></div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 h-20 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-[0_-4px_12px_rgba(0,0,0,0.03)] border-t border-zinc-100 dark:border-zinc-800 rounded-t-[24px]">
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 hover:text-emerald-600 active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-2xl px-5 py-1.5 active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Minha Banca</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 hover:text-emerald-600 active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Pedidos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 hover:text-emerald-600 active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Perfil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,218 @@
+.page {
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border-radius: 32px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.1);
+}
+
+.sidePanel {
+  width: 35%;
+  position: relative;
+  background: linear-gradient(135deg, #fc6c29 0%, #ba1a1a 100%);
+}
+
+.sidePanel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+.sideOverlay {
+  position: absolute;
+  inset: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.sideContent h2 {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.sideContent p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.formContent {
+  flex: 1;
+  padding: 48px;
+  background: #fafafa;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--on-surface);
+}
+
+.subtitle {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--on-surface-variant);
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+}
+
+.btnClose {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-container);
+  color: var(--on-surface-variant);
+  transition: all 0.2s;
+}
+
+.btnClose:hover {
+  background: var(--error);
+  color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroup label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  padding-left: 4px;
+}
+
+.inputWrapper {
+  height: 48px;
+  background: white;
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  transition: all 0.2s;
+}
+
+.inputWrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 107, 23, 0.1);
+}
+
+.inputWrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.checkboxGroup {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.checkboxGroup input {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--outline-variant);
+}
+
+.checkboxGroup label {
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  line-height: 1.4;
+}
+
+.checkboxGroup label strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.btnSubmit {
+  height: 56px;
+  background: var(--primary);
+  color: white;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 16px rgba(14, 107, 23, 0.2);
+  transition: all 0.2s;
+  margin-top: 12px;
+}
+
+.btnSubmit:hover {
+  background: #0b5a13;
+  transform: translateY(-2px);
+}
+
+.loginLink {
+  text-align: center;
+  font-size: 14px;
+  color: var(--outline);
+  margin-top: 8px;
+}
+
+.loginLink a {
+  color: var(--secondary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .sidePanel { display: none; }
+  .modal { max-width: 500px; }
+  .row { grid-template-columns: 1fr; }
+}

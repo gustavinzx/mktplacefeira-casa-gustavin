@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdad6",
+                      "secondary-container": "#fc6c29",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#30852f",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#efeee9",
+                      "on-surface-variant": "#40493c",
+                      "on-surface": "#1b1c19",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#ffdbce",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "primary": "#0e6b17",
+                      "primary-fixed-dim": "#83db79",
+                      "on-tertiary-fixed": "#410002",
+                      "inverse-surface": "#30312e",
+                      "on-primary-container": "#f8fff0",
+                      "inverse-on-surface": "#f2f1ec",
+                      "outline": "#707a6b",
+                      "on-secondary-fixed": "#370e00",
+                      "on-secondary-container": "#5a1c00",
+                      "on-primary": "#ffffff",
+                      "background": "#faf9f4",
+                      "on-primary-fixed": "#002202",
+                      "primary-fixed": "#9ef892",
+                      "on-tertiary-container": "#fffbff",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#bb0014",
+                      "surface": "#faf9f4",
+                      "on-secondary-fixed-variant": "#7f2b00",
+                      "on-primary-fixed-variant": "#00530b",
+                      "surface-variant": "#e3e3de",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "surface-tint": "#126e19",
+                      "secondary": "#a63b00",
+                      "secondary-fixed-dim": "#ffb599",
+                      "surface-container-highest": "#e3e3de",
+                      "surface-container-high": "#e9e8e3",
+                      "on-tertiary-fixed-variant": "#93000d",
+                      "on-background": "#1b1c19",
+                      "surface-dim": "#dbdad5",
+                      "inverse-primary": "#83db79",
+                      "surface-bright": "#faf9f4",
+                      "tertiary-container": "#e41f25",
+                      "surface-container-low": "#f5f4ef",
+                      "outline-variant": "#bfcab9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "xl": "64px",
+                      "xs": "4px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "md": "24px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "80px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "title-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black tracking-tight text-primary font-display-lg">feira.casa Chef</span>
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Search your recipes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-500">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-500">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Chef Gourmet Profile Avatar" class="w-full h-full object-cover" data-alt="professional portrait of a smiling gourmet chef in a white uniform against a blurred kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu_nZ_t7xExsCXnhPazUiSPGD-Q397T1UmoV93vSapXZp5BigxntrQJ4A388dYKgH8BT49Z5pg_SgoBMLURNdJ1rp5mKWNwlSN2zinBlZnPiYBrHrF4uBCDTsAldONsiMw2jebFQeUg4LIzEA1L-UzyixaMs9XGCQf935WgaWefA-3LFWpt9pap4SLUH6-nafHxnedjiVYtaP6IoR5u7FQydU0rXLiYVEO2sHvkZOiNr3lZC9lIqj2xSv4Gt8Z3Xk8OBKH6yGLECs"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-16">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-stone-50 border-r border-stone-200 shadow-inner pt-20 pb-6 flex flex-col hidden md:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-primary font-title-lg">Chef Gourmet</h2>
+<p class="text-xs text-stone-500">Gourmet Services</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="text-stone-600 hover:text-primary px-4 py-3 flex items-center gap-3 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm">Dashboard</span>
+</a>
+<a class="text-stone-600 hover:text-primary px-4 py-3 flex items-center gap-3 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-sm">My Store</span>
+</a>
+<a class="bg-primary-container text-on-primary-container font-semibold px-4 py-3 flex items-center gap-3 border-r-4 border-primary rounded-l-none" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm">My Recipes</span>
+</a>
+<a class="text-stone-600 hover:text-primary px-4 py-3 flex items-center gap-3 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm">Settings</span>
+</a>
+</nav>
+<div class="px-6 mb-6">
+<button class="w-full bg-secondary-container text-white py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-secondary-container/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    Add New Dish
+                </button>
+</div>
+<div class="px-3 border-t border-stone-200 pt-4 space-y-1">
+<a class="text-stone-600 hover:text-primary px-4 py-3 flex items-center gap-3 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-label-sm">Support</span>
+</a>
+<a class="text-stone-600 hover:text-primary px-4 py-3 flex items-center gap-3 hover:bg-stone-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-6 md:p-10 bg-background">
+<div class="max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<h1 class="text-display-lg font-display-lg text-on-surface mb-2">My Recipes</h1>
+<p class="text-on-surface-variant max-w-lg">Curate and manage your signature dishes. Connect with fresh ingredients directly from our local vendors.</p>
+</div>
+<button class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-primary/90 transition-all shadow-md">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Add New Recipe
+                    </button>
+</div>
+<!-- Recipe Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Recipe Card 1 -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-2/5 relative h-48 md:h-auto overflow-hidden">
+<img alt="Fresh Garden Salad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="a vibrant green salad with cherry tomatoes, cucumbers, and avocado in a ceramic bowl with bright natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPxIocq1xJ2oYvsk890MfNsvA-FxVnpgZfXWC9z6EoAFRQJLlfZo72z8pLEIv55oL3kiFRU6AbKiCkQ1ncv5byZv4MYu9njqsunmRpQaFoIsgCOhzFNWlTmuLY2zY-FCSChUGHdmtVBBpxJc6P2JWuvDsDYaHJ1crIMvWSpOBd2S5b9Ef0xR-TsRxSmEosYSGzYBkLpYMS_o6WFmYfZCN_QrLKRzc6PKsKawJvs7o2HC2d6YHlKpBI0pP_Ui6xggvs9uZODC46p4k"/>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold px-2 py-1 rounded shadow-sm">Vegan</span>
+<span class="bg-white/90 backdrop-blur text-secondary font-bold text-[10px] uppercase px-2 py-1 rounded shadow-sm border border-secondary/20">Easy</span>
+</div>
+</div>
+<div class="md:w-3/5 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-title-lg font-title-lg text-on-surface">Summer Garden Bounty Bowl</h3>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-extrabold px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                            SPONSORED
+                                        </span>
+</div>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-4">A refreshing mix of seasonal vegetables sourced directly from 'Horta do Zé' featuring our secret herb dressing.</p>
+<div class="flex items-center gap-4 text-xs text-outline mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 15 min
+                                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="group">group</span> 2 servings
+                                        </div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-stone-100">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-stone-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-stone-600">JZ</div>
+<div class="w-8 h-8 rounded-full bg-stone-300 border-2 border-white flex items-center justify-center text-[10px] font-bold text-stone-700">FL</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-stone-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-stone-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 (Vertical) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-shadow group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Roasted Root Veggies" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close up of roasted root vegetables with rosemary and garlic on a dark baking tray with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbBnxZjPTgYJB_YVW-rEKm-lTkZqp3GLQmlcu4J4cl0CfqLkhlSBm9SdMN9r2l4Ih_JXkj4sOYyWe3pYwLDzIjA77qub4aTSEg8EfVoF81ODKQ1ovYF8GACycQf903hoO2Gr1Cp9dUgNnrvpwqt3Xk2tAXqeXoawggxMkPetubqMAfQc1SrIPSUTmaN3zLftJ0VNw0z84mjJygSN5VZ8XSCnb91qa6mzQNHV1kcZ7BH8V1CgCdIDg7CrAa-MDxnN-8RR03TFOV3Og"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-bold px-2 py-1 rounded shadow-sm">Gluten-Free</span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-2">Winter Harvest Roast</h3>
+<p class="text-on-surface-variant text-sm mb-4">Hearty roasted tubers with local honey and organic thyme.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-stone-100">
+<span class="text-xs font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="eco">eco</span> Organic
+                                </span>
+<div class="flex gap-1">
+<button class="p-2 text-stone-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-stone-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 (Vertical) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-shadow group flex flex-col">
+<div class="relative h-48 overflow-hidden">
+<img alt="Pasta al Pesto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="a plate of pasta al pesto with pine nuts and parmesan cheese in a rustic setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNUa_ggBuifCWAsNubjLWLPatuwSZTmv6CXFRRLgVvdjwSq_-iABzEfUyP-_3Qr3lOwZotXzoIYgPDW23KY-2CPjkszmZVz445xe3XvyynHgQU5n1UQK_mAx_rC6a9iXNziZ_S2GZR01z1Kj7h1VvMnA7W6-UqS0r51GCcOYQ6uqHv9wfrsE71JiZlwRDCXRFrMse9ljqbPOzYFqti039q8xs2DBlnZptCW225R9NXT1EsXrGFvsQ7poX4Y7VZncPRQv_Ovak8irs"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container text-white text-[10px] uppercase font-bold px-2 py-1 rounded shadow-sm">Chef's Choice</span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-2">Artisan Basil Pesto Pasta</h3>
+<p class="text-on-surface-variant text-sm mb-4">Handmade linguine with basil picked this morning.</p>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-extrabold px-2 py-1 rounded-full inline-flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    SPONSORED
+                                </span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-stone-100">
+<span class="text-xs font-bold text-stone-500">35 min Preparation</span>
+<div class="flex gap-1">
+<button class="p-2 text-stone-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-stone-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recipe Card 4 -->
+<div class="md:col-span-8 bg-white border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-stone-50 transition-colors cursor-pointer group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-outline group-hover:text-primary group-hover:bg-primary-fixed transition-colors mb-4">
+<span class="material-symbols-outlined text-4xl" data-icon="add_circle">add_circle</span>
+</div>
+<h4 class="text-title-lg font-title-lg text-on-surface mb-1">Create a new culinary masterpiece</h4>
+<p class="text-on-surface-variant max-w-xs mb-6">Start sharing your kitchen secrets with the feira.casa community.</p>
+<button class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary-container transition-colors">Get Started Now</button>
+</div>
+</div>
+<!-- Footer Summary (Optional UI pattern) -->
+<div class="mt-16 bg-surface-container rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-outline-variant">
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="text-display-lg font-display-lg text-primary">12</p>
+<p class="text-xs uppercase font-bold text-stone-500 tracking-widest">Active Recipes</p>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant"></div>
+<div class="text-center">
+<p class="text-display-lg font-display-lg text-secondary">05</p>
+<p class="text-xs uppercase font-bold text-stone-500 tracking-widest">Sponsored</p>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant"></div>
+<div class="text-center">
+<p class="text-display-lg font-display-lg text-on-surface">1.2k</p>
+<p class="text-xs uppercase font-bold text-stone-500 tracking-widest">Views</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-on-surface-variant text-sm mb-2 italic">"From farm to table, every recipe tells a story."</p>
+<div class="flex items-center justify-end gap-2 text-primary">
+<span class="text-xs font-bold">Chef Rating</span>
+<div class="flex">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star_half">star_half</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<footer class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50">
+<nav class="flex justify-around items-center h-16">
+<button class="flex flex-col items-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="text-[10px] font-bold">Store</span>
+</button>
+<button class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-[10px] font-bold">Recipes</span>
+</button>
+<button class="flex flex-col items-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+</nav>
+</footer>
+</body></html>

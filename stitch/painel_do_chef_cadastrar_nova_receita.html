@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#a63b00",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "surface-container-highest": "#e3e3de",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#002202",
+                    "inverse-on-surface": "#f2f1ec",
+                    "background": "#faf9f4",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface": "#faf9f4",
+                    "on-tertiary-fixed": "#410002",
+                    "tertiary": "#bb0014",
+                    "primary-fixed-dim": "#83db79",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-primary-container": "#f8fff0",
+                    "outline": "#707a6b",
+                    "secondary-fixed": "#ffdbce",
+                    "on-tertiary-container": "#fffbff",
+                    "primary-fixed": "#9ef892",
+                    "primary-container": "#30852f",
+                    "surface-container-low": "#f5f4ef",
+                    "outline-variant": "#bfcab9",
+                    "surface-tint": "#126e19",
+                    "surface-container-high": "#e9e8e3",
+                    "on-surface": "#1b1c19",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary": "#0e6b17",
+                    "surface-dim": "#dbdad5",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "inverse-primary": "#83db79",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#370e00",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-background": "#1b1c19",
+                    "tertiary-fixed": "#ffdad6",
+                    "inverse-surface": "#30312e",
+                    "secondary-container": "#fc6c29",
+                    "surface-bright": "#faf9f4",
+                    "on-surface-variant": "#40493c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#5a1c00",
+                    "surface-variant": "#e3e3de",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#e41f25"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "margin-desktop": "80px",
+                    "lg": "40px",
+                    "margin-mobile": "20px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f4;
+            color: #1b1c19;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #126e19;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md font-plus-jakarta-sans antialiased shadow-sm border-b border-stone-100 dark:border-slate-800 flex justify-between items-center w-full px-6 py-3 fixed top-0 z-50">
+<div class="text-2xl font-black tracking-tight text-green-700 dark:text-green-400">feira.casa</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Início</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Receitas</a>
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600" href="#">Painel Chef</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Cesta</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-green-600 dark:text-green-400 p-2 hover:bg-stone-50 rounded-full transition-colors">restaurant_menu</button>
+<button class="material-symbols-outlined text-green-600 dark:text-green-400 p-2 hover:bg-stone-50 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-green-600 dark:text-green-400 p-2 hover:bg-stone-50 rounded-full transition-colors">account_circle</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-gutter md:px-margin-desktop max-w-7xl mx-auto">
+<div class="flex flex-col gap-md">
+<header>
+<h1 class="font-display-lg text-display-lg text-on-surface">Cadastrar Nova Receita</h1>
+<p class="text-on-surface-variant max-w-2xl mt-base">Compartilhe seus segredos culinários com a comunidade e apoie os produtores locais vinculando ingredientes aos feirantes.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg mt-md">
+<!-- Main Form Column -->
+<div class="lg:col-span-8 space-y-md">
+<!-- General Info Card -->
+<section class="bg-white p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-highest">
+<h2 class="font-title-lg text-title-lg mb-md flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                            Informações Básicas
+                        </h2>
+<div class="grid grid-cols-1 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">TÍTULO DA RECEITA</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg p-sm transition-all placeholder:text-stone-400" placeholder="Ex: Moqueca de Banana da Terra Orgânica" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">DESCRIÇÃO BREVE</label>
+<textarea class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg p-sm transition-all placeholder:text-stone-400" placeholder="Conte um pouco sobre a história ou o sabor desta receita..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">TEMPO DE PREPARO</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg p-sm pl-10 transition-all" placeholder="45 min" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-[20px]">schedule</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">DIFICULDADE</label>
+<select class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg p-sm transition-all text-on-surface">
+<option>Fácil</option>
+<option>Média</option>
+<option>Avançada</option>
+<option>Profissional</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Ingredients Section -->
+<section class="bg-white p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-highest">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-title-lg text-title-lg flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">flatware</span>
+                                Ingredientes
+                            </h2>
+<button class="bg-primary-container text-on-primary-container px-sm py-xs rounded-lg font-label-sm flex items-center gap-xs active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                ADICIONAR
+                            </button>
+</div>
+<div class="space-y-sm">
+<!-- Ingredient Item 1 -->
+<div class="p-sm bg-surface-container-lowest rounded-xl border border-outline-variant/30 flex flex-col md:flex-row gap-sm items-start md:items-center">
+<div class="flex-1 grid grid-cols-3 gap-xs w-full md:w-auto">
+<input class="bg-surface-container border-none rounded-lg text-center font-bold text-primary" type="text" value="500g"/>
+<input class="col-span-2 bg-surface-container border-none rounded-lg" type="text" value="Banana da Terra"/>
+</div>
+<div class="w-full md:w-auto">
+<button class="w-full md:w-auto bg-secondary-fixed text-on-secondary-fixed-variant px-sm py-xs rounded-lg font-label-sm flex items-center justify-center gap-xs border border-secondary/20">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">verified</span>
+                                        VINCULAR FEIRANTE
+                                    </button>
+</div>
+<button class="text-error p-xs hover:bg-error-container rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Ingredient Item 2 (Linked State) -->
+<div class="p-sm bg-surface-container-lowest rounded-xl border border-primary/20 flex flex-col md:flex-row gap-sm items-start md:items-center">
+<div class="flex-1 grid grid-cols-3 gap-xs w-full md:w-auto">
+<input class="bg-surface-container border-none rounded-lg text-center font-bold text-primary" type="text" value="200ml"/>
+<input class="col-span-2 bg-surface-container border-none rounded-lg" type="text" value="Leite de Coco"/>
+</div>
+<div class="w-full md:w-auto flex items-center gap-xs bg-primary-container/10 px-sm py-xs rounded-lg border border-primary/20">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img alt="Feirante" class="w-full h-full object-cover" data-alt="Portrait of a friendly Brazilian artisan food producer with a warm smile and rustic clothing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNO7iNvVHkrNTZLanJrP257EWPFmMNcllCU813reI9qVkjO08qTj1547MwyV0tqNJlPhrsVe4nqh_hH5lq_SVwe2SDKD8xRJMYMk3VFGssuRhHV67kyUFITfK6a1TCx3i9DzyIzUpky5EJSWn3NZFiFBx3D7eo1CKYt3u3k3v_FGWeenuSBr5UwUSL-Bj4qSUikOkxwW_qBjThuj0v39e4nMtMPI4T_kWr8B910OBeGrKcoPUWaX4AuU66Gk8Gf7_UNL7Q0n41Fp8"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant leading-none">PATROCINADO POR</span>
+<span class="text-label-sm text-primary font-bold">Sítio Santo Antônio</span>
+</div>
+<button class="material-symbols-outlined text-[18px] text-on-surface-variant ml-xs">close</button>
+</div>
+<button class="text-error p-xs hover:bg-error-container rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Preparation Mode -->
+<section class="bg-white p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-highest">
+<h2 class="font-title-lg text-title-lg mb-md flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">blender</span>
+                            Modo de Preparo
+                        </h2>
+<!-- Pseudo Rich Text Editor -->
+<div class="border border-surface-container-highest rounded-xl overflow-hidden">
+<div class="bg-surface-container-low p-xs flex gap-xs border-b border-surface-container-highest">
+<button class="p-xs hover:bg-white rounded transition-colors material-symbols-outlined text-[20px]">format_bold</button>
+<button class="p-xs hover:bg-white rounded transition-colors material-symbols-outlined text-[20px]">format_italic</button>
+<button class="p-xs hover:bg-white rounded transition-colors material-symbols-outlined text-[20px]">format_list_bulleted</button>
+<button class="p-xs hover:bg-white rounded transition-colors material-symbols-outlined text-[20px]">format_list_numbered</button>
+<div class="w-px h-6 bg-surface-container-highest mx-xs"></div>
+<button class="p-xs hover:bg-white rounded transition-colors material-symbols-outlined text-[20px]">link</button>
+</div>
+<textarea class="w-full bg-white border-none focus:ring-0 p-md transition-all placeholder:text-stone-400 resize-none" placeholder="Passo 1: Comece picando as bananas..." rows="10"></textarea>
+</div>
+</section>
+</div>
+<!-- Sidebar Column -->
+<aside class="lg:col-span-4 space-y-md">
+<!-- Photo Upload Card -->
+<section class="bg-white p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-highest">
+<h2 class="font-label-sm text-label-sm text-on-surface-variant mb-sm uppercase tracking-wider">Foto de Capa</h2>
+<div class="relative group cursor-pointer border-2 border-dashed border-outline-variant hover:border-primary rounded-2xl aspect-[4/3] flex flex-col items-center justify-center gap-sm bg-surface-container-low overflow-hidden transition-all">
+<span class="material-symbols-outlined text-[48px] text-primary group-hover:scale-110 transition-transform">add_a_photo</span>
+<p class="text-label-sm text-on-surface-variant text-center px-lg">Arraste uma foto apetitosa ou clique para upload</p>
+<!-- Optional preview state background -->
+<div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-primary"></div>
+</div>
+<p class="text-[11px] text-stone-400 mt-sm text-center">Formatos sugeridos: JPG, PNG. Mínimo 1200x800px.</p>
+</section>
+<!-- Preview / Publish Card -->
+<section class="bg-primary p-md rounded-xl shadow-lg text-on-primary sticky top-24">
+<h3 class="font-title-lg text-title-lg mb-sm">Quase lá, Chef!</h3>
+<p class="text-sm opacity-90 mb-md">Sua receita será revisada pela nossa curadoria e publicada em até 24 horas.</p>
+<div class="space-y-sm">
+<button class="w-full bg-white text-primary font-bold py-sm rounded-lg flex items-center justify-center gap-sm active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">publish</span>
+                                PUBLICAR RECEITA
+                            </button>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-sm rounded-lg flex items-center justify-center gap-sm active:scale-95 transition-all border border-white/20">
+<span class="material-symbols-outlined">visibility</span>
+                                VISUALIZAR PRÉVIA
+                            </button>
+</div>
+<div class="mt-md pt-md border-t border-white/20 flex items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<span class="text-[12px] opacity-80">Ao publicar, você concorda com os Termos de Uso do Chef da feira.casa</span>
+</div>
+</section>
+</aside></div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-white dark:bg-slate-900 border-t border-stone-100 dark:border-slate-800 shadow-[0_-8px_30px_rgb(0,0,0,0.04)] z-50">
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Receitas</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-2xl px-5 py-2 active:scale-90 duration-150">
+<span class="material-symbols-outlined">outdoor_grill</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Painel Chef</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider">Cesta</span>
+</div>
+</nav>
+</body></html>

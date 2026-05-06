@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#30312e",
+                        "primary-fixed": "#9ef892",
+                        "inverse-primary": "#83db79",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "primary-fixed-dim": "#83db79",
+                        "outline-variant": "#bfcab9",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "tertiary": "#bb0014",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-tertiary-fixed": "#410002",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-background": "#1b1c19",
+                        "surface-container-high": "#e9e8e3",
+                        "secondary": "#a63b00",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-variant": "#e3e3de",
+                        "on-secondary-container": "#5a1c00",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-dim": "#dbdad5",
+                        "outline": "#707a6b",
+                        "secondary-container": "#fc6c29",
+                        "surface-tint": "#126e19",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface": "#faf9f4",
+                        "surface-container-low": "#f5f4ef",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "secondary-fixed-dim": "#ffb599",
+                        "primary": "#0e6b17",
+                        "surface-bright": "#faf9f4",
+                        "on-surface-variant": "#40493c",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#f8fff0",
+                        "on-primary-fixed": "#002202",
+                        "background": "#faf9f4",
+                        "surface-container": "#efeee9",
+                        "on-surface": "#1b1c19",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#e41f25",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#fffbff",
+                        "primary-container": "#30852f",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "md": "24px",
+                        "margin-desktop": "80px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Updated Standardized TopNavBar -->
+<header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md sticky top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between px-6 py-4 max-w-screen-2xl mx-auto w-full gap-8">
+<div class="flex items-center gap-8">
+<!-- Prominent Brand Logo -->
+<a class="flex items-center gap-2 group" href="#">
+<img alt="feira.casa logo" class="h-9 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZnoCvnI0y4xPgMYA7xds-SNggMdEzd3SoL8doKPxb6YE-A9E0a5f7brEhMQG_MHE6H8uD-65Am2M1GS6jNRAb06EBa5gddsdc97QfYtaeHLW4C6D2LDPz2QayPXt4loUA5RgLBJjvO3FY__UlSnUl_PKrMCcm6lO8qBt6pYpoE2muKwlXxvVnKhbIWVyEvs1p7Stc1io0luzFs8J1PzpKlP-wp0fxfRv7en6BnEiqxiuexvz3ITmQ0-cPAqPDg_Y2LySFi9mK7-A"/>
+<span class="text-2xl font-black text-[#4BA046] tracking-tighter dark:text-[#5cb856]">feira.casa</span>
+</a>
+<!-- Location Selector -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-[#4BA046]" data-icon="location_on">location_on</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-400 leading-none">Entregar em</span>
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-200">CEP 01310-100</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Main Navigation Links -->
+<nav class="hidden xl:flex items-center gap-6 font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
+<a class="text-[#4BA046] dark:text-[#5cb856] font-bold border-b-2 border-[#4BA046] pb-1" href="#">Produtos</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#4BA046] transition-colors" href="#">Receitas</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#4BA046] transition-colors" href="#">Feiras</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#4BA046] transition-colors" href="#">Atacado</a>
+</nav>
+<!-- Search Bar -->
+<div class="flex-1 max-w-md hidden md:block">
+<div class="relative group">
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl py-2.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-[#4BA046]/20 transition-all placeholder:text-slate-400" placeholder="Busque por feiras ou produtos..." type="text"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#4BA046]" data-icon="search">search</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 group active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-[#4BA046]" data-icon="account_circle">account_circle</span>
+<span class="hidden sm:inline font-['Plus_Jakarta_Sans'] text-sm font-medium text-slate-600 dark:text-slate-400 group-hover:text-[#4BA046]">Minha Conta</span>
+</button>
+<button class="flex items-center gap-2 p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 group relative active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-[#4BA046]" data-icon="shopping_cart">shopping_cart</span>
+<span class="hidden sm:inline font-['Plus_Jakarta_Sans'] text-sm font-medium text-slate-600 dark:text-slate-400 group-hover:text-[#4BA046]">Carrinho</span>
+<span class="absolute top-1 right-1 bg-[#4BA046] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-4 md:px-12 pt-6 pb-20">
+<!-- Hero Section -->
+<section class="relative h-[300px] md:h-[480px] rounded-3xl overflow-hidden mb-xl shadow-xl group">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="wide shot of a sun-drenched outdoor organic market stall with overflowing crates of colorful fresh fruits and vegetables in the foreground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzLm7uis6sOHCw4QvgNXiEz01JT2OXNeai8SlbBlK3yd8AoUIMZpqIJMJJuhMLChwdyJ6gq1i6SxElvlbf3UBQYI09fMy0Vy-sd3Znm0EziyOM_FheNCowsvbJRaY0Dz__ePE6emjpqPTAjEf6u6kgr1QWnJdqhWvz1sy8CMLANuMvHZT07qb28pEiXyMX9ODlII6bm51Paofijf4oGgq9kxXGoQ6a66poJA4sfD-NWZvlg9tQTb2FOrvKYbEmJ4RRpkU-6SoL0aI"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent flex flex-col justify-center px-12">
+<span class="inline-block bg-secondary-container text-white px-4 py-1 rounded-full text-label-sm font-label-sm mb-4 self-start">OFERTA DO DIA</span>
+<h1 class="text-white font-display-lg text-display-lg max-w-xl mb-6">Frescor da feira direto na sua porta.</h1>
+<p class="text-white/90 font-body-md text-body-md max-w-md mb-8">Produtos colhidos hoje pelos melhores produtores locais da sua região.</p>
+<button class="bg-primary text-white font-label-sm text-label-sm px-8 py-4 rounded-xl self-start hover:scale-105 active:scale-95 transition-all shadow-lg">Ver Ofertas</button>
+</div>
+</section>
+<!-- Categories -->
+<section class="mb-xl overflow-x-auto">
+<div class="flex justify-between items-start gap-4 min-w-max md:min-w-0">
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary group-hover:text-white" data-icon="eco">eco</span>
+</div>
+<span class="font-label-sm text-label-sm">Frutas</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-orange-50 rounded-full flex items-center justify-center group-hover:bg-secondary-container transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-secondary group-hover:text-white" data-icon="nutrition">nutrition</span>
+</div>
+<span class="font-label-sm text-label-sm">Legumes</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-green-50 rounded-full flex items-center justify-center group-hover:bg-primary-container transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary group-hover:text-white" data-icon="herbaceous">grass</span>
+</div>
+<span class="font-label-sm text-label-sm">Verduras</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-amber-50 rounded-full flex items-center justify-center group-hover:bg-amber-500 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-amber-600 group-hover:text-white" data-icon="bakery_dining">bakery_dining</span>
+</div>
+<span class="font-label-sm text-label-sm">Pastel</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-red-50 rounded-full flex items-center justify-center group-hover:bg-tertiary transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-tertiary group-hover:text-white" data-icon="spoke">spoke</span>
+</div>
+<span class="font-label-sm text-label-sm">Temperos</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-yellow-50 rounded-full flex items-center justify-center group-hover:bg-yellow-400 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-yellow-600 group-hover:text-white" data-icon="cheese">chess</span>
+</div>
+<span class="font-label-sm text-label-sm">Queijos</span>
+</div>
+</div>
+</section>
+<!-- Main Layout with Sidebar (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Featured & Nearest Fair -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Nearest Fair Card -->
+<div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+<h2 class="font-title-lg text-title-lg">Feira mais próxima</h2>
+</div>
+<div class="relative h-48 rounded-2xl overflow-hidden mb-4 grayscale hover:grayscale-0 transition-all duration-500 group">
+<img class="w-full h-full object-cover" data-alt="map overview of a city district with pin point markers on colorful market locations" data-location="São Paulo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBASNv9n7XlcEB3YyXwI8I9ZjpmshY9HQShTR6L18l3AA8p18Z96kmZQ-5KkFG5-qsiIwYMU60q8hjJXhjBIiM958BoChobhCsZ-xdnQ1KqS0uh7iKTT5R0UIT8mnFpGA_ZFvB1ScK69y5e8teGk7DyTL912x4NIp6g6W5nfWn-Yiz8uTfF-27-gdH0yfCumZi7Qv50pvmMHLGpodLcjE0f8axnj_jEo1EbP5bYOXTCTKxoPU7n76PaaSPBAGtsvzWJs9VRG6wpEvc"/>
+<div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-3 left-3 bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-md">FEIRA DA VILA MARIANA</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="schedule">schedule</span>
+<div>
+<p class="text-sm font-bold">Terças e Sábados</p>
+<p class="text-xs text-outline">Das 07:00 às 13:00</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="pin_drop">pin_drop</span>
+<p class="text-xs text-outline">Rua Joaquim Távora, 1200 - São Paulo</p>
+</div>
+<button class="w-full mt-4 border-2 border-primary text-primary font-bold py-3 rounded-xl hover:bg-primary hover:text-white transition-colors">Como chegar</button>
+</div>
+</div>
+<!-- Sponsored Stallholder -->
+<div class="bg-primary/5 rounded-3xl p-6 border border-primary/10 relative overflow-hidden">
+<span class="absolute top-4 right-4 bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-bold">PATROCINADO</span>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="friendly smiling older man wearing an apron and a straw hat in front of a vegetable stall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1FG-jnWPKSx-tDrDDsa-XymDSKX888u2hJR3TXhVd16M85HIMM0TvRFOo5qL32tBeM5NTLNg51_iM3l2kKWnzpacDZ91tK2F3h9vd4jDQQrMxFymHzTs1a47FODc65PDBTamL-uRx-HYwZekk1zcC8mMXJR9c_rdrBNJ0M6jDhd-gj_-DkrNDpFh80Ntt7Zamhfv22YV4QTpaKp8pZ2W0cYjeHh6hZRMsiFlIB3in4bvlB1VfsECKlSEY6tENVfmx0HXn8FurR2A"/>
+</div>
+<div>
+<h3 class="font-bold text-lg">Barraca do Sr. Zé</h3>
+<div class="flex text-yellow-500 items-center">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="text-stone-500 text-xs ml-1">(4.9)</span>
+</div>
+</div>
+</div>
+<p class="text-sm text-stone-600 mb-6 italic">"As melhores laranjas-lima da região, colhidas em nossa chácara familiar."</p>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-white p-2 rounded-xl text-center">
+<img class="w-full h-20 object-cover rounded-lg mb-2" data-alt="a bright pile of fresh juicy oranges with a few green leaves attached" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeIqu5QB13vfT_m3A4SmqhAz5lLBWgBkmmDbXWHSFR7n0hW5l_VKfEllMaKaa_z-_4Lm3kj5_4n7R11Jrl3WL1wYJx8FzmDvS0D3mcpO2fYcGQ7rzuxCOme6YOTeKdHeWtJUyTnmSWqJ9MJifx7n74c6yRnmbqyULJg6_GEeSIbYuOb8tsldeRg72yvQwA7QYW5R9cssFKtJciwLwOAdYbgNSE9HaFl2J1hXHYPE1W6X5prr0b_hxmh5J8TNeviW8aWZOWaQBDMW8"/>
+<p class="text-[10px] font-bold">Laranja Lima</p>
+<p class="text-primary font-bold text-xs">R$ 8,90/kg</p>
+</div>
+<div class="bg-white p-2 rounded-xl text-center">
+<img class="w-full h-20 object-cover rounded-lg mb-2" data-alt="close up of a bunch of ripe yellow bananas on a market counter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMXZZyPamRZmWwJt3QpNojqRH7YW-gFf3l4KakDF215lI8IP1tdqwC97vykj79ogAZloItEcyzTurRXzqMIvT6DHpztqNTzEwyAxiqr7yj1wLxdlD_3kWyd_JDXQdUHTgI1DL7sUslQ3EfDHsprK0XMHtrAxcqAZNTkdEMUAh_jBP96a18-INAofzpZNEymFzQjCASXUhtmEaAqKlAi_l_GYSJVUrDbBZkg883OO0CiPT2DLZ_M9qPhJ6Lz_2nHzDxce9Z_5nfMTo"/>
+<p class="text-[10px] font-bold">Banana Nanica</p>
+<p class="text-primary font-bold text-xs">R$ 5,50/dz</p>
+</div>
+</div>
+<button class="w-full mt-4 bg-white text-stone-700 font-bold py-3 rounded-xl hover:bg-stone-50 transition-colors flex items-center justify-center gap-2">
+                        Ver Banca Completa
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Product Grid & Banners -->
+<div class="lg:col-span-8 space-y-xl">
+<!-- Product Section: Ofertas -->
+<div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md">Ofertas de Hoje</h2>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">Ver tudo <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Product Card -->
+<div class="bg-white p-4 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative mb-4 overflow-hidden rounded-2xl h-40">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="macro close-up of a perfectly ripe red tomato with water droplets on a rustic wooden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkYMP13gRgMr34Ik67Ie_aum87GByFod0NXYFyEq2rmHlHwF9mBndi818Zx3Kha6MXrb-jV_3rIVcL9HEpDk47C0h45NnC77xjhJ1_D19ZyJNepIgvq9J6LGOw-aJeF2668GNXCZkBjgzaFEwI7diGGLkTk1BI_taaN406luYPlr9yEFYxDae61Gl97upyIfZn0XYmLj910wVBxMCSDJ9vN5_DwGYvmuY4oJbKuu1awJVqZ1F3fJq2JLEAYG61qraZMjkT7mnc3g"/>
+<span class="absolute top-2 left-2 bg-tertiary text-white text-[10px] px-2 py-1 rounded-lg font-bold">-20%</span>
+</div>
+<h3 class="font-bold text-sm mb-1 truncate">Tomate Italiano Selecionado</h3>
+<p class="text-outline text-[11px] mb-3">Barraca do Sr. Joaquim</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs text-outline line-through">R$ 12,00</span>
+<p class="font-bold text-lg text-primary">R$ 9,60/kg</p>
+</div>
+<button class="w-10 h-10 bg-secondary-container text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Repeat Cards for Layout -->
+<div class="bg-white p-4 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative mb-4 overflow-hidden rounded-2xl h-40">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="top view of a vibrant mixed salad bowl with greens, seeds, and fresh vegetables in bright lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3_tSH1k-khlRCimL8_BQMczSrhrzSM7s6nCLfwKxHyIPF723is0ZfdWe1pqUkabFmguV6LIZheZfiX6Ll21quwZWMc0yJzIaj8A5GpuNNSBZJHpZiNBu7KHKZ8JwbtqJznwg8gqsf1F-eoZIHUJQF5WJ0iqePLxWjLatg2cgNTQWrGKgA11S-3O6Qm80i3UdnlMLBZ0HfglbzzLwMbBA_pNHydK4jcegb3naZmDIMSsCLK1jLXkCnxvPWFdODcEkAOI2t_SvHqbY"/>
+</div>
+<h3 class="font-bold text-sm mb-1 truncate">Mix Folhas Higienizado</h3>
+<p class="text-outline text-[11px] mb-3">Horta da Família</p>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-lg text-primary">R$ 7,50/un</p>
+</div>
+<button class="w-10 h-10 bg-secondary-container text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<div class="bg-white p-4 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative mb-4 overflow-hidden rounded-2xl h-40">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="neat rows of various herbs and seedlings in small clay pots at a nursery market" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHBU9daJmq03F9iyqW8PhJCC8mUU4b-7EQG_FvX7hDldhP4dSRO9xqToHB6m-nHRBzFzi8g_MPOEh6uI3750eSajnz744JNuRZvxxdL6h4TeMnJksi2pnVsoo0Px7juQermJz8gA5iMK3eKlbhRmZcZZhNvelQkKxL-lCPFK7jV7itrwX01-iMuRnnQGncq6G58ilvaB_OvHRc-KlXTNrjowg8yxRN31A1MGTC31oPAS1pK5VTvLE7phBRqb60Z2g79Aqw1N1RR4"/>
+</div>
+<h3 class="font-bold text-sm mb-1 truncate">Kit Tempero Fresco</h3>
+<p class="text-outline text-[11px] mb-3">Temperos do Mundo</p>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-lg text-primary">R$ 15,90/kit</p>
+</div>
+<button class="w-10 h-10 bg-secondary-container text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<div class="bg-white p-4 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="relative mb-4 overflow-hidden rounded-2xl h-40">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="deliciously golden brown deep fried Brazilian pastel on a white plate with a side of vinaigrette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAday7fH6w0zfs5UGJnVl_xGobiAQwOj7pzi9M_VrqOREfODDeiq9ZsaEHgAhKW_WAO5ydeNBRtKEV11hoo62uQxiA0mSBXNnBXQB0dBsC-IPWwOpSE9rNreja9vljC1cmWrbUkAJyDfSye210Dz3ei_bcr5Qksa1T8p5h32LgMI2Jsi2kMi6jGHfVgdVqr3rZW4tKcLzFUI_571b1oyV9ZL7D5iC40qrcJ9G9GL1nd1mAU1Q9c7vzANuyZRLJLj9ujcqK12E5CqLc"/>
+</div>
+<h3 class="font-bold text-sm mb-1 truncate">Pastel de Feira (Congelado)</h3>
+<p class="text-outline text-[11px] mb-3">Pastel do Japa</p>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-lg text-primary">R$ 22,00/pct</p>
+</div>
+<button class="w-10 h-10 bg-secondary-container text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sub-banners Section -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="vibrant garden full of blooming flowers and green herbs under bright sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6QcBF7CpDEQQGKp5WZn1G5UGS-uULEdkJvUMKfQ-oCrezUCXHT1WHhSDH1SXn_2WYYxmS-FfUPg3a4JCTZDcdLTNTB36lTGQsO6JE7Mr-dTd-6PrvIdkmDyHdxG9vaZaJHfpS9thSSCGNvqG7PLrkjDpXSx64R3Bz4pxynXPMDl3HPtqa0jeQTnMNnNmN1UJuQkuBDkIE_qVPHcmH3ypTb3DD5A1vpEH-dwxCAbUdXnybRtq8M2uQxFEd-klR84ROW1fJ-LptT4M"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="text-white font-bold text-center px-2">Orgânicos</span>
+</div>
+</div>
+<div class="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="close up of rustic spice market stalls with cones of colorful ground spices" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0IcpLO2buPDC37z7vfUbL050hPu3GSTjEGERao_NcygozlDXkZU-n4Hh-_6ujKrvYdE3wRtEWEB7ATBgaktAt6CXhST_5t1ZGMIGUTaaHlMKON8O7-rLWEyNsnLgC0F-zSQPrGno7f3J3_mYFlIpzMrIGfFWo7NDHt7apncTicutHjhHdIruts33D0AfK4p4_sughWGpxe5QYO56XzQZyEKyDsSxkRp1D2Qwp4J1EQ7GbHxt1fX61eixtAHm7pvH2GZJaVrrJd8g"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="text-white font-bold text-center px-2">Temperos do Mundo</span>
+</div>
+</div>
+<div class="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="crispy deep fried pastel appetizers served with a cold sugar cane juice on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX3ryE0F7w1TLmKuxxWGTgM-OQ2X8LyXlpPIuUl3hgwl6eNm2JutuVyxTI4jVcS-0mSyFa_O-PpjVyw-dpQ9QxFgSC1Md56Y2P9IhGCJqFxZPhhvT9xDfJ1K29Op4yQTexGR4aa1cYcTpP2swO_-yAbgFgN28IIcKbjwx_cGH7oJkLeybX2UUnk6dssnp1HdEvS9hNmPEu2yShYOIExuh9iBxxCl66r0vWVEw6XwwU2xS141hiXMZqBEMCerfXrhQFR7PgbRzy7NI"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="text-white font-bold text-center px-2">Kit Pastel</span>
+</div>
+</div>
+<div class="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="overhead shot of a bounty of farm fresh harvest featuring corn, squash and root vegetables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6ZiU0ov7XrTtbr2oUYHarA9bWdLYUMuf8HijtcIRJUxQY2HWOL5hNsCGKS_CZ_Dv7ice62I4a2z0qb0QTBvEHNizAc37ItLKLC2e0UgNtzO6IqqVggKy02DewVFEUPFTacqqKR5oW1QNOi9SgOoKKV6XQoWSEkya72g0QtODmJ3hAFbq4-2OizEIcmH_GeLCxnBQIagCjEscjrLL7JNi1wFHMsXbO5iE4W2jyzJkBdsx6HmjB6_ywfRUP2vuCTYCaPlMVNW_jDQ"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="text-white font-bold text-center px-2">Ofertas do Dia</span>
+</div>
+</div>
+</div>
+<!-- Recipes Section -->
+<div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md">Receitas do Chef</h2>
+<button class="text-primary font-bold flex items-center gap-1">Todas as receitas <span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span></button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-sm hover:translate-y-[-4px] transition-transform">
+<div class="w-2/5 relative">
+<img class="w-full h-full object-cover" data-alt="beautifully plated vegetable soup with garnishes on a dark ceramic bowl in a moody kitchen setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoBPD_Am0blcg8SURE3cT3kZ5Gvwm4ZvnV74nYnodQbLs931I0vcVlCPVTmiNJ34cGvcMcL9bOzhtM2rkHzp7vTeN06RMHE-HmVB8nAiPXEKkfh51PerYGCKa668aSLctamxU-yCgQVyBisfsJW29yVKfIb2J-tKq3V31gA3Yna4fvGmIcLKuB_43iiB9tUXXIRa8cv0kTq_UlR1nhhs3VCmMn-_cCl_Xyrut0Tn9g7w-UT9mZeP6cTaygwG4SpGY2gQ7Rls9awQg"/>
+</div>
+<div class="p-6 w-3/5 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-lg mb-2">Sopa de Legumes da Vovó</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Uma receita clássica usando os melhores ingredientes da feira.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-stone-50 text-stone-500 text-[10px] px-2 py-1 rounded-full">+ Abóbora</span>
+<span class="bg-stone-50 text-stone-500 text-[10px] px-2 py-1 rounded-full">+ Batata</span>
+</div>
+</div>
+<button class="text-secondary font-bold text-sm flex items-center gap-2">Comprar Ingredientes <span class="material-symbols-outlined text-sm" data-icon="shopping_cart_checkout">shopping_cart_checkout</span></button>
+</div>
+</div>
+<div class="flex bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-sm hover:translate-y-[-4px] transition-transform">
+<div class="w-2/5 relative">
+<img class="w-full h-full object-cover" data-alt="fresh vibrant fruit salad bowl with pieces of melon, orange and berries in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMgrrD2slpYSx8pWc1gNjgHfANRH6i2HbOgZefEWOVDzIPNqsMD9Tir785dYYFKLRxfo5pyQesT9xGN8NntTvAEvibwE3D8v7O3dTWakUiMOkFRseKeiQJ2hIjgayFY3D_5M0BMP0rTtTA_KYH8wToKAd1bu0r2LWiUI-kRumwjweeU0XaUC_jb1FsB697ZHHS7axoVa10nYAoPqB_sPp6SY3bvqpXQchv4lctySeKlS5LXbu9eq8zTH3bAGJ_7odvMuwG2uAS43I"/>
+</div>
+<div class="p-6 w-3/5 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-lg mb-2">Salada de Frutas Tropical</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Refrescante e direta do pomar dos nossos feirantes.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-stone-50 text-stone-500 text-[10px] px-2 py-1 rounded-full">+ Mamão</span>
+<span class="bg-stone-50 text-stone-500 text-[10px] px-2 py-1 rounded-full">+ Manga</span>
+</div>
+</div>
+<button class="text-secondary font-bold text-sm flex items-center gap-2">Comprar Ingredientes <span class="material-symbols-outlined text-sm" data-icon="shopping_cart_checkout">shopping_cart_checkout</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 hidden md:block">
+<div class="max-w-screen-2xl mx-auto px-12 py-16">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<img alt="feira.casa logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZnoCvnI0y4xPgMYA7xds-SNggMdEzd3SoL8doKPxb6YE-A9E0a5f7brEhMQG_MHE6H8uD-65Am2M1GS6jNRAb06EBa5gddsdc97QfYtaeHLW4C6D2LDPz2QayPXt4loUA5RgLBJjvO3FY__UlSnUl_PKrMCcm6lO8qBt6pYpoE2muKwlXxvVnKhbIWVyEvs1p7Stc1io0luzFs8J1PzpKlP-wp0fxfRv7en6BnEiqxiuexvz3ITmQ0-cPAqPDg_Y2LySFi9mK7-A"/>
+<span class="text-xl font-black text-[#4BA046] tracking-tighter">feira.casa</span>
+</div>
+<p class="text-stone-500 text-sm leading-relaxed">Conectamos você aos feirantes e produtores locais da sua região para levar o frescor da natureza até sua mesa.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="public">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="chat">chat</span>
+</div>
+</div>
+<div>
+<h5 class="font-bold mb-6">feira.casa</h5>
+<ul class="space-y-4 text-sm text-stone-500">
+<li><a class="hover:text-green-600 transition-colors" href="#">Sobre Nós</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Seja um Feirante</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Trabalhe Conosco</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Blog da Feira</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">Ajuda</h5>
+<ul class="space-y-4 text-sm text-stone-500">
+<li><a class="hover:text-green-600 transition-colors" href="#">Central de Ajuda</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Política de Privacidade</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Termos de Uso</a></li>
+<li><a class="hover:text-green-600 transition-colors" href="#">Devolução e Reembolso</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">Newsletter</h5>
+<p class="text-sm text-stone-500 mb-4">Receba as melhores ofertas da semana.</p>
+<form class="space-y-3">
+<input class="w-full bg-white border-stone-200 rounded-xl px-4 py-3 text-sm focus:ring-primary" placeholder="Seu e-mail" type="email"/>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">Assinar</button>
+</form>
+</div>
+</div>
+<div class="pt-12 border-t border-stone-200 flex flex-col md:flex-row justify-between items-center text-xs text-stone-400">
+<p>© 2024 feira.casa - O frescor da feira na sua porta.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<img alt="mastercard" class="h-6 grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp3su7fwPC1e2vK33C2ltFxg3d4xwcbY731a-5WvZj3f-oua9HvkBxpaCBZdbgnm6X4c8o8p-s3pwPmc-ygwrI2SGUMKIENQHi4KnxDiA07XdPvbuIPh5DrsYhSMyooLKMUlcsnsA2X9hO46iLySaNMJ_2kfiDOuZXetsCLP6DnhOBKZuXpxHT5WBoyICZDv4VC5fQWvGQS80rR6eNoQN4yy_M-dPsSAYKiQ3tP5UxeVrZzhlRKNygS7zx_Pn8YQ6Z4IrqS1BlIIc"/>
+<img alt="visa" class="h-4 grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL3p-FRnm4sHORu-d4zo28l4iEvEEsj-zHkzAlyzHZFsIZWvd_wnIaL1CqDNw2rV6jTIhWmUvs2kQW8TkoRp-g7rZFhwyy0sA8jvqdjqKi-dovQg8MH5pbNwOmlVsfgMt6zuZalMzRMDo7pqsXVHGnVHko6sSxOdcWAbP0FICN5BhIFTKJ6Elg1VDqsDxNUUc-7HOI_dvi4Mqj2PJ0X00boEPRHsQdsZUxTPbVp9qgMhYLaiHwGQ09fXDTSmFJD_Ouh1MhLRcq4iY"/>
+<img alt="pix" class="h-6 grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmAohRp0m50IIn2vAOdB5BA3y6Do1TtVmpTK35Dumjfvg2MJvkgGRtW2tzfrun-bn5C80sC8Ga9o-fgxCh2rO4A2leVQtsrIVpuGZ1OkEyNu0kVsXICR8p6vdtu-ZdG3NWnJ8CA-e2E_Ft62phO6iBsbR-z0p7dEBp3fODpRvaM5gcix6_lzXinow5Pbf3dHUMb-Gv7GivRgrR5jZA2f3e0Un2Ef91jUZdSsiMwBAFUtOE_S73N8q2Ls_Nu1fY3_eT515GC8a_GuQ"/>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 md:hidden bg-white/90 dark:bg-stone-900/90 backdrop-blur-md border-t border-stone-200 dark:border-stone-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] z-50">
+<div class="flex flex-col items-center justify-center text-[#4BA046] dark:text-[#5cb856] bg-green-50 dark:bg-green-900/30 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-plus-jakarta text-[11px] font-bold uppercase tracking-wider">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-plus-jakarta text-[11px] font-bold uppercase tracking-wider">Feiras</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-plus-jakarta text-[11px] font-bold uppercase tracking-wider">Cestas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-plus-jakarta text-[11px] font-bold uppercase tracking-wider">Perfil</span>
+</div>
+</nav>
+</body></html>

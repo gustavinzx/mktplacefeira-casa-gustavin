@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>feira.casa | Relatório de Ganhos e Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#f8fff0",
+                    "on-primary-fixed": "#002202",
+                    "primary-container": "#30852f",
+                    "inverse-surface": "#30312e",
+                    "on-secondary-container": "#5a1c00",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-highest": "#e3e3de",
+                    "on-surface-variant": "#40493c",
+                    "inverse-primary": "#83db79",
+                    "surface": "#faf9f4",
+                    "surface-bright": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "tertiary-fixed": "#ffdad6",
+                    "primary-fixed": "#9ef892",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#bfcab9",
+                    "on-tertiary-fixed": "#410002",
+                    "on-surface": "#1b1c19",
+                    "surface-dim": "#dbdad5",
+                    "tertiary-container": "#e41f25",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary": "#a63b00",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-container": "#efeee9",
+                    "on-background": "#1b1c19",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e9e8e3",
+                    "tertiary": "#bb0014",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "secondary-fixed-dim": "#ffb599",
+                    "surface-tint": "#126e19",
+                    "primary-fixed-dim": "#83db79",
+                    "secondary-fixed": "#ffdbce",
+                    "background": "#faf9f4",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#fc6c29"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "80px",
+                    "margin-mobile": "20px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 h-full w-64 bg-zinc-50 border-r border-zinc-200 z-50">
+<div class="px-6 py-8">
+<h1 class="text-lg font-black text-green-700">Logística</h1>
+<p class="text-zinc-500 text-xs font-medium uppercase tracking-wider">Gestão de Entregas</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-zinc-100 hover:translate-x-1 transition-transform duration-200 rounded-lg">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Painel</span>
+</div>
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-zinc-100 hover:translate-x-1 transition-transform duration-200 rounded-lg">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-medium text-sm">Rotas</span>
+</div>
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-zinc-100 hover:translate-x-1 transition-transform duration-200 rounded-lg">
+<span class="material-symbols-outlined" data-icon="delivery_dining">delivery_dining</span>
+<span class="font-medium text-sm">Entregadores</span>
+</div>
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-zinc-100 hover:translate-x-1 transition-transform duration-200 rounded-lg">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Ganhos</span>
+</div>
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 bg-green-50 text-green-700 border-r-4 border-green-600 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-medium text-sm">Relatórios</span>
+</div>
+<div class="cursor-pointer flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-zinc-100 hover:translate-x-1 transition-transform duration-200 rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Configurações</span>
+</div>
+</nav>
+<div class="p-4">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nova Rota
+            </button>
+</div>
+</aside>
+<main class="md:ml-64 pb-24 md:pb-8 min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-zinc-100 px-6 py-3 flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-green-700">feira.casa</span>
+<div class="hidden sm:flex items-center bg-zinc-100 rounded-full px-4 py-1.5 gap-2">
+<span class="material-symbols-outlined text-zinc-400 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Buscar entregador..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-zinc-50 rounded-lg transition-all text-zinc-600">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-zinc-50 rounded-lg transition-all text-zinc-600">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border-2 border-green-100">
+<img alt="Foto do perfil do gestor" data-alt="Close-up portrait of a professional manager in a bright modern office setting, friendly expression, natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0t9raj-LYXytrws7qSnJUDzi_sPzd5rkjpUyqvs5Awln-5v7XzYCMkZ_WHMyVzvQl3FIVElScliocJJnE7JfwuQLYIGjJ8IWPsZgU2y79ICq3x_zYVbxeot5QSC7ChbzPKXAwMas63IcSZkLgneaW8BeVbdMBeqSn2WuNnaZR3Eb2alVCKIv3DQHg8Uv63TOBFDxxbXnURFq6G-9vRSTsYfmxWimx5qyf6bQV3gxcv_ccTPHQiJXSTnP1A_obrIdlYXpqvXPzHdI"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<section class="p-6 md:p-8 max-w-7xl mx-auto space-y-8">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Relatório de Performance</h2>
+<p class="text-body-md text-zinc-500">Acompanhe a eficiência e os ganhos da sua frota em tempo real.</p>
+</div>
+<div class="flex flex-wrap gap-2 bg-zinc-100 p-1 rounded-xl w-fit">
+<button class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-white shadow-sm text-primary">Hoje</button>
+<button class="px-4 py-2 rounded-lg text-sm font-bold transition-all text-zinc-500 hover:text-zinc-700">Semana</button>
+<button class="px-4 py-2 rounded-lg text-sm font-bold transition-all text-zinc-500 hover:text-zinc-700">Mês</button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 space-y-2">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg" data-icon="payments">payments</span>
+<span class="text-primary text-xs font-bold bg-primary-fixed/20 px-2 py-1 rounded-full">+12.5%</span>
+</div>
+<div>
+<p class="text-zinc-500 text-label-sm uppercase tracking-wider">Total em Ganhos</p>
+<h3 class="text-title-lg font-title-lg">R$ 14.280,50</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 space-y-2">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary bg-secondary-fixed/30 p-2 rounded-lg" data-icon="local_shipping">local_shipping</span>
+<span class="text-secondary text-xs font-bold bg-secondary-fixed/20 px-2 py-1 rounded-full">+5.2%</span>
+</div>
+<div>
+<p class="text-zinc-500 text-label-sm uppercase tracking-wider">Total Entregas</p>
+<h3 class="text-title-lg font-title-lg">1.248</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 space-y-2">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-lg" data-icon="speed">speed</span>
+<span class="text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">Eficiente</span>
+</div>
+<div>
+<p class="text-zinc-500 text-label-sm uppercase tracking-wider">Média de KM/Entrega</p>
+<h3 class="text-title-lg font-title-lg">4.2 km</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 space-y-2">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-orange-500 bg-orange-50 p-2 rounded-lg" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-orange-500 text-xs font-bold bg-orange-50 px-2 py-1 rounded-full">Excelente</span>
+</div>
+<div>
+<p class="text-zinc-500 text-label-sm uppercase tracking-wider">Avaliação Média</p>
+<h3 class="text-title-lg font-title-lg">4.92 / 5.0</h3>
+</div>
+</div>
+</div>
+<!-- Comparison Chart Placeholder (Visual Component) -->
+<div class="bg-white p-8 rounded-3xl shadow-sm border border-zinc-100">
+<div class="flex justify-between items-center mb-8">
+<h4 class="text-title-lg font-title-lg text-on-surface">Comparativo de Performance</h4>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs text-zinc-500">Ganhos</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="text-xs text-zinc-500">Entregas</span>
+</div>
+</div>
+</div>
+<div class="h-64 flex items-end gap-4 md:gap-8">
+<!-- Fake Bars -->
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 45%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 60%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">SEG</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 55%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 75%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">TER</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 40%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 50%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">QUA</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 70%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 90%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">QUI</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 60%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 85%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">SEX</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 85%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 95%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">SÁB</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2 h-full">
+<div class="w-full max-w-[40px] bg-secondary-container/20 rounded-t-lg" style="height: 30%;"></div>
+<div class="w-full max-w-[40px] bg-primary rounded-t-lg" style="height: 40%;"></div>
+<span class="text-[10px] font-bold text-zinc-400 mt-2">DOM</span>
+</div>
+</div>
+</div>
+<!-- Deliveries Table -->
+<div class="bg-white rounded-3xl shadow-sm border border-zinc-100 overflow-hidden">
+<div class="p-6 border-b border-zinc-100 flex justify-between items-center">
+<h4 class="text-title-lg font-title-lg">Ranking de Entregadores</h4>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                        Exportar CSV
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-zinc-50 border-b border-zinc-100">
+<tr>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">Entregador</th>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">Entregas</th>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">KM Rodados</th>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">Avaliação</th>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">Ganhos Totais</th>
+<th class="px-6 py-4 text-label-sm text-zinc-500 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-50">
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-zinc-200 overflow-hidden">
+<img alt="Avatar do entregador" data-alt="Close-up profile photo of a young man with a helmet, smiling, bright outdoor daylight, high quality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRDoqodYi52rvwYNeEEqSBA5kn3fZXPC20rA3tmse_gFOaMjaiGwRkT74WJ6btHaQR0odCk4707cO-ZrZxC54qBg9A0eazV2oS1jbCjorH6l2BxCAwqbFznCaWXDsu2yrKFF9wpNtS1evo-2M6-5-cbgpn-In3fsAvsDPYYKgeJ-mAL3BhSgqme-f1jDpVSnPOFyzmswy6iNVLvprww_QhLM9voM_RaJ9Ynx2JKeu28W7WLPZlM-Io4hwGjDDCBlZDc4XOzcQ38lI"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Ricardo Silva</p>
+<p class="text-xs text-zinc-500">Motosat ID: 8842</p>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">142</td>
+<td class="px-6 py-4 text-sm">542.4 km</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-orange-500">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.95</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-primary">R$ 1.845,00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase">Ativo</span>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-zinc-200 overflow-hidden">
+<img alt="Avatar da entregadora" data-alt="Portrait of a young delivery woman with a warm smile, natural morning sunlight, urban environment background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPoq5DTwLQ6hOpPK5eAPMQFALT-OWr8DwqR24f0g-zUerpfOBT8YxtQGcyc_Lc367WAhamAoh5io1vMmKB4ICXmr6s5Otv4S440AaqIDn2pAsSgV7UUui0oloW3YEC41Ts7x0MRu7bH12H5YyYA_sfnETmd7L2sjriiYqhYaOexqnYaWkRWI2ytVauKDAwPdQcj6PHyWjB-UY_ySmgJvzHEfsSRsvbtNyt6AFpRpMtbs5z3h9hgNMW_FQIHP-EpCa_GxgiWRRLp0c"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Mariana Costa</p>
+<p class="text-xs text-zinc-500">Bike ID: 9021</p>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">128</td>
+<td class="px-6 py-4 text-sm">215.8 km</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-orange-500">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.98</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-primary">R$ 1.620,00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase">Ativo</span>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50/50 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-zinc-200 overflow-hidden">
+<img alt="Avatar do entregador" data-alt="Mid-age man portrait, casual clothing, confident smile, soft focus park background, natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2rOt54JRs-s-DYgCxXdrX7dDXAP0OpIZoYyWDLlnwxxuqJ8rFFwThS4bwfMCzxH2ILtasRKU7ehCByOdHrGjC0iu_fA65VGUhpm8HyWIs6NXyJnyOGzlZ4vnNz1eMwzUWeG56WyRQasPJHnLtp6aLNSdwG91-WaUhMEMx1P8dvIFDIAsEWjeZHGitRu76gikRXy8RVTcQS6vO4ho2t3HI1gCepSXwq3aHh5ckQGnb8yUP5NPwkx-ajlo1iLq9NUoijdEPkW-puS0"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Paulo Santos</p>
+<p class="text-xs text-zinc-500">Van ID: 7751</p>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">95</td>
+<td class="px-6 py-4 text-sm">812.2 km</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-orange-500">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.82</span>
+</div>
+</td>
+<td class="px-6 py-4 font-bold text-primary">R$ 2.450,50</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-zinc-100 text-zinc-500 text-[10px] font-black rounded-full uppercase">Folga</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-safe-offset-2 bg-white border-t border-zinc-100 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="navigation">navigation</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Rotas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-orange-600 bg-orange-50 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Ganhos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Perfil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,89 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: white;
+  border-right: 1px solid var(--outline-variant);
+  padding: 32px 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary);
+  margin-bottom: 48px;
+  text-decoration: none;
+}
+
+.logo h2 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 20px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--on-surface-variant);
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.navLink:hover {
+  background: var(--surface-container-low);
+  color: var(--primary);
+}
+
+.navLinkActive {
+  background: var(--primary-container);
+  color: white;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--outline-variant);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--secondary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+}
+
+.profileInfo h4 {
+  font-size: 14px;
+  color: var(--on-surface);
+}
+
+.profileInfo p {
+  font-size: 12px;
+  color: var(--on-surface-variant);
+}

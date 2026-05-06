@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#410002",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#ffdad6",
+                    "primary-fixed-dim": "#83db79",
+                    "on-primary-container": "#f8fff0",
+                    "secondary": "#a63b00",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#40493c",
+                    "tertiary": "#bb0014",
+                    "surface-bright": "#faf9f4",
+                    "on-surface": "#1b1c19",
+                    "outline-variant": "#bfcab9",
+                    "surface-container": "#efeee9",
+                    "primary-container": "#30852f",
+                    "inverse-surface": "#30312e",
+                    "outline": "#707a6b",
+                    "on-secondary-container": "#5a1c00",
+                    "primary": "#0e6b17",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-fixed": "#002202",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f2f1ec",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "inverse-primary": "#83db79",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-background": "#1b1c19",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary-container": "#fc6c29",
+                    "tertiary-container": "#e41f25",
+                    "surface": "#faf9f4",
+                    "on-error": "#ffffff",
+                    "background": "#faf9f4",
+                    "secondary-fixed": "#ffdbce",
+                    "surface-container-high": "#e9e8e3",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#dbdad5",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#9ef892",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "surface-container-highest": "#e3e3de",
+                    "on-secondary-fixed": "#370e00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-tint": "#126e19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "sm": "12px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px",
+                    "md": "24px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-800 shadow-sm fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-black text-green-700 dark:text-green-500 tracking-tighter">feira.casa</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 font-plus-jakarta text-sm font-medium">
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 transition-colors" href="#">Produtos</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 transition-colors" href="#">Produtores</a>
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-700" href="#">Sou Chef</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-zinc-600 dark:text-zinc-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-16 flex items-stretch">
+<div class="grid grid-cols-1 md:grid-cols-2 w-full max-w-[1440px] mx-auto overflow-hidden">
+<!-- Left Side: Visual -->
+<div class="hidden md:block relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent z-10"></div>
+<img alt="Chef Profissional" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Professional chef in a white uniform meticulously plating a gourmet dish with fresh microgreens in a high-end kitchen with warm atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxkqq78J0FkcwzqmLJlduxpmM_n_7EH_TK056Xx8MrynjQ4733us9n9cJEOD_FOx4P9JhnCdAQuL3lL0_yOWoFG0I6vuUSW1W3AXe7DblcBAqpry6hnsTLJ8jY3B92PagBdnzhfGOCgGOlacW6J8Gr47I_F9-dYVTB6PC5YNiBSj4x_nraWGwqBbn-NWu-kFRxH--72hRAkQtEKBKTuq8kM8yCSB-G1Yt-GC6OdFTQtgFN5TXdOYHON4egz4XpsAJTE5_jub34d5c"/>
+<div class="absolute bottom-lg left-margin-desktop z-20 text-white max-w-md">
+<span class="bg-secondary px-3 py-1 rounded-full text-label-sm font-label-sm mb-4 inline-block">EXCLUSIVO PARA CHEFS</span>
+<h2 class="font-display-lg text-display-lg mb-4">Ingredientes diretos da horta para a sua bancada.</h2>
+<p class="font-body-md text-body-md opacity-90">Acesso privilegiado aos melhores produtores locais com logística especializada para o seu restaurante.</p>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface">
+<div class="w-full max-w-md">
+<div class="mb-lg">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">Bem-vindo, Chef.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Entre com suas credenciais para gerenciar seus pedidos e fornecedores.</p>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-sm text-label-sm text-outline mb-xs" for="email">Email Profissional</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" id="email" name="email" placeholder="chef@exemplo.com.br" type="email"/>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-sm text-label-sm text-outline" for="password">Senha</label>
+<a class="text-label-sm text-primary hover:underline" href="#">Esqueceu a senha?</a>
+</div>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" id="password" name="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex items-center gap-2 mb-md">
+<input class="w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary" id="remember" type="checkbox"/>
+<label class="font-body-md text-[14px] text-on-surface-variant" for="remember">Lembrar de mim</label>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-md text-title-lg hover:bg-primary-container transition-all shadow-md active:opacity-80" type="submit">
+                            Entrar na Cozinha
+                        </button>
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-label-sm uppercase">
+<span class="bg-surface px-4 text-outline">Ou continue com</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<button class="flex items-center justify-center gap-2 py-3 border border-outline-variant rounded-xl hover:bg-surface-container transition-colors font-body-md" type="button">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZwW25fWTnmP6n3lex9oM203Qw3UM4W-QJIC_35VJkuC5r2KJxfCNjf91TyGoJI2CBULdJDbVnr2-bCKAAi2aohHaDSN5uVtF-aufSxzLVwhvmSf_zX32DlD7yRHNd0CtdM1Oa8CBqE65Kh3nLLrjVCh1N0I2MheqanpGsR6tOgIhXTrfI1bj9pJALeHcDLWg26F3O8J-R8A59FXTcEIFvslo9XpVKRBqW8ukDmSAlmmJuO-VOy0qfW8noLhvW_hqUvaU9wG62i5k"/>
+                                Google
+                            </button>
+<button class="flex items-center justify-center gap-2 py-3 border border-outline-variant rounded-xl hover:bg-surface-container transition-colors font-body-md" type="button">
+<img alt="Apple" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdS1e3o9y1CCMa-8Ig3T1djxBivuoYPr37y9JER1tjBdrwuUWV3fFXYR7E426KYUj388MNCLMo2WGkPbrtALyVfLmKLhgaqKRii_riKlZvmm_7mqXqCvVkio28bY5yQmotXNKE5yCiX1b7jorEyK2dcxsZ8uN9skp1QzDJfEwZ3vWFySjF7_GvRR4XwOlnIcZJXJIpabwr7WGH8-6X7Qmdfw9uZ1PS4_OBjbcMx7WSDmzpYTGCV_xyK2WpFRQyfZ5Ivi_eMn5pFS0"/>
+                                Apple
+                            </button>
+</div>
+</form>
+<div class="mt-xl text-center">
+<p class="font-body-md text-on-surface-variant">Ainda não faz parte da nossa rede?</p>
+<a class="inline-block mt-xs font-title-lg text-secondary hover:underline decoration-2" href="#">
+                            Torne-se um Chef Parceiro
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-50 dark:bg-zinc-950 w-full py-8 mt-auto border-t border-zinc-200 dark:border-zinc-800">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-8">
+<div class="mb-4 md:mb-0">
+<span class="font-bold text-zinc-900 dark:text-white">feira.casa</span>
+<p class="font-plus-jakarta text-xs text-zinc-500 mt-1">© 2024 feira.casa - Conectando Chefs e Produtores</p>
+</div>
+<div class="flex gap-6">
+<a class="font-plus-jakarta text-xs text-zinc-500 hover:underline decoration-green-500" href="#">Privacidade</a>
+<a class="font-plus-jakarta text-xs text-zinc-500 hover:underline decoration-green-500" href="#">Termos</a>
+<a class="font-plus-jakarta text-xs text-zinc-500 hover:underline decoration-green-500" href="#">Suporte</a>
+<a class="font-plus-jakarta text-xs text-zinc-500 hover:underline decoration-green-500" href="#">Sobre nós</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,99 @@
+.wrapper {
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+.container {
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+}
+
+.title {
+  font-family: var(--font-plus-jakarta);
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+
+.section {
+  background: white;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-plus-jakarta);
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+.addressCard {
+  border: 2px solid var(--primary);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-low);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paymentMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.method {
+  border: 1px solid var(--outline-variant);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.methodActive {
+  border-color: var(--primary);
+  background: var(--surface-container-low);
+}
+
+.summary {
+  background: white;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2);
+  position: sticky;
+  top: 48px;
+}
+
+.summaryTitle {
+  font-family: var(--font-plus-jakarta);
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: var(--on-surface-variant);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid var(--outline-variant);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--on-surface);
+}

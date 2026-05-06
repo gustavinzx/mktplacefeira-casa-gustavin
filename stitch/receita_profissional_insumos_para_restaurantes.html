@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#30852f",
+                        "secondary-fixed": "#ffdbce",
+                        "inverse-on-surface": "#f2f1ec",
+                        "inverse-surface": "#30312e",
+                        "on-secondary-fixed": "#370e00",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "primary-fixed": "#9ef892",
+                        "surface-container-high": "#e9e8e3",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-primary-fixed": "#002202",
+                        "background": "#faf9f4",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#5a1c00",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#e41f25",
+                        "surface-dim": "#dbdad5",
+                        "secondary-fixed-dim": "#ffb599",
+                        "outline": "#707a6b",
+                        "on-surface-variant": "#40493c",
+                        "surface-tint": "#126e19",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#efeee9",
+                        "on-surface": "#1b1c19",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f4ef",
+                        "surface-variant": "#e3e3de",
+                        "secondary": "#a63b00",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfcab9",
+                        "primary": "#0e6b17",
+                        "tertiary": "#bb0014",
+                        "on-primary-container": "#f8fff0",
+                        "on-tertiary-fixed": "#410002",
+                        "primary-fixed-dim": "#83db79",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fc6c29",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#faf9f4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .recipe-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        }
+        .bento-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm docked full-width top-0 z-50 border-b border-stone-100 dark:border-neutral-800">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold tracking-tight text-green-700 dark:text-green-500 font-display-lg">Chef Gourmet</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-['Plus_Jakarta_Sans'] text-sm font-medium text-stone-500 dark:text-neutral-400 hover:text-green-600 transition-colors" href="#">Vitrine</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm font-medium text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600 pb-1" href="#">Serviços</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm font-medium text-stone-500 dark:text-neutral-400 hover:text-green-600 transition-colors" href="#">Institucional</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm font-medium text-stone-500 dark:text-neutral-400 hover:text-green-600 transition-colors" href="#">Suporte</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2">
+<span class="material-symbols-outlined text-stone-500">notifications</span>
+<span class="material-symbols-outlined text-stone-500">help_outline</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-primary-container transition-all active:opacity-80">Acessar Painel</button>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-6 py-10 md:px-margin-desktop">
+<!-- Hero Section: Recipe Feature -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl">
+<div class="lg:col-span-8 relative rounded-xl overflow-hidden shadow-sm h-[500px]">
+<img alt="Ratatouille de Legumes da Mantiqueira" class="w-full h-full object-cover" data-alt="Premium close-up of a rustic ratatouille in a cast iron pan with vibrant colors and fresh herbs, warm kitchen lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtzwAPaylZe7zrOxNT9Z-G3OvaAQDOtPK7rDpkAuBOCRGh-W3KGnH4YH2jUySVzRDIXnW346onU7LEfkt85NVJxOMLO98n_3mDLuWnzbYHZAVMtwOsMHcoan6qV2PD2kN3dFb06WKDvnGr-9VCJr6nF4ULqc5Vu4QT9JfjHbUt4a2ZxGybEjr2sBM3a_mJJrzwfRmpcVC2F5zYkvsV9113QmtqxQhMEzklhKXxcM6rJM3S7gsdhNde845RRJr_ITqvUik0K662js4"/>
+<div class="absolute inset-0 recipe-gradient flex flex-col justify-end p-md">
+<div class="flex gap-2 mb-sm">
+<span class="bg-secondary-container text-white px-3 py-1 rounded-full text-label-sm font-label-sm">CURADORIA B2B</span>
+<span class="bg-primary-container text-white px-3 py-1 rounded-full text-label-sm font-label-sm">ALTO RENDIMENTO</span>
+</div>
+<h1 class="text-white font-display-lg text-display-lg mb-2">Ratatouille Premium Mantiqueira</h1>
+<p class="text-stone-200 font-body-md max-w-2xl">Receita assinada pela Chef Helena Rizzo, otimizada para cozinhas de alto padrão que buscam frescor e padronização em escala industrial.</p>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-white p-md rounded-xl shadow-sm border border-stone-100 flex-1 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<img alt="Chef Helena Rizzo" class="w-16 h-16 rounded-full object-cover" data-alt="Professional portrait of a high-end chef in a white uniform with a modern restaurant kitchen in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDShhV8mS8MQc2oM_p8OCU85lOCj2B8cjMwnOtfkBJKN34wrTRU1j_Q9JvpKZkF_ux2FvNgKKNV11rIX7uHcRsGWinXncFI31AZAzWl17ZZg9BNE700gY0lzTCJ5_jHE92aLlo4WYpOUEpq-P8DXEwRMp7rE0kFiBY8cKOsQR6ieJMZIKfzVZxKIFumLpwa-ShzC2khb9f74EKRT30Hq83rEBZMC1qC7vMvu3os7CzVTS8MnrPZ_ypeJg1svMP8CvfZFtAXKWoFDkM"/>
+<div>
+<p class="text-stone-500 text-label-sm uppercase tracking-wider">Chef Residente</p>
+<h3 class="font-title-lg text-title-lg text-primary">Helena Rizzo</h3>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md italic border-l-4 border-secondary-container pl-4">
+                        "O segredo da escala é a origem. Para este prato, selecionamos produtores que garantem a textura crocante mesmo em grandes volumes."
+                    </p>
+</div>
+<div class="bg-primary-container text-white p-md rounded-xl shadow-sm flex-1 flex flex-col justify-center">
+<h4 class="font-title-lg text-title-lg mb-2">Resumo Operacional</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">timer</span>
+<span class="text-label-sm">Prep: 45min</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="text-label-sm">120 Porções</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">inventory</span>
+<span class="text-label-sm">Grade A+</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="text-label-sm">Entrega: 24h</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Insumos em Larga Escala -->
+<section class="mb-xl">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Insumos para o Restaurante</h2>
+<p class="text-on-surface-variant font-body-md">Fornecimento direto do produtor em fardos e caixas fechadas.</p>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold hover:underline">
+                    Ver catálogo B2B completo <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-gutter h-auto lg:h-[600px]">
+<!-- Main Ingredient Box -->
+<div class="md:col-span-2 lg:col-span-5 bg-white border border-stone-200 rounded-xl overflow-hidden bento-card shadow-sm flex flex-col">
+<div class="h-1/2 relative">
+<img alt="Tomates Italianos" class="w-full h-full object-cover" data-alt="Rows of perfectly ripe red roma tomatoes in a wooden crate, professional lighting focusing on texture and freshness" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCTOoQB1Yf1vNZWiVjAHFm3zMK1G_ATqHuF3wOA-mBLBaybrxHtvkWhiHR7uE7ygqmRWwE5-E4YCNkJJ4gXqIwLXYeXWbS6Bi6zNDlPOpHGTbnH-5_ieIgAIjXW3C1zhJno_WkgZ1fUpmJlkmTC3gjDq8zWLV2KA-1ICNKSmmMRPeBiwuT3oKQWelA6g-Al5vBMBwjb6uOgRFGP0M34jTEvvdd60nswedBxbBUf8QHq5-StKto3b_maF0wlkQAvTXW-8ewPwTFo8Q"/>
+<span class="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-label-sm font-label-sm">OFERTA DO PRODUTOR</span>
+</div>
+<div class="p-md flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-lg text-title-lg text-on-surface">Tomate Italiano Premium</h3>
+<span class="text-primary font-bold">R$ 185,00/Caixa</span>
+</div>
+<p class="text-on-surface-variant text-body-md mb-4">Caixa 20kg - Padronizados, casca firme, ideal para molhos e confits em larga escala.</p>
+<div class="flex gap-2">
+<span class="bg-surface-container px-2 py-1 rounded text-label-sm text-on-surface-variant border border-outline-variant">Orgânico</span>
+<span class="bg-surface-container px-2 py-1 rounded text-label-sm text-on-surface-variant border border-outline-variant">Horta Vertical</span>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-white font-bold py-3 rounded-lg hover:bg-secondary transition-colors mt-4">Adicionar 1 Caixa ao Pedido</button>
+</div>
+</div>
+<!-- Secondary Insumos Column -->
+<div class="md:col-span-2 lg:col-span-3 flex flex-col gap-gutter">
+<div class="bg-white border border-stone-200 rounded-xl p-md bento-card shadow-sm flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Berinjela Japonesa" class="w-full h-full object-cover" data-alt="Fresh glossy purple japanese eggplants on a clean white surface with natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj8_lIVa5STiJdOSZCSenctJl2xg1osM3Hau3KNVXIe5y26KkCMQLzOLQqWyByNTw800jKxHImgJr7tsgd-pqx7csOq_CA6AKCzvT7oMZGv6FJ7oZ929T22-FzqMHgsCn85bdSyvCWIvpdbVZBCO4OoGfkExSmqay-AW6rCgwoxOLS1yCFL5QhtH92a0YbPmJudzr5l-X9d5hqjusWJnTSOJx2imIZmtiIiI9_Ne0TFxE0MQ5dc0vwuVErvdEdubdDZYmGKsRY7rY"/>
+</div>
+<div>
+<h4 class="font-label-sm text-on-surface">Berinjela Japonesa</h4>
+<p class="text-primary font-bold">R$ 98,00/Fardo</p>
+</div>
+</div>
+<p class="text-on-surface-variant text-label-sm mb-4">Fardo 10kg - Direto de Atibaia/SP. Menor acidez para o Ratatouille.</p>
+<button class="w-full border-2 border-primary text-primary font-bold py-2 rounded-lg hover:bg-primary-container hover:text-white transition-all text-label-sm">Vincular Recorrência</button>
+</div>
+<div class="bg-white border border-stone-200 rounded-xl p-md bento-card shadow-sm flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Alho Roxo" class="w-full h-full object-cover" data-alt="Bulbs of premium purple garlic on a rustic wooden board with dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmTTyEL1zW91NJyn8tJs63Zv4UL8vbekBgpPcmX80WKLTZe2iRvvaaRLkLSMLleAPauCRZd4O30SQ-Eom2j2cPchwqywJtvGwVSc8IzZ7Mkmo5aeaAIG8zMpobOWeOBqbZSzaACMbGIQe5HPTpYJMUKNHtwmaolg5rsXtPWc8LN487wpJ1P5snYbBmWp1sPeCw68d82z0se-O_-RhWkSM-Vx8JCnU3aPd00yjtRbeAIDI8sSsgp4Btn6yc7i3nTpRAH2F_-jAroCM"/>
+</div>
+<div>
+<h4 class="font-label-sm text-on-surface">Alho Roxo Especial</h4>
+<p class="text-primary font-bold">R$ 145,00/Saco</p>
+</div>
+</div>
+<p class="text-on-surface-variant text-label-sm mb-4">Saco 5kg - Dentes grandes e sabor intenso. Curadoria MG.</p>
+<button class="w-full border-2 border-primary text-primary font-bold py-2 rounded-lg hover:bg-primary-container hover:text-white transition-all text-label-sm">Vincular Recorrência</button>
+</div>
+</div>
+<!-- Logistics & Producer Panel -->
+<div class="md:col-span-4 lg:col-span-4 bg-stone-100 dark:bg-neutral-900 border border-stone-200 rounded-xl p-md shadow-sm flex flex-col">
+<h3 class="font-title-lg text-title-lg mb-4 text-on-surface">Logística e Origem</h3>
+<div class="flex-1 space-y-6">
+<div class="flex items-start gap-4">
+<div class="bg-white p-2 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface">Janela de Entrega Restaurante</p>
+<p class="text-label-sm text-on-surface-variant">Próxima saída: Amanhã às 05:00. <br/>Área: São Paulo e Grande SP.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-white p-2 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface">Certificação B2B</p>
+<p class="text-label-sm text-on-surface-variant">Todos os produtores possuem nota fiscal eletrônica e laudos sanitários atualizados.</p>
+</div>
+</div>
+<div class="border-t border-stone-200 pt-4 mt-auto">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-on-surface-variant">location_on</span>
+<span class="text-label-sm font-bold text-on-surface">Cooperativa Mantiqueira</span>
+</div>
+<img alt="Horta Mantiqueira" class="w-full h-32 object-cover rounded-lg mb-4" data-alt="Beautiful aerial view of organized green crop fields on a rolling hillside during early morning mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7W-f1Sa6dO3YsKEHF9w0p1Ei6Cz3Sdx81A431VZc1aN0JknvnzSNGB_nnyVRwbM83W11ybplGrwR44MuqwoMXcpHQlF2RJtvLbBDGhJFMtTM5Heu8zpjqrwOG0NNYxCm6X6lpXTCe4otxP4cxccmE7GY6rOW5qjhzUseBk-KjtaITk6ZUKQ85e-Vo1pwOQC0zG-AkRhZ0OEkJyjFD5RiJtYNPlnvmrWdlgqFVbiQSf4S9QbgCbnA2Xt4_4cwrbD95n8h06i9RQS4"/>
+<button class="w-full bg-on-surface text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90">
+<span class="material-symbols-outlined">description</span>
+                                Baixar Ficha Técnica
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preparation Steps -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<div class="lg:col-span-2">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Passo a Passo (Alta Escala)</h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<span class="text-4xl font-extrabold text-stone-200">01</span>
+<div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Higienização e Padronização</h4>
+<p class="text-on-surface-variant text-body-md">Lave os insumos em cubas industriais com solução clorada. Utilize o fatiador industrial regulado para 4mm para garantir que as fatias de berinjela, abobrinha e tomate tenham o mesmo tempo de cocção.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="text-4xl font-extrabold text-stone-200">02</span>
+<div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">A Base de Sofrito</h4>
+<p class="text-on-surface-variant text-body-md">Em um caldeirão, sue o alho roxo picado com azeite extra virgem. Adicione o tomate italiano triturado. O objetivo é uma base rica que irá sustentar os vegetais durante a montagem nas GN 1/1.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="text-4xl font-extrabold text-stone-200">03</span>
+<div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Montagem e Forno Combinado</h4>
+<p class="text-on-surface-variant text-body-md">Disponha os vegetais em espiral ou fileiras transversais. Utilize o forno combinado em modo calor seco 160°C por 35 minutos para concentrar os sabores sem desmanchar a estrutura dos legumes orgânicos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-md rounded-xl h-fit">
+<h3 class="font-title-lg text-title-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">trending_up</span>
+                    Dica de Lucratividade
+                </h3>
+<p class="text-body-md mb-6">O uso de berinjelas e tomates padronizados reduz o desperdício de aparas em até 18% comparado ao mercado comum. Ao comprar a caixa de 20kg, o custo por porção cai de R$ 4,50 para R$ 3,10.</p>
+<div class="bg-white/40 p-4 rounded-lg">
+<h4 class="font-label-sm uppercase mb-2">Insumos Complementares</h4>
+<ul class="space-y-2 text-label-sm">
+<li class="flex justify-between"><span>Azeite Galão 5L</span> <span class="font-bold">R$ 280</span></li>
+<li class="flex justify-between"><span>Ervas Finas Maço</span> <span class="font-bold">R$ 15</span></li>
+<li class="flex justify-between"><span>Flor de Sal 1kg</span> <span class="font-bold">R$ 45</span></li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-900 dark:bg-black w-full py-8 border-t border-stone-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-10 gap-4 max-w-screen-2xl mx-auto">
+<span class="text-white font-bold text-title-lg">Chef Gourmet</span>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Termos de Serviço</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Privacidade</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Portal do Produtor</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Trabalhe Conosco</a>
+</div>
+<p class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400">© 2024 Chef Gourmet - Soluções B2B para Gastronomia.</p>
+</div>
+</footer>
+</body></html>

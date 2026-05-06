@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#faf9f4",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#ffb599",
+                      "primary-container": "#30852f",
+                      "on-secondary-fixed-variant": "#7f2b00",
+                      "inverse-on-surface": "#f2f1ec",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#ffdbce",
+                      "surface-tint": "#126e19",
+                      "on-background": "#1b1c19",
+                      "tertiary": "#bb0014",
+                      "inverse-surface": "#30312e",
+                      "secondary": "#a63b00",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#83db79",
+                      "surface-container-low": "#f5f4ef",
+                      "surface-container": "#efeee9",
+                      "on-secondary-container": "#5a1c00",
+                      "on-primary-container": "#f8fff0",
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "primary": "#0e6b17",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#fffbff",
+                      "surface-variant": "#e3e3de",
+                      "surface-container-highest": "#e3e3de",
+                      "secondary-container": "#fc6c29",
+                      "on-secondary-fixed": "#370e00",
+                      "surface-dim": "#dbdad5",
+                      "primary-fixed-dim": "#83db79",
+                      "primary-fixed": "#9ef892",
+                      "error": "#ba1a1a",
+                      "outline": "#707a6b",
+                      "on-tertiary-fixed": "#410002",
+                      "background": "#faf9f4",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#ffdad6",
+                      "tertiary-container": "#e41f25",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#1b1c19",
+                      "surface-container-high": "#e9e8e3",
+                      "outline-variant": "#bfcab9",
+                      "on-tertiary-fixed-variant": "#93000d",
+                      "on-primary-fixed-variant": "#00530b",
+                      "surface-bright": "#faf9f4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#40493c",
+                      "on-primary-fixed": "#002202"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "md": "24px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "margin-desktop": "80px",
+                      "xl": "64px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-md": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "title-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen flex flex-col p-6 space-y-2 bg-stone-50 dark:bg-neutral-950 border-r border-stone-200 dark:border-neutral-800 w-[280px] z-50">
+<div class="mb-8 px-4">
+<h1 class="text-2xl font-black text-green-700 dark:text-green-500 font-display-lg">feira.casa</h1>
+<p class="text-stone-500 font-label-sm uppercase tracking-widest mt-1">Master Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:translate-x-1 transition-transform transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 font-bold rounded-lg px-4 py-3 border-l-4 border-green-600 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-body-md">Users &amp; Roles</span>
+</a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:translate-x-1 transition-transform transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:translate-x-1 transition-transform transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-md">Logistics</span>
+</a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:translate-x-1 transition-transform transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-body-md">Content</span>
+</a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:translate-x-1 transition-transform transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">System Settings</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-stone-200 dark:border-neutral-800">
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-xl mb-4 hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-body-md">Support Portal</span>
+</button>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 font-medium px-4 py-3 hover:text-green-600 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 flex items-center justify-between px-8 h-16 w-[calc(100%-280px)] ml-auto bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-stone-100 dark:border-neutral-800 shadow-sm z-40">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-stone-50 dark:bg-neutral-800 border-none rounded-full text-sm focus:ring-2 focus:ring-green-500/20" placeholder="Search users, IDs, or emails..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-stone-500 hover:text-green-600 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<button class="text-stone-500 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-stone-100">
+<div class="text-right hidden sm:block">
+<p class="font-bold text-sm">Admin User</p>
+<p class="text-xs text-stone-500">Super Administrator</p>
+</div>
+<img alt="Master Administrator Profile" class="w-10 h-10 rounded-full border-2 border-green-100" data-alt="Professional headshot of a master administrator in a clean office setting, soft lighting, friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo2PNJN2Yqska2DO43UWfTU7MiWDcWlH-KFanboy4DMKos_YrkmJrBsOtHMwODGzYgCfS0q4jdeZR8RT_NOBLcS6jIeVjyWkV4vns2w32UfB_pmj-GnD0KrFQEy8tO70IsCMgz9CDN3GXPFYZC-QKzK_KO7GNuBHDnK_EXpVfkjxARlbDsoZhhWsojv3NT4TCAG7mAYP6Cmi5LwbKZjG1W6-uQ8Bj9gOU-pHzjmdawyi8xeLv2DXHR4-K9CFGBnqLtJaooCHAh0hg"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[280px] pt-24 px-8 pb-12 min-h-screen bg-surface">
+<!-- Page Header -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">User &amp; Role Management</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Control access levels and manage global user accounts across all regions.</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-900/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-body-md">Create New User</span>
+</button>
+</div>
+<!-- Filters Bento Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="md:col-span-1 bg-white dark:bg-neutral-900 p-4 rounded-2xl shadow-sm border border-stone-100">
+<label class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Role Filter</label>
+<select class="w-full bg-stone-50 border-stone-100 rounded-lg text-sm font-medium focus:ring-green-500 focus:border-green-500">
+<option>All Roles</option>
+<option>Client</option>
+<option>Vendor</option>
+<option>Chef</option>
+<option>Franchisee</option>
+<option>Admin</option>
+</select>
+</div>
+<div class="md:col-span-1 bg-white dark:bg-neutral-900 p-4 rounded-2xl shadow-sm border border-stone-100">
+<label class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Status</label>
+<select class="w-full bg-stone-50 border-stone-100 rounded-lg text-sm font-medium focus:ring-green-500 focus:border-green-500">
+<option>All Statuses</option>
+<option>Active</option>
+<option>Pending</option>
+<option>Suspended</option>
+</select>
+</div>
+<div class="md:col-span-1 bg-white dark:bg-neutral-900 p-4 rounded-2xl shadow-sm border border-stone-100">
+<label class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Region</label>
+<select class="w-full bg-stone-50 border-stone-100 rounded-lg text-sm font-medium focus:ring-green-500 focus:border-green-500">
+<option>Global</option>
+<option>São Paulo, SP</option>
+<option>Rio de Janeiro, RJ</option>
+<option>Belo Horizonte, MG</option>
+</select>
+</div>
+<div class="md:col-span-1 flex items-end">
+<button class="w-full bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+<span>Clear Filters</span>
+</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-white dark:bg-neutral-900 rounded-3xl shadow-sm border border-stone-100 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-50 dark:bg-neutral-800/50 border-b border-stone-100">
+<th class="px-6 py-4 font-label-sm text-stone-500 uppercase tracking-wider">User</th>
+<th class="px-6 py-4 font-label-sm text-stone-500 uppercase tracking-wider">Role</th>
+<th class="px-6 py-4 font-label-sm text-stone-500 uppercase tracking-wider">Region</th>
+<th class="px-6 py-4 font-label-sm text-stone-500 uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-sm text-stone-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-50">
+<!-- User Row 1 -->
+<tr class="hover:bg-green-50/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-10 h-10 rounded-full" data-alt="Portrait of a smiling young male customer, friendly expression, vibrant outdoor background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArUGnrpn2sDueKzn5i1Deik4DyvqtfFjv6mcwF1mU_64tYqwFuAvNxRVAdwgqIykb-AtfftnHOynYYVJPH-ciA08VUvHPrvcQin43OESKzLfTUIIskqB1rxhTXjiGgrMFQ5DMDSYWTUmOwJUZzpj9ipai_4m2rXjSPFAMwEb9jbtgZHNkOd-eGw0TAxzKOugSluL9u8icrjkxvotMDMKveD5MPgPPJOPoJx7DMbvsix554uo6zdNg4Ov0KDHJV_QLDrjEZ7-2L1Vc"/>
+<div>
+<p class="font-bold text-on-surface">Ricardo Silva</p>
+<p class="text-xs text-stone-400">ricardo.silva@email.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide">Client</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">São Paulo, SP</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-green-600 font-bold text-sm">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span> Active
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-green-600 shadow-sm border border-transparent hover:border-stone-100" title="View Profile">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-secondary shadow-sm border border-transparent hover:border-stone-100" title="Edit Permissions">
+<span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-tertiary shadow-sm border border-transparent hover:border-stone-100" title="Manage Status">
+<span class="material-symbols-outlined text-xl">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-green-50/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-10 h-10 rounded-full" data-alt="Portrait of a professional middle-aged woman vendor, artisan setting, warm cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8DOw4zj4pJ_XxHRpG9C15A7P_JRaN-G4C8G2WfsUcIGp_iNnNzESIkgR4yqRV1KVW-XAxyABinARRF1tuWTCaJEuSH6NueFHsaLqemRGuUpHJiLrfXa_b63E9Kq5lvdXCom5MOBO3raWOtrhCt0KwUOIKH_zbfs_FB4hWhUnB3M8-D6n6WeNvjH60gEwxgTXcWwEN2QrrGTAmHni-lnmhzLt1y-r3WYffD_kAnK206J-5M36DufxvGRfOkzzIYfWg9Ye5ZorWAbQ"/>
+<div>
+<p class="font-bold text-on-surface">Maria Oliveira</p>
+<p class="text-xs text-stone-400">maria.organicos@feira.casa</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-bold uppercase tracking-wide">Vendor</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">Rio de Janeiro, RJ</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-green-600 font-bold text-sm">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span> Active
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-green-600"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-secondary"><span class="material-symbols-outlined text-xl">admin_panel_settings</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-tertiary"><span class="material-symbols-outlined text-xl">block</span></button>
+</div>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-green-50/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-10 h-10 rounded-full" data-alt="Friendly male chef in uniform, professional kitchen background, clean and bright lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdA0AKj0dh7zfvXLQbVIMys1kw6UcvrxN5PpuTHNpgh_KJosh4e-Onu4ovYHfJ2t1meip3_PPRcRaiXVprlO4oT1TTqh62kwnoqF-S6x4dKTzOdm5WkBwB6IrMw1tPNQzkYlmiWKUnPLFj6o5LBfczwO_RDV9ScO75B354U-ctwiCokx3yxlMmWzOsvOdUnEBjblQ62hTD8uELyswnMuR_JiwMRdNJQZsPcKLzskU4N08IXqqgzV1sChh3e_2qyXY_BeLKTDG71dE"/>
+<div>
+<p class="font-bold text-on-surface">André Santos</p>
+<p class="text-xs text-stone-400">andre.chef@delivery.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-xs font-bold uppercase tracking-wide">Chef</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">Belo Horizonte, MG</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-amber-600 font-bold text-sm">
+<span class="w-2 h-2 bg-amber-500 rounded-full"></span> Pending
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-green-600"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-secondary"><span class="material-symbols-outlined text-xl">admin_panel_settings</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-tertiary"><span class="material-symbols-outlined text-xl">block</span></button>
+</div>
+</td>
+</tr>
+<!-- User Row 4 -->
+<tr class="hover:bg-green-50/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-10 h-10 rounded-full" data-alt="Portrait of an executive franchisee woman, office background, modern minimalist style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYQg-3gTcGSC0_wzbVj4HReagdG4KySW5nGoONoKj1LaUUvicBfLs2s7-CNnlV8xCi9fiRMEXUZu2DUumeRbTN2LTYptPTKiC-wUIwUwRLyrYUXgO0xczUQWPgbey4bc8l88TuUvSem4ZtzV6wmEdDUS0LhbY5PzkBnqF-X8u4S3qfRRucU7nsCoJL4Xs9Y8fqYD5sGrN6VGfYVh1uIoDxkvJ6WxjoPYDalmqLIhBX5_9C9pr4VNOpQSsMPRF4TKRQLfFkJ2gjLK8"/>
+<div>
+<p class="font-bold text-on-surface">Fernanda Costa</p>
+<p class="text-xs text-stone-400">fernanda.franchise@feira.casa</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold uppercase tracking-wide">Franchisee</span>
+</td>
+<td class="px-6 py-4 text-sm text-stone-600">Curitiba, PR</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-red-600 font-bold text-sm">
+<span class="w-2 h-2 bg-red-500 rounded-full"></span> Suspended
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-green-600"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-secondary"><span class="material-symbols-outlined text-xl">admin_panel_settings</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-stone-400 hover:text-tertiary"><span class="material-symbols-outlined text-xl">check_circle</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-stone-50 dark:bg-neutral-800/50 flex items-center justify-between border-t border-stone-100">
+<p class="text-sm text-stone-500 font-medium">Showing <span class="text-on-surface font-bold">1-10</span> of <span class="text-on-surface font-bold">245</span> users</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg bg-white border border-stone-200 text-stone-400 hover:text-green-600 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="w-8 h-8 rounded-lg bg-white text-stone-600 text-sm font-bold hover:bg-stone-100">2</button>
+<button class="w-8 h-8 rounded-lg bg-white text-stone-600 text-sm font-bold hover:bg-stone-100">3</button>
+<span class="text-stone-400 px-1">...</span>
+<button class="w-8 h-8 rounded-lg bg-white text-stone-600 text-sm font-bold hover:bg-stone-100">25</button>
+<button class="p-2 rounded-lg bg-white border border-stone-200 text-stone-400 hover:text-green-600">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role Permissions Overview (Secondary Bento) -->
+<div class="mt-12">
+<h3 class="text-title-lg font-title-lg mb-6 text-on-surface">Role Quick Reference</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary-container/10 p-6 rounded-3xl border border-primary-container/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary-container">admin_panel_settings</span>
+<h4 class="font-bold text-primary-container">Admin Control</h4>
+</div>
+<p class="text-sm text-stone-600 font-body-md">Full access to system configurations, financial records, and master user list.</p>
+</div>
+<div class="bg-secondary-container/10 p-6 rounded-3xl border border-secondary-container/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary-container">store</span>
+<h4 class="font-bold text-secondary-container">Vendor Portal</h4>
+</div>
+<p class="text-sm text-stone-600 font-body-md">Manage product catalog, inventory levels, and direct order fulfillment.</p>
+</div>
+<div class="bg-stone-100 p-6 rounded-3xl border border-stone-200">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-stone-600">person</span>
+<h4 class="font-bold text-stone-600">Standard Client</h4>
+</div>
+<p class="text-sm text-stone-600 font-body-md">Purchase goods, track orders, and manage personal profile/address book.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Criar conta - feira.casa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dbdad5",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-primary-container": "#f8fff0",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "background": "#faf9f4",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#efeee9",
+                    "on-surface": "#1b1c19",
+                    "on-secondary-fixed": "#370e00",
+                    "surface-container-low": "#f5f4ef",
+                    "inverse-surface": "#30312e",
+                    "tertiary": "#bb0014",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#707a6b",
+                    "outline-variant": "#bfcab9",
+                    "on-tertiary-fixed": "#410002",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffdbce",
+                    "on-background": "#1b1c19",
+                    "primary-container": "#30852f",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-primary-fixed": "#002202",
+                    "surface-tint": "#126e19",
+                    "inverse-primary": "#83db79",
+                    "secondary-container": "#fc6c29",
+                    "surface-container-highest": "#e3e3de",
+                    "surface-bright": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "surface": "#faf9f4",
+                    "secondary-fixed-dim": "#ffb599",
+                    "primary-fixed-dim": "#83db79",
+                    "on-tertiary-container": "#fffbff",
+                    "primary-fixed": "#9ef892",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-surface-variant": "#40493c",
+                    "on-secondary-container": "#5a1c00",
+                    "secondary": "#a63b00",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#e41f25",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-high": "#e9e8e3",
+                    "inverse-on-surface": "#f2f1ec"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "xs": "4px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md">
+<!-- Simple TopBar Branding -->
+<header class="flex justify-center py-xl">
+<h1 class="text-3xl font-black text-primary tracking-tight font-headline-md">feira.casa</h1>
+</header>
+<main class="flex-grow flex items-start justify-center px-gutter pb-xl">
+<!-- Register Card -->
+<div class="w-full max-w-[400px] bg-white border border-outline-variant p-md md:p-xl rounded-xl shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Criar conta</h2>
+<form class="space-y-md">
+<!-- Name Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface block" for="nome">Seu nome</label>
+<input class="w-full p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-surface-dim" id="nome" name="nome" placeholder="Nome e sobrenome" type="text"/>
+</div>
+<!-- Email Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface block" for="email">E-mail</label>
+<input class="w-full p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="email" name="email" type="email"/>
+</div>
+<!-- WhatsApp Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface block" for="whatsapp">WhatsApp</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</span>
+<input class="w-full pl-10 p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" type="tel"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface block" for="senha">Senha</label>
+<input class="w-full p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="senha" name="senha" placeholder="Pelo menos 6 caracteres" type="password"/>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span class="text-[11px] font-medium">As senhas devem ter pelo menos 6 caracteres.</span>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface block" for="confirmar-senha">Confirmar senha</label>
+<input class="w-full p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="confirmar-senha" name="confirmar-senha" type="password"/>
+</div>
+<!-- Primary Action -->
+<div class="pt-base">
+<button class="w-full py-sm bg-primary text-on-primary font-headline-md rounded-lg shadow-sm hover:opacity-90 active:opacity-100 transition-all text-body-md font-bold" type="submit">
+                        Criar sua conta feira.casa
+                    </button>
+</div>
+<!-- Policy Text -->
+<p class="text-[12px] leading-relaxed text-on-surface-variant">
+                    Ao criar uma conta, você concorda com as <a class="text-secondary hover:underline" href="#">Condições de Uso</a> e o <a class="text-secondary hover:underline" href="#">Aviso de Privacidade</a> da feira.casa.
+                </p>
+<!-- Divider -->
+<div class="relative py-base">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-[12px]">
+<span class="px-2 bg-white text-on-surface-variant font-medium">Já tem uma conta?</span>
+</div>
+</div>
+<!-- Login Link -->
+<div class="text-center">
+<a class="inline-flex items-center gap-1 text-body-md font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+                        Fazer login
+                        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</form>
+</div>
+</main>
+<!-- Simple Footer (As per JSON structure but adapted for Auth flow) -->
+<footer class="bg-zinc-50 border-t border-zinc-200 mt-xl py-10 px-6 w-full text-center space-y-4">
+<div class="flex flex-wrap justify-center gap-md mb-2">
+<a class="text-xs font-medium text-zinc-600 hover:text-green-700 transition-colors" href="#">Condições de Uso</a>
+<a class="text-xs font-medium text-zinc-600 hover:text-green-700 transition-colors" href="#">Aviso de Privacidade</a>
+<a class="text-xs font-medium text-zinc-600 hover:text-green-700 transition-colors" href="#">Ajuda</a>
+</div>
+<p class="text-xs font-medium text-zinc-600">© 2024 feira.casa - Conectando o campo à sua mesa.</p>
+</footer>
+<!-- Decorative Image Context (Asymmetric background accent) -->
+<div class="fixed bottom-0 right-0 -z-10 opacity-10 pointer-events-none">
+<img class="w-[400px] h-auto object-contain" data-alt="high quality close-up of fresh organic green kale leaves with water droplets and vibrant textures on a bright background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeWZD0jbk-iLm0gc_AClcLHmIMx77pCVkBQe1iKmCYovNBSsK7WXjPNJn-hzQfnonh9oQqSFVgOgTcSHNdYXwme6jtfywe2t8ip46b660O25WP3OQeNrUbCno4HvZcB9COjY8eKALG2rSe91TTaGdFx7mMIYAtW-fY3s-JV_pKEoRNnBhP46QUaI1C_H8qV3FCxCSgPAthmdPlpn-ttBbqPQgYZWb2YF0TQqHoy3yYKwYubgzZhGbvSn3rZ_tNzPo_S298nNC1wuc"/>
+</div>
+</body></html>

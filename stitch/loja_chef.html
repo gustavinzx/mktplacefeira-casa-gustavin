@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "surface-container": "#efeee9",
+                    "primary-container": "#30852f",
+                    "primary-fixed": "#9ef892",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#40493c",
+                    "surface-dim": "#dbdad5",
+                    "inverse-surface": "#30312e",
+                    "tertiary": "#bb0014",
+                    "on-secondary-fixed": "#370e00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-secondary-container": "#5a1c00",
+                    "outline": "#707a6b",
+                    "surface-bright": "#faf9f4",
+                    "surface-container-high": "#e9e8e3",
+                    "surface": "#faf9f4",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#0e6b17",
+                    "surface-tint": "#126e19",
+                    "secondary": "#a63b00",
+                    "surface-container-low": "#f5f4ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#002202",
+                    "inverse-primary": "#83db79",
+                    "on-background": "#1b1c19",
+                    "tertiary-container": "#e41f25",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "primary-fixed-dim": "#83db79",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "outline-variant": "#bfcab9",
+                    "background": "#faf9f4",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-variant": "#e3e3de",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1b1c19",
+                    "surface-container-highest": "#e3e3de",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "secondary-fixed": "#ffdbce",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary-fixed": "#410002",
+                    "secondary-container": "#fc6c29",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xs": "4px",
+                    "margin-desktop": "80px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-stone-950/90 backdrop-blur-md border-b border-stone-100 dark:border-stone-800 shadow-sm docked full-width top-0 z-50 sticky">
+<div class="flex items-center justify-between px-6 h-20 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black italic text-green-600 dark:text-green-400 tracking-tighter">feira.casa</div>
+<nav class="hidden md:flex items-center gap-8 font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
+<a class="text-stone-600 dark:text-stone-400 hover:text-green-500 transition-colors duration-200" href="#">Produtos</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-green-500 transition-colors duration-200" href="#">Receitas</a>
+<a class="text-green-600 dark:text-green-400 border-b-2 border-green-600 pb-1" href="#">Produtores</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-green-500 transition-colors duration-200" href="#">Ofertas</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined text-stone-600">shopping_basket</span>
+</button>
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined text-stone-600">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-xl">
+<!-- Chef Hero Profile -->
+<section class="relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-stone-100">
+<div class="h-48 md:h-64 bg-gradient-to-r from-primary-container to-primary overflow-hidden">
+<img alt="" class="w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="blurred background of a high-end professional kitchen with copper pans and warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSfJtPqqzXfp31m3OnrezrQLaXLUWnDwGIXG02dSONJjwH3mcBEz9_l5mf_S7ijWUWHe1Vtr7rgAhsyTvzgQuoFp4eda0vYh2fNAWh8m40x2UMYl1zbpY723fGk0t63VOpGfpTCbku6U0YGe55jvnYiRW43jPOfwA7KGa3qrR3FOPUBZuTRWKwxLq5mSaNi3HjpysejrjHleVN3rzHp2WeWEbPsUfbuWtlgEbcTsDKZYaDOQG7YS87hX840OZl9xmx3aWwpTLN5wE"/>
+</div>
+<div class="px-md pb-md -mt-16 md:-mt-20 flex flex-col md:flex-row items-end md:items-center gap-md">
+<div class="relative">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white overflow-hidden shadow-lg bg-white">
+<img alt="" class="w-full h-full object-cover" data-alt="portrait of a professional gourmet chef in a white uniform smiling warmly against a soft studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMn2nnVG-D3ogcDNtqCAhn3Xg2yocbXkEtFn87dNRHSinWMnihshGJpAbUeiE8SR9QgXonxNRCl0d0K7MX0CWlxnPtTIcEwwz8I5ntmbAjQxea77ePv4fOqgv9rEsfUQTF3cozXTowtFyHs5F0-74JhjAql2rP3Z0GlUzFnUYvTLhiXdvd4yr6PkbibU64y8iJxTgrwF5aTJEQ_O75mPRzWkNM0rXJi2IaF2zP6O6bNIMMQTY8s9gb7hqVrVAB8AfTxo0TMvfjftY"/>
+</div>
+</div>
+<div class="flex-1 space-y-xs pt-4 md:pt-16">
+<div class="flex items-center gap-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface">Loja do Chef Gourmet</h1>
+<span class="flex items-center gap-1 bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-lg text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9 (120 avaliações)
+                        </span>
+</div>
+<p class="font-title-lg text-title-lg text-secondary">Especialista em Cozinha Autoral e Italiana</p>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                        Acreditamos na alquimia dos ingredientes frescos. Trago o melhor da horta direto para pratos que contam histórias, unindo técnica clássica e alma brasileira.
+                    </p>
+</div>
+<div class="flex gap-sm pb-xs md:pb-0">
+<button class="bg-secondary text-white font-bold px-md py-sm rounded-xl shadow-sm hover:opacity-90 active:scale-95 transition-all">Seguir Chef</button>
+<button class="border border-outline text-on-surface font-bold px-md py-sm rounded-xl hover:bg-stone-50 transition-all">Compartilhar</button>
+</div>
+</div>
+</section>
+<!-- Featured Products: Pratos Assinados -->
+<section class="space-y-md">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Pratos Assinados</h2>
+<a class="text-primary font-bold hover:underline" href="#">Ver Menu Completo</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Product Card 1 -->
+<div class="bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div class="h-56 overflow-hidden relative">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close-up of a creamy mushroom risotto with fresh herbs and parmesan shavings on a ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0WFS3Vy0t2HCZvTECPYuOThBRzRXlxOL5KOTOrBgFNc0gIOAJ_Nx9CotJGxeZak2Cp2fsQi02arrUVuaO9i8qpmPtnxW2cwfIR4C7pdex-RqAQ9efD6NHpo8kNjwq5uaeicRkess8GKCzTTo29fSuxx3X3omdoJdROnIst4cBEQmVGPRKgWlMF3TgLOGR_BhwPDTWIBqahydeGeqAnT0XNO5jnKGJ6wCvRi5lBy3RkuJeyhHDRaMLRwPfvFq0Goau0LNW93vGk30"/>
+<span class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-label-sm font-label-sm text-primary">Mais Pedido</span>
+</div>
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg">Risoto de Funghi Porcini</h3>
+<span class="font-headline-md text-headline-md text-primary">R$ 78</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Arroz arbóreo premium, mix de cogumelos frescos e finalizado com azeite de trufas brancas.</p>
+<button class="w-full bg-primary text-white font-bold py-sm rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                            Adicionar à Cesta
+                        </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div class="h-56 overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="artisanal fresh pasta with bright cherry tomatoes and basil leaves, golden hour natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbqxIz3h4nsOz6ri2oLVyr5zNRxHlYZhmoGQtRydwOFdeDCej_LUdLONN2v0oldbJ16xbppcJY6Wv4msIuxa_jPSF10bRaXoj3awTAvTlUkwOwiX9aFrmV5nRPZ4PeH_Hi3ZGFwwyvgzUO33t4VAuybezEGhBlRXb9TNbP0LOL3j71QVA2xTCtOAUUR2-zHne7yM0EMBClFLIQ7RtUd5a0OkUljbWdsJR-iIFE_pFomrtEGmmM9EmKtDr-BTB2IEqDvxB86qMbmGY"/>
+</div>
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg">Massa Fresca Pomodoro</h3>
+<span class="font-headline-md text-headline-md text-primary">R$ 64</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Fettuccine feito à mão com ovos caipiras e molho de tomates rasteiros colhidos hoje.</p>
+<button class="w-full bg-primary text-white font-bold py-sm rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                            Adicionar à Cesta
+                        </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div class="h-56 overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="pan-seared salmon fillet with roasted asparagus and a lemon butter sauce on a premium slate plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfZgsqcdbFmsDmmRzTWpW7EJZX-hJRa2yL8S41eqJtX1_wU2v2bcomKh7Q7kBT1DGuW_VWpK2RJymOIf-ZFoPrJSjVRXE4s6gYBJW3QAANtMVqat8gWCaRA7lSxVAw0aFgr_3a9NFyYrqvIuQ03V8nL4fKo8FKAtW9wEWw4lX0-2dcPFpGFmvD-bMyESiVYTV60ApP12WbOKEcr0_s5bop1WwBFAgK4VFuYWk9DHCh9chuGIF4LROuelZm0cFlEhYT_7OGHDrzI7I"/>
+</div>
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg">Salmão em Crosta</h3>
+<span class="font-headline-md text-headline-md text-primary">R$ 92</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Filé de salmão grelhado com crosta de pistache e purê de mandioquinha orgânica.</p>
+<button class="w-full bg-primary text-white font-bold py-sm rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                            Adicionar à Cesta
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section: Gourmet Services (Asymmetric Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container rounded-3xl p-lg flex flex-col justify-center space-y-md">
+<span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Experiência Única</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-on-surface">Serviços Gourmet Exclusivos</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Transforme sua casa em um restaurante de alta gastronomia ou aprenda as técnicas por trás dos pratos.</p>
+<div class="space-y-sm pt-4">
+<div class="flex items-start gap-md group cursor-pointer hover:bg-white/50 p-sm rounded-xl transition-all">
+<div class="bg-white p-3 rounded-xl text-primary shadow-sm">
+<span class="material-symbols-outlined">dinner_dining</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg">Jantar em Casa</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Menu completo preparado na sua cozinha para até 8 convidados.</p>
+</div>
+</div>
+<div class="flex items-start gap-md group cursor-pointer hover:bg-white/50 p-sm rounded-xl transition-all">
+<div class="bg-white p-3 rounded-xl text-primary shadow-sm">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg">Workshops Privados</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Aula prática de massas frescas ou risotos para pequenos grupos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-3xl overflow-hidden min-h-[400px] relative">
+<img alt="" class="w-full h-full object-cover" data-alt="chef hands plating a delicate dessert in a sunlit kitchen, focus on the artistic details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXpuHP-wurrgurkezssKqgRZ77DdlKjxbmqV6SpIkz8KNf7UFOOD5LH7nD7vQm11pV3f7W6gsyvv_Rx0JmAY-WiRKsvqWxe54kMJq1elUAxLZaPagVTrMy888vfYARQC0RNl_cQbMuY5X41u7UIGpcze3F2gr2-v-F6sm5W9YTj2JmslZjd144woFGr8G7AAfdLeG8WU4hlCFaMiv-srk7kSXe_-xoX0y3dKLRHxJEIEBkd8dEKeeE4wrKFMRLo6bmOZi2KzSsQec"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+<button class="bg-white text-on-surface font-bold px-xl py-md rounded-xl hover:scale-105 transition-transform">Consultar Disponibilidade</button>
+</div>
+</div>
+</section>
+<!-- Recipes Section -->
+<section class="space-y-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Receitas Publicadas</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Recipe 1 -->
+<div class="space-y-sm group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-stone-200 shadow-sm relative">
+<img alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="overhead shot of a bowl of pasta with rustic tomato sauce and fresh parmesan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGYEiILr7qhhHZn0nofLzcNyHWkneFXLwMNOqhcmTby71ySZE8KkrWIRsRh_S-lQA9h0mWBOLCqniM7r63NNDw0P6QxPVHb5bYJcWLcjCNmzbWpoohB707ymESCo8p8O6jHxL-HlGQPocbiGpQc_xWAFFPiZdLAKUs-1pe-_o9xwSePz_LTWcWBZFfNdYTbfX6fyOqrggxC5hF28WbxtB9YodZwCG8uCFLmMjjmJH6vAXEmBveAMXZnd3mMkDdPjJ1HUpCGoKh3SI"/>
+<div class="absolute top-2 right-2 bg-black/30 backdrop-blur text-white p-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-sm text-body-md font-bold text-on-surface">Segredo do Pomodoro Perfeito</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">15 min • Intermediário</p>
+</div>
+</div>
+<!-- Recipe 2 -->
+<div class="space-y-sm group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-stone-200 shadow-sm relative">
+<img alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="warm roasted vegetables with balsamic glaze and fresh herbs on a rustic platter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvDNMCV1MV4W4pk012a1TiK8QsDzisVQBB2BsNSZ3fI1BdKBWHZC1csn5ya9FWVp1QKfCl8UCb_gGyxkqtY9gvZUx5c0108nUlpB1SKtXzQteeD6eqHvb7Tzj3qOJlu6XgHK9bJdBhF5oF3_Udz0JI73fiGvTyxERB9dn1PdPbuv-F0snZaI50Jr0psGB4PibJTYFuu0rSafne4jRME2FlfsWQXXOvBqtiSag4cYzN1n7pW-LOsXD1RhTcWJHF8oDW5BZcLrLoFPA"/>
+</div>
+<div>
+<h4 class="font-label-sm text-body-md font-bold text-on-surface">Legumes Tostados na Brasa</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">30 min • Fácil</p>
+</div>
+</div>
+<!-- Recipe 3 -->
+<div class="space-y-sm group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-stone-200 shadow-sm relative">
+<img alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="healthy vibrant salad with avocado, citrus slices, and microgreens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzAKai8MJ4HbRAsKZdgPCcSSDYFPQ1heuCQcAwdWw-Nb4yHkY3DIc-QRt4Hn_VT_9rBEDQvFmkZsn2zYatbA92URQysAoaNVOfcDi874rBXFZPH-RfEhZnK7Pa1rbTXnTlUdyTpaYlbxg6sWWm_TKmv5xMffZ9sd3HSmr3fxfEJ-CoC3WVG4NwdfeajMkNn8cSiLkwXwpIOMPC9Uv5Zud8Yai60C-5c2xzxdNXrpiBqRiVwjVYETDKHJ4sD7vRNRh4OsnrXGPNqH0"/>
+</div>
+<div>
+<h4 class="font-label-sm text-body-md font-bold text-on-surface">Salada Sensorial de Verão</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">10 min • Iniciante</p>
+</div>
+</div>
+<!-- Recipe 4 -->
+<div class="space-y-sm group cursor-pointer">
+<div class="aspect-square rounded-2xl overflow-hidden bg-stone-200 shadow-sm relative">
+<img alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="decadent chocolate fondant with a molten core and vanilla bean ice cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9uZyC-Vtyj0qcnGtabyHbnH2J86Y-c6Hm52SaNLvwT2iFzj0rTtjnRc-XxUdxBz2Bl7Botr3o-7DPucAjtOGZQBjN44WPsUz68lNnhw88zzTRJB0eO8IlUqBzU__blqD5oJnHDDu79pSYK_HVO4hsQdnNjrmtLvGCHIKbhnf7PxAHCRJ6zHF3lJq69veDX0On0-l2QfmrC4cI0QeXcv3-2atoCosbFWjs0jMsLQj77G8eHDyyA5867oIuF7XyP_vYG0IFTvJXkgU"/>
+</div>
+<div>
+<h4 class="font-label-sm text-body-md font-bold text-on-surface">Fondant de Chocolate 70%</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">25 min • Avançado</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 w-full">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-6 w-full max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] text-sm text-stone-500 dark:text-stone-400">
+<div class="flex flex-col gap-2">
+<span class="font-black text-green-600 text-xl">feira.casa</span>
+<p>© 2024 feira.casa - Do produtor direto para sua bancada.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-stone-500 hover:text-orange-500 underline decoration-orange-400 decoration-2 underline-offset-4 Smooth transition-all" href="#">Sobre a Feira</a>
+<a class="text-stone-500 hover:text-orange-500 underline decoration-orange-400 decoration-2 underline-offset-4 Smooth transition-all" href="#">Privacidade</a>
+<a class="text-stone-500 hover:text-orange-500 underline decoration-orange-400 decoration-2 underline-offset-4 Smooth transition-all" href="#">Termos de Uso</a>
+<a class="text-stone-500 hover:text-orange-500 underline decoration-orange-400 decoration-2 underline-offset-4 Smooth transition-all" href="#">Fale com a Gente</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-stone-950 border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-500" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-500" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Busca</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-500" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Receitas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-500" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Cesta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 rounded-xl px-3 py-1 scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

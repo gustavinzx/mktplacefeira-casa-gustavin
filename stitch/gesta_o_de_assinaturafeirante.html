@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfcab9",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#410002",
+                        "primary-fixed": "#9ef892",
+                        "on-secondary-container": "#5a1c00",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-dim": "#dbdad5",
+                        "secondary": "#a63b00",
+                        "tertiary": "#bb0014",
+                        "background": "#faf9f4",
+                        "primary-fixed-dim": "#83db79",
+                        "on-secondary-fixed": "#370e00",
+                        "on-background": "#1b1c19",
+                        "surface-container": "#efeee9",
+                        "tertiary-container": "#e41f25",
+                        "secondary-fixed-dim": "#ffb599",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdad6",
+                        "outline": "#707a6b",
+                        "inverse-surface": "#30312e",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f1ec",
+                        "surface": "#faf9f4",
+                        "on-primary-fixed": "#002202",
+                        "on-primary-container": "#f8fff0",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "secondary-fixed": "#ffdbce",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "surface-bright": "#faf9f4",
+                        "on-primary": "#ffffff",
+                        "primary": "#0e6b17",
+                        "surface-tint": "#126e19",
+                        "surface-container-highest": "#e3e3de",
+                        "surface-variant": "#e3e3de",
+                        "secondary-container": "#fc6c29",
+                        "surface-container-high": "#e9e8e3",
+                        "primary-container": "#30852f",
+                        "on-primary-fixed-variant": "#00530b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "surface-container-low": "#f5f4ef",
+                        "on-surface-variant": "#40493c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f4; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar (from Shared Components JSON) -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col p-6 z-40 w-72 bg-white dark:bg-zinc-950 border-r border-zinc-100 dark:border-zinc-800 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+<div class="mb-10 flex flex-col gap-1">
+<span class="text-2xl font-extrabold text-[#4BA046] tracking-tighter">feira.casa</span>
+<span class="text-xs uppercase tracking-widest text-outline font-bold">Portal do Feirante</span>
+</div>
+<div class="flex-1 flex flex-col gap-2 font-['Plus_Jakarta_Sans'] text-sm tracking-tight">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Catálogo de Produtos
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Pedidos e Devoluções
+            </a>
+<!-- ACTIVE NAVIGATION -->
+<a class="flex items-center gap-3 px-4 py-3 bg-green-50 dark:bg-green-900/20 text-[#4BA046] font-bold rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="card_membership">card_membership</span>
+                Minha Assinatura
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                Pontos de Venda
+            </a>
+</div>
+<div class="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:bg-primary-container transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Anunciar Produto
+            </button>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a friendly Brazilian vendor at an open air market, warm natural sunlight, rural aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLnMTJgksQQiMNjhGk3X4adj5sYL2Ws5Z9_8DoU5-poixjEW4F-4pjS8LAt_D_9cjJ4VdKH4AT0wG5R6EHYWzhy-sIYPooIyZVVP8hf1O_R4YJcptzsTI8bUtZoG1XPSVaJwvX8BSoSg1sfv17HF3KmRCxpRnwh0zAFyXyETZhmTlq9Uc28nl6PC6oQvb3esE_tm0lbCAkpoi_L_Uqua15_izWdreeh_ofXTsDjDco0r7djZ-D57qhqiVz_tTZ31Zci6LaBn9yy8"/>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-xs">Seu João Frutas</span>
+<span class="text-[10px] text-outline">Feirante Verificado</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (from Shared Components JSON) -->
+<header class="fixed top-0 right-0 h-16 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md flex justify-between items-center px-8 ml-72 w-[calc(100%-18rem)] z-30 border-b border-zinc-100 dark:border-zinc-800">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-lg">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary-fixed" placeholder="Buscar no painel..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="text-zinc-500 hover:text-[#4BA046] transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<button class="text-zinc-500 hover:text-[#4BA046] transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-px bg-zinc-100"></div>
+<span class="font-title-lg text-primary text-sm font-bold">Painel de Controle</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-72 pt-24 px-10 pb-16 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center gap-2 text-xs font-bold text-outline uppercase tracking-widest mb-2">
+<span>Configurações</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">Gestão de Assinatura</span>
+</nav>
+<h1 class="font-display-lg text-on-background text-4xl">Minha Assinatura</h1>
+<p class="font-body-md text-on-surface-variant mt-2 max-w-xl">Gerencie seu plano, benefícios exclusivos e mantenha seu ponto de venda ativo na feira digital.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 border border-outline text-on-surface font-bold rounded-xl hover:bg-surface-container transition-all">Cancelar Renovação</button>
+<button class="px-6 py-3 bg-secondary text-white font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-secondary/20">Fazer Upgrade</button>
+</div>
+</header>
+<!-- Grid Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Bento Block: Current Plan Details -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Featured Current Plan Card -->
+<section class="relative overflow-hidden rounded-3xl p-8 border border-primary/10 shadow-sm bg-gradient-to-br from-primary/5 to-transparent">
+<div class="absolute top-0 right-0 p-8">
+<span class="px-4 py-1 bg-primary text-white text-xs font-black rounded-full uppercase tracking-widest">Ativo</span>
+</div>
+<div class="flex items-start gap-6">
+<div class="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-4xl" data-icon="potted_plant">potted_plant</span>
+</div>
+<div>
+<h2 class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Seu Plano Atual</h2>
+<h3 class="font-headline-md text-3xl">Plano Semeador</h3>
+<div class="flex items-center gap-4 mt-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase">Próxima Renovação</span>
+<span class="font-title-lg text-sm">15 de Setembro, 2024</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase">Valor Mensal</span>
+<span class="font-title-lg text-sm">R$ 89,90</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Benefits Grid inside Current Plan -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+<div class="flex items-center gap-3 p-4 bg-white/60 rounded-2xl">
+<span class="material-symbols-outlined text-primary" data-icon="percent" style="font-variation-settings: 'FILL' 1;">percent</span>
+<span class="text-sm font-medium text-on-surface-variant">Taxas reduzidas em vendas (8%)</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white/60 rounded-2xl">
+<span class="material-symbols-outlined text-primary" data-icon="newspaper" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+<span class="text-sm font-medium text-on-surface-variant">Destaque semanal no tabloide local</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white/60 rounded-2xl">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="text-sm font-medium text-on-surface-variant">Logística integrada prioritária</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white/60 rounded-2xl border-2 border-dashed border-primary/20">
+<span class="material-symbols-outlined text-outline" data-icon="add_circle">add_circle</span>
+<span class="text-sm font-medium text-outline">Ver todos os benefícios</span>
+</div>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="bg-white rounded-3xl p-8 border border-zinc-100">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-lg">Método de Pagamento</h3>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+                                Alterar
+                            </button>
+</div>
+<div class="flex items-center justify-between p-5 border border-zinc-100 rounded-2xl bg-surface-container-lowest">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-zinc-800 rounded-md flex items-center justify-center">
+<span class="text-[8px] text-white font-bold italic tracking-tighter">MASTERCARD</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-sm">•••• •••• •••• 4492</span>
+<span class="text-xs text-outline">Expira em 10/2026</span>
+</div>
+</div>
+<span class="px-3 py-1 bg-green-50 text-primary text-[10px] font-black rounded-full uppercase">Padrão</span>
+</div>
+</section>
+<!-- Invoice History Table -->
+<section class="bg-white rounded-3xl p-8 border border-zinc-100">
+<h3 class="font-title-lg text-lg mb-6">Histórico de Faturas</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b border-zinc-50">
+<tr class="text-[10px] text-outline font-black uppercase tracking-widest">
+<th class="pb-4">Data</th>
+<th class="pb-4">Plano</th>
+<th class="pb-4">Valor</th>
+<th class="pb-4">Status</th>
+<th class="pb-4 text-right">Ação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-50">
+<tr class="group">
+<td class="py-4 text-sm">15 Ago, 2024</td>
+<td class="py-4 text-sm font-semibold">Plano Semeador</td>
+<td class="py-4 text-sm">R$ 89,90</td>
+<td class="py-4">
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-primary-container text-[10px] font-bold rounded-lg">
+<span class="w-1 h-1 bg-primary rounded-full"></span> Pago
+                                            </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</td>
+</tr>
+<tr class="group">
+<td class="py-4 text-sm">15 Jul, 2024</td>
+<td class="py-4 text-sm font-semibold">Plano Semeador</td>
+<td class="py-4 text-sm">R$ 89,90</td>
+<td class="py-4">
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-primary-container text-[10px] font-bold rounded-lg">
+<span class="w-1 h-1 bg-primary rounded-full"></span> Pago
+                                            </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</td>
+</tr>
+<tr class="group">
+<td class="py-4 text-sm">15 Jun, 2024</td>
+<td class="py-4 text-sm font-semibold">Plano Semeador</td>
+<td class="py-4 text-sm">R$ 89,90</td>
+<td class="py-4">
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-primary-container text-[10px] font-bold rounded-lg">
+<span class="w-1 h-1 bg-primary rounded-full"></span> Pago
+                                            </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Side Info Panel: Upgrades and Promo -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Upgrade Card -->
+<div class="bg-[#1b1c19] text-white rounded-3xl p-8 relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl"></div>
+<span class="relative z-10 px-3 py-1 bg-secondary text-white text-[10px] font-bold rounded-full uppercase tracking-widest">Recomendado</span>
+<h3 class="relative z-10 font-headline-md text-2xl mt-4 mb-2">Plano Colheita Farta</h3>
+<p class="relative z-10 text-xs text-zinc-400 mb-6">Ideal para feirantes que querem dominar o mercado local com logística própria e vitrine infinita.</p>
+<div class="relative z-10 flex items-baseline gap-1 mb-6">
+<span class="text-3xl font-black">R$ 149</span>
+<span class="text-sm text-zinc-500">/mês</span>
+</div>
+<ul class="relative z-10 space-y-3 mb-8">
+<li class="flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Taxa de venda zero
+                            </li>
+<li class="flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Selo de "Produtor Estrela"
+                            </li>
+<li class="flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Suporte 24h via WhatsApp
+                            </li>
+</ul>
+<button class="relative z-10 w-full py-4 bg-white text-on-background font-bold rounded-2xl hover:bg-zinc-100 transition-all flex items-center justify-center gap-2">
+                            Mudar para este plano
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Promo Banner -->
+<div class="rounded-3xl p-1 bg-gradient-to-br from-secondary to-tertiary">
+<div class="bg-white rounded-[22px] p-6 text-center">
+<img class="w-full h-32 object-cover rounded-xl mb-4" data-alt="Vibrant heap of organic vegetables and fruits at a street market, high saturation, fresh and bountiful" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLvu2Uq_ojQW3Enq59WAIarI4z4e8kDzqBX_APFpXdjeD1LQzp3Hovd_ZmXOMOZ3yP-_XwAp-A7XXpoSrhVGYAa_1WlFNbcIwMqGKClX5oREOJMKqEXGNaIKdAPpbfru4okQXAmqwhwg4bSbHB8kNBDEMAM01er4Gs3PN51p5dmtf-wEk3dD-OarF2xSVsfTHFPszAOEtLdcS354hsjflnSQ5yjRp8ziApcepqHpYXJQCjZ6RANQHlvLftRcfYhFuDF-HBor7FPm0"/>
+<h4 class="font-bold text-on-background">Indique um feirante</h4>
+<p class="text-xs text-outline mt-2 mb-4">Ganhe 1 mês grátis de assinatura para cada novo parceiro que ativar a conta.</p>
+<button class="w-full text-secondary font-bold text-sm border-2 border-secondary/20 rounded-xl py-3 hover:bg-secondary/5 transition-colors">Copiar Link de Convite</button>
+</div>
+</div>
+<!-- Statistics Small Card -->
+<div class="bg-surface-container rounded-3xl p-6 border border-zinc-100">
+<h4 class="text-[10px] text-outline font-black uppercase tracking-widest mb-4">Economia com o plano</h4>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Este mês:</span>
+<span class="text-sm font-black text-primary">R$ 342,10</span>
+</div>
+<div class="w-full bg-white rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+<p class="text-[10px] text-outline mt-3 leading-relaxed">Você economizou 22% em taxas comparado ao plano gratuito "Semente".</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

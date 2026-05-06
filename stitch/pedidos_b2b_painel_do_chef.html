@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#5a1c00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dbdad5",
+                    "outline": "#707a6b",
+                    "surface-container-low": "#f5f4ef",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "surface": "#faf9f4",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-surface-variant": "#40493c",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary-fixed": "#410002",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e9e8e3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-tint": "#126e19",
+                    "primary-container": "#30852f",
+                    "on-background": "#1b1c19",
+                    "secondary": "#a63b00",
+                    "on-surface": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "inverse-primary": "#83db79",
+                    "surface-variant": "#e3e3de",
+                    "surface-bright": "#faf9f4",
+                    "outline-variant": "#bfcab9",
+                    "background": "#faf9f4",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-highest": "#e3e3de",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffdbce",
+                    "on-primary-fixed": "#002202",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-container": "#e41f25",
+                    "primary": "#0e6b17",
+                    "primary-fixed": "#9ef892",
+                    "secondary-container": "#fc6c29",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "primary-fixed-dim": "#83db79"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "margin-desktop": "80px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #faf9f4; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: #f0fdf4;
+            color: #15803d;
+            border-right: 4px solid #16a34a;
+            font-weight: 600;
+        }
+        .status-pill-separacao { background-color: #fef3c7; color: #92400e; }
+        .status-pill-transito { background-color: #dcfce7; color: #166534; }
+        .status-pill-entregue { background-color: #f3f4f6; color: #374151; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen w-64 border-r border-stone-100 bg-white py-6 fixed left-0 top-0 z-40">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-bold text-green-600 font-display-lg tracking-tighter">Gestão Feirante</h1>
+<p class="text-xs text-stone-400 font-label-sm mt-1">Painel de Controle</p>
+</div>
+<div class="flex items-center px-6 mb-8 gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional chef portrait in white uniform with blurred kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu12Se6_ffsuxlXQwR1372YBul3m0NtAWXR1hVaHMYNd2ZvSaQquCtT6QnLz1yJ10K7LRuHCgIrop21NI4BKruT3FIOZeLJAjbsZLJMuhHc6JmvOQ_ZYNWQ9v71UPBeRVEdCmdapRV0vonVKKSEnIJNjuziulyxj8HIzpvctjnVmdr3k4UQ18zjeaQwdhl7jLtRBrJUNmV7ly610z7eGte_KvmiHw0el9u1hXzRAYvBHOhmCm3uI9Vz3mBm1VDS3M1Um0AVlvNOOc"/>
+</div>
+<div class="flex flex-col">
+<span class="font-title-lg text-sm truncate">Chef Ricardo</span>
+<span class="text-[10px] text-stone-500 uppercase tracking-widest font-label-sm">B2B Premium</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-50 hover:pl-7 transition-all duration-300 font-plus-jakarta-sans text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="grid_view">grid_view</span>
+                    Dashboard
+                </a>
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-50 hover:pl-7 transition-all duration-300 font-plus-jakarta-sans text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="bakery_dining">bakery_dining</span>
+                    Produtos
+                </a>
+<a class="flex items-center px-6 py-3 bg-green-50 text-green-700 border-r-4 border-green-600 font-semibold font-plus-jakarta-sans text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="moped">moped</span>
+                    Pedidos
+                </a>
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-50 hover:pl-7 transition-all duration-300 font-plus-jakarta-sans text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="account_balance_wallet">account_balance_wallet</span>
+                    Extrato
+                </a>
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-50 hover:pl-7 transition-all duration-300 font-plus-jakarta-sans text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings_account_box">settings_account_box</span>
+                    Configurações
+                </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-secondary text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-on-secondary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="add_circle">add_circle</span>
+                    Nova Oferta
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pb-24 md:pb-8">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 left-0 md:left-64 bg-white/90 backdrop-blur-md z-30 h-16 border-b border-stone-100 px-4 md:px-8 flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-stone-600" data-icon="menu">menu</span>
+<h2 class="font-headline-md text-xl md:text-2xl text-green-600 tracking-tighter">Histórico de Pedidos</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-outline text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Buscar pedido ou fornecedor..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-600 cursor-pointer" data-icon="location_on">location_on</span>
+<div class="relative">
+<span class="material-symbols-outlined text-green-600 cursor-pointer" data-icon="shopping_basket">shopping_basket</span>
+<span class="absolute -top-2 -right-2 bg-secondary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
+</div>
+<span class="material-symbols-outlined text-green-600 cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+</div>
+</header>
+<div class="mt-24 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Filters Section -->
+<div class="bg-white rounded-2xl p-6 shadow-sm mb-8 border border-stone-100">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex flex-wrap gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] font-bold uppercase tracking-wider text-stone-400 px-1">Período</label>
+<select class="bg-surface-container-low border-stone-200 rounded-lg text-sm py-2 pl-3 pr-8 focus:border-green-500 focus:ring-0 outline-none">
+<option>Últimos 30 dias</option>
+<option>Últimos 90 dias</option>
+<option>Este ano</option>
+<option>Personalizado</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[10px] font-bold uppercase tracking-wider text-stone-400 px-1">Status</label>
+<select class="bg-surface-container-low border-stone-200 rounded-lg text-sm py-2 pl-3 pr-8 focus:border-green-500 focus:ring-0 outline-none">
+<option>Todos os Status</option>
+<option>Em separação</option>
+<option>Em trânsito</option>
+<option>Entregue</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-stone-600 font-label-sm hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+                                Exportar PDF
+                            </button>
+<button class="flex items-center gap-2 bg-green-50 text-green-600 px-4 py-2 rounded-lg font-bold hover:bg-green-100 transition-all border border-green-200">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                                Filtros Avançados
+                            </button>
+</div>
+</div>
+</div>
+<!-- Orders Table Section -->
+<div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-50 border-b border-stone-100">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500">ID Pedido</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500">Data</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500">Fornecedor</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500">Total</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-stone-500 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100">
+<!-- Order Row 1 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-5 font-bold text-stone-700">#B2B-8821</td>
+<td class="px-6 py-5 text-sm text-stone-600">14 Out 2023, 08:30</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</div>
+<div>
+<p class="font-bold text-sm text-stone-800">Horta do Zé</p>
+<p class="text-xs text-stone-400">Banca 42 - Feira Central</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-green-700">R$ 1.450,00</td>
+<td class="px-6 py-5">
+<span class="status-pill-separacao px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                            Em separação
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Order Row 2 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-5 font-bold text-stone-700">#B2B-8815</td>
+<td class="px-6 py-5 text-sm text-stone-600">12 Out 2023, 10:15</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined" data-icon="egg">egg</span>
+</div>
+<div>
+<p class="font-bold text-sm text-stone-800">Granja Vale Verde</p>
+<p class="text-xs text-stone-400">Direto do Produtor</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-green-700">R$ 890,40</td>
+<td class="px-6 py-5">
+<span class="status-pill-transito px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            Em trânsito
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Order Row 3 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-5 font-bold text-stone-700">#B2B-8790</td>
+<td class="px-6 py-5 text-sm text-stone-600">10 Out 2023, 16:45</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
+</div>
+<div>
+<p class="font-bold text-sm text-stone-800">Panifício Artigianale</p>
+<p class="text-xs text-stone-400">Banca 12 - Atacado</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-green-700">R$ 2.120,00</td>
+<td class="px-6 py-5">
+<span class="status-pill-entregue px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+                                            Entregue
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Order Row 4 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-5 font-bold text-stone-700">#B2B-8752</td>
+<td class="px-6 py-5 text-sm text-stone-600">08 Out 2023, 07:00</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined" data-icon="set_meal">set_meal</span>
+</div>
+<div>
+<p class="font-bold text-sm text-stone-800">Pescados Maré</p>
+<p class="text-xs text-stone-400">Cooperativa Regional</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-green-700">R$ 4.780,50</td>
+<td class="px-6 py-5">
+<span class="status-pill-entregue px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+                                            Entregue
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-stone-50 flex items-center justify-between">
+<span class="text-xs text-stone-400 font-label-sm">Mostrando 4 de 128 pedidos</span>
+<div class="flex items-center gap-2">
+<button class="p-1 text-stone-400 hover:text-green-600 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded">1</span>
+<span class="text-xs font-bold text-stone-400 px-2.5 py-1 rounded hover:bg-stone-100 cursor-pointer">2</span>
+<span class="text-xs font-bold text-stone-400 px-2.5 py-1 rounded hover:bg-stone-100 cursor-pointer">3</span>
+<button class="p-1 text-stone-400 hover:text-green-600">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Component (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-6 h-20 bg-white border-t border-stone-100 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-600 bg-green-50 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Cesta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold uppercase tracking-wider mt-1">Perfil</span>
+</a>
+</nav>
+</div>
+</body></html>

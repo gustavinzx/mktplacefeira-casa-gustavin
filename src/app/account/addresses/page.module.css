@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.btnAdd {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--outline-variant);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.default {
+  border-color: var(--primary);
+  background: rgba(14, 107, 23, 0.02);
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-container);
+  color: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.default .cardIcon {
+  background: var(--primary);
+  color: white;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.typeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.typeRow h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.badge {
+  background: var(--primary);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.cardContent p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.btnEdit, .btnDelete {
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btnEdit { color: var(--primary); }
+.btnDelete { color: var(--error); }
+
+@media (max-width: 800px) {
+  .list { grid-template-columns: 1fr; }
+}

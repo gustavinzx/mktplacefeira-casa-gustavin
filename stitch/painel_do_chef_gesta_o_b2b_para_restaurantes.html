@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chef Gourmet Admin - B2B Solutions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#30852f",
+                    "secondary-fixed": "#ffdbce",
+                    "inverse-on-surface": "#f2f1ec",
+                    "inverse-surface": "#30312e",
+                    "on-secondary-fixed": "#370e00",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary-fixed": "#9ef892",
+                    "surface-container-high": "#e9e8e3",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-primary-fixed": "#002202",
+                    "background": "#faf9f4",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#5a1c00",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#e41f25",
+                    "surface-dim": "#dbdad5",
+                    "secondary-fixed-dim": "#ffb599",
+                    "outline": "#707a6b",
+                    "on-surface-variant": "#40493c",
+                    "surface-tint": "#126e19",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1b1c19",
+                    "inverse-primary": "#83db79",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "on-surface": "#1b1c19",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f4ef",
+                    "surface-variant": "#e3e3de",
+                    "secondary": "#a63b00",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#bfcab9",
+                    "primary": "#0e6b17",
+                    "tertiary": "#bb0014",
+                    "on-primary-container": "#f8fff0",
+                    "on-tertiary-fixed": "#410002",
+                    "primary-fixed-dim": "#83db79",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-container-highest": "#e3e3de",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fc6c29",
+                    "surface-bright": "#faf9f4",
+                    "on-tertiary-container": "#fffbff",
+                    "surface": "#faf9f4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "sm": "12px",
+                    "margin-desktop": "80px",
+                    "xl": "64px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "xs": "4px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md docked full-width top-0 z-50 shadow-sm border-b border-stone-100 dark:border-neutral-800 sticky">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold tracking-tight text-green-700 dark:text-green-500">Chef Gourmet</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600 pb-1 font-['Plus_Jakarta_Sans'] text-sm font-medium" href="#">Vitrine</a>
+<a class="text-stone-500 dark:text-neutral-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] text-sm font-medium transition-colors" href="#">Serviços</a>
+<a class="text-stone-500 dark:text-neutral-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] text-sm font-medium transition-colors" href="#">Institucional</a>
+<a class="text-stone-500 dark:text-neutral-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] text-sm font-medium transition-colors" href="#">Suporte</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-stone-50 dark:hover:bg-neutral-800 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-50 dark:hover:bg-neutral-800 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+</div>
+<button class="bg-primary px-6 py-2 rounded-lg text-on-primary font-['Plus_Jakarta_Sans'] text-sm font-medium hover:bg-primary-container transition-all active:scale-95">
+                    Acessar Painel
+                </button>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-stone-50 dark:bg-neutral-950 h-screen w-64 border-r border-stone-200 dark:border-neutral-800 shadow-lg pt-20">
+<div class="px-6 py-4 border-b border-stone-200 dark:border-neutral-800 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden shadow-sm">
+<img alt="Perfil do Chef Gourmet" class="w-full h-full object-cover" data-alt="professional executive chef portrait in white uniform with confident expression in a high-end restaurant kitchen setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFKjHK5t0SiMdR4g5TZrGKKj8-1NJY-RmhMYuiDun2aGco-lqCmGn1MwSQg-dZuoUTTWsFvNFJh05hAurrkZozn36hDVOfXuhTrlY0YMtlAAUezYlMEWpT8YxYQidkhrszppwx1v8P2sJgE5RyB4NLJZmqFq2tOhxtCHfbMRX5uJyYj701k8pJXGlEole1eTC-H0TKyz5QW_zFyn4ZwJw-Si2DPEUTD17xdVt9wK1pyNVxCRLV80_cewtie6bX0GLHyXq_EKDC_bE"/>
+</div>
+<div>
+<h2 class="text-lg font-bold text-green-800 dark:text-green-400 font-['Plus_Jakarta_Sans'] leading-tight">Chef Admin</h2>
+<p class="text-xs text-stone-500 font-['Plus_Jakarta_Sans']">Portal do Fornecedor</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto font-['Plus_Jakarta_Sans'] text-sm">
+<a class="flex items-center gap-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 font-bold border-r-4 border-green-600 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 px-4 py-3 hover:bg-stone-100 dark:hover:bg-neutral-800 hover:text-green-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+                    Menu B2B
+                </a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 px-4 py-3 hover:bg-stone-100 dark:hover:bg-neutral-800 hover:text-green-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Estoque Insumos
+                </a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 px-4 py-3 hover:bg-stone-100 dark:hover:bg-neutral-800 hover:text-green-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="supervised_user_circle">supervised_user_circle</span>
+                    Clientes B2B
+                </a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 px-4 py-3 hover:bg-stone-100 dark:hover:bg-neutral-800 hover:text-green-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="insert_chart">insert_chart</span>
+                    Relatórios
+                </a>
+<a class="flex items-center gap-3 text-stone-600 dark:text-neutral-400 px-4 py-3 hover:bg-stone-100 dark:hover:bg-neutral-800 hover:text-green-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                    Contratos
+                </a>
+</nav>
+<div class="mt-auto px-4 py-6 border-t border-stone-200 dark:border-neutral-800">
+<button class="w-full bg-secondary text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-container transition-all active:scale-95 mb-4 shadow-sm">
+<span class="material-symbols-outlined">add_circle</span>
+                    Cadastrar Insumo
+                </button>
+<a class="flex items-center gap-3 text-stone-500 hover:text-green-600 px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Configurações
+                </a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-tertiary px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Sair
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 p-8">
+<div class="max-w-7xl mx-auto">
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Painel de Operações B2B</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestão profissional para a cadeia de suprimentos de restaurantes.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container px-4 py-2 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Junho, 2024</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- KPI Cards Row -->
+<div class="col-span-12 md:col-span-3 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed-dim rounded-lg text-primary">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">+12.5%</span>
+</div>
+<h3 class="text-label-sm font-label-sm text-stone-500 mb-1">Pedidos no Atacado</h3>
+<p class="text-headline-md font-headline-md">1.284</p>
+</div>
+<div class="col-span-12 md:col-span-3 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-fixed rounded-lg text-secondary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded-full">+8.2%</span>
+</div>
+<h3 class="text-label-sm font-label-sm text-stone-500 mb-1">Receita Mensal (B2B)</h3>
+<p class="text-headline-md font-headline-md">R$ 84k</p>
+</div>
+<div class="col-span-12 md:col-span-3 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="text-xs font-bold text-stone-500 bg-stone-50 px-2 py-1 rounded-full">Ativos</span>
+</div>
+<h3 class="text-label-sm font-label-sm text-stone-500 mb-1">Contratos Vigentes</h3>
+<p class="text-headline-md font-headline-md">42</p>
+</div>
+<div class="col-span-12 md:col-span-3 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed rounded-lg text-tertiary">
+<span class="material-symbols-outlined">error_outline</span>
+</div>
+<span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full">Urgente</span>
+</div>
+<h3 class="text-label-sm font-label-sm text-stone-500 mb-1">Ruptura de Estoque</h3>
+<p class="text-headline-md font-headline-md">04</p>
+</div>
+<!-- Main Section: Contracts and Supply -->
+<div class="col-span-12 lg:col-span-8 bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-stone-100 flex justify-between items-center">
+<h3 class="text-title-lg font-title-lg">Gestão de Contratos de Insumos</h3>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                                Ver todos os contratos <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="p-0">
+<table class="w-full text-left">
+<thead class="bg-stone-50 text-label-sm font-label-sm text-stone-500 uppercase tracking-wider">
+<tr>
+<th class="px-6 py-4">Estabelecimento</th>
+<th class="px-6 py-4">Insumos Principais</th>
+<th class="px-6 py-4">Volume Mensal</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Vencimento</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100 text-sm">
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-6 py-4 font-bold">Steakhouse Jardim</td>
+<td class="px-6 py-4">Cortes Premium, Vegetais</td>
+<td class="px-6 py-4">850kg</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Ativo</span></td>
+<td class="px-6 py-4 text-stone-500">12/2024</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-6 py-4 font-bold">Bistro Paris 6</td>
+<td class="px-6 py-4">Queijos Finos, Vinhos</td>
+<td class="px-6 py-4">420kg</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Ativo</span></td>
+<td class="px-6 py-4 text-stone-500">03/2025</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-6 py-4 font-bold">Sushi Del Mar</td>
+<td class="px-6 py-4">Salmão, Atum, Algas</td>
+<td class="px-6 py-4">280kg</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold">Renovação</span></td>
+<td class="px-6 py-4 text-stone-500">07/2024</td>
+</tr>
+<tr class="hover:bg-stone-50 transition-colors">
+<td class="px-6 py-4 font-bold">Pizzaria Napolitana</td>
+<td class="px-6 py-4">Farinha 00, Tomates</td>
+<td class="px-6 py-4">1.2ton</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Ativo</span></td>
+<td class="px-6 py-4 text-stone-500">01/2025</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Side Section: Menu Consulting B2B -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-white rounded-xl p-6 shadow-lg relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10">
+<h3 class="text-title-lg font-title-lg mb-2">Menu Consultoria B2B</h3>
+<p class="text-sm opacity-90 mb-6">Desenvolva fichas técnicas e menus exclusivos para seus clientes corporativos com nossa inteligência gastronômica.</p>
+<div class="space-y-4">
+<div class="bg-white/10 p-4 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">assignment</span>
+<div>
+<p class="text-sm font-bold">Nova Ficha Técnica</p>
+<p class="text-xs opacity-70">Restaurante Mirante (Carnes)</p>
+</div>
+</div>
+<div class="bg-white/10 p-4 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">analytics</span>
+<div>
+<p class="text-sm font-bold">Otimização de Custos</p>
+<p class="text-xs opacity-70">Análise de CMV - Março</p>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-8 bg-white text-primary py-3 rounded-lg font-bold w-full hover:bg-stone-50 transition-colors relative z-10">
+                            Iniciar Nova Consultoria
+                        </button>
+<div class="absolute -right-10 -bottom-10 opacity-20 transform -rotate-12">
+<span class="material-symbols-outlined text-[180px]">chef_hat</span>
+</div>
+</div>
+<!-- Lower Section: Wholesale Reports & Analytics -->
+<div class="col-span-12 lg:col-span-7 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-title-lg font-title-lg">Relatório de Pedidos em Atacado</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-stone-100 text-stone-600 rounded-md text-xs font-bold">Exportar CSV</button>
+<button class="px-3 py-1 bg-stone-100 text-stone-600 rounded-md text-xs font-bold">Filtrar</button>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-4">
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[60%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 12k</div>
+</div>
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[80%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 15k</div>
+</div>
+<div class="flex-1 bg-primary-container/60 rounded-t-lg h-[100%] relative group cursor-pointer hover:bg-primary-container transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 19k</div>
+</div>
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[40%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 8k</div>
+</div>
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[75%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 14k</div>
+</div>
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[65%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 13k</div>
+</div>
+<div class="flex-1 bg-primary-container/20 rounded-t-lg h-[90%] relative group cursor-pointer hover:bg-primary-container/40 transition-all">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">R$ 17k</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-stone-400 px-4">
+<span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SAB</span><span>DOM</span>
+</div>
+</div>
+<!-- Inventory Alert Section -->
+<div class="col-span-12 lg:col-span-5 bg-white rounded-xl p-6 border border-stone-100 shadow-sm">
+<h3 class="text-title-lg font-title-lg mb-6">Estoque Crítico (Distribuição)</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-stone-100 overflow-hidden flex-shrink-0">
+<img alt="Insumo Tomates" class="w-full h-full object-cover" data-alt="close-up of fresh organic roma tomatoes in a wooden crate with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUXr1x_gnhw7V90pDXNVYKXvLet4DIHha6OAnj-O_jMe1p5N-Ljke679wGIwsLlTqhzJKgAygToMJNbCl31tY3Kg0d8csURVrCt7cdHzyCZRZyFKp4bWeCpmNUlpF1NEuz659WtCYL7d-QqxZ-8LoKMiyJIzwHj0qBgDGFEg5jMH7ESXgb7U62OUi2ShfZyy3fI4Kd0nKDSjM0hwGYJJ7IIKpj18w-njr3oHRJDUe8d3W7Nd3fwaxzPLxJAznR7KIqWDQ0vjxW_84"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="text-sm font-bold">Tomate Cereja (Orgânico)</span>
+<span class="text-xs text-red-600 font-bold">12%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary w-[12%] h-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-stone-100 overflow-hidden flex-shrink-0">
+<img alt="Insumo Azeite" class="w-full h-full object-cover" data-alt="professional golden olive oil bottle with elegant minimalist label on a stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyXuQ_VeZpOxQg4eVKxPHLfMhnot4sbsJU_MD_pGmzpnLm_h04qSWRJ_LLMxHAAjBvMaJfBAksnGf-qQb3wDjGaOsBF2chRGfTlGXqFPxwWnuh0CoM81Z9F4QEHT6NYSo5G12E7zIEULs4bKRp73m5BweCXh_TT4U9U567QAo5TC1MFTCxvedEpPkQ8HbxQ7lxW2Iu3d1yBQrgCq2ieReTA9joxr_6liEUUy0XksZHu6AxwcfV9LsrBvQmxm4zhlK0CDKiU9o_3WM"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="text-sm font-bold">Azeite de Oliva Extra Virgem 5L</span>
+<span class="text-xs text-orange-600 font-bold">28%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container w-[28%] h-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-stone-100 overflow-hidden flex-shrink-0">
+<img alt="Insumo Massa" class="w-full h-full object-cover" data-alt="heaps of dry artisan pasta shapes on a wooden table with dusting of flour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjruFwD8MK7ZphHWOmjlbb9Ab9ivV2PeYrSoFugtajV2J-NyTy2SaIktyrQscMJEdGGoa0QzvQEBPqnHfbKGGHF26wd1-oKN_PB4OZ0ZwDVD-2NJ5UJIka1PFBOR3ooW88VF1skOsTq0hXrKhIirDv7DNSyXN0vT2bT-jFie-wJGQYplK3tJCfRZ2jwEOXXuX74_xoUq83t2wnPMls8fgB2GqE9eG-WbedzMy8XIMXnpCLOgBmryG7yDd8pcFMbAjw4UbAgWfQDMM"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="text-sm font-bold">Massa Curta Artesanal</span>
+<span class="text-xs text-orange-600 font-bold">34%</span>
+</div>
+<div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container w-[34%] h-full"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 border border-stone-200 text-stone-600 py-3 rounded-lg font-bold hover:bg-stone-50 transition-colors">
+                            Ver Inventário Completo
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-stone-900 dark:bg-black w-full py-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center px-10 gap-4 mt-12">
+<div class="flex items-center gap-4">
+<span class="text-white font-bold text-xl">Chef Gourmet</span>
+<span class="text-xs text-stone-500">B2B Professional Ecosystem</span>
+</div>
+<div class="flex gap-8">
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Termos de Serviço</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Privacidade</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Portal do Produtor</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-stone-400 hover:text-white transition-colors underline-offset-4 hover:underline" href="#">Trabalhe Conosco</a>
+</div>
+<div class="text-stone-500 font-['Plus_Jakarta_Sans'] text-xs">
+            © 2024 Chef Gourmet - Soluções B2B para Gastronomia.
+        </div>
+</footer>
+</body></html>

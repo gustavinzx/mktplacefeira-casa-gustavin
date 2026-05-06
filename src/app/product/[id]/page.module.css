@@ -1,0 +1,141 @@
+.container {
+  padding-top: 48px;
+}
+
+.productLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+.imageSection {
+  background-color: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--outline-variant);
+}
+
+.mainImage {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.badge {
+  background-color: var(--primary-container);
+  color: white;
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+.title {
+  font-family: var(--font-plus-jakarta);
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.unit {
+  font-size: 18px;
+  color: var(--on-surface-variant);
+}
+
+.description {
+  font-size: 16px;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--surface-container);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.qtyBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-1);
+}
+
+.producerCard {
+  margin-top: 32px;
+  padding: 24px;
+  background-color: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.producerAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--secondary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.producerInfo h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.producerInfo p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 768px) {
+  .productLayout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+}

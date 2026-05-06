@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary-container": "#e41f25",
+                    "primary-fixed": "#9ef892",
+                    "primary-container": "#30852f",
+                    "on-primary-container": "#f8fff0",
+                    "on-secondary-container": "#5a1c00",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bfcab9",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "secondary-container": "#fc6c29",
+                    "inverse-surface": "#30312e",
+                    "surface-bright": "#faf9f4",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-fixed": "#002202",
+                    "secondary": "#a63b00",
+                    "on-surface": "#1b1c19",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-highest": "#e3e3de",
+                    "surface-container": "#efeee9",
+                    "surface-tint": "#126e19",
+                    "surface-container-high": "#e9e8e3",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary-fixed": "#ffdbce",
+                    "primary-fixed-dim": "#83db79",
+                    "surface-dim": "#dbdad5",
+                    "on-primary": "#ffffff",
+                    "background": "#faf9f4",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-secondary-fixed": "#370e00",
+                    "tertiary": "#bb0014",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-tertiary-fixed": "#410002",
+                    "on-surface-variant": "#40493c",
+                    "inverse-primary": "#83db79",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e3e3de",
+                    "surface": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "on-background": "#1b1c19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "80px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Shared Component: TopAppBar) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-sm border-b border-stone-100 dark:border-slate-800">
+<div class="flex items-center gap-2 active:scale-95 transition-transform cursor-pointer">
+<span class="text-2xl font-bold tracking-tight text-green-700 dark:text-green-500 font-['Plus_Jakarta_Sans']">feira.casa</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors cursor-pointer" data-icon="help_outline">help_outline</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-margin-mobile md:px-margin-desktop">
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30">
+<!-- Visual Branding Side -->
+<div class="hidden md:block relative overflow-hidden bg-primary-container">
+<img alt="Horta orgânica com vegetais frescos e iluminação natural" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEo4QDOzSCJ90Ni1lv45iTYu1TStHTyKFuZoT-mjXI_jYxI6bU2bsAPPqMeP_yKeyEyYXEvdcIek9FKuZ-ThVqG-gCldV-epUWIItq_bztmoL7jtjS5_2XzbhlgU2eWWQGze8q4Tfr6FHkhXDLN67zSuR1XrGks_h9y_zoYtkhWIUcPIfn4ym0YlByVGPNWLO4WHi3xv8G8OxBpNnVcgASFTjmGGEJK9IVUX8WQaswYfgc5tAbWAn6PSKAqLeOO65YGMTWSIVeSMc"/>
+<div class="relative z-10 p-xl flex flex-col justify-end h-full text-on-primary-container">
+<h1 class="font-display-lg text-display-lg mb-md">Frescor direto do campo.</h1>
+<p class="font-body-md text-body-md opacity-90 max-w-md">Bem-vindo de volta! Acesse sua conta para continuar escolhendo o melhor da feira livre no conforto da sua casa.</p>
+</div>
+<div class="absolute top-0 right-0 p-md">
+<div class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm">
+                        Colhido hoje
+                    </div>
+</div>
+</div>
+<!-- Login Form Side -->
+<div class="p-lg md:p-xl flex flex-col justify-center bg-white">
+<div class="mb-xl">
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">Acesse sua conta</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Que bom ver você por aqui novamente!</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md mb-xl">
+<button class="flex items-center justify-center gap-base px-md py-sm border-2 border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:bg-surface-container hover:border-primary/30 transition-all active:scale-95 group">
+<img alt="Google Logo" class="w-5 h-5 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFcFoXFmE6v71SS9SF1TikVHOKcUSOpp2x8Q-JmpUWPAnTPBPxN2PZvGugZNmpi27yfRV1PuVGrttvySfxXrh1-4P_VOUZZoazspbKsBPijsPI4qq5ud_CDv0uY63ONceduYDQ3m5N4hmOPPr-klnvAm22c-UwdHDkIPv6kLzaXYppgvxAD0DNDUm8VirJnS_brc4RJUfIc96UY29F8_7iYP9OAKNtlg6YsAvQQY-d90m2SD_WuWEzdhjwpqQgL8ezwmpMXoKglNw"/>
+<span class="font-label-sm">Google</span>
+</button>
+<button class="flex items-center justify-center gap-base px-md py-sm border-2 border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:bg-surface-container hover:border-black transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-zinc-900 text-[20px] group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">ios</span>
+<span class="font-label-sm">Apple</span>
+</button>
+</div>
+<div class="relative mb-xl">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/50"></div>
+</div>
+<div class="relative flex justify-center text-label-sm">
+<span class="px-md bg-white text-on-surface-variant/60 uppercase tracking-widest text-[10px] font-bold">ou use seu e-mail</span>
+</div>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-xs" for="identity">E-mail ou CPF</label>
+<input class="w-full px-md py-sm rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary bg-surface-container-low transition-all outline-none text-body-md placeholder:text-outline/60" id="identity" placeholder="Digite seu e-mail ou CPF" type="text"/>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-sm text-label-sm text-on-surface" for="password">Senha</label>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors underline underline-offset-4" href="#">Esqueceu a senha?</a>
+</div>
+<input class="w-full px-md py-sm rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary bg-surface-container-low transition-all outline-none text-body-md" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex items-center">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary cursor-pointer" id="remember" type="checkbox"/>
+<label class="ml-base font-body-md text-body-md text-on-surface-variant cursor-pointer select-none" for="remember">Lembrar de mim</label>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded-xl font-title-lg text-title-lg font-bold shadow-md hover:bg-surface-tint active:scale-[0.98] transition-all duration-150 mt-xl" type="submit">
+                        Entrar na feira
+                    </button>
+</form>
+<p class="mt-xl text-center font-body-md text-body-md text-on-surface-variant">
+                    Novo por aqui? <a class="text-primary font-bold hover:underline underline-offset-4" href="#">Crie sua conta agora</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component: Footer) -->
+<footer class="w-full py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4 bg-stone-50 dark:bg-slate-900 border-t border-stone-200 dark:border-slate-800">
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="font-bold text-green-800 dark:text-green-500 font-['Plus_Jakarta_Sans']">feira.casa</span>
+<p class="font-['Plus_Jakarta_Sans'] text-sm text-stone-500 dark:text-slate-400">© 2024 Feira Viva - Conectando o campo à sua mesa.</p>
+</div>
+<nav class="flex gap-6">
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 underline transition-all font-['Plus_Jakarta_Sans'] text-sm cursor-pointer" href="#">Termos de Uso</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 underline transition-all font-['Plus_Jakarta_Sans'] text-sm cursor-pointer" href="#">Privacidade</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 underline transition-all font-['Plus_Jakarta_Sans'] text-sm cursor-pointer" href="#">Suporte</a>
+</nav>
+<div class="relative group">
+<span class="material-symbols-outlined text-stone-300 dark:text-slate-700 text-sm cursor-pointer hover:text-green-600 transition-colors" data-icon="security">security</span>
+<span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-stone-800 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap">Admin</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed": "#002202",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#9ef892",
+                    "outline": "#707a6b",
+                    "on-surface": "#1b1c19",
+                    "inverse-primary": "#83db79",
+                    "secondary-container": "#fc6c29",
+                    "tertiary": "#bb0014",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface": "#faf9f4",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "outline-variant": "#bfcab9",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-container": "#f8fff0",
+                    "secondary": "#a63b00",
+                    "surface-container-highest": "#e3e3de",
+                    "primary": "#0e6b17",
+                    "on-tertiary-fixed": "#410002",
+                    "surface-container-low": "#f5f4ef",
+                    "primary-fixed-dim": "#83db79",
+                    "surface-variant": "#e3e3de",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-tint": "#126e19",
+                    "background": "#faf9f4",
+                    "surface-dim": "#dbdad5",
+                    "surface-bright": "#faf9f4",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#e41f25",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-surface-variant": "#40493c",
+                    "primary-container": "#30852f",
+                    "on-secondary-fixed": "#370e00",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#ffdbce",
+                    "surface-container-high": "#e9e8e3",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-background": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-container": "#5a1c00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "80px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f4;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar Shell -->
+<header class="bg-white/90 dark:bg-stone-950/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100 dark:border-stone-800 shadow-sm w-full">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 w-full max-w-7xl mx-auto">
+<span class="text-2xl font-black tracking-tighter text-emerald-600 dark:text-emerald-400">feira.casa</span>
+<div class="flex items-center gap-4">
+<span class="text-stone-500 dark:text-stone-400 font-plus-jakarta-sans antialiased hover:text-emerald-500 transition-colors duration-200 cursor-pointer">Ajuda</span>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Stepper Section -->
+<div class="mb-xl">
+<div class="flex items-center justify-between relative max-w-2xl mx-auto">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-outline-variant -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-primary -translate-y-1/2 z-0 origin-left scale-x-100"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-background">Banca</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-background">Responsável</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-background">Identidade</span>
+</div>
+<!-- Step 4 Active -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold ring-4 ring-primary/20">
+<span>4</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Revisão</span>
+</div>
+</div>
+</div>
+<!-- Content Header -->
+<div class="text-center mb-xl">
+<h1 class="font-headline-md text-headline-md text-on-background mb-sm">Quase lá! Revise seus dados</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Confira se todas as informações estão corretas antes de enviar para nossa equipe de curadoria.</p>
+</div>
+<!-- Revision Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Section: Banca -->
+<div class="md:col-span-8 bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-xs">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                        Dados da Banca
+                    </h2>
+<button class="text-secondary font-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">edit</span> Editar
+                    </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Nome da Banca</p>
+<p class="font-body-md text-body-md text-on-surface">Pomar do Sr. João</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">CNPJ / CPF</p>
+<p class="font-body-md text-body-md text-on-surface">12.345.678/0001-90</p>
+</div>
+<div class="sm:col-span-2">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Categorias</p>
+<div class="flex flex-wrap gap-2 mt-xs">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-label-sm">Orgânicos</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-label-sm">Frutas</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-label-sm">Legumes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Fotos -->
+<div class="md:col-span-4 bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-xs">
+<h2 class="font-title-lg text-title-lg text-on-background">Identidade Visual</h2>
+<button class="text-secondary font-label-sm hover:underline">Editar</button>
+</div>
+<div class="flex flex-col gap-md">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-variant">
+<img alt="Banner da Banca" class="w-full h-full object-cover" data-alt="colorful fruit stall at an open-air market with vibrant oranges, apples, and bananas neatly arranged in wooden crates" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFU3fSAbIj_2QSQYHIs0VmiMwz36b3f_bBVssdYvlwNPohViA5CbTb7G9pT5PcqKQxkkntRK7B8EFDJ_7uaz6nj1pjoTSpirudoXMtkVBB4DYUOeybUGdJITgZy8Ec7u2WUzxepYCK-Cet7OHjHIiC7xuzyMv6D3VkYU0zb52kanZuesdLw-TSPAd9hSbnE8EuRMcY01dVXjI4Ndgs-Ly_O8UdvbqwgpL6oJf91cuSj-ztmWsBYADojeC1lCVkRp8gPMB-1FfRhIA"/>
+<div class="absolute bottom-2 left-2 bg-white/90 px-2 py-1 rounded text-[10px] font-bold text-on-surface uppercase">Banner Principal</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-container shrink-0">
+<img alt="Logo da Banca" class="w-full h-full object-cover" data-alt="artisanal hand-drawn logo for a farm business featuring a small sprout icon and rustic typography on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdNoIDj-k0XqRQGWgpyoW1-c5I8W9x2oN--1XloQgm7L7PfhMZuAR5_ZE8mpYKP0eM6gpZ6ouROVnv_Uxpt7nTquzTO-I-8JwO9Zw2heAGg5I-aH3LCWOlQks7ernq_OzrtgRu1GNgVWToCkFLTlhY86MRk0SbbQnfqCLt2lUVmSJ-r3Kl6S_u4nAECz-cVph3v12ak777MhV3a-wDsYUzGPKpCRer2ASTLnkXfsgU_eYmeLeoXA5rx78lua2WMqkpZ4o9BTgGCUo"/>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant">Logotipo</p>
+<p class="font-label-sm text-on-surface">logo_pomar_v2.png</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Responsável & KYC -->
+<div class="md:col-span-6 bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-xs">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                        Responsável &amp; Identidade
+                    </h2>
+<button class="text-secondary font-label-sm hover:underline">Editar</button>
+</div>
+<div class="space-y-md">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Nome Completo</p>
+<p class="font-body-md text-body-md text-on-surface">João Silva Ferreira</p>
+</div>
+<div class="flex items-center gap-2 p-sm bg-primary-fixed/30 rounded-lg border border-primary/10">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<p class="font-label-sm text-on-primary-fixed-variant">Verificação de Identidade (KYC)</p>
+<p class="text-label-sm text-on-primary-fixed-variant opacity-80">Documentos enviados e processados com sucesso.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Feiras Selecionadas -->
+<div class="md:col-span-6 bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-xs">
+<h2 class="font-title-lg text-title-lg text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                        Feiras Atendidas
+                    </h2>
+<button class="text-secondary font-label-sm hover:underline">Editar</button>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+<div>
+<p class="font-label-sm text-on-surface">Feira da Vila Madalena</p>
+<p class="text-[10px] text-on-surface-variant">Sábados, 07:00 - 13:00</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+<div>
+<p class="font-label-sm text-on-surface">Feira do Pacaembu</p>
+<p class="text-[10px] text-on-surface-variant">Terças e Sextas, 06:00 - 12:30</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Final Confirmation -->
+<div class="mt-xl flex flex-col items-center gap-md">
+<div class="flex items-start gap-sm max-w-xl">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary h-5 w-5" id="terms" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface-variant" for="terms">
+                    Declaro que todas as informações acima são verdadeiras e estou de acordo com os <a class="text-primary font-bold hover:underline" href="#">Termos de Uso</a> e <a class="text-primary font-bold hover:underline" href="#">Políticas de Qualidade</a> da feira.casa.
+                </label>
+</div>
+<div class="flex flex-col sm:flex-row gap-md w-full sm:w-auto mt-md">
+<button class="px-xl py-md border-2 border-outline-variant text-on-surface-variant font-title-lg rounded-full hover:bg-surface-container-high transition-all active:scale-95">
+                    Voltar
+                </button>
+<button class="px-xl py-md bg-secondary text-on-secondary font-title-lg rounded-full hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                    Finalizar e Enviar para Aprovação
+                    <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<p class="text-label-sm text-on-surface-variant">Tempo estimado de análise: 48 horas úteis.</p>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-stone-50 dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 py-12 px-6 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto w-full text-center md:text-left">
+<div class="flex flex-col gap-2">
+<span class="font-bold text-emerald-600 font-plus-jakarta-sans">feira.casa</span>
+<p class="text-sm font-plus-jakarta-sans text-stone-600 dark:text-stone-400 opacity-80">© 2024 feira.casa - O frescor da feira na sua casa.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-sm font-plus-jakarta-sans text-stone-500 hover:text-emerald-500 hover:underline decoration-orange-400 underline-offset-4 transition-all" href="#">Sobre nós</a>
+<a class="text-sm font-plus-jakarta-sans text-stone-500 hover:text-emerald-500 hover:underline decoration-orange-400 underline-offset-4 transition-all" href="#">Termos de Uso</a>
+<a class="text-sm font-plus-jakarta-sans text-stone-500 hover:text-emerald-500 hover:underline decoration-orange-400 underline-offset-4 transition-all" href="#">Privacidade</a>
+<a class="text-sm font-plus-jakarta-sans text-stone-500 hover:text-emerald-500 hover:underline decoration-orange-400 underline-offset-4 transition-all" href="#">Ajuda</a>
+</div>
+</div>
+</footer>
+</body></html>

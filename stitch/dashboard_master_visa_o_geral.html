@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Administrativo Master - feira.casa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf9f4",
+                        "surface-bright": "#faf9f4",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdad6",
+                        "tertiary-container": "#e41f25",
+                        "surface-container-low": "#f5f4ef",
+                        "secondary-fixed": "#ffdbce",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#bb0014",
+                        "outline": "#707a6b",
+                        "on-secondary-fixed": "#370e00",
+                        "on-secondary-container": "#5a1c00",
+                        "on-primary-fixed": "#002202",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "on-surface": "#1b1c19",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fc6c29",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "primary-fixed-dim": "#83db79",
+                        "secondary-fixed-dim": "#ffb599",
+                        "error": "#ba1a1a",
+                        "surface-container": "#efeee9",
+                        "primary-container": "#30852f",
+                        "surface-tint": "#126e19",
+                        "secondary": "#a63b00",
+                        "outline-variant": "#bfcab9",
+                        "inverse-primary": "#83db79",
+                        "surface-dim": "#dbdad5",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e3e3de",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#9ef892",
+                        "on-background": "#1b1c19",
+                        "surface-container-high": "#e9e8e3",
+                        "on-surface-variant": "#40493c",
+                        "surface": "#faf9f4",
+                        "primary": "#0e6b17",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-primary-container": "#f8fff0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "on-tertiary-fixed": "#410002",
+                        "surface-container-highest": "#e3e3de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-desktop": "80px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #e3e3de; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-gray-100 bg-white shadow-sm flex flex-col overflow-y-auto sidebar-scroll z-50">
+<div class="p-6 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-green-700">Admin Master</h1>
+<p class="text-xs text-on-surface-variant opacity-70">Ecossistema feira.casa</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-6">
+<!-- Active Navigation -->
+<a class="flex items-center gap-3 px-6 py-3 bg-green-50 text-green-700 border-r-4 border-green-600 font-medium text-sm transition-all opacity-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Usuários &amp; Perfis
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                Gestão de Feirantes
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+                B2B &amp; Atacado
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                Logística
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                Marketing
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:text-green-600 hover:bg-gray-50 text-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Configurações
+            </a>
+</nav>
+<div class="p-6 mt-auto">
+<div class="bg-surface-container rounded-xl p-4 flex items-center gap-3">
+<img alt="Logo feira.casa" class="w-10 h-10 rounded-full border-2 border-white" data-alt="close up professional male headshot for admin profile with friendly expression and clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMZNDydVydgtzCWasn0wJn0vynOSaXumWotzASg-7_dDC2nl3keduRn-FyW9xkk-E2LHb_WW6GvoVp9Me8tVSbUWYhvLWiKahlxSxTHTkkDBKcArcGIcYdPQAX7MDeGTqbE6wIx9ifDdLYUBO9dx4V-tmGxGVxUZlm4tQm5pEItmu3uTNq1inhgKEkZKAubU6I7gFXmFe56_Hv0Yn6GghXEJ2R_sc2rp8ZG6FpSGLa19GawTsLZb8AyQ-oKFLKUIR550ZQX0zY130"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Suporte Master</p>
+<p class="text-[10px] text-on-surface-variant">Online agora</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md flex justify-between items-center h-16 px-6 ml-64 max-w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-green-500/20" placeholder="Buscar feirantes, pedidos ou logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-gray-100 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<button class="hover:bg-gray-100 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="hover:bg-gray-100 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<div class="h-8 w-[1px] bg-gray-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<span class="text-sm font-semibold text-gray-900">Painel Administrativo</span>
+<img alt="Avatar do Administrador" class="w-8 h-8 rounded-full" data-alt="professional portrait of a manager for a digital dashboard profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDepP5_VBBsLR2obL8d4gBz9CJS3LPXD_c_tLoQaT-iWdAEAizm8gVXctrMKXAml4fWRcFcv9jjx5_qtQk14PhY5Dnr6LmOXWFULraFM6daG1Cu4oODnYeFvODaWXr8yvs6hRkI43K8PHYMJvRMiW6WrjmLg61QB-rQP8B5P5uxR15jERYMj16ZieSI2AnIEFEWiMAFfxvTDAbLoKklUHa74tqJ_UYYDrZ6AcxQ9rswkUVsF0SSCMjaJ4Auv37D9KT7v0wTqiGd0Hg"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-8 min-h-screen">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Welcome Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background">Overview do Ecossistema</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Bem-vindo de volta. Aqui está o que aconteceu hoje na feira.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                        Últimos 7 dias
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Exportar Relatório
+                    </button>
+</div>
+</div>
+<!-- Bento Grid KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-green-50 rounded-lg">
+<span class="material-symbols-outlined text-green-700" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<span class="text-green-600 text-xs font-bold flex items-center gap-1">+12.4% <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span></span>
+</div>
+<div class="mt-4">
+<p class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Vendas B2C</p>
+<h3 class="text-2xl font-extrabold mt-1">R$ 142.580,00</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-orange-50 rounded-lg">
+<span class="material-symbols-outlined text-orange-600" data-icon="handshake">handshake</span>
+</div>
+<span class="text-green-600 text-xs font-bold flex items-center gap-1">+8.1% <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span></span>
+</div>
+<div class="mt-4">
+<p class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Vendas B2B</p>
+<h3 class="text-2xl font-extrabold mt-1">R$ 89.420,50</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-blue-50 rounded-lg">
+<span class="material-symbols-outlined text-blue-600" data-icon="person_add">person_add</span>
+</div>
+<span class="text-red-500 text-xs font-bold flex items-center gap-1">-2.3% <span class="material-symbols-outlined text-[14px]" data-icon="trending_down">trending_down</span></span>
+</div>
+<div class="mt-4">
+<p class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Novos Lojistas</p>
+<h3 class="text-2xl font-extrabold mt-1">42</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="p-2 bg-purple-50 rounded-lg">
+<span class="material-symbols-outlined text-purple-600" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 bg-purple-100 rounded-full">
+<div class="w-1.5 h-1.5 bg-purple-600 rounded-full"></div>
+<span class="text-[10px] font-bold text-purple-700">EM ROTA</span>
+</div>
+</div>
+<div class="mt-4">
+<p class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Eficiência Logística</p>
+<h3 class="text-2xl font-extrabold mt-1">94.8%</h3>
+</div>
+</div>
+</div>
+<!-- Middle Section: Chart & Alerts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Weekly Performance Graph Placeholder -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-6 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-title-lg text-title-lg">Desempenho Semanal</h4>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">B2C</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="text-xs font-medium">B2B</span>
+</div>
+</div>
+</div>
+<div class="relative h-[280px] w-full mt-4 flex items-end justify-between px-4">
+<!-- Abstract Chart Visualization -->
+<div class="flex flex-col items-center gap-2 w-full h-full justify-end">
+<div class="flex gap-1 w-full justify-around items-end h-[80%] px-2">
+<div class="w-6 bg-primary/20 rounded-t-lg h-[40%]"></div>
+<div class="w-6 bg-primary/40 rounded-t-lg h-[60%]"></div>
+<div class="w-6 bg-primary rounded-t-lg h-[85%]"></div>
+<div class="w-6 bg-primary/30 rounded-t-lg h-[45%]"></div>
+<div class="w-6 bg-primary/50 rounded-t-lg h-[70%]"></div>
+<div class="w-6 bg-primary rounded-t-lg h-[95%]"></div>
+<div class="w-6 bg-primary/20 rounded-t-lg h-[30%]"></div>
+</div>
+<div class="flex w-full justify-around text-[10px] font-bold text-on-surface-variant">
+<span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SAB</span><span>DOM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Alerts -->
+<div class="bg-surface-container-high rounded-xl p-6 space-y-4">
+<div class="flex items-center justify-between">
+<h4 class="font-title-lg text-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="error">error</span>
+                            Alertas Críticos
+                        </h4>
+<span class="bg-tertiary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+</div>
+<div class="space-y-3">
+<div class="bg-white p-3 rounded-lg border-l-4 border-tertiary shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-tertiary">Falha de API Logística</p>
+<span class="text-[10px] text-on-surface-variant">2m atrás</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">Timeout na conexão com o gateway de frete da região Sul.</p>
+</div>
+<div class="bg-white p-3 rounded-lg border-l-4 border-secondary shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-secondary">Estoque Crítico: Hortifruti</p>
+<span class="text-[10px] text-on-surface-variant">15m atrás</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">5 feirantes reportaram falta de itens orgânicos premium.</p>
+</div>
+<div class="bg-white p-3 rounded-lg border-l-4 border-primary-container shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-primary-container">Novo Recorde de Vendas</p>
+<span class="text-[10px] text-on-surface-variant">1h atrás</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">Pico de tráfego orgânico detectado na categoria 'Frutas'.</p>
+</div>
+</div>
+<button class="w-full py-2 text-xs font-bold text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors">
+                        Ver todos os logs
+                    </button>
+</div>
+</div>
+<!-- Lower Section: Approval Queue -->
+<div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-gray-50 flex justify-between items-center">
+<div>
+<h4 class="font-title-lg text-title-lg">Fila de Aprovações Pendentes</h4>
+<p class="text-xs text-on-surface-variant mt-1">Feiras e feirantes aguardando validação de documentos.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container text-[11px] font-bold rounded-full">Total: 18</span>
+<a class="text-xs font-bold text-green-700 hover:underline" href="#">Ver fila completa</a>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+<th class="px-6 py-4">Solicitante</th>
+<th class="px-6 py-4">Tipo</th>
+<th class="px-6 py-4">Região</th>
+<th class="px-6 py-4">Data Solicitação</th>
+<th class="px-6 py-4">Status Doc.</th>
+<th class="px-6 py-4 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<!-- Table Row 1 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Feirante" class="w-8 h-8 rounded-full" data-alt="close up of a smiling farmer wearing a hat for a profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu_IZ_z5N_iVhAWf43PeB6_nkSf9sma8ioUH9VbFKe0q_6vg1kTH2IhnKYFq_A5Y5M6zfpqTphK9ENksvi-85ONDeaCZRfxjiubhM-YMS_1II984rjT6DroH975GxpgLn7-uDqxBavDeXYoYCaJtJmi3BV6h9qZETjmaX8zSDkjmEO1-CnTZ0XndZFqIsOZDzzKNiBHj1-JTWIQDAtMAcpXmWXmzsq0pEPMMsg8gvO0O4BHRa8zfmemOHs5ELx_iN2dkDie5yJd00"/>
+<div>
+<p class="text-sm font-bold">Orgânicos da Serra</p>
+<p class="text-[10px] text-on-surface-variant">CNPJ: 12.345.678/0001-00</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-0.5 bg-orange-50 text-orange-700 rounded-md font-medium border border-orange-100">Feirante</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium">Bento Gonçalves, RS</td>
+<td class="px-6 py-4 text-xs">Hoje, 09:42</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span>
+<span class="text-xs">Validado</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-gray-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="block">block</span>
+</button>
+<button class="px-3 py-1 bg-green-600 text-white text-[11px] font-bold rounded-lg hover:bg-green-700 transition-all">
+                                            Aprovar
+                                        </button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-500 text-[18px]" data-icon="store">store</span>
+</div>
+<div>
+<p class="text-sm font-bold">Feira Livre do Ipiranga</p>
+<p class="text-[10px] text-on-surface-variant">Solicitação de Nova Feira</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md font-medium border border-blue-100">Marketplace</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium">São Paulo, SP</td>
+<td class="px-6 py-4 text-xs">Ontem, 14:20</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+<span class="text-xs">Pendente</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-gray-400 hover:text-green-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="block">block</span>
+</button>
+<button class="px-3 py-1 bg-green-600 text-white text-[11px] font-bold rounded-lg hover:bg-green-700 transition-all">
+                                            Aprovar
+                                        </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Action Floating Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-primary text-on-primary p-6 rounded-xl relative overflow-hidden group cursor-pointer">
+<div class="relative z-10">
+<span class="material-symbols-outlined mb-4 block" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<h5 class="text-lg font-bold">Cadastrar Novo Feirante</h5>
+<p class="text-sm opacity-80 mt-1">Inicie o onboarding manual de um novo parceiro estratégico.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl" data-icon="assignment_ind">assignment_ind</span>
+</div>
+</div>
+<div class="bg-secondary-container text-white p-6 rounded-xl relative overflow-hidden group cursor-pointer">
+<div class="relative z-10">
+<span class="material-symbols-outlined mb-4 block" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<h5 class="text-lg font-bold">Lançar Campanha B2B</h5>
+<p class="text-sm opacity-80 mt-1">Crie cupons de desconto exclusivos para compras em atacado.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<div class="bg-surface-container-highest p-6 rounded-xl relative overflow-hidden group cursor-pointer border border-outline-variant/30">
+<div class="relative z-10">
+<span class="material-symbols-outlined mb-4 block" data-icon="analytics">analytics</span>
+<h5 class="text-lg font-bold">Relatório de Logística</h5>
+<p class="text-sm text-on-surface-variant mt-1">Analise os gargalos de entrega por região metropolitana.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl text-on-surface" data-icon="query_stats">query_stats</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only for Home/Overview) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-all z-50 group">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<div class="absolute right-full mr-4 bg-white text-on-surface px-3 py-1.5 rounded-lg text-xs font-bold shadow-xl border border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+            Suporte ao Admin
+        </div>
+</button>
+</body></html>

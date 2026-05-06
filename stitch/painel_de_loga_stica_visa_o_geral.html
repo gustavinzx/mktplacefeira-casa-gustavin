@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#f8fff0",
+                    "on-primary-fixed": "#002202",
+                    "primary-container": "#30852f",
+                    "inverse-surface": "#30312e",
+                    "on-secondary-container": "#5a1c00",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-highest": "#e3e3de",
+                    "on-surface-variant": "#40493c",
+                    "inverse-primary": "#83db79",
+                    "surface": "#faf9f4",
+                    "surface-bright": "#faf9f4",
+                    "primary": "#0e6b17",
+                    "tertiary-fixed": "#ffdad6",
+                    "primary-fixed": "#9ef892",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#bfcab9",
+                    "on-tertiary-fixed": "#410002",
+                    "on-surface": "#1b1c19",
+                    "surface-dim": "#dbdad5",
+                    "tertiary-container": "#e41f25",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f5f4ef",
+                    "secondary": "#a63b00",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary-fixed-variant": "#00530b",
+                    "surface-container": "#efeee9",
+                    "on-background": "#1b1c19",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e9e8e3",
+                    "tertiary": "#bb0014",
+                    "outline": "#707a6b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "secondary-fixed-dim": "#ffb599",
+                    "surface-tint": "#126e19",
+                    "primary-fixed-dim": "#83db79",
+                    "secondary-fixed": "#ffdbce",
+                    "background": "#faf9f4",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#fc6c29"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "80px",
+                    "margin-mobile": "20px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .heatmap-cell {
+            transition: opacity 0.3s ease;
+        }
+        .heatmap-cell:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-background antialiased">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md font-['Plus_Jakarta_Sans'] antialiased docked full-width top-0 z-40 border-b border-zinc-100 dark:border-zinc-800 shadow-sm sticky top-0 flex justify-between items-center w-full px-6 py-3">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-green-700 dark:text-green-500">feira.casa</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex bg-zinc-100 dark:bg-zinc-800 rounded-full px-4 py-2 items-center gap-2">
+<span class="material-symbols-outlined text-zinc-500" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64" placeholder="Buscar entregas..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-lg transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-600" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-lg transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-600" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-zinc-200">
+<img alt="Foto do perfil do gestor" data-alt="professional portrait of a logistics manager in a clean office environment, soft daylight, friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbUFR0cV8JS0tAssPGsRKhBcdujwNpYFAAhx2fieSQ_Ww1f5MyC3j_EdFqT8DpbTH5BJMIxWQzFGM18qwhxwQHos75S530sXyoQuUgqbEg5Az_TuqAnqLxpH02am2JgGmDVOzwZJHZ9NWa6jVXUfcc-VXtgzN4JnwzyVA51FzcOrjUcALfCigrOB_pe9cH2mRrCXBYZMHloaYTajQjsI91VNMcYIUjEL4XYYQOkFZOCNfvGaHyUZcnifSFjCVYa0oFtlf1se8IWj0"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="bg-zinc-50 dark:bg-zinc-950 font-['Plus_Jakarta_Sans'] text-sm font-medium h-screen w-64 border-r border-zinc-200 dark:border-zinc-800 hidden md:flex flex-col fixed left-0 top-0 h-full pt-[72px]">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="local_shipping" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-green-700 leading-tight">Logística</h2>
+<p class="text-xs text-zinc-500">Gestão de Entregas</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Painel</span>
+</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span>Rotas</span>
+</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="delivery_dining">delivery_dining</span>
+<span>Entregadores</span>
+</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Ganhos</span>
+</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span>Relatórios</span>
+</a>
+<a class="text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Configurações</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6">
+<button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Nova Rota
+                </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 p-6 lg:p-margin-desktop bg-surface min-h-screen">
+<header class="mb-lg">
+<h1 class="font-headline-md text-headline-md text-on-background mb-2">Visão Geral da Operação</h1>
+<p class="text-on-surface-variant font-body-md">Monitoramento em tempo real da logística feira.casa</p>
+</header>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
+<div class="bg-white p-md rounded-xl border border-zinc-100 shadow-[4px_4px_12px_rgba(14,107,23,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<span class="text-zinc-500 font-label-sm">ENTREGAS REALIZADAS</span>
+<span class="p-2 bg-green-50 text-primary rounded-lg">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-on-background">1,284</span>
+<span class="text-green-600 text-sm font-semibold">+12% hoje</span>
+</div>
+</div>
+<div class="bg-white p-md rounded-xl border border-zinc-100 shadow-[4px_4px_12px_rgba(14,107,23,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<span class="text-zinc-500 font-label-sm">EM CURSO</span>
+<span class="p-2 bg-secondary/10 text-secondary rounded-lg">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-on-background">42</span>
+<span class="text-zinc-400 text-sm">8 veículos ativos</span>
+</div>
+</div>
+<div class="bg-white p-md rounded-xl border border-zinc-100 shadow-[4px_4px_12px_rgba(14,107,23,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<span class="text-zinc-500 font-label-sm">PENDENTES</span>
+<span class="p-2 bg-zinc-100 text-zinc-500 rounded-lg">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-on-background">156</span>
+<span class="text-error text-sm font-semibold">Urgente</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Volume Chart (Simulated) -->
+<div class="lg:col-span-2 bg-white p-md rounded-xl border border-zinc-100 shadow-sm">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="text-title-lg font-title-lg">Volume por Hora</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600">Hoje</span>
+<span class="px-3 py-1 text-xs font-bold text-zinc-400 hover:text-zinc-600 cursor-pointer">Ontem</span>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 pt-4">
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[20%] relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-800 text-white px-2 py-1 rounded">08h</span>
+</div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[45%]"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[65%]"></div>
+<div class="bg-primary/60 hover:bg-primary/80 transition-colors w-full rounded-t-lg h-[95%]"></div>
+<div class="bg-primary/40 hover:bg-primary/60 transition-colors w-full rounded-t-lg h-[80%]"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[40%]"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[55%]"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-lg h-[30%]"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-zinc-400 font-bold uppercase">
+<span>08:00</span>
+<span>10:00</span>
+<span>12:00</span>
+<span>14:00</span>
+<span>16:00</span>
+<span>18:00</span>
+<span>20:00</span>
+<span>22:00</span>
+</div>
+</div>
+<!-- Heatmap/Map of Zones -->
+<div class="bg-white p-md rounded-xl border border-zinc-100 shadow-sm overflow-hidden flex flex-col">
+<h3 class="text-title-lg font-title-lg mb-4">Zonas de Entrega</h3>
+<div class="flex-1 relative rounded-lg bg-zinc-50 border border-zinc-100 overflow-hidden min-h-[250px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" data-alt="detailed city map of Sao Paulo showing streets and districts in a clean minimalist grayscale style" data-location="Sao Paulo, Brazil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_JRgjfiZ6FHheydiiM86Ae3q1ughTyLONduzwoAod99_kFtHnS3wZpV995yQKC2bQcx9j-QUIY8FC8AvyDapo1dsasV0wnvdGT9SKGOCoKL-568KEpPX_Wqe35ct19wDUZ6mQXNNp4-OXRIvkaKDVPXyGhbj6yELj0f0XCcAyX83uEsuB1GgI3t9Kty9mutliNb3wKW6eNXKrsde42r-F6CMug4B8sY4vOg8nLPDb_LM3KJIYkTc9RSPquGjhcB0VSqhoSITddbY"/>
+<!-- Simulated Heatmap Overlay -->
+<div class="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-1 p-2">
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/40 rounded"></div>
+<div class="heatmap-cell bg-orange-500/20 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/60 rounded-lg border-2 border-orange-400/50"></div>
+<div class="heatmap-cell bg-orange-500/80 rounded-lg border-2 border-orange-600/50"></div>
+<div class="heatmap-cell bg-orange-500/30 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/20 rounded"></div>
+<div class="heatmap-cell bg-orange-500/50 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+<div class="heatmap-cell bg-orange-500/10 rounded"></div>
+</div>
+<div class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-zinc-600 shadow-sm">
+                            FOCO: ZONA OESTE
+                        </div>
+</div>
+</div>
+</div>
+<!-- Recent Deliveries Table Section -->
+<div class="mt-lg bg-white rounded-xl border border-zinc-100 shadow-sm overflow-hidden">
+<div class="px-md py-4 border-b border-zinc-100 flex items-center justify-between">
+<h3 class="text-title-lg font-title-lg">Entregas Recentes</h3>
+<button class="text-primary font-bold text-sm hover:underline">Ver tudo</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-zinc-50 border-b border-zinc-100">
+<tr>
+<th class="px-md py-3 font-label-sm text-zinc-500">ID DA ORDEM</th>
+<th class="px-md py-3 font-label-sm text-zinc-500">CLIENTE</th>
+<th class="px-md py-3 font-label-sm text-zinc-500">PRODUTOS</th>
+<th class="px-md py-3 font-label-sm text-zinc-500">STATUS</th>
+<th class="px-md py-3 font-label-sm text-zinc-500">PRAZO</th>
+<th class="px-md py-3 font-label-sm text-zinc-500"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-50">
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-md py-4 font-bold text-zinc-700">#FC-8821</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-zinc-200"></div>
+<span class="text-sm font-medium">Maria Helena S.</span>
+</div>
+</td>
+<td class="px-md py-4 text-sm text-zinc-600">6 itens (Horta &amp; Frutas)</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-green-50 text-green-700">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                                        NO PRAZO
+                                    </span>
+</td>
+<td class="px-md py-4 text-sm font-medium">Hoje, 14:30</td>
+<td class="px-md py-4 text-right">
+<button class="p-1 hover:bg-zinc-200 rounded text-zinc-400">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-md py-4 font-bold text-zinc-700">#FC-8819</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-zinc-200"></div>
+<span class="text-sm font-medium">Ricardo P. Alencar</span>
+</div>
+</td>
+<td class="px-md py-4 text-sm text-zinc-600">12 itens (Cesta Premium)</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-50 text-red-700">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                                        ATRASADO
+                                    </span>
+</td>
+<td class="px-md py-4 text-sm font-medium text-red-600">Hoje, 12:00</td>
+<td class="px-md py-4 text-right">
+<button class="p-1 hover:bg-zinc-200 rounded text-zinc-400">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-50 transition-colors">
+<td class="px-md py-4 font-bold text-zinc-700">#FC-8815</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-zinc-200"></div>
+<span class="text-sm font-medium">Julia G. Martins</span>
+</div>
+</td>
+<td class="px-md py-4 text-sm text-zinc-600">4 itens (Laticínios)</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-50 text-orange-700">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                                        EM ROTA
+                                    </span>
+</td>
+<td class="px-md py-4 text-sm font-medium">Hoje, 15:45</td>
+<td class="px-md py-4 text-right">
+<button class="p-1 hover:bg-zinc-200 rounded text-zinc-400">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-safe-offset-2 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 rounded-xl px-3 py-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="navigation">navigation</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Rotas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Ganhos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Perfil</span>
+</a>
+</nav>
+</body></html>

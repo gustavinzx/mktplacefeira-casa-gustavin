@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary": "#a63b00",
+                "secondary-fixed-dim": "#ffb599",
+                "on-secondary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#efeee9",
+                "surface-container-highest": "#e3e3de",
+                "on-tertiary": "#ffffff",
+                "on-primary-fixed": "#002202",
+                "inverse-on-surface": "#f2f1ec",
+                "background": "#faf9f4",
+                "on-primary-fixed-variant": "#00530b",
+                "surface": "#faf9f4",
+                "on-tertiary-fixed": "#410002",
+                "tertiary": "#bb0014",
+                "primary-fixed-dim": "#83db79",
+                "on-tertiary-fixed-variant": "#93000d",
+                "on-primary-container": "#f8fff0",
+                "outline": "#707a6b",
+                "secondary-fixed": "#ffdbce",
+                "on-tertiary-container": "#fffbff",
+                "primary-fixed": "#9ef892",
+                "primary-container": "#30852f",
+                "surface-container-low": "#f5f4ef",
+                "outline-variant": "#bfcab9",
+                "surface-tint": "#126e19",
+                "surface-container-high": "#e9e8e3",
+                "on-surface": "#1b1c19",
+                "on-primary": "#ffffff",
+                "error-container": "#ffdad6",
+                "primary": "#0e6b17",
+                "surface-dim": "#dbdad5",
+                "on-secondary-fixed-variant": "#7f2b00",
+                "inverse-primary": "#83db79",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed": "#370e00",
+                "tertiary-fixed-dim": "#ffb4ab",
+                "on-tertiary-fixed": "#ffdad6",
+                "inverse-surface": "#30312e",
+                "secondary-container": "#fc6c29",
+                "surface-bright": "#faf9f4",
+                "on-surface-variant": "#40493c",
+                "error": "#ba1a1a",
+                "on-secondary-container": "#5a1c00",
+                "surface-variant": "#e3e3de",
+                "on-error": "#ffffff",
+                "tertiary-container": "#e41f25"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xl": "64px",
+                "sm": "12px",
+                "gutter": "16px",
+                "xs": "4px",
+                "base": "8px",
+                "margin-desktop": "80px",
+                "lg": "40px",
+                "margin-mobile": "20px",
+                "md": "24px"
+            },
+            "fontFamily": {
+                "headline-md": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"],
+                "body-md": ["Plus Jakarta Sans"],
+                "label-sm": ["Plus Jakarta Sans"],
+                "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md font-plus-jakarta-sans antialiased docked full-width top-0 z-50 border-b border-stone-100 dark:border-slate-800 shadow-sm sticky">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tight text-green-700 dark:text-green-400">
+                feira.casa
+            </div>
+<div class="hidden md:flex flex-1 max-w-md mx-8">
+<div class="relative w-full">
+<input class="w-full bg-surface-container-low border-none rounded-full px-5 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Buscar receitas ou ingredientes..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-2 text-outline">search</span>
+</div>
+</div>
+<nav class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-6">
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Início</a>
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600 active:scale-95 duration-200" href="#">Receitas</a>
+<a class="text-stone-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-300 transition-colors" href="#">Painel Chef</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 text-stone-500 hover:text-green-600">
+<span class="material-symbols-outlined">restaurant_menu</span>
+</button>
+<button class="active:scale-95 duration-200 text-stone-500 hover:text-green-600">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="active:scale-95 duration-200 text-stone-500 hover:text-green-600">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-base md:py-md mb-24">
+<!-- Hero Banner -->
+<section class="relative rounded-[32px] overflow-hidden mb-lg shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent z-10"></div>
+<img alt="Receita em destaque" class="w-full h-[300px] md:h-[450px] object-cover" data-alt="Close-up of a vibrant Mediterranean salad with fresh tomatoes, olives, and feta cheese in a rustic ceramic bowl with warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ESYuPKmkSoZLsls7iLqnAuJqWge2-jKqTNDap3au-IcksVzmcuCjkZS9Zwc-aqPWDCN1R3o1tkBio3006mgz2Yiid1n9sXK_MHlsVv0ZFVTI1N1nGkR4rvbZBLJ_06hmJ_37pHkvqWDNiORCB5lc5tX7rID_p7RUsZnJEAFAMk3UdYg4W9OqtOJsinNO_ifIdEy5hL_miij7fSG1UG06d3_aHkncVUt6vSq0wHGlwkU8FbAhKSa3LH7n2iTUzVTOG5WaztMsa_w"/>
+<div class="absolute inset-0 z-20 flex flex-col justify-center px-md md:px-xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-label-sm font-label-sm mb-sm w-fit">
+                    Destaque da Semana
+                </span>
+<h1 class="font-display-lg text-display-lg text-white mb-sm max-w-2xl">
+                    Receitas do Chef: Frescor da Horta à sua Mesa
+                </h1>
+<p class="text-white/90 max-w-lg mb-md hidden md:block">
+                    Descubra como transformar os ingredientes fresquinhos da feira em pratos dignos de restaurante com dicas exclusivas dos nossos chefs parceiros.
+                </p>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold w-fit active:scale-95 transition-transform hover:bg-primary-container">
+                    Explorar Receitas
+                </button>
+</div>
+</section>
+<!-- Filters Section -->
+<section class="mb-lg">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-on-background">Explore por categoria</h2>
+<button class="text-primary font-bold flex items-center gap-1 hover:underline">
+                    Ver tudo <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex-none bg-primary text-on-primary px-6 py-2 rounded-full font-semibold border border-primary">Todas</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Vegana</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Rápida</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Almoço de Domingo</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Sobremesas</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Glúten Free</button>
+<button class="flex-none bg-white border border-outline-variant px-6 py-2 rounded-full font-semibold hover:border-primary transition-colors">Massas</button>
+</div>
+</section>
+<!-- Recipe Grid (Bento Style & Standard Cards Mix) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Bento Hero Card (Spans 2 columns on large screens) -->
+<div class="lg:col-span-2 group relative overflow-hidden rounded-[32px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all duration-300">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-3/5 h-64 md:h-full overflow-hidden">
+<img alt="Salada Tropical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Exquisite buddha bowl with avocado, quinoa, roasted sweet potatoes and fresh greens arranged artistically with vibrant colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKDmLc9e4Sb3cF2xDz-naV0OoHqxEKgzjTz4bolAFThXjWcfcbi5GttNUOdH1XqQsLQCp-k35pAg-zC9E5foPbFaDleoBSnTL91VURAGjPI-wzqRRxh65zmefeo1NuO9-L6Zol0kl6AjE5wriyv-s1uTMzeSbOxGKvVETbiYnXurLer14MMgX01thbMfyPI1YoTqXy3PKBsPIaOqPrBbVJuCp1n1bxlmum0caz54dJ9UWqzYBIh6JMRNy-Vnj18Aer0SIlBdJ1rxA"/>
+</div>
+<div class="md:w-2/5 p-md flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-sm">
+<span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Vegana</span>
+<span class="text-outline text-label-sm">● 15 min</span>
+</div>
+<h3 class="font-headline-md text-title-lg mb-sm text-on-surface">Bowl Tropical de Verão</h3>
+<p class="text-on-surface-variant mb-md text-sm line-clamp-3">
+                            Uma combinação refrescante de quinoa real, abacate maduro colhido hoje e molho cítrico artesanal.
+                        </p>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img alt="Chef" class="w-8 h-8 rounded-full border border-primary/20" data-alt="Headshot of a friendly professional chef in a white uniform smiling warmly against a blurred kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqZjk_CMdm_P5yiC2ef7MkzpyAuWUz4ZRDrPKYBV1d62wBiyCDoF_xoowKEIKbw3QVnZ4m1zvG864hyqyRSihl1k3wHs-nYm9jAMoNEDdMPQc7bYiXnTjXfCxrIFFHwEHxSAmISCWfSF9ivgjENNf6Caxy-qOQYOgpEd-gf4IGdOE1fm24L-uJVZwSgAj9FikruELHBEo0PGTmje9Rkf9Z6TiwlTH0-TKgevOfM4p97kf-0ZbRCQ9s40sTz4W49uMKo6sMTcQaNzM"/>
+<span class="text-label-sm font-semibold text-on-surface">Chef Ricardo</span>
+</div>
+<button class="bg-secondary text-on-secondary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Standard Card 1 -->
+<div class="group bg-white rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="relative h-56">
+<img alt="Frango com Legumes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Roasted chicken breast with glazed honey carrots and steamed broccoli on a white plate with elegant plating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCyO-P3bjkVtZ2bejHX4Bstf-5hUxD4OfcH4DSiOPdLIAvhgO83wgyZQGAF93o07y6wAvORI3Y0__ksbQoYgWASFwPNTmIVyzQ3jWLiw0ZcuAJm2u8MB-GJyu_Fcowv6GyiXo0yB_NDZHBECkPkI7LmBCOT6UREZZQskNdvby_o1g2F7IIxalxTCY-owhGCRq5hzp2zQKollhNuZYpA8LyjyxXbFNcaDw-mIYnc0-_c9FavI8H3XOx5fEB1nVvFkufKzVMTXC5buk"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-red-500" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex items-center justify-between mb-xs">
+<span class="text-secondary font-bold text-[10px] uppercase tracking-wider">Rápida</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">25 min</span>
+</div>
+</div>
+<h4 class="font-title-lg text-title-lg mb-sm text-on-surface group-hover:text-primary transition-colors">Frango Grelhado com Cenouras Honey</h4>
+<p class="text-on-surface-variant text-sm mb-md line-clamp-2">Cenouras orgânicas caramelizadas no mel silvestre e ervas frescas da horta.</p>
+<div class="flex items-center justify-between border-t border-stone-50 pt-md">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+<span class="text-xs font-semibold">Fácil</span>
+</div>
+<button class="text-primary font-bold text-sm">Ver Receita</button>
+</div>
+</div>
+</div>
+<!-- Standard Card 2 -->
+<div class="group bg-white rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="relative h-56">
+<img alt="Salada Caprese" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Classic caprese salad with buffalo mozzarella, heirloom tomatoes, and fresh basil leaves drizzled with balsamic glaze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNQRMKWLEk3-AHZfRIYDzj3WKdVTRjE36nerloXqKqLKhRDS0M_EeZZK-V3JAT9v33o8X4LGDz11ZvXmGJ8YTOAsMkVZ2BY-qJ8F1CSth59_M6k_ry8q7apLlxNId9NVaq6vDAmayb2PCkWWdTgBs41gTCnDnUa59F197pFOioaRgK5fhX4zOfP4a8NXTnhiMc7Mc5lCg42sgTWs-cH4ENqVxLcCQjN5asDso3frUHhOQ1URFg3NBWPT2jp2MFWLoPA3y2UCnRFnk"/>
+</div>
+<div class="p-md">
+<div class="flex items-center justify-between mb-xs">
+<span class="text-secondary font-bold text-[10px] uppercase tracking-wider">Entrada</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">10 min</span>
+</div>
+</div>
+<h4 class="font-title-lg text-title-lg mb-sm text-on-surface group-hover:text-primary transition-colors">Caprese de Feira Gourmet</h4>
+<p class="text-on-surface-variant text-sm mb-md line-clamp-2">Tomates cereja multicoloridos com manjericão roxo e azeite extra virgem.</p>
+<div class="flex items-center justify-between border-t border-stone-50 pt-md">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+<span class="text-xs font-semibold">Iniciante</span>
+</div>
+<button class="text-primary font-bold text-sm">Ver Receita</button>
+</div>
+</div>
+</div>
+<!-- Standard Card 3 -->
+<div class="group bg-white rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="relative h-56">
+<img alt="Pizza Artesanal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Rustic homemade pizza with thin crust, melting cheese, and fresh garden vegetables on a wooden paddle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsXOA5yiLAH9FP8SQmJz3u6ss6o8oz09Njw0m7hHymPPUiBVnaluRX2hfXhy-DZTUJCouWeJMN4Ky2_fM0Wht_j7fGSzRivHBYuQ9CpQwlVeSZI49OLj_NNr5z3mqsTa9S5M8aMGfgFaIRDuOJXsI8oPlkzNWxP_OXsINSofrf80VukGvIqpdx2PDBrze3LR-GRESwpyLtYRlzs7FgEx2ZPbS0c1D-dATxFnACEsCiBSUamA_vA3vFPFuFwSFsrgwQbWO5q2F_Bzg"/>
+</div>
+<div class="p-md">
+<div class="flex items-center justify-between mb-xs">
+<span class="text-secondary font-bold text-[10px] uppercase tracking-wider">Almoço de Domingo</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">45 min</span>
+</div>
+</div>
+<h4 class="font-title-lg text-title-lg mb-sm text-on-surface group-hover:text-primary transition-colors">Pizza de Hortaliças da Estação</h4>
+<p class="text-on-surface-variant text-sm mb-md line-clamp-2">Massa de fermentação natural com mix de abobrinha, berinjela e pimentões.</p>
+<div class="flex items-center justify-between border-t border-stone-50 pt-md">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+<span class="text-xs font-semibold">Médio</span>
+</div>
+<button class="text-primary font-bold text-sm">Ver Receita</button>
+</div>
+</div>
+</div>
+<!-- Standard Card 4 -->
+<div class="group bg-white rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="relative h-56">
+<img alt="Espaguete" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Twirled spaghetti al pomodoro with fresh basil and parmesan flakes in a dark shallow bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYmgTqBjJWyXPqLSAtlDUeevGlp7CWmsCIHmJKN79-0u_1Z8tOcga1RSVlL0wHRjxhIcJet6GousKvOn1VHCEuyi2EYIMFaifRzkr3cv7jYZlI3Ull443gNz3WR6Xl0Fh2YAkgTFwUgWDqp0usseqMFkZ6VKBa2zvt0lTR2KI7yt4Tggc2LhBySLzNGYYt3baOYFjJhZg2sCQ7FoUlLINtrKU_AuPzZi7nJDNg7ldSqSSBXn1zPKp7xS7nsWZZk2jWr-tk2uAD9Bo"/>
+</div>
+<div class="p-md">
+<div class="flex items-center justify-between mb-xs">
+<span class="text-secondary font-bold text-[10px] uppercase tracking-wider">Massas</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">20 min</span>
+</div>
+</div>
+<h4 class="font-title-lg text-title-lg mb-sm text-on-surface group-hover:text-primary transition-colors">Espaguete Pomodoro Orgânico</h4>
+<p class="text-on-surface-variant text-sm mb-md line-clamp-2">Molho feito com tomates italianos maduros, alho e manjericão fresco.</p>
+<div class="flex items-center justify-between border-t border-stone-50 pt-md">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+<span class="text-xs font-semibold">Fácil</span>
+</div>
+<button class="text-primary font-bold text-sm">Ver Receita</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action Banner -->
+<section class="mt-xl bg-primary-container rounded-[32px] p-xl flex flex-col md:flex-row items-center justify-between gap-md overflow-hidden relative shadow-lg">
+<div class="absolute right-0 top-0 w-1/3 h-full bg-white/5 skew-x-12"></div>
+<div class="relative z-10 text-center md:text-left">
+<h2 class="font-headline-md text-headline-md text-on-primary-container mb-sm">Torne-se um Chef Feira.casa</h2>
+<p class="text-on-primary-container/80 max-w-md">Envie suas receitas favoritas usando nossos ingredientes e ganhe cupons de desconto exclusivos!</p>
+</div>
+<button class="relative z-10 bg-on-primary-container text-primary px-8 py-4 rounded-full font-bold shadow-md hover:scale-105 transition-transform">
+                Enviar minha Receita
+            </button>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-white dark:bg-slate-900 border-t border-stone-100 dark:border-slate-800 shadow-[0_-8px_30px_rgb(0,0,0,0.04)] z-50 rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-2xl px-5 py-2 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider mt-1">Receitas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">outdoor_grill</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider mt-1">Painel Chef</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-slate-500 px-5 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-plus-jakarta-sans text-[10px] font-semibold uppercase tracking-wider mt-1">Cesta</span>
+</a>
+</nav>
+</body></html>

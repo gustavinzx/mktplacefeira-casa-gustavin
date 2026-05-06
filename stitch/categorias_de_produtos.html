@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#5a1c00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-secondary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dbdad5",
+                    "outline": "#707a6b",
+                    "surface-container-low": "#f5f4ef",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "surface": "#faf9f4",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-surface-variant": "#40493c",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-tertiary-fixed": "#410002",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e9e8e3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-tint": "#126e19",
+                    "primary-container": "#30852f",
+                    "on-background": "#1b1c19",
+                    "secondary": "#a63b00",
+                    "on-surface": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "inverse-primary": "#83db79",
+                    "surface-variant": "#e3e3de",
+                    "surface-bright": "#faf9f4",
+                    "outline-variant": "#bfcab9",
+                    "background": "#faf9f4",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "surface-container-highest": "#e3e3de",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffdbce",
+                    "on-primary-fixed": "#002202",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-container": "#e41f25",
+                    "primary": "#0e6b17",
+                    "primary-fixed": "#9ef892",
+                    "secondary-container": "#fc6c29",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "on-tertiary-container": "#fffbff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "primary-fixed-dim": "#83db79"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "margin-desktop": "80px",
+                    "md": "24px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 dark:bg-stone-950/90 backdrop-blur-md border-b border-stone-100 dark:border-stone-800 shadow-sm">
+<div class="flex justify-between items-center px-4 md:px-12 h-16 w-full max-w-[1440px] mx-auto">
+<div class="text-2xl font-black text-green-600 dark:text-green-400 tracking-tighter">
+                feira.casa
+            </div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-plus-jakarta-sans text-sm font-bold border-b-2 border-green-600 text-green-700 dark:text-green-400 hover:text-orange-500 transition-colors duration-200" href="#">Explorar</a>
+<a class="font-plus-jakarta-sans text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-orange-500 transition-colors duration-200" href="#">Produtores</a>
+<a class="font-plus-jakarta-sans text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-orange-500 transition-colors duration-200" href="#">Ofertas</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant items-center gap-2 w-64">
+<span class="material-symbols-outlined text-stone-400">search</span>
+<span class="text-sm text-stone-400 font-plus-jakarta-sans">Buscar na feira...</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-green-600 dark:text-green-400 hover:text-orange-500 active:scale-95 transition-all">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<button class="p-2 text-green-600 dark:text-green-400 hover:text-orange-500 active:scale-95 transition-all">
+<span class="material-symbols-outlined">shopping_basket</span>
+</button>
+<button class="p-2 text-green-600 dark:text-green-400 hover:text-orange-500 active:scale-95 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-margin-desktop max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="font-display-lg text-display-lg text-on-background mb-sm">Categorias da Feira</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                Explore o melhor da terra. Produtos frescos, colhidos hoje e entregues diretamente do produtor para a sua bancada.
+            </p>
+</div>
+<!-- Bento Grid for Categories -->
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-gutter">
+<!-- Frutas (Large Accent) -->
+<div class="md:col-span-2 lg:col-span-6 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="aspect-[16/9] w-full relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Abundant variety of fresh tropical fruits including papaya, mango, and pitaya in a rustic basket under warm natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ZIvI0IxcSCCsbHBAz39XhVOVhdmRwHIXG5R2MdkH2AhSwEein3SzByII8LZo1TEtH3l_jAn6F20M8vM9rpQSj2_kBJ1BAA4iZ03YVhukb34cTOu97Nw26SEpSw-6q0jmBBOveoeNRO_RAZK6X6ba2pg0NEfsgOtBtxSXwYvlVaioCSgqEoek1I3ADvWWEbixArvTqpdMgYRMvT2CpdO7CYzJfBYie3YA9Yu3Q-sp2r7fOw5uczHbN_GyeF-mwspTdLW2IiNmZpM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<div class="flex justify-between items-end">
+<div>
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Popular</span>
+<h3 class="font-headline-md text-headline-md text-white">Frutas</h3>
+<p class="text-white/80 font-body-md text-sm">142 produtos disponíveis</p>
+</div>
+<button class="bg-white text-primary p-3 rounded-full shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Legumes (Vertical) -->
+<div class="md:col-span-2 lg:col-span-3 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="h-full relative flex flex-col">
+<div class="flex-grow relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Collection of colorful heirloom carrots, purple bell peppers, and fresh beetroots on a wooden farm table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWoPeHxbshbvC0PU49IJI3MwI1sm5QcLNrCzOxFFY0YeM13ahr5qnC5lR0rzEoUlq5IFu6vnV95mRgIkboZAzr_lXZKwT49n_4iS4cRn1OBUcw-70yTFFAxRK2MOPX5XUW9pVgbaVPvhOT5FcF1_QeTbXuUpqyj-ERryfeAZpTvnw9nR5hLGU5kvG3qxZXE1HvE8HwgDNSMaXGYNkJSV-ClHy1C3qbH0VIpeQoXTzB5RHsJavXMwObtNLU1dKYpkx77c2eE9DloH0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-title-lg text-title-lg text-white">Legumes</h3>
+<p class="text-white/80 font-body-md text-sm">86 produtos</p>
+</div>
+</div>
+</div>
+<!-- Verduras (Square) -->
+<div class="md:col-span-2 lg:col-span-3 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="aspect-square relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close-up of vibrant green kale, crisp lettuce leaves, and fresh spinach with water droplets reflecting bright light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo0PHEIvwrpkHKaSIhfxs5EKP7416Lx6AS_oAH4mGPMqyU057xLENldxejvB2fOXg6rCmHisyirHyYc0AngCMZ9fHy0RsX7_X6jZQa6KQUAWG-YZTVEk7g0qQ10qRbjq9P7YpyNVhQpqVDbtQDfaaPjnmaClt1SfrNzwXDtv1HUw_1tLQj_QbpMWPWwQCDPVaZaxn8LCf72BcWxECbx7_IovtAAkhDuO8VPGweRptVCDT4M1qr3SUiAiONzwKdaWgFnBHFdYUyGW0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-title-lg text-title-lg text-white">Verduras</h3>
+<p class="text-white/80 font-body-md text-sm">54 produtos</p>
+</div>
+</div>
+</div>
+<!-- Orgânicos (Horizontal Small) -->
+<div class="md:col-span-2 lg:col-span-4 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="aspect-[4/3] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Eco-friendly wooden crate filled with certified organic produce with a visible ecological certificate stamp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL_MQ_YA2BUpU7u9vJx-_osm-vUak9K9ndsISznEjfHvlYzXyJ28u1pYDTphiCI4vfmnONBaeIfc3diAq_HVw4068UisfwU92Yk5bTZB3TqISMSVz__ugQVPq3x-bRBdWFhzPsSI0bvrrsNFtjBB2ZbLCcEbIE52AxcG773QMvS17gcJ4XLKTjg3sRtdytVNhA287Ysa-0PydUTy9ylBN5xniqmLmOMLe2hHzCNodF7awLQ9ADGXz5MPbkwSCOB9DFMo88WRrWa3A"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-green-600 text-sm" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-[10px] font-bold text-green-700">CERTIFICADO</span>
+</div>
+<div class="absolute bottom-0 left-0 p-md w-full bg-gradient-to-t from-black/80 to-transparent">
+<h3 class="font-title-lg text-title-lg text-white">Orgânicos</h3>
+<p class="text-white/80 font-body-md text-sm">112 produtos</p>
+</div>
+</div>
+</div>
+<!-- Temperos (Small square-ish) -->
+<div class="md:col-span-2 lg:col-span-4 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="aspect-[4/3] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Assortment of fresh herbs including rosemary, basil, and thyme tied with twine on a dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGDSZaTXYJF0rPoFlhaeaysf7me_vIPpzLRsUNLfdpxOLtLILSw_bD94m5wWCDo1qHv2zesYABtq49CMeLHl4LKJeeHYGg7gvyecr5o1lnGLOVjJp0PflOUTjjrJY2xiK49h9FIRbLaN6vcHnaAsFc1J-RQ469iw7ZiHzjP8xGqRDXNEJdAwL10SIIQMHa4lP1Ni_8BSOZdARadg6y24wDGvwuIq0UaevH7R_tPu44GHCtS4o8cZBC_UNJ6BE_MDEB-w2xNXSNgWg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-title-lg text-title-lg text-white">Temperos</h3>
+<p class="text-white/80 font-body-md text-sm">43 produtos</p>
+</div>
+</div>
+</div>
+<!-- Ovos e Laticínios (Tall) -->
+<div class="md:col-span-2 lg:col-span-4 group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
+<div class="aspect-[4/3] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Farm-fresh brown eggs in a carton next to a glass bottle of whole milk with cream on top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjOjRlngYhgTMOiRJSskkEe0KLkHmoES5fb06k_yBVIH9ptLXQ7oljiq6yiaFZ4Qiro-TAUOxDWOCBwqeVt5DrA1ldE7CHkAD5Vd6AmAT7WTnHTR8cFB7gXZHT7FtQlKYLdmHAjT4HKE3KLhzQb6nyi1Kpfp9qYcYwnphNcmJjtc85B4zzuip6VMJm9WkLEDluWW94OhIdgYyFDQpMT1wEjEGE7iydsDZTiHpiZM4vdL6D_v_YV_Z_UxPDfiNKatde91qLEeoR4_k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md w-full">
+<h3 class="font-title-lg text-title-lg text-white">Ovos e Laticínios</h3>
+<p class="text-white/80 font-body-md text-sm">31 produtos</p>
+</div>
+</div>
+</div>
+<!-- Artesanal (Wide CTA style) -->
+<div class="md:col-span-4 lg:col-span-12 group relative overflow-hidden rounded-xl bg-secondary-container shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex flex-col md:flex-row items-center">
+<div class="w-full md:w-1/2 p-lg text-on-secondary-container">
+<span class="bg-orange-100 text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 inline-block">Feito à mão</span>
+<h3 class="font-display-lg text-3xl mb-sm">Produtos Artesanais</h3>
+<p class="font-body-md mb-md opacity-90">Queijos maturados, pães de fermentação natural, geleias e conservas feitas com receitas de família.</p>
+<button class="bg-on-secondary-container text-white px-6 py-3 rounded-full font-bold active:scale-95 transition-all">Ver todos (27)</button>
+</div>
+<div class="w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Artisanal sourdough bread loaf being sliced on a flour-dusted wooden board with dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPAQETffvMny64iUYB4j3OVBzb081Eb6-fAyxEBoTP5X5WFDtZBzn2sjym6Uvo6N_Oy7M6JQfKu3zw-j86iEW-__5SsQohnxtYnIxBtZHz2WOsTnXWKljGsRsDd2tRzmFMIunOQVGB6zejImelxKblg-5CwDBiOrVQQDCNutCNf_TMdQQeTJVXQSSyNqSeyHSjWQGSAzyPRnEz3N8VxpJqjrNVcOCXDAhBqLbGDlKcKK2WW_LjzWJpQ0xJl7g86PRtBUZYx39jzXg"/>
+<div class="absolute inset-0 bg-gradient-to-r from-secondary-container via-transparent to-transparent hidden md:block"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-6 h-20 bg-white dark:bg-stone-950 border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 active:scale-90 transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-plus-jakarta-sans text-[10px] font-bold uppercase tracking-wider mt-1">Início</span>
+</button>
+<button class="flex flex-col items-center justify-center text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-xl px-4 py-1 active:scale-90 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-plus-jakarta-sans text-[10px] font-bold uppercase tracking-wider mt-1">Explorar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 active:scale-90 transition-all">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-plus-jakarta-sans text-[10px] font-bold uppercase tracking-wider mt-1">Cesta</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 active:scale-90 transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-plus-jakarta-sans text-[10px] font-bold uppercase tracking-wider mt-1">Perfil</span>
+</button>
+</nav>
+<!-- Contextual FAB (Hidden as per rule: Only on Home/Dash, not Details/Settings) -->
+<!-- Not rendered as this is a navigation/browsing sub-page -->
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1b1c19",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#7f2b00",
+                      "outline": "#707a6b",
+                      "tertiary-fixed-dim": "#ffb4ab",
+                      "surface-tint": "#126e19",
+                      "surface-container": "#efeee9",
+                      "surface-container-highest": "#e3e3de",
+                      "tertiary-container": "#e41f25",
+                      "primary-fixed": "#9ef892",
+                      "primary-container": "#30852f",
+                      "tertiary-fixed": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f2f1ec",
+                      "on-secondary-container": "#5a1c00",
+                      "on-primary-container": "#f8fff0",
+                      "surface-bright": "#faf9f4",
+                      "secondary-container": "#fc6c29",
+                      "inverse-surface": "#30312e",
+                      "outline-variant": "#bfcab9",
+                      "on-tertiary-fixed-variant": "#93000d",
+                      "secondary": "#a63b00",
+                      "on-tertiary-container": "#fffbff",
+                      "on-primary-fixed": "#002202",
+                      "on-tertiary-fixed": "#410002",
+                      "on-surface-variant": "#40493c",
+                      "inverse-primary": "#83db79",
+                      "surface-variant": "#e3e3de",
+                      "on-error-container": "#93000a",
+                      "on-background": "#1b1c19",
+                      "primary": "#0e6b17",
+                      "surface": "#faf9f4",
+                      "surface-container-high": "#e9e8e3",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "background": "#faf9f4",
+                      "surface-dim": "#dbdad5",
+                      "surface-container-low": "#f5f4ef",
+                      "secondary-fixed": "#ffdbce",
+                      "primary-fixed-dim": "#83db79",
+                      "on-secondary-fixed": "#370e00",
+                      "secondary-fixed-dim": "#ffb599",
+                      "on-primary-fixed-variant": "#00530b",
+                      "on-error": "#ffffff",
+                      "tertiary": "#bb0014",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "80px",
+                      "lg": "40px",
+                      "base": "8px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "sm": "12px",
+                      "xl": "64px",
+                      "md": "24px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "title-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen overflow-hidden">
+<!-- Screen Content Underlay (Meus Endereços) -->
+<header class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-stone-100 shadow-sm">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500">arrow_back</span>
+<h1 class="font-title-lg text-title-lg text-on-surface">Meus Endereços</h1>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-stone-500" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-stone-500" data-icon="notifications">notifications</span>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8 blur-[2px] pointer-events-none">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Existing Address Card 1 -->
+<div class="bg-white p-md rounded-xl shadow-sm border border-stone-100 flex items-start gap-4">
+<div class="p-3 bg-green-50 rounded-full">
+<span class="material-symbols-outlined text-primary">home</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-lg">Casa</h3>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Principal</span>
+</div>
+<p class="text-on-surface-variant mt-1">Rua das Amoreiras, 123 - Bloco B</p>
+<p class="text-on-surface-variant text-sm">Vila Mariana, São Paulo - SP</p>
+</div>
+</div>
+<!-- Existing Address Card 2 -->
+<div class="bg-white p-md rounded-xl shadow-sm border border-stone-100 flex items-start gap-4">
+<div class="p-3 bg-stone-50 rounded-full text-stone-400">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-lg text-lg text-stone-700">Trabalho</h3>
+<p class="text-on-surface-variant mt-1">Av. Paulista, 1000 - 14º Andar</p>
+<p class="text-on-surface-variant text-sm">Bela Vista, São Paulo - SP</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal Backdrop Overlay -->
+<div class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-md flex items-center justify-center p-4">
+<!-- Modal Container -->
+<div class="bg-white w-full max-w-xl rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] overflow-hidden">
+<!-- Modal Header -->
+<div class="px-md py-4 border-b border-stone-100 flex justify-between items-center bg-surface-bright">
+<h2 class="font-title-lg text-title-lg text-on-surface">Adicionar Novo Endereço</h2>
+<button class="p-2 hover:bg-stone-100 rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-stone-500">close</span>
+</button>
+</div>
+<!-- Modal Body (Form) -->
+<form class="p-md space-y-md">
+<!-- CEP Search -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">CEP</label>
+<div class="flex gap-2">
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="00000-000" type="text"/>
+<button class="bg-stone-100 px-4 py-2 rounded-lg font-bold text-sm text-stone-700 hover:bg-stone-200 transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[20px]">search</span>
+                                Buscar
+                            </button>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Nome do Endereço</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="Ex: Casa, Trabalho, Mãe" type="text"/>
+</div>
+</div>
+<!-- Logradouro -->
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Logradouro (Rua, Avenida...)</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="Nome da rua" type="text"/>
+</div>
+<!-- Numero e Complemento -->
+<div class="grid grid-cols-3 gap-sm">
+<div class="col-span-1 space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Número</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="123" type="text"/>
+</div>
+<div class="col-span-2 space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Complemento</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="Apto, Bloco, Casa" type="text"/>
+</div>
+</div>
+<!-- Bairro, Cidade, Estado -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Bairro</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="Nome do bairro" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Cidade</label>
+<input class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface" placeholder="Sua cidade" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant">Estado</label>
+<select class="w-full border-stone-200 rounded-lg focus:ring-primary focus:border-primary px-4 py-2 text-on-surface">
+<option value="">UF</option>
+<option value="SP">SP</option>
+<option value="RJ">RJ</option>
+<option value="MG">MG</option>
+</select>
+</div>
+</div>
+<!-- Primary Checkbox -->
+<div class="flex items-center gap-3 pt-2">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary cursor-pointer" id="main-address" type="checkbox"/>
+<label class="text-sm text-on-surface cursor-pointer select-none" for="main-address">Definir como endereço principal</label>
+</div>
+</form>
+<!-- Modal Footer -->
+<div class="px-md py-6 bg-stone-50 border-t border-stone-100 flex gap-4 justify-end">
+<button class="px-6 py-2.5 rounded-lg font-bold text-on-surface-variant hover:bg-stone-200 transition-colors active:scale-95">
+                    Cancelar
+                </button>
+<button class="px-8 py-2.5 bg-primary text-white rounded-lg font-bold shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">save</span>
+                    Salvar Endereço
+                </button>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed bottom-margin-mobile left-margin-mobile -z-10 opacity-20 pointer-events-none">
+<img class="w-48 h-48 rounded-full object-cover grayscale" data-alt="Close-up of fresh organic green vegetables in a rustic wooden crate at a vibrant farmers market" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVm20EiPNEAcZd6xi5wQEFbqSPYzXUKcCO-Hn-fLY-YmLhpL52W5iD9vYrh5k4xaO3WSGeTA31fc3qEMQ-5oFeI2GCKVhsYfJYKgEsUfeq9npmZORg8x1Y1pYawlg2PNFy1NUfKaiahzf85gCFJarN6Um6tBvBuRLksgIDh56cuGCl95sCBw9cVIGOAa7B-JbRGEVVLX37s3QS62uo1yB0MvduvLyYBfNurvChMYXpxBodAXBmYMCTwXVYi9TnH4lyy85vm47nScw"/>
+</div>
+</body></html>

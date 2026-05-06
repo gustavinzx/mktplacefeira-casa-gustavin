@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#f8fff0",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfcab9",
+                        "primary-fixed": "#9ef892",
+                        "on-surface-variant": "#40493c",
+                        "surface-tint": "#126e19",
+                        "surface-container-highest": "#e3e3de",
+                        "inverse-primary": "#83db79",
+                        "surface-bright": "#faf9f4",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4ef",
+                        "outline": "#707a6b",
+                        "on-secondary-container": "#5a1c00",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "on-tertiary-fixed": "#410002",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-surface": "#1b1c19",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-high": "#e9e8e3",
+                        "secondary-fixed": "#ffdbce",
+                        "tertiary": "#bb0014",
+                        "surface-dim": "#dbdad5",
+                        "on-primary-fixed": "#002202",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "surface-container": "#efeee9",
+                        "primary": "#0e6b17",
+                        "secondary-container": "#fc6c29",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "primary-fixed-dim": "#83db79",
+                        "primary-container": "#30852f",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#370e00",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e3de",
+                        "tertiary-container": "#e41f25",
+                        "secondary-fixed-dim": "#ffb599",
+                        "secondary": "#a63b00",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1b1c19",
+                        "inverse-surface": "#30312e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-desktop": "80px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-backdrop {
+            background-color: rgba(27, 28, 25, 0.4);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<header class="bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-sm shadow-emerald-900/5 fixed top-0 w-full z-40">
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="text-xl font-extrabold text-emerald-700 dark:text-emerald-500 tracking-tight font-['Plus_Jakarta_Sans']">Feira.casa</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-zinc-500">help_outline</span>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-10 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto opacity-50 select-none pointer-events-none">
+<div class="mb-md">
+<div class="flex gap-2 mb-4">
+<div class="h-1 w-full bg-primary-container rounded-full"></div>
+<div class="h-1 w-full bg-primary-container rounded-full"></div>
+<div class="h-1 w-full bg-primary rounded-full"></div>
+<div class="h-1 w-full bg-surface-container-high rounded-full"></div>
+</div>
+<p class="text-primary font-label-sm uppercase tracking-wider mb-xs">Etapa 3 de 4</p>
+<h1 class="text-headline-md font-headline-md text-on-surface">Onde você vai atuar?</h1>
+</div>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="p-md bg-white border border-outline-variant rounded-xl shadow-sm">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-primary">storefront</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Selecione sua feira</h3>
+<p class="text-on-surface-variant mb-md">Busque pelo nome ou localização da feira que você já participa.</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Ex: Feira da Vila Madalena" type="text"/>
+</div>
+</div>
+<div class="p-md bg-white border border-outline-variant rounded-xl shadow-sm flex flex-col justify-center items-center text-center">
+<div class="w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-secondary">add_location_alt</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-xs">Não encontrou sua feira?</h3>
+<p class="text-on-surface-variant mb-md">Se a sua banca fica em um local novo, sugira a inclusão no mapa.</p>
+<button class="bg-secondary-container text-on-secondary-container font-bold px-6 py-2.5 rounded-full active:scale-95 transition-transform">
+                    Sugerir Nova Feira
+                </button>
+</div>
+</section>
+</main>
+<div class="fixed inset-0 z-50 flex items-center justify-center p-margin-mobile modal-backdrop">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-[28px] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="p-md md:p-lg">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill">add_location_alt</span>
+</div>
+<h2 class="font-title-lg text-title-lg text-on-surface">Sugerir Nova Feira</h2>
+</div>
+<button class="text-outline hover:bg-surface-container-high rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Nome da Feira</label>
+<input class="w-full px-4 py-3.5 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none text-on-surface placeholder:text-outline/60 font-body-md" placeholder="Como a feira é conhecida?" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">CEP</label>
+<input class="w-full px-4 py-3.5 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none text-on-surface font-body-md" placeholder="00000-000" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Logradouro / Número</label>
+<input class="w-full px-4 py-3.5 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none text-on-surface font-body-md" placeholder="Rua e número" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Dias de Funcionamento</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Dom</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Seg</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Ter</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Qua</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Qui</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Sex</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant font-label-sm text-label-sm hover:border-primary hover:text-primary transition-colors" type="button">Sáb</button>
+</div>
+</div>
+<div class="bg-secondary-fixed/30 border border-secondary/10 p-sm rounded-xl flex gap-3">
+<span class="material-symbols-outlined text-secondary text-base">info</span>
+<p class="text-on-secondary-fixed-variant text-[13px] leading-relaxed font-medium">
+                            Sua sugestão passará por uma análise. Prazo de liberação de até 24 horas.
+                        </p>
+</div>
+<div class="flex flex-col-reverse md:flex-row gap-3 pt-sm">
+<button class="flex-1 px-6 py-3.5 text-on-surface font-bold rounded-full border border-outline-variant hover:bg-surface-container transition-colors active:scale-95" type="button">
+                            Cancelar
+                        </button>
+<button class="flex-[2] px-6 py-3.5 bg-primary text-on-primary font-bold rounded-full shadow-lg shadow-primary/20 hover:bg-primary-container transition-colors active:scale-95" type="button">
+                            Enviar para Aprovação
+                        </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 h-20 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-[0_-4px_12px_rgba(0,0,0,0.03)] rounded-t-[24px] border-t border-zinc-100 dark:border-zinc-800 md:hidden">
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-medium">
+<span class="material-symbols-outlined">home</span>
+<span>Início</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-2xl px-5 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-bold">
+<span class="material-symbols-outlined">storefront</span>
+<span>Minha Banca</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-medium">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Pedidos</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 px-5 py-1.5 font-['Plus_Jakarta_Sans'] text-[11px] font-medium">
+<span class="material-symbols-outlined">person</span>
+<span>Perfil</span>
+</div>
+</nav>
+</body></html>

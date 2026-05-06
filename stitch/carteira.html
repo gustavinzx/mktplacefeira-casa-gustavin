@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efeee9",
+                        "on-surface-variant": "#40493c",
+                        "on-surface": "#1b1c19",
+                        "tertiary-fixed": "#ffdad6",
+                        "secondary-container": "#fc6c29",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#30852f",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed": "#410002",
+                        "inverse-surface": "#30312e",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#0e6b17",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-primary-container": "#f8fff0",
+                        "on-primary-fixed": "#002202",
+                        "primary-fixed": "#9ef892",
+                        "on-tertiary-container": "#fffbff",
+                        "outline": "#707a6b",
+                        "on-secondary-fixed": "#370e00",
+                        "on-secondary-container": "#5a1c00",
+                        "on-primary": "#ffffff",
+                        "background": "#faf9f4",
+                        "surface": "#faf9f4",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-primary-fixed-variant": "#00530b",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#bb0014",
+                        "surface-tint": "#126e19",
+                        "secondary": "#a63b00",
+                        "surface-variant": "#e3e3de",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed-dim": "#ffb599",
+                        "surface-container-highest": "#e3e3de",
+                        "surface-container-high": "#e9e8e3",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "inverse-primary": "#83db79",
+                        "surface-bright": "#faf9f4",
+                        "tertiary-container": "#e41f25",
+                        "surface-container-low": "#f5f4ef",
+                        "outline-variant": "#bfcab9",
+                        "on-background": "#1b1c19",
+                        "surface-dim": "#dbdad5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md text-green-600 dark:text-green-400 font-plus-jakarta text-sm font-medium shadow-sm flex justify-between items-center px-6 h-16 w-full sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800">
+<div class="text-2xl font-black tracking-tight text-green-700 dark:text-green-500">feira.casa</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="active:scale-95 transition-transform p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<img alt="User avatar" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="Close-up portrait of a friendly young man with a warm smile, outdoor natural lighting, soft blurred green background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3DEAXzv4L8I-jNDyXPvS02X52D0KOPWGmmouCEU1Nl2EY9n515qOAJ9k1zQUnFLbZGgrKvN8b9xjMk-4d00KKgdDCb8IdBIqI6jwDclQ1DxpbvpHRoZQ4W2A1ywEQYhvF5ChXuE6LqDw6VD1BhRFfbXv8Zj9IDtDeXAK6nmOnqUEFGhJQNZfjtxY8hRkqnDrQVfAdJKNuiIqQiYMBEm_7-J0TcYmmjB0bueTO8kN3aOpQMox0jOhcMbpLTOS0HD0Y0o9ocftOVcY"/>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="bg-gray-50 dark:bg-gray-950 font-plus-jakarta text-base h-screen w-72 border-r border-gray-200 dark:border-gray-800 fixed left-0 top-16 h-[calc(100vh-64px)] flex flex-col p-4 space-y-2 overflow-y-auto hidden md:flex">
+<div class="px-4 py-6 mb-2">
+<h2 class="text-green-700 font-black text-xl">Minha Conta</h2>
+<p class="text-sm text-on-surface-variant">Bem-vindo à feira.casa</p>
+</div>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span>Meus Pedidos</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span>Meus Endereços</span>
+</a>
+<a class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 font-bold rounded-lg px-4 py-3 flex items-center gap-3 cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span>Carteira</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span>Cupons</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/10 rounded-lg transition-all cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Dados Pessoais</span>
+</a>
+<div class="pt-10">
+<a class="text-gray-600 dark:text-gray-400 px-4 py-3 flex items-center gap-3 hover:text-error rounded-lg transition-all cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 p-6 md:p-10 min-h-screen">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-8 text-on-surface-variant font-label-sm">
+<span class="hover:text-primary cursor-pointer transition-colors">Área do Cliente</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Carteira</span>
+</nav>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Balance Card -->
+<section class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant shadow-sm flex flex-col justify-between relative overflow-hidden h-full min-h-[240px]">
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-on-surface-variant font-label-sm uppercase tracking-wider">Créditos Feira</h3>
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div class="font-display-lg text-primary mb-2">R$ 428,50</div>
+<p class="text-on-surface-variant text-sm">Disponível para suas compras</p>
+</div>
+<button class="mt-6 bg-secondary-container text-on-secondary font-bold py-3 px-6 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-secondary transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                        Adicionar Créditos
+                    </button>
+<!-- Organic Background Pattern -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+<!-- Saved Payment Methods -->
+<section class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant shadow-sm h-full">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-title-lg text-on-surface">Métodos Salvos</h3>
+<button class="text-primary font-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Novo cartão
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-bright flex items-center gap-4 hover:border-primary transition-colors cursor-pointer group">
+<div class="w-12 h-8 bg-on-surface rounded flex items-center justify-center text-white font-bold text-[10px]">VISA</div>
+<div class="flex-1">
+<p class="font-body-md font-bold text-on-surface">**** 1234</p>
+<p class="text-xs text-on-surface-variant">Expira em 08/28</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="more_vert">more_vert</span>
+</div>
+<!-- Card 2 -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-bright flex items-center gap-4 hover:border-primary transition-colors cursor-pointer group">
+<div class="w-12 h-8 bg-secondary-container rounded flex items-center justify-center text-white font-bold text-[10px]">MASTERCARD</div>
+<div class="flex-1">
+<p class="font-body-md font-bold text-on-surface">**** 8890</p>
+<p class="text-xs text-on-surface-variant">Expira em 12/26</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</section>
+<!-- Transactions History -->
+<section class="lg:col-span-12 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-title-lg text-on-surface">Transações Recentes</h3>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full border border-outline text-xs font-bold hover:bg-surface-container transition-colors">Todos</button>
+<button class="px-4 py-1.5 rounded-full border border-primary text-primary bg-primary/5 text-xs font-bold">Créditos</button>
+<button class="px-4 py-1.5 rounded-full border border-outline text-xs font-bold hover:bg-surface-container transition-colors">Compras</button>
+</div>
+</div>
+<div class="space-y-1">
+<!-- Transaction Row 1 (Top-up) -->
+<div class="flex items-center justify-between py-4 px-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Recarga de Créditos</p>
+<p class="text-xs text-on-surface-variant">24 Out 2023 • Cartão de Crédito</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-primary">+ R$ 200,00</p>
+<p class="text-[10px] text-primary uppercase font-bold tracking-widest">Concluído</p>
+</div>
+</div>
+<!-- Transaction Row 2 (Purchase) -->
+<div class="flex items-center justify-between py-4 px-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Compra #8821 - Feira do Bairro</p>
+<p class="text-xs text-on-surface-variant">22 Out 2023 • Débito em Saldo</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-on-surface">- R$ 124,50</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Pago</p>
+</div>
+</div>
+<!-- Transaction Row 3 (Purchase) -->
+<div class="flex items-center justify-between py-4 px-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Compra #8790 - Orgânicos da Serra</p>
+<p class="text-xs text-on-surface-variant">18 Out 2023 • Débito em Saldo</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-on-surface">- R$ 85,20</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Pago</p>
+</div>
+</div>
+<!-- Transaction Row 4 (Top-up) -->
+<div class="flex items-center justify-between py-4 px-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="currency_exchange">currency_exchange</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Recarga Automática (Saldo Baixo)</p>
+<p class="text-xs text-on-surface-variant">15 Out 2023 • Cartão de Crédito</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-primary">+ R$ 100,00</p>
+<p class="text-[10px] text-primary uppercase font-bold tracking-widest">Concluído</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 border border-outline-variant text-on-surface-variant font-label-sm rounded-lg hover:bg-surface-container transition-colors active:opacity-70">
+                        Ver extrato completo
+                    </button>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 flex justify-around items-center h-16 z-50">
+<a class="flex flex-col items-center gap-1 text-gray-500" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="text-[10px]">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-500" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_basket">shopping_basket</span>
+<span class="text-[10px]">Pedidos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-green-700" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-[10px] font-bold">Carteira</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-500" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="text-[10px]">Perfil</span>
+</a>
+</nav>
+</body></html>

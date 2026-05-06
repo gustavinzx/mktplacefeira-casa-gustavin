@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0e6b17",
+                        "outline-variant": "#bfcab9",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#a63b00",
+                        "surface-variant": "#e3e3de",
+                        "surface-container-low": "#f5f4ef",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "surface-bright": "#faf9f4",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-container": "#fc6c29",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e3e3de",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-fixed-dim": "#83db79",
+                        "on-tertiary-fixed": "#410002",
+                        "on-primary-container": "#f8fff0",
+                        "tertiary": "#bb0014",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002202",
+                        "background": "#faf9f4",
+                        "surface-container-high": "#e9e8e3",
+                        "on-primary-fixed-variant": "#00530b",
+                        "primary-fixed": "#9ef892",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#30312e",
+                        "inverse-on-surface": "#f2f1ec",
+                        "secondary-fixed": "#ffdbce",
+                        "primary-container": "#30852f",
+                        "on-surface": "#1b1c19",
+                        "surface-container": "#efeee9",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "inverse-primary": "#83db79",
+                        "surface-tint": "#126e19",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#40493c",
+                        "secondary-fixed-dim": "#ffb599",
+                        "outline": "#707a6b",
+                        "tertiary-container": "#e41f25",
+                        "surface-dim": "#dbdad5",
+                        "on-secondary-container": "#5a1c00",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-desktop": "80px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-overlay {
+            background-color: rgba(27, 28, 25, 0.6);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen">
+<!-- Screen Content Background (Simulated Portal Atacado) -->
+<div class="fixed inset-0 overflow-hidden opacity-40 pointer-events-none select-none">
+<nav class="bg-white/95 backdrop-blur-md border-b border-zinc-100 flex justify-between items-center w-full px-4 md:px-8 h-16 max-w-7xl mx-auto">
+<span class="text-2xl font-bold text-green-700 tracking-tight">FeiraDigital</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-zinc-500">notifications</span>
+<span class="material-symbols-outlined text-zinc-500">shopping_basket</span>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-12">
+<h1 class="font-display-lg text-display-lg text-primary mb-8">Portal de Atacado B2B</h1>
+<div class="grid grid-cols-4 gap-6">
+<div class="h-64 bg-surface-container-high rounded-xl"></div>
+<div class="h-64 bg-surface-container-high rounded-xl"></div>
+<div class="h-64 bg-surface-container-high rounded-xl"></div>
+<div class="h-64 bg-surface-container-high rounded-xl"></div>
+</div>
+</main>
+</div>
+<!-- Advanced Filter Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+<div class="bg-surface-container-lowest w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[921px]">
+<!-- Modal Header -->
+<div class="px-md py-md border-b border-outline-variant flex justify-between items-center bg-white">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">tune</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Filtros Avançados</h2>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+<!-- Modal Body (Efficiency Focused) -->
+<div class="flex-1 overflow-y-auto p-md space-y-lg">
+<!-- Category: Faturamento e Volume -->
+<section>
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-sm">Capacidade e Volume</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Pedido Mínimo</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 font-bold text-primary">R$</span>
+<input class="w-full pl-10 pr-sm py-sm rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white" placeholder="0,00" type="number"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Faturamento Mensal</label>
+<select class="w-full px-sm py-sm rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white appearance-none">
+<option>Qualquer faturamento</option>
+<option>Até R$ 10.000,00</option>
+<option>R$ 10.000 - R$ 50.000</option>
+<option>R$ 50.000 - R$ 100.000</option>
+<option>Acima de R$ 100.000</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Category: Logística -->
+<section>
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-sm">Logística e Prazo</h3>
+<div class="space-y-md">
+<div class="flex flex-wrap gap-sm">
+<button class="px-md py-sm rounded-full border border-primary bg-primary-container text-on-primary-container flex items-center gap-xs font-label-sm">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+                                Entrega em 24h
+                            </button>
+<button class="px-md py-sm rounded-full border border-outline-variant text-on-surface-variant hover:border-primary flex items-center gap-xs font-label-sm transition-all">
+                                Até 3 dias
+                            </button>
+<button class="px-md py-sm rounded-full border border-outline-variant text-on-surface-variant hover:border-primary flex items-center gap-xs font-label-sm transition-all">
+                                Programado Semanal
+                            </button>
+</div>
+<div class="p-sm bg-surface-container-low rounded-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="flex-1">
+<p class="font-label-sm text-on-surface">Raio de entrega</p>
+<input class="w-full accent-primary h-2 bg-surface-variant rounded-full appearance-none mt-xs" type="range"/>
+</div>
+<span class="font-label-sm text-primary">50km</span>
+</div>
+</div>
+</section>
+<!-- Category: Certificações (Bento Style Cards) -->
+<section>
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-sm">Certificações e Qualidade</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-sm">
+<div class="group relative p-md border-2 border-primary bg-primary-container/10 rounded-xl cursor-pointer hover:shadow-md transition-all">
+<div class="absolute top-sm right-sm text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[32px] mb-xs">eco</span>
+<p class="font-label-sm text-on-primary-container">Selo Orgânico</p>
+<p class="text-[10px] text-primary/70">Certificação Federal</p>
+</div>
+<div class="group relative p-md border border-outline-variant hover:border-secondary-container bg-white rounded-xl cursor-pointer hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-xs">psychology_alt</span>
+<p class="font-label-sm text-on-surface">Selo Verde</p>
+<p class="text-[10px] text-outline">Sustentabilidade</p>
+</div>
+<div class="group relative p-md border border-outline-variant hover:border-secondary-container bg-white rounded-xl cursor-pointer hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-zinc-500 text-[32px] mb-xs">verified</span>
+<p class="font-label-sm text-on-surface">Exportação</p>
+<p class="text-[10px] text-outline">Padrão Global</p>
+</div>
+</div>
+</section>
+<!-- Featured Producer Card -->
+<section class="bg-gradient-to-br from-primary/5 to-secondary/5 p-md rounded-xl border border-outline-variant/30">
+<div class="flex items-start gap-md">
+<div class="w-16 h-16 rounded-lg bg-white shadow-sm flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a weathered wooden sign in a vegetable garden with the name of a farm in elegant handwriting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQJy5ptvBG--4KrsPP36SMINa5xd9rTbR6gVNM6Y3hwenu9Y25phw2062ORbdoZzHXXeqDF0aTrUAt4mYmlXAz2grxjvpZKULeO_HteVaGnohcPRDljN13ZIrvBVhC-gbwWNx5dCQdPL8ltvt_e_HqpzDiL3scnNPCQRWungn5bYshQpcart9defVLbOkySOsiSTo4_RcnLH1UdKlE7XJ89XGtjeR-Ilmvt1nCi3g6vtYVOLpO8ZHcIonZcfgnO2EjHjmLxL83PRQ"/>
+</div>
+<div>
+<h4 class="font-title-lg text-primary text-sm leading-tight">Sugestão: Banca do Zé</h4>
+<p class="text-xs text-on-surface-variant mb-xs">Produtor Platina • Atende seu volume</p>
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-secondary-container/20 text-secondary text-[10px] rounded-full font-bold">Entrega Flash</span>
+<span class="px-2 py-0.5 bg-primary-container/20 text-primary text-[10px] rounded-full font-bold">100% Orgânico</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Modal Footer Actions -->
+<div class="px-md py-md bg-surface-container-high border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<button class="text-on-surface-variant font-label-sm hover:text-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                    Limpar todos os filtros
+                </button>
+<div class="flex gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none px-xl py-sm bg-white border border-outline-variant text-on-surface font-label-sm rounded-lg hover:bg-surface-variant transition-all active:scale-95">
+                        Cancelar
+                    </button>
+<button class="flex-1 md:flex-none px-xl py-sm bg-primary text-on-primary font-title-lg text-sm rounded-lg shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-95">
+                        Aplicar Filtros
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

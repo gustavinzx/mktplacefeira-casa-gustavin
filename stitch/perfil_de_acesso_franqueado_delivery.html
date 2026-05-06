@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeee9",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-background": "#1b1c19",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-container": "#5a1c00",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffdbce",
+                    "surface-container-high": "#e9e8e3",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "tertiary-container": "#e41f25",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#40493c",
+                    "primary-container": "#30852f",
+                    "on-secondary-fixed": "#370e00",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f1ec",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#faf9f4",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#126e19",
+                    "background": "#faf9f4",
+                    "surface-dim": "#dbdad5",
+                    "on-tertiary-fixed": "#410002",
+                    "surface-variant": "#e3e3de",
+                    "surface-container-low": "#f5f4ef",
+                    "primary-fixed-dim": "#83db79",
+                    "outline-variant": "#bfcab9",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-container": "#f8fff0",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "primary": "#0e6b17",
+                    "secondary": "#a63b00",
+                    "surface-container-highest": "#e3e3de",
+                    "primary-fixed": "#9ef892",
+                    "outline": "#707a6b",
+                    "on-surface": "#1b1c19",
+                    "inverse-primary": "#83db79",
+                    "secondary-container": "#fc6c29",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface": "#faf9f4",
+                    "tertiary": "#bb0014",
+                    "on-primary-fixed": "#002202",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "margin-desktop": "80px",
+                    "base": "8px",
+                    "xl": "64px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-40 border-b bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-green-700 dark:text-green-400">Painel Administrativo Master</span>
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64" placeholder="Buscar permissões..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-zinc-50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-zinc-50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500" data-icon="settings">settings</span>
+</button>
+<button class="p-2 rounded-full hover:bg-zinc-50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden ml-2">
+<img alt="Avatar do Administrador" class="w-full h-full object-cover" data-alt="close up professional headshot of a smiling system administrator in a modern office environment with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMh6MhmFdkLkgzkbd08Dtc4I58G2LxLJuVszAqiNQVvx2QMRgeZgXGWuyf_8qVmgGghs4j5nz_yAkv8gHCJ7rlcBDGevn6qxx96NPLgGILzn_TlO0Dv4PlmrkUArv-L_XmalVEu76xrJQ0FQS_m_pbSidyTz2M2VrUZrQk7pyBySflJrzCWoBfpIXDT26J-mhd9fcfboKhrOXseExhDl2JeEHm3a_Fv3aE_iunsk4jLL1iFzZ4r3nZ_Nc5jLpbCaeAWFo2znxNKr0"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 flex flex-col pt-20 pb-6 w-64 z-30">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-green-700">Administração</h2>
+<p class="text-xs text-zinc-500 uppercase tracking-wider font-bold">Gestão Centralizada</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-sm font-medium">Notas Fiscais</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="text-sm font-medium">Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-r-4 border-green-600 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-sm font-medium">Gestão de Perfis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-green-600 hover:bg-zinc-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-bold text-sm shadow-sm hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Novo Relatório
+            </button>
+<button class="w-full mt-4 flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-600 hover:bg-error-container hover:text-error transition-all">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<header class="mb-10 flex items-end justify-between">
+<div>
+<nav class="flex items-center gap-2 text-sm text-outline mb-2">
+<span>Gestão de Perfis</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-semibold">Franqueado Delivery</span>
+</nav>
+<h1 class="font-display-lg text-display-lg text-on-background">Franqueado Delivery</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                    Este perfil possui autonomia para orquestrar a logística regional e validar o crescimento da rede através da aprovação de novos expositores.
+                </p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 rounded-full border border-outline text-on-surface font-semibold hover:bg-surface-container transition-colors">
+                    Duplicar Perfil
+                </button>
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-semibold hover:shadow-lg transition-all">
+                    Salvar Alterações
+                </button>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-6">
+<!-- Summary Bento Grid Section -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="local_shipping">local_shipping</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+                    Matriz de Permissões
+                </h3>
+<div class="space-y-6">
+<!-- Permission Group 1 -->
+<div class="p-6 rounded-xl bg-surface-container-low border-l-4 border-primary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-on-surface">Monitoramento de Frotas Regionais</h4>
+<p class="text-sm text-on-surface-variant">Acesso em tempo real ao posicionamento e status de carga dos entregadores parceiros.</p>
+</div>
+<div class="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Ativo
+                            </div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-white p-3 rounded-lg border border-outline-variant text-center">
+<p class="text-[10px] text-outline font-bold uppercase">Visualização</p>
+<span class="text-sm font-semibold">Total</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-outline-variant text-center">
+<p class="text-[10px] text-outline font-bold uppercase">Intervenção</p>
+<span class="text-sm font-semibold">Crítica</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-outline-variant text-center">
+<p class="text-[10px] text-outline font-bold uppercase">Escopo</p>
+<span class="text-sm font-semibold">Regional</span>
+</div>
+</div>
+</div>
+<!-- Permission Group 2 -->
+<div class="p-6 rounded-xl bg-surface-container-low border-l-4 border-secondary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-on-surface">Aprovação de Novas Feiras</h4>
+<p class="text-sm text-on-surface-variant">Poder de veto e homologação para expansão de novos pontos de venda físicos na região.</p>
+</div>
+<div class="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Ativo
+                            </div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-white border border-outline-variant rounded-full text-xs font-medium">Vistoria Prévia</span>
+<span class="px-3 py-1 bg-white border border-outline-variant rounded-full text-xs font-medium">Assinatura Digital</span>
+<span class="px-3 py-1 bg-white border border-outline-variant rounded-full text-xs font-medium">Gestão de Documentação</span>
+</div>
+</div>
+<!-- Permission Group 3 -->
+<div class="p-6 rounded-xl bg-surface-container-low border-l-4 border-tertiary-container">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-on-surface">Gestão de Taxas de Entrega Locais</h4>
+<p class="text-sm text-on-surface-variant">Ajustes dinâmicos de valores baseados em zoneamento e horários de pico.</p>
+</div>
+<div class="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Ativo
+                            </div>
+</div>
+<div class="relative h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-tertiary-container w-3/4"></div>
+</div>
+<p class="text-[10px] mt-2 text-outline font-medium italic">*Alterações requerem 2FA (Autenticação de dois fatores)</p>
+</div>
+</div>
+</div>
+<!-- Side Card: Quick Actions & Status -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Status Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<h4 class="text-sm font-bold text-outline uppercase mb-4">Status do Perfil</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">Perfil Homologado</p>
+<p class="text-xs text-on-surface-variant">Última revisão: Ontem, 14:30</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Nível de Acesso:</span>
+<span class="font-semibold">Nível 4 (Franquia)</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Usuários com este perfil:</span>
+<span class="font-semibold">12 Administradores</span>
+</div>
+</div>
+</div>
+<!-- Logistics Preview Card -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="h-32 relative">
+<img class="w-full h-full object-cover" data-alt="vibrant abstract map visualization with glowing delivery routes and data points in shades of green and orange" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGkmTrMVGjUjIjFPFDhSuSTjY8RvC0TgKnImL-_xxHDvR-ILsNZsBfcpLGkrL3mx0Ayazk9HxZp9TN3UTGbutMszZ-0OlRdFMVRbphUSocWFd47gGUAt4XKAGcFx0-UhOOI5s-qzlyUJWKVvTs8cKG2XxFr5MoQSVyxEI9iS2KE08UnvW8iiS86EbLCaqP0Edx7Rb2wdxgtQ3PezpXjUrAZU_oMrUaMoWilWAfytC8KaQlGxMnjW1MjPGqfHVcbca-EhGU7f4LnMY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+<p class="text-white font-bold text-sm">Preview Regional: São Paulo Sul</p>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<p class="text-xs text-on-surface-variant italic leading-relaxed">
+                            "Acesso liberado para ajustar o raio de entrega em até 15km da sede da feira."
+                        </p>
+<button class="w-full py-2 rounded-lg bg-surface-container text-primary font-bold text-xs hover:bg-primary-container hover:text-white transition-colors">
+                            Ver Mapa de Calor
+                        </button>
+</div>
+</div>
+<!-- Security History -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant">
+<h4 class="text-sm font-bold text-outline uppercase mb-4">Log de Segurança</h4>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-sm text-primary mt-0.5" data-icon="history">history</span>
+<div>
+<p class="text-xs font-bold text-on-surface">Taxa de entrega alterada</p>
+<p class="text-[10px] text-outline">Por: adm_carlos - 2h atrás</p>
+</div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-sm text-primary mt-0.5" data-icon="history">history</span>
+<div>
+<p class="text-xs font-bold text-on-surface">Novo feirante aprovado</p>
+<p class="text-[10px] text-outline">Por: adm_carlos - 5h atrás</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only for administrative profiles) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-secondary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="add_moderator" style="font-variation-settings: 'FILL' 1;">add_moderator</span>
+</button>
+</body></html>

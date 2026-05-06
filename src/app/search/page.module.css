@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  gap: 32px;
+  padding-top: 40px;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.filterSection {
+  margin-bottom: 32px;
+}
+
+.filterTitle {
+  font-family: var(--font-plus-jakarta);
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.filterList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxActive {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.content {
+  flex: 1;
+}
+
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.resultsCount {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+.sortSelect {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline-variant);
+  background-color: white;
+  font-size: 14px;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+}

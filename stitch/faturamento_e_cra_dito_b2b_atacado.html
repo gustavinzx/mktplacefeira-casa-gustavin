@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#e41f25",
+                    "secondary": "#a63b00",
+                    "tertiary-fixed": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "outline-variant": "#bfcab9",
+                    "on-secondary-container": "#5a1c00",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#83db79",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dbdad5",
+                    "secondary-fixed": "#ffdbce",
+                    "on-tertiary-fixed": "#410002",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "surface-container": "#efeee9",
+                    "on-surface-variant": "#40493c",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1b1c19",
+                    "surface-variant": "#e3e3de",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e3e3de",
+                    "surface": "#faf9f4",
+                    "on-secondary-fixed": "#370e00",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-tint": "#126e19",
+                    "primary-container": "#30852f",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#f8fff0",
+                    "background": "#faf9f4",
+                    "surface-container-high": "#e9e8e3",
+                    "primary-fixed": "#9ef892",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#00530b",
+                    "outline": "#707a6b",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#83db79",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fc6c29",
+                    "primary": "#0e6b17",
+                    "surface-bright": "#faf9f4",
+                    "on-background": "#1b1c19",
+                    "on-primary-fixed": "#002202",
+                    "surface-container-low": "#f5f4ef",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xl": "64px",
+                    "margin-desktop": "80px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 shadow-sm docked full-width top-0 z-50 fixed w-full">
+<div class="flex justify-between items-center w-full px-6 h-16">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-emerald-700 dark:text-emerald-500 tracking-tight">feira.casa Atacado</span>
+<div class="hidden md:flex gap-6">
+<span class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors cursor-pointer active:opacity-80 px-2 py-1">Início</span>
+<span class="text-emerald-700 dark:text-emerald-400 font-bold border-b-2 border-emerald-600 font-plus-jakarta text-sm px-2 py-1">Faturamento</span>
+<span class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors cursor-pointer active:opacity-80 px-2 py-1">Pedidos</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:block px-4 py-1.5 bg-surface-container rounded-full text-zinc-600 text-xs font-semibold">
+                    Seletor de CNPJ: 45.231.888/0001-90
+                </div>
+<div class="flex gap-2">
+<button class="p-2 text-zinc-500 hover:bg-zinc-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-zinc-500 hover:bg-zinc-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<img alt="Avatar do Gestor Corporativo" class="w-8 h-8 rounded-full border border-zinc-200" data-alt="close-up portrait of a professional corporate manager in a bright office environment, high quality photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3l4upi3qXplH8HudUYCAHOyMBF7ewdHHn0q-_HdGMq3vcS_Cl7WXBMHi_QfZ2xiV63DkkmqV_pyPrc14Vdm1_pZzcQT8hZ4ntiSGRl8-vmy5pbUFx_ukY3OCI7njg7AVJ3OZVe6wZlDAAm0k5tYe29QpZdXfPSJgkczVvJs9kOljpvsxLRMedkgF269h7Cv0s4fXnwcTBwwpbKweQMdBGWCI2bs6a7rQO-RiU8J6fGomWxywaGIGz1W2602CsHgs30GPIJVIa6AY"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 flex flex-col h-full pt-16 bg-zinc-50 dark:bg-zinc-900 h-screen w-64 border-r border-zinc-200 dark:border-zinc-800 flat no shadows hidden md:flex">
+<div class="p-6">
+<h2 class="text-lg font-extrabold text-emerald-800 dark:text-emerald-200">Portal B2B</h2>
+<p class="text-xs text-zinc-500 font-plus-jakarta">Gestão de Suprimentos</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 font-plus-jakarta text-sm hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 font-plus-jakarta text-sm hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Catálogo Atacado
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-semibold border-r-4 border-emerald-600 font-plus-jakarta text-sm transition-all duration-200 ease-in-out rounded-l-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Faturamento
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 font-plus-jakarta text-sm hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                Contratos
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 font-plus-jakarta text-sm hover:bg-emerald-50/50 dark:hover:bg-zinc-800 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                Suporte
+            </a>
+</nav>
+<div class="p-4 mt-auto border-t border-zinc-200 dark:border-zinc-800">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 font-plus-jakarta text-sm hover:bg-emerald-50/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Log out
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 px-4 md:px-8 pb-12">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md text-on-surface">Gestão Financeira B2B</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Bem-vindo, Hortifruti São José Ltda.</p>
+</div>
+<!-- Bento Grid - Financial Overview -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<!-- Credit Limit Card -->
+<div class="col-span-1 md:col-span-2 bg-primary-container p-6 rounded-xl shadow-sm border border-primary text-on-primary-container flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm opacity-90">Limite de Crédito Disponível</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-display-lg text-display-lg">R$ 50.000,00</span>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<div class="flex-1 h-2 bg-white/20 rounded-full mr-4">
+<div class="h-2 bg-primary-fixed w-[65%] rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm">65% utilizado</span>
+</div>
+</div>
+<!-- Status Summary -->
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status da Conta</span>
+<div class="mt-4 flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-fixed-dim rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-primary">Em dia</p>
+<p class="text-xs text-on-surface-variant">Nenhum atraso detectado</p>
+</div>
+</div>
+</div>
+<!-- Next Due Date -->
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Próximo Vencimento</span>
+<div class="mt-4">
+<p class="font-title-lg text-title-lg text-secondary">R$ 4.250,80</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+<span class="text-sm font-medium">15 de Outubro</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pending Debits Section -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="pending_actions">pending_actions</span>
+                        Notas de Débito Pendentes
+                    </h2>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+<th class="px-6 py-4">Documento</th>
+<th class="px-6 py-4">Emissão</th>
+<th class="px-6 py-4 text-center">Prazo</th>
+<th class="px-6 py-4">Vencimento</th>
+<th class="px-6 py-4">Valor</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">ND #88291</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">30/09/2023</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-bold text-zinc-600">15 DIAS</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium">15/10/2023</td>
+<td class="px-6 py-4 text-sm font-bold">R$ 1.240,00</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-secondary text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                            Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-emerald-700 hover:text-emerald-800 flex items-center gap-1 ml-auto font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                                            Boletim
+                                        </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">ND #88104</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">15/09/2023</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-bold text-zinc-600">30 DIAS</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium">15/10/2023</td>
+<td class="px-6 py-4 text-sm font-bold">R$ 3.010,80</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-secondary text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                            Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-emerald-700 hover:text-emerald-800 flex items-center gap-1 ml-auto font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                                            Boletim
+                                        </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">ND #87550</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">01/09/2023</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-bold text-zinc-600">45 DIAS</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium">16/10/2023</td>
+<td class="px-6 py-4 text-sm font-bold">R$ 8.900,00</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-secondary text-xs font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                            Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-emerald-700 hover:text-emerald-800 flex items-center gap-1 ml-auto font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                                            Boletim
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Payments History & Analytics -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Payment History -->
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-outline-variant flex flex-col">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface">Histórico de Pagamentos</h3>
+<button class="text-sm font-semibold text-emerald-700 flex items-center gap-1 hover:underline">
+                            Ver todos
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Pagamento NF #7721</p>
+<p class="text-xs text-on-surface-variant">Via PIX Bancário</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">22 Set 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-emerald-700">R$ 5.400,00</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2.5 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold rounded-full uppercase">Sucesso</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="receipt">receipt</span>
+</div>
+<div>
+<p class="text-sm font-bold">Pagamento NF #7690</p>
+<p class="text-xs text-on-surface-variant">Boleto Liquidado</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">10 Set 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-emerald-700">R$ 2.100,50</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2.5 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold rounded-full uppercase">Sucesso</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Pagamento NF #7655</p>
+<p class="text-xs text-on-surface-variant">TED Corporate</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">01 Set 2023</td>
+<td class="px-6 py-4 text-sm font-bold text-emerald-700">R$ 12.800,00</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2.5 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold rounded-full uppercase">Sucesso</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Actions / Support -->
+<div class="bg-surface-container-high rounded-xl p-6 flex flex-col gap-6">
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-wider">Ações Rápidas</h4>
+<div class="grid grid-cols-1 gap-3">
+<button class="w-full flex items-center justify-between p-4 bg-white rounded-lg border border-outline-variant hover:border-primary transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="description">description</span>
+<span class="text-sm font-bold">Baixar Todas NFs</span>
+</div>
+<span class="material-symbols-outlined text-zinc-400 group-hover:text-primary transition-colors" data-icon="download">download</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-white rounded-lg border border-outline-variant hover:border-primary transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="request_quote">request_quote</span>
+<span class="text-sm font-bold">Solicitar Limite</span>
+</div>
+<span class="material-symbols-outlined text-zinc-400 group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+</button>
+</div>
+</div>
+<div class="mt-auto bg-primary-container/10 p-4 rounded-lg border border-primary/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="headset_mic">headset_mic</span>
+<div>
+<p class="text-sm font-bold text-on-surface">Gerente de Conta</p>
+<p class="text-xs text-on-surface-variant mb-3">Ricardo Mendes está pronto para ajudar com seu faturamento.</p>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-emerald-800 transition-colors">
+                                    Falar agora
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-zinc-200 flex justify-around items-center h-16 px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[10px] font-medium">Catálogo</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-emerald-600">
+<span class="material-symbols-outlined" data-icon="receipt_long" data-weight="fill" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="text-[10px] font-bold">Faturamento</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-[10px] font-medium">Suporte</span>
+</button>
+</nav>
+</body></html>

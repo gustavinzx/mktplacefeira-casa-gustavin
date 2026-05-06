@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffdbce",
+                    "surface-tint": "#126e19",
+                    "secondary-fixed-dim": "#ffb599",
+                    "on-primary-container": "#f8fff0",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#faf9f4",
+                    "surface": "#faf9f4",
+                    "surface-container": "#efeee9",
+                    "surface-container-high": "#e9e8e3",
+                    "outline": "#707a6b",
+                    "inverse-surface": "#30312e",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#e41f25",
+                    "secondary": "#a63b00",
+                    "on-secondary-fixed": "#370e00",
+                    "on-background": "#1b1c19",
+                    "on-primary-fixed-variant": "#00530b",
+                    "on-surface": "#1b1c19",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#bb0014",
+                    "tertiary-fixed-dim": "#ffb4ab",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-fixed-variant": "#7f2b00",
+                    "primary-fixed-dim": "#83db79",
+                    "background": "#faf9f4",
+                    "primary-fixed": "#9ef892",
+                    "on-tertiary-fixed-variant": "#93000d",
+                    "tertiary-fixed": "#ffdad6",
+                    "on-surface-variant": "#40493c",
+                    "on-primary-fixed": "#002202",
+                    "on-secondary-container": "#5a1c00",
+                    "surface-dim": "#dbdad5",
+                    "surface-variant": "#e3e3de",
+                    "inverse-primary": "#83db79",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#410002",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f2f1ec",
+                    "surface-container-low": "#f5f4ef",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#0e6b17",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#fc6c29",
+                    "primary-container": "#30852f",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e3e3de",
+                    "outline-variant": "#bfcab9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "sm": "12px",
+                    "margin-desktop": "80px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh {
+            background-color: #faf9f4;
+            background-image: radial-gradient(at 0% 0%, rgba(14, 107, 23, 0.05) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(252, 108, 41, 0.05) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-fixed-dim min-h-screen flex">
+<!-- Left Column: Visual & Brand Narrative -->
+<section class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-primary-container p-xl flex-col justify-between">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-overlay" data-alt="Vibrant outdoor Brazilian farmer market with fresh colorful fruits and vegetables organized neatly on wooden crates under bright morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxgXZ8vRUJJCpGt3dX_v1lonh80KWtGkDxqRujvxSSriNOwk8Lkmgo2A0ztxeN6rSRidaDiJF_DPZD2c2Bf3sWrAGbEv3weEcdw-AZzKEPjLio2FAwKxLezedp_j4WbUmK5N_d8ruTSjHFPGhqGLcaKTUSoDK35hXH7Uo8zUOGGrtK41D9E507DFPGLAXo4S5O4_29pMmND1RKTXODQrlFQqcpfXKY4d7wy7dPUrwqhv7uuzJxmtS5Hpblcx6F0WjBAqhJ_rvmaZQ"/>
+<div class="absolute inset-0 bg-gradient-to-b from-primary/40 to-primary-container"></div>
+</div>
+<!-- Logo Area -->
+<div class="relative z-10">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-display-lg text-primary-fixed" data-weight="fill">storefront</span>
+<span class="font-display-lg text-display-lg text-white tracking-tighter">feira.casa</span>
+</div>
+<div class="mt-md">
+<span class="bg-white/20 backdrop-blur-md px-md py-xs rounded-full text-white font-label-sm border border-white/30">Portal do Franqueado</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="relative z-10 max-w-lg">
+<h1 class="font-display-lg text-display-lg text-white mb-md leading-tight">Leve o frescor da feira para sua região.</h1>
+<p class="font-body-md text-body-md text-on-primary-container opacity-90">
+                Transforme a economia local e conecte produtores diretamente aos consumidores. Gerencie sua franquia com ferramentas inteligentes e suporte dedicado.
+            </p>
+</div>
+<!-- Social Proof/Footer -->
+<div class="relative z-10 flex gap-lg items-center">
+<div class="flex -space-x-4">
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Portrait of a smiling mature female entrepreneur in a professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSlHBIDpeRRwvAsa42fqgHL8kmSq59Ay_P7q9cbdgwaeWnQXiAPbQUc3vOPG0akRWhOugLudKtgkrkhPtvn3BqCvdLKojq044-WMyRuxlHqW-6omLkRinNFuA3LTss2AqyVpLb-KNpmxSIhwSTqFpkoowESquTf1XMTpdI9FJ9-Ly2Gk_dDtvFIvyBJYgZO-Z7ngPJypogtz0uI_gAQUKsbsmCdZi5bA6ltfXFDUl9gq-9LbpsPkIaCVL4ip2ZFtGh_Uq3foIAf_g"/>
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Portrait of a friendly male franchise manager in casual business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxnS6RRp5GBINQC9KtzQ87kjdMzsLSVpez7OS9LAc5mjpHWcDTUVxvjrhF7Vh6P3N-pW-dWpMo_aIA9_g__EnkZn6AeYfU1kS-jG1p4F4PgCWQdiP6p0Gd4mZl9WpqoaWBEA8mndsdQvFsiXyyopR9p_dqhVzLEC_Bp99oHAovHmrdhXKvRKjtA3ZenaVfa71qoMVJcSvNaLeR3TqT1RmNzl5-GVfmABYdqnV12x-kWnUJGY9nWkOjltO0EGxzejxVLD3Y8anOqrY"/>
+<img class="w-12 h-12 rounded-full border-2 border-white object-cover" data-alt="Close-up of a young professional woman smiling warmly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBe4H8wWpGuNDREDhYryhZ3fiju7grX-uHjz_ixrnE43-3kjsG2M2epJF146OAJ5mROMXmzTnbMYibErDVwVkAyn6x0IdrRAtmDkLp5EcTDd02VahHaGgXX6NaJwqykg504Ds_NQICVk42QAy0szwkndDPfNE7NN3OGlLxNa7Ln1EBYaUz5Wt5_UbO3JHy84nJ_vEFhuMLK9Ic4-lcPyC7EmWeuf-KZSCdzY4m9jyL_XzCA85IqJbcAESJz-IOuHDAbGE2C-77Xc8"/>
+</div>
+<p class="font-label-sm text-white text-label-sm">+150 Franqueados ativos em todo o Brasil</p>
+</div>
+</section>
+<!-- Right Column: Forms -->
+<main class="w-full lg:w-1/2 flex items-center justify-center p-gutter lg:p-xl bg-mesh min-h-screen">
+<div class="w-full max-w-md space-y-lg">
+<!-- Mobile Logo (Visible only on small screens) -->
+<div class="lg:hidden flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-title-lg text-primary" data-weight="fill">storefront</span>
+<span class="font-display-lg text-title-lg text-primary tracking-tighter">feira.casa</span>
+</div>
+<!-- Tabs Container -->
+<div class="bg-surface-container-low p-xs rounded-xl flex gap-xs">
+<button class="flex-1 py-base px-md rounded-lg font-title-lg text-label-sm transition-all bg-white text-primary shadow-sm ring-1 ring-black/5">Acessar Conta</button>
+<button class="flex-1 py-base px-md rounded-lg font-title-lg text-label-sm transition-all text-on-surface-variant hover:bg-surface-variant/50">Nova Franquia</button>
+</div>
+<!-- Login Form Header -->
+<header>
+<h2 class="font-headline-md text-headline-md text-on-surface">Bem-vindo de volta</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Insira suas credenciais corporativas para acessar o painel administrativo.</p>
+</header>
+<!-- Login Form -->
+<form action="#" class="space-y-md">
+<div class="space-y-xs">
+<label class="block font-label-sm text-label-sm text-on-surface-variant ml-xs" for="email">E-mail corporativo</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-xl pr-md py-md bg-white border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-body-md" id="email" placeholder="nome@feira.casa" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center px-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="password">Senha</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Esqueceu a senha?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-xl pr-md py-md bg-white border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none text-body-md" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-sm px-xs">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary transition-all" id="remember" type="checkbox"/>
+<label class="font-body-md text-label-sm text-on-surface-variant select-none" for="remember">Manter conectado por 30 dias</label>
+</div>
+<button class="w-full py-md bg-primary text-white font-title-lg text-body-md rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-95 transition-all flex items-center justify-center gap-sm" type="submit">
+                    Entrar no Painel
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<!-- SSO Alternative -->
+<div class="relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-label-sm">
+<span class="px-md bg-surface text-on-surface-variant">Ou continue com</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm py-base px-md border border-outline-variant rounded-xl hover:bg-surface-variant transition-all font-label-sm">
+<img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUYArUcMRTiECtBvfv0hJyifwggswYTphWQpwUlFI58vqXXoRIrUOfi1wmctyR1gNJ1Hh4q9tJNMBKn51i5zpm2S1tJw8_IisGp5R5ieaX2ZliqenvuIutm2hSHHXBXC0MYBvcNjCf5FkHJZqEu0HQruaAbEJs6Ur3ql5G4VGdqlK5rlzf_EwtIsTc1DWG6-0mx9kF2J_HGKaSNUWvJJ8DOczqlr2F0cT1spxV_zH3vYk4z7-5DsLisHaKSpsHNzgdBn7fvV42s3M"/>
+                    Google
+                </button>
+<button class="flex items-center justify-center gap-sm py-base px-md border border-outline-variant rounded-xl hover:bg-surface-variant transition-all font-label-sm">
+<span class="material-symbols-outlined text-on-surface">identity_platform</span>
+                    Microsoft
+                </button>
+</div>
+<!-- Footer Help -->
+<footer class="text-center pt-lg">
+<p class="font-body-md text-label-sm text-on-surface-variant">
+                    Problemas com o acesso? <a class="text-secondary font-semibold hover:underline" href="#">Falar com Suporte Regional</a>
+</p>
+</footer>
+</div>
+</main>
+<!-- Hidden Registration Content Structure (Used when tab toggles) -->
+<div class="hidden" id="registration-fields">
+<div class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="block font-label-sm text-label-sm text-on-surface-variant ml-xs">Nome da Franquia</label>
+<input class="w-full px-md py-md bg-white border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: Regional Sul" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-label-sm text-label-sm text-on-surface-variant ml-xs">CNPJ</label>
+<input class="w-full px-md py-md bg-white border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary" placeholder="00.000.000/0000-00" type="text"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="block font-label-sm text-label-sm text-on-surface-variant ml-xs">Região de Atuação</label>
+<select class="w-full px-md py-md bg-white border-outline-variant rounded-xl outline-none focus:ring-2 focus:ring-primary appearance-none">
+<option>Sul</option>
+<option>Sudeste</option>
+<option>Centro-Oeste</option>
+<option>Nordeste</option>
+<option>Norte</option>
+</select>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#f8fff0",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfcab9",
+                        "primary-fixed": "#9ef892",
+                        "on-surface-variant": "#40493c",
+                        "surface-tint": "#126e19",
+                        "surface-container-highest": "#e3e3de",
+                        "inverse-primary": "#83db79",
+                        "surface-bright": "#faf9f4",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4ef",
+                        "outline": "#707a6b",
+                        "on-secondary-container": "#5a1c00",
+                        "inverse-on-surface": "#f2f1ec",
+                        "on-primary-fixed-variant": "#00530b",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "on-tertiary-fixed": "#410002",
+                        "tertiary-fixed-dim": "#ffb4ab",
+                        "on-surface": "#1b1c19",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-high": "#e9e8e3",
+                        "secondary-fixed": "#ffdbce",
+                        "tertiary": "#bb0014",
+                        "surface-dim": "#dbdad5",
+                        "on-primary-fixed": "#002202",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#7f2b00",
+                        "surface-container": "#efeee9",
+                        "primary": "#0e6b17",
+                        "secondary-container": "#fc6c29",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f4",
+                        "primary-fixed-dim": "#83db79",
+                        "primary-container": "#30852f",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#370e00",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e3de",
+                        "tertiary-container": "#e41f25",
+                        "secondary-fixed-dim": "#ffb599",
+                        "secondary": "#a63b00",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1b1c19",
+                        "inverse-surface": "#30312e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-desktop": "80px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #0e6b17;
+            box-shadow: 0 0 0 2px rgba(14, 107, 23, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<div class="flex min-h-screen">
+<!-- Sidebar Image Section (Hidden on Mobile) -->
+<div class="hidden lg:flex lg:w-5/12 xl:w-4/12 relative overflow-hidden bg-primary-container">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-transparent to-transparent z-10"></div>
+<img alt="Feira Livre" class="absolute inset-0 w-full h-full object-cover" data-alt="vibrant brazilian outdoor street market with colorful tropical fruits neatly arranged on wooden stalls under sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbNaydZr16CQ8qQ2VV2LJYJ90oKtsiiy9JnKyJndGAcleI-unXg-U-W-mzWHgfLNtLybdS3XefjaPoIbWKrCxUZGPGnhdxUF-RET34EiA3Q75y8vdLKMWPldn_xCIYHuWPB6cLaV5lPlXNfLq3OyHJNpReoT4vpYiNvhUV57ffB7ufB1KSwJg4YOm_G0dXERrn1lcVxWHSeHrJatyRTXKMF4a8p-xLYk8OIT_CvqX4b2fLF5N4HVf1chwSWrxzOFWbZz5Quw3ygAM"/>
+<div class="relative z-20 flex flex-col justify-end p-lg h-full text-on-primary-container">
+<h1 class="font-display-lg text-display-lg mb-sm">Traga sua banca para o digital.</h1>
+<p class="font-title-lg text-title-lg opacity-90 max-w-md">Conecte-se com milhares de vizinhos e venda o frescor da sua colheita direto da sua banca.</p>
+<div class="mt-lg flex items-center gap-base">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+<img alt="Feirante 1" data-alt="portrait of a smiling male farmer in his late 40s wearing a straw hat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM5xZ3vaLfy_9IypUcce013in4nhCQ5n_tJqCxlF_qjNEed8lf1MZ1r0YLtbt0TNzwMR8PSf7U6pRse6VL7xjKUbDsNMEoCKKuyqaCt0i057rT3FABZzOct7YbzW7mllLC4bF1RZ_q0NPypP2n24MtFKLO41FHMMEd3L_OiPLhEL9ye1YNgpEhYm-3eokxUM1o0F9ZyybvWDH5upz-6neazsKvXqgsOLxbecWA3yhNnDQUiNNwTAQv5rjrI_P57ZcmnYfx8gwtWnY"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+<img alt="Feirante 2" data-alt="portrait of a joyful female fruit vendor in a traditional apron" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpjo4oSAU3WDBA_StDhxoH5El8vSuFJFMrup7TiSoLQ7sxhNf06hvhurpVRL_vycP1fqqHtAGQN66PabNtRnmiqqNVCZq-G2i21I94z7A3wsNrTroFP7IqtebXNoro9R5dr2Ob4kuhIHxSFSApZZVhVSAdtxgf6V1qB0puu-ukUWnvUHDwD0v_Y_bbeMey1BizQWFLtOjQ0nIro3gIFdhRcaPrVr6xYyTLkEUQRd-RYj1pPjDzpYvQ4E35JAM8Yf_ty_1a1Ou9afo"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+<img alt="Feirante 3" data-alt="portrait of an elderly smiling produce seller at a market" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJaSYl1MqSEaFjn55yCi_N6s6joA-vPrXb11-6UpzoMEsUzy_utvE7rxvB5mO3k6OwxxHqbbfuvadO9vRek_19uKbsbu9V7fTO18ws3NQm2eMcRtgcaCphLrYJ6SJ2BxpfEUfbTKRZrASGZn-yREjSNl3ojMVWYZwcZFwGkNngQf3BnXuDgn-xBlGz2IeARvK9JuE_vvYyWbBYE18b88RCZi2a8-NAUQsNtnUWAjI6nseb7l3o9dTBLjOZSEG39jvgsxdIvDNwyXc"/>
+</div>
+</div>
+<span class="font-label-sm text-label-sm">+500 feirantes ativos</span>
+</div>
+</div>
+</div>
+<!-- Form Section -->
+<main class="flex-1 w-full lg:max-w-7/12 flex flex-col">
+<!-- Header/TopBar -->
+<header class="flex justify-between items-center w-full px-8 h-20 bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-sm shadow-emerald-900/5">
+<div class="text-xl font-extrabold text-emerald-700 dark:text-emerald-500 tracking-tight font-['Plus_Jakarta_Sans']">Feira.casa</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-sm text-label-sm text-outline">Já tem conta?</span>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Fazer Login</a>
+</div>
+</header>
+<div class="flex-1 px-8 py-lg max-w-3xl mx-auto w-full">
+<!-- Stepper -->
+<div class="mb-lg">
+<div class="flex items-center justify-between relative">
+<!-- Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-surface-container-high -translate-y-1/2 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-lg shadow-primary/20">1</div>
+<span class="mt-xs font-label-sm text-label-sm text-primary">Dados</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold">2</div>
+<span class="mt-xs font-label-sm text-label-sm text-outline">Identidade</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold">3</div>
+<span class="mt-xs font-label-sm text-label-sm text-outline">Feiras</span>
+</div>
+</div>
+</div>
+<div class="mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Dados da Banca e Pessoais</h2>
+<p class="text-on-surface-variant mt-xs">Conte-nos um pouco sobre você e o seu negócio na feira.</p>
+</div>
+<!-- Registration Form -->
+<form class="space-y-md">
+<!-- Section: A Banca -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant/30">
+<h3 class="font-title-lg text-title-lg mb-base flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined">storefront</span>
+                            A Sua Banca
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Nome da Banca</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="Ex: Barraca do Zé das Frutas" required="" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Categoria</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md appearance-none">
+<option value="">Selecione...</option>
+<option>Frutas</option>
+<option>Legumes</option>
+<option>Verduras</option>
+<option>Pastéis e Salgados</option>
+<option>Queijos e Laticínios</option>
+<option>Artesanato</option>
+</select>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">CNPJ (Opcional)</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="00.000.000/0000-00" type="text"/>
+</div>
+</div>
+</div>
+<!-- Section: Pessoal -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant/30">
+<h3 class="font-title-lg text-title-lg mb-base flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined">person</span>
+                            Dados Pessoais
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Nome Completo</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="Como você quer ser chamado" required="" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">E-mail</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="seu@email.com" required="" type="email"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">WhatsApp</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="(00) 00000-0000" required="" type="tel"/>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Senha de Acesso</label>
+<div class="relative">
+<input class="w-full bg-white border border-outline-variant rounded-lg px-base py-sm form-input-focus transition-all text-body-md" placeholder="Mínimo 8 caracteres" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline" type="button">
+<span class="material-symbols-outlined">visibility_off</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="pt-sm flex flex-col gap-base">
+<button class="w-full bg-primary text-on-primary font-bold py-sm px-lg rounded-full shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-95 transition-all flex items-center justify-center gap-xs" type="submit">
+                            Próximo Passo
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-label-sm font-label-sm text-outline px-md">
+                            Ao continuar, você concorda com nossos <a class="text-primary hover:underline" href="#">Termos de Uso</a> e <a class="text-primary hover:underline" href="#">Política de Privacidade</a>.
+                        </p>
+</div>
+</form>
+</div>
+<!-- Footer Decorative Element -->
+<footer class="mt-auto px-8 py-md text-center border-t border-surface-container">
+<div class="flex items-center justify-center gap-sm opacity-50 grayscale hover:grayscale-0 transition-all cursor-default">
+<span class="material-symbols-outlined">lock</span>
+<span class="text-label-sm font-label-sm">Conexão segura e criptografada</span>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
