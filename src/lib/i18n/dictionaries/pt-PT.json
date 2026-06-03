@@ -1,0 +1,26 @@
+{
+  "common": {
+    "save": "Guardar Alterações",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "search": "Pesquisar...",
+    "loading": "A carregar...",
+    "logout": "Sair do Painel",
+    "profile": "O meu Perfil",
+    "settings": "Definições",
+    "language": "Idioma"
+  },
+  "admin": {
+    "title": "Painel Administrativo",
+    "overview": "Visão Geral",
+    "users": "Utilizadores e Perfis",
+    "vendors": "Gestão de Feirantes",
+    "franchisees": "Gestão de Franqueados",
+    "logistics": "Logística",
+    "marketing": "Marketing",
+    "finance": "Financeiro & ERP",
+    "crm": "CRM & Expansão",
+    "system_settings": "Definições do Sistema"
+  }
+}

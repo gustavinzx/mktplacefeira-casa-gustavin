@@ -42,21 +42,49 @@ const categoryData: Record<string, CategoryInfo> = {
     subtitle: 'Preços de final de feira, frescos e econômicos.',
     icon: Sparkles,
     color: '#bb0014',
-    banner: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDeKpoVUzmwXDZjpFYUThEMWYs5xweQ6iv3IQQ9gg4nGFBH2HBQS6PMNiNXx-HjPj8mRFnYgfx7wKEzCbAJN06YKykkWqhQZQjYISj2WSZdohoMuGiB5uxbDv0NgDkQqaWa-5rXiDl404cddMfQQweQM7mVAL6NnbMffFuz7AP84_4oNonbyMRrVJpJkmIxWiU5jzZb2AyrkM2Zhls-MMg9HgxB5XnWwuy-EOt_1zS1GnTaedYjvg_mOuVpuj3wEnHyBHHPei3M08E'
+    banner: '/images/feira_hero_3.png'
   }
 };
 
 const CategoryPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
-  const category = categoryData[slug] || categoryData['organicos'];
+  const category = categoryData[slug] || { title: 'Categoria', subtitle: '', icon: Sparkles, color: '#0b612e', banner: '/images/feira_hero_1.png' };
   const Icon = category.icon;
 
-  const products = [
-    { id: '1', title: 'Produto Exemplo 1', price: 12.90, unit: 'kg', imageUrl: category.banner, isOrganic: slug === 'organicos', producerName: 'Produtor Local' },
-    { id: '2', title: 'Produto Exemplo 2', price: 8.50, unit: 'un', imageUrl: category.banner, isOrganic: slug === 'organicos', producerName: 'Produtor Local' },
-    { id: '3', title: 'Produto Exemplo 3', price: 15.00, unit: 'pacote', imageUrl: category.banner, isOrganic: slug === 'organicos', producerName: 'Produtor Local' },
-    { id: '4', title: 'Produto Exemplo 4', price: 9.90, unit: 'kg', imageUrl: category.banner, isOrganic: slug === 'organicos', producerName: 'Produtor Local' },
-  ];
+  const [products, setProducts] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setLoading(true);
+    let url = '/api/products?limit=50';
+    if (slug === 'ofertas-dia') url += '&promotion=true';
+    else if (slug === 'organicos') url += '&organic=true';
+    
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data && data.data.products) {
+          // If it's a specific category like temperos, we might need to filter by category_slug
+          // For now, if we don't have a specific API filter for slug, we filter in frontend
+          let fetchedProducts = data.data.products;
+          if (slug !== 'ofertas-dia' && slug !== 'organicos') {
+            fetchedProducts = fetchedProducts.filter((p: any) => p.category?.slug === slug);
+          }
+          
+          setProducts(fetchedProducts.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            price: Number(p.price),
+            unit: p.unit,
+            imageUrl: p.image_url || category.banner,
+            isOrganic: p.is_organic,
+            producerName: p.producer?.stall_name || 'Produtor Local'
+          })));
+        }
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [slug, category.banner]);
 
   return (
     <div className={styles.page}>
@@ -81,11 +109,21 @@ const CategoryPage = ({ params }: { params: Promise<{ slug: string }> }) => {
           <button className={styles.btnFilter}><Filter size={18} /> Filtrar</button>
         </div>
 
-        <div className={styles.grid}>
-          {products.map(p => (
-            <ProductCard key={p.id} {...p} />
-          ))}
-        </div>
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '40px' }}>Carregando produtos...</div>
+        ) : (
+          <div className={styles.grid}>
+            {products.length > 0 ? (
+              products.map(p => (
+                <ProductCard key={p.id} {...p} />
+              ))
+            ) : (
+              <div style={{ padding: '40px', gridColumn: '1 / -1', textAlign: 'center', color: '#666' }}>
+                Nenhum produto encontrado nesta categoria.
+              </div>
+            )}
+          </div>
+        )}
       </main>
 
       <Footer />

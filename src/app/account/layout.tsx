@@ -1,76 +1,140 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { User, Package, MapPin, Wallet, Settings, LogOut, Loader2 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { User, MapPin, CreditCard, Package, LogOut } from 'lucide-react';
+import styles from './layout.module.css';
+import { clearAuthSession } from '@/lib/profile';
+import { supabase } from '@/lib/supabase';
 
-const AccountLayout = ({ children }: { children: React.ReactNode }) => {
+export default function AccountLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const pathname = usePathname();
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+          router.push('/login');
+          return;
+        }
+        
+        const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+        
+        if (userError || !user) {
+          throw new Error('Não autenticado');
+        }
+
+        const { data: profileData, error: profileError } = await supabase
+          .from('mktplace_feira_profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+
+        if (profileError || !profileData) {
+          throw new Error('Perfil não encontrado');
+        }
+
+        // Se for feirante ou admin, avisar mas deixar acessar? Ou redirecionar para o portal respectivo?
+        // Vamos permitir que todos acessem "Minha Conta" como compradores.
+        setProfile({
+          ...profileData,
+          email: user.email
+        });
+      } catch (err) {
+        console.error('Erro na autenticação:', err);
+        router.push('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [router]);
+
+  const handleLogout = async () => {
+    await clearAuthSession();
+    router.push('/login');
+  };
 
   const navItems = [
-    { href: '/account', label: 'Visão Geral', icon: User },
-    { href: '/account/orders', label: 'Meus Pedidos', icon: Package },
-    { href: '/account/addresses', label: 'Endereços', icon: MapPin },
-    { href: '/account/wallet', label: 'Carteira', icon: CreditCard },
+    { label: 'Visão Geral', path: '/account', icon: User },
+    { label: 'Meus Pedidos', path: '/account/orders', icon: Package },
+    { label: 'Meus Endereços', path: '/account/addresses', icon: MapPin },
+    { label: 'Carteira e Cupons', path: '/account/wallet', icon: Wallet },
+    { label: 'Configurações', path: '/account/settings', icon: Settings },
   ];
 
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Header />
+        <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Loader2 size={40} className="animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!profile) return null;
+
   return (
-    <div style={{ backgroundColor: 'var(--background)', minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f9fafb' }}>
       <Header />
-      <main className="container" style={{ padding: '48px 0', display: 'flex', gap: '48px' }}>
-        <aside style={{ width: '280px' }}>
-          <h2 style={{ fontFamily: 'var(--font-plus-jakarta)', fontSize: '24px', marginBottom: '24px' }}>Minha Conta</h2>
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      
+      <main className={styles.accountLayout}>
+        {/* Sidebar */}
+        <aside className={styles.sidebar}>
+          <div className={styles.profileCard}>
+            <img 
+              src={profile.avatar_url || '/images/placeholder.png'} 
+              alt={profile.full_name} 
+              className={styles.avatar} 
+            />
+            <h2 className={styles.profileName}>{profile.full_name}</h2>
+            <p className={styles.profileEmail}>{profile.email}</p>
+            {profile.role && profile.role !== 'cliente' && (
+              <span className={styles.roleBadge}>{profile.role}</span>
+            )}
+          </div>
+
+          <nav className={styles.nav}>
             {navItems.map((item) => {
+              const isActive = pathname === item.path;
               const Icon = item.icon;
-              const isActive = pathname === item.href;
               return (
                 <Link 
-                  key={item.href} 
-                  href={item.href}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '12px 16px',
-                    borderRadius: 'var(--radius-md)',
-                    textDecoration: 'none',
-                    color: isActive ? 'white' : 'var(--on-surface-variant)',
-                    backgroundColor: isActive ? 'var(--primary)' : 'transparent',
-                    fontWeight: '600'
-                  }}
+                  key={item.path} 
+                  href={item.path} 
+                  className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
                 >
                   <Icon size={20} />
                   {item.label}
                 </Link>
               );
             })}
-            <Link href="/login" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '12px 16px',
-              borderRadius: 'var(--radius-md)',
-              textDecoration: 'none',
-              color: '#ba1a1a',
-              fontWeight: '600',
-              marginTop: '16px'
-            }}>
-              <LogOut size={20} /> Sair
-            </Link>
           </nav>
+
+          <button onClick={handleLogout} className={styles.logoutBtn}>
+            <LogOut size={20} />
+            Sair da conta
+          </button>
         </aside>
-        
-        <div style={{ flex: 1 }}>
+
+        {/* Dynamic Content */}
+        <div className={styles.content}>
           {children}
         </div>
       </main>
+
       <Footer />
     </div>
   );
-};
-
-export default AccountLayout;
+}

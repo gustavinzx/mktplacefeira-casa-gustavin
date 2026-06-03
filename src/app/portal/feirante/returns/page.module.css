@@ -1,0 +1,106 @@
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main, #111827);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted, #6b7280);
+}
+
+.tableContainer {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f9fafb;
+  text-align: left;
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status_pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status_approved {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status_rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnAction {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btnApprove {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.btnApprove:hover {
+  background: #dcfce7;
+}
+
+.btnReject {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.btnReject:hover {
+  background: #fee2e2;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 64px 20px;
+  color: #6b7280;
+}

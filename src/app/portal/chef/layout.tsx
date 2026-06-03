@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PortalSidebar from '@/components/PortalSidebar';
+import PortalAuthGate from '@/components/PortalAuthGate';
 
 export default function ChefLayout({
   children,
@@ -9,11 +10,11 @@ export default function ChefLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: 'flex' }}>
-      <PortalSidebar role="chef" />
-      <div style={{ flex: 1, marginLeft: '280px' }}>
-        {children}
+    <PortalAuthGate portalRole="chef">
+      <div style={{ display: 'flex' }}>
+        <PortalSidebar role="chef" />
+        <div style={{ flex: 1, marginLeft: '280px' }}>{children}</div>
       </div>
-    </div>
+    </PortalAuthGate>
   );
 }

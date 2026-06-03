@@ -3,16 +3,16 @@
   justify-content: space-between;
   gap: 16px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 8px 16px 24px 16px;
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  items: center;
+  align-items: center;
   gap: 12px;
   cursor: pointer;
-  min-width: 100px;
+  min-width: 80px;
   text-align: center;
   transition: transform 0.2s;
 }
@@ -22,8 +22,8 @@
 }
 
 .iconWrapper {
-  width: 96px;
-  height: 96px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@
 
 @media (max-width: 600px) {
   .iconWrapper {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
   }
 }

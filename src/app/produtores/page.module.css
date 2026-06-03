@@ -1,0 +1,210 @@
+.page {
+  background-color: #faf9f4;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hero h1 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 40px;
+  font-weight: 800;
+  color: #1b1c19;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #707a6b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 32px;
+  margin-bottom: 100px;
+}
+
+.producerCard {
+  background: white;
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.producerCard:hover {
+  transform: translateY(-5px);
+}
+
+.cardImage {
+  width: 200px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-cover: cover;
+}
+
+.verifiedBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(14, 107, 23, 0.9);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.cardContent {
+  padding: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.cardHeader h3 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b1c19;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1b1c19;
+}
+
+.specialty {
+  color: #0e6b17;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #707a6b;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.bio {
+  font-size: 14px;
+  color: #40493c;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.btnView {
+  background: #fcfbf7;
+  border: 1px solid #e3e3de;
+  color: #1b1c19;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+.btnView:hover {
+  background: #eef7f2;
+  border-color: #0e6b17;
+  color: #0e6b17;
+}
+
+.becomePartner {
+  background: #125d30;
+  border-radius: 48px;
+  padding: 80px;
+  text-align: center;
+  color: white;
+}
+
+.partnerIcon {
+  color: #fbbc04;
+  margin-bottom: 24px;
+}
+
+.becomePartner h2 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.becomePartner p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+}
+
+.btnPartner {
+  background: white;
+  color: #125d30;
+  text-decoration: none;
+  padding: 18px 48px;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 18px;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btnPartner:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .producerCard { flex-direction: column; }
+  .cardImage { width: 100%; height: 200px; }
+  .becomePartner { padding: 40px 20px; }
+}

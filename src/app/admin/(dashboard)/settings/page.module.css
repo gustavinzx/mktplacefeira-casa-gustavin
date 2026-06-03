@@ -1,0 +1,107 @@
+.page {
+  padding: 32px;
+  max-width: 800px;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1b1c19;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #78716c;
+  font-size: 14px;
+}
+
+.section {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1b1c19;
+  margin-bottom: 24px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f5f5f4;
+}
+
+.row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.info h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1b1c19;
+  margin-bottom: 4px;
+}
+
+.info p {
+  font-size: 13px;
+  color: #78716c;
+}
+
+.toggle {
+  width: 48px;
+  height: 24px;
+  background-color: #0e6b17;
+  border-radius: 99px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggleOff {
+  background-color: #e5e5e5;
+}
+
+.knob {
+  position: absolute;
+  top: 2px;
+  left: 26px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggleOff .knob {
+  left: 2px;
+}
+
+.btnSave {
+  background: #0e6b17;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btnSave:hover {
+  opacity: 0.9;
+}

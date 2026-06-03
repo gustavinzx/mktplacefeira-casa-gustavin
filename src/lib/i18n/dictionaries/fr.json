@@ -1,0 +1,26 @@
+{
+  "common": {
+    "save": "Enregistrer les modifications",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher...",
+    "loading": "Chargement...",
+    "logout": "Se déconnecter",
+    "profile": "Mon Profil",
+    "settings": "Paramètres",
+    "language": "Langue"
+  },
+  "admin": {
+    "title": "Panneau d'administration",
+    "overview": "Vue d'ensemble",
+    "users": "Utilisateurs et Profils",
+    "vendors": "Gestion des Exposants",
+    "franchisees": "Gestion des Franchisés",
+    "logistics": "Logistique",
+    "marketing": "Marketing",
+    "finance": "Finance et ERP",
+    "crm": "CRM et Expansion",
+    "system_settings": "Paramètres du système"
+  }
+}

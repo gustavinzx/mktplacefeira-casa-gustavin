@@ -1,0 +1,145 @@
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main, #111827);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted, #6b7280);
+}
+
+.currentPlan {
+  background: linear-gradient(135deg, var(--leaf-green, #10b981), #059669);
+  border-radius: 20px;
+  padding: 32px;
+  color: white;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.planLabel {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.planName {
+  font-size: 32px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.planStatus {
+  background: rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.pricingCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+}
+
+.pricingCard:hover {
+  border-color: var(--leaf-green, #10b981);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+}
+
+.pricingCard.active {
+  border: 2px solid var(--leaf-green, #10b981);
+}
+
+.planHeader {
+  margin-bottom: 24px;
+}
+
+.planType {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  text-transform: capitalize;
+}
+
+.planPrice {
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  margin-top: 8px;
+}
+
+.planPrice span {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.featureIcon {
+  color: var(--leaf-green, #10b981);
+  margin-top: 2px;
+}
+
+.btnUpgrade {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background: #f3f4f6;
+  color: #111827;
+  transition: all 0.2s;
+}
+
+.btnUpgrade:hover:not(:disabled) {
+  background: var(--leaf-green, #10b981);
+  color: white;
+}
+
+.btnUpgrade:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnActive {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}

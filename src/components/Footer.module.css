@@ -1,8 +1,7 @@
 .footer {
-  background-color: #ffffff;
-  border-top: 1px solid #f1f0ea;
+  background-color: var(--on-surface);
   padding: 80px 0 40px;
-  color: #40493c;
+  color: var(--outline);
 }
 
 .container {
@@ -29,28 +28,30 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 24px;
-  color: #0e6b17;
+  font-size: 26px;
+  color: white;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .logo strong {
-  color: #a63b00;
+  color: var(--primary-container);
 }
 
 .description {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #707a6b;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--outline);
   max-width: 320px;
 }
 
 .linksCol h4, .socialCol h4 {
   font-size: 18px;
-  font-weight: 700;
-  color: #1b1c19;
+  font-weight: 800;
+  color: white;
   margin-bottom: 24px;
+  letter-spacing: -0.01em;
 }
 
 .linksCol ul {
@@ -63,14 +64,16 @@
 }
 
 .linksCol a {
-  color: #40493c;
+  color: var(--outline);
   text-decoration: none;
   font-size: 15px;
-  transition: color 0.2s;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
 }
 
 .linksCol a:hover {
-  color: #0e6b17;
+  color: white;
+  transform: translateX(4px);
 }
 
 .socialCol {
@@ -87,22 +90,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: #fcfbf7;
-  border-radius: 12px;
-  color: #0e6b17;
-  transition: all 0.2s;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-md);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .socialIcons a:hover {
-  background: #0e6b17;
+  background: var(--primary);
   color: white;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(14, 107, 23, 0.4);
 }
 
 .bottom {
-  border-top: 1px solid #f1f0ea;
+  border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -111,7 +115,7 @@
 
 .copyright {
   font-size: 14px;
-  color: #707a6b;
+  color: var(--outline-variant);
 }
 
 .bottomActions {
@@ -122,7 +126,7 @@
 
 .madeWith {
   font-size: 14px;
-  color: #707a6b;
+  color: var(--outline-variant);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -135,15 +139,15 @@
 }
 
 .adminAccess {
-  color: #e3e3de;
-  transition: all 0.2s;
+  color: rgba(255,255,255,0.1);
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
 .adminAccess:hover {
-  color: #0e6b17;
+  color: var(--primary);
 }
 
 .adminTooltip {

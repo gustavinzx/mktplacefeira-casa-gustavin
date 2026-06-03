@@ -1,124 +1,223 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.pageTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main, #111827);
+  margin-bottom: 4px;
 }
 
-.header {
+.pageSubtitle {
+  font-size: 15px;
+  color: var(--text-muted, #6b7280);
+  margin-bottom: 32px;
+}
+
+.headerRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 }
 
-.header h1 {
-  font-size: 28px;
-  font-weight: 800;
-}
-
-.btnAdd {
-  background: var(--primary);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 9999px;
-  font-weight: 700;
+.addBtn {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.card {
-  background: white;
-  border: 1px solid var(--outline-variant);
-  border-radius: 24px;
-  padding: 24px;
-  display: flex;
-  gap: 20px;
+  background: var(--leaf-green, #10b981);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.card:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-sm);
+.addBtn:hover {
+  background: #059669;
 }
 
-.default {
-  border-color: var(--primary);
-  background: rgba(14, 107, 23, 0.02);
+.addressesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.cardIcon {
-  width: 48px;
-  height: 48px;
-  background: var(--surface-container);
-  color: var(--primary);
-  border-radius: 12px;
+.addressCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.addressCardDefault {
+  border-color: var(--leaf-green, #10b981);
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);
+}
+
+.defaultBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.addressStreet {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main, #111827);
+  margin-bottom: 4px;
+  padding-right: 60px;
+}
+
+.addressDetail {
+  font-size: 14px;
+  color: var(--text-muted, #4b5563);
+  margin-bottom: 2px;
+}
+
+.actionsRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.actionBtnDelete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Modal form */
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  z-index: 1000;
+  padding: 20px;
 }
 
-.default .cardIcon {
-  background: var(--primary);
-  color: white;
+.modalContent {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
 }
 
-.cardContent {
-  flex: 1;
-}
-
-.typeRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.typeRow h3 {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.badge {
-  background: var(--primary);
-  color: white;
-  font-size: 10px;
+.modalTitle {
+  font-size: 20px;
   font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  text-transform: uppercase;
+  margin-bottom: 24px;
 }
 
-.cardContent p {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  line-height: 1.5;
-}
-
-.actions {
-  margin-top: 20px;
-  display: flex;
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-.btnEdit, .btnDelete {
-  font-size: 13px;
-  font-weight: 700;
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.formGroup {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 6px;
 }
 
-.btnEdit { color: var(--primary); }
-.btnDelete { color: var(--error); }
+.formGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
 
-@media (max-width: 800px) {
-  .list { grid-template-columns: 1fr; }
+.formGroup input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--leaf-green, #10b981);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #4b5563;
+  border: none;
+  cursor: pointer;
+}
+
+.saveBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: var(--leaf-green, #10b981);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 64px 20px;
+  background: #f9fafb;
+  border-radius: 16px;
+  border: 1px dashed #d1d5db;
+  color: #6b7280;
+  grid-column: 1 / -1;
 }

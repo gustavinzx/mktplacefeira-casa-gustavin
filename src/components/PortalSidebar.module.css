@@ -2,33 +2,44 @@
   width: 280px;
   height: 100vh;
   background: white;
-  border-right: 1px solid var(--outline-variant);
+  border-right: 1px solid #bfc9bd;
   padding: 32px 24px;
   position: fixed;
   left: 0;
   top: 0;
   display: flex;
   flex-direction: column;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.sidebarOpen {
+  transform: translateX(0) !important;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--primary);
+  color: #0b612e;
   margin-bottom: 48px;
   text-decoration: none;
 }
 
 .logo h2 {
-  font-family: var(--font-plus-jakarta);
   font-size: 20px;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   flex: 1;
 }
 
@@ -37,27 +48,33 @@
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   text-decoration: none;
-  color: var(--on-surface-variant);
+  color: #707a6f;
   font-weight: 600;
+  font-size: 14px;
   transition: all 0.2s;
 }
 
 .navLink:hover {
-  background: var(--surface-container-low);
-  color: var(--primary);
+  background: #f0faf4;
+  color: #125d30;
 }
 
 .navLinkActive {
-  background: var(--primary-container);
-  color: white;
+  background: #125d30;
+  color: #ffffff !important;
+}
+
+.navLinkActive:hover {
+  background: #0e4a26;
+  color: #ffffff;
 }
 
 .footer {
   margin-top: auto;
   padding-top: 24px;
-  border-top: 1px solid var(--outline-variant);
+  border-top: 1px solid #bfc9bd;
 }
 
 .profile {
@@ -70,20 +87,23 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--secondary-container);
+  background: #fc6c29;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .profileInfo h4 {
   font-size: 14px;
-  color: var(--on-surface);
+  font-weight: 700;
+  color: #1b1c19;
 }
 
 .profileInfo p {
   font-size: 12px;
-  color: var(--on-surface-variant);
+  color: #707a6f;
 }

@@ -1,236 +1,166 @@
 'use client';
 
-import React from 'react';
-import { Check, Zap, Star, ShieldCheck, Crown } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { CheckCircle2, Loader2, Star, Zap, Shield } from 'lucide-react';
+import styles from './page.module.css';
+
+const PLANS = [
+  {
+    id: 'basic',
+    name: 'Plano Básico',
+    price: 0,
+    icon: Shield,
+    features: [
+      'Presença no marketplace',
+      'Até 50 produtos cadastrados',
+      'Taxa de 10% por venda online',
+      'Acesso ao PDV Básico'
+    ]
+  },
+  {
+    id: 'premium',
+    name: 'Plano Premium',
+    price: 49.90,
+    icon: Star,
+    features: [
+      'Tudo do Plano Básico',
+      'Produtos ILIMITADOS',
+      'Taxa reduzida: 6% por venda',
+      'Destaque nas buscas',
+      'PDV Avançado (Múltiplos Vendedores)'
+    ]
+  },
+  {
+    id: 'master',
+    name: 'Master / Atacado',
+    price: 149.90,
+    icon: Zap,
+    features: [
+      'Tudo do Plano Premium',
+      'Acesso ao Portal B2B (Restaurantes)',
+      'Taxa ZERO em vendas B2B',
+      'Relatórios avançados de IA',
+      'Gerente de conta dedicado'
+    ]
+  }
+];
 
 export default function SubscriptionPage() {
-  const plans = [
-    {
-      name: 'Essencial',
-      price: 'Grátis',
-      features: ['Até 10 produtos ativos', 'Taxa de 15% por venda', 'Recebimento em 14 dias', 'Suporte via ticket'],
-      icon: <ShieldCheck size={32} />,
-      current: true
-    },
-    {
-      name: 'Premium',
-      price: 'R$ 89,90/mês',
-      features: ['Produtos ilimitados', 'Taxa de 10% por venda', 'Recebimento em 7 dias', 'Destaque nas buscas', 'Suporte via WhatsApp'],
-      icon: <Star size={32} />,
-      recommended: true
-    },
-    {
-      name: 'Master',
-      price: 'R$ 199,90/mês',
-      features: ['Tudo do Premium', 'Taxa de 8% por venda', 'Recebimento em 2 dias', 'Banner fixo em categorias', 'Consultoria de Marketing'],
-      icon: <Crown size={32} />
+  const [currentSub, setCurrentSub] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState<string | null>(null);
+
+  const fetchSubscription = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('access_token');
+      const res = await fetch('/api/feirante/subscription', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCurrentSub(data.data.subscription);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  useEffect(() => {
+    fetchSubscription();
+  }, []);
+
+  const handleUpgrade = async (plan: any) => {
+    if (!confirm(`Deseja alterar seu plano para ${plan.name}?`)) return;
+    
+    try {
+      setProcessing(plan.id);
+      const token = localStorage.getItem('access_token');
+      const res = await fetch('/api/feirante/subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ plan_type: plan.id, amount: plan.price })
+      });
+      if (res.ok) {
+        alert('Plano atualizado com sucesso!');
+        fetchSubscription();
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Erro ao atualizar plano.');
+    } finally {
+      setProcessing(null);
+    }
+  };
+
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}><Loader2 size={32} className="animate-spin text-primary" /></div>;
+  }
+
+  const activePlanId = currentSub?.plan_type || 'basic';
 
   return (
-    <div className="subscription-container">
-      <header className="page-header">
-        <h1>Minha Assinatura</h1>
-        <p>Escolha o plano ideal para escalar suas vendas na feira</p>
-      </header>
-
-      <div className="current-plan-banner">
-        <div className="plan-info">
-          <span className="label">Plano Atual</span>
-          <h2>Essencial</h2>
-          <p>Próxima renovação: 12 de Maio, 2026</p>
-        </div>
-        <div className="plan-badge">Ativo</div>
+    <div>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Minha Assinatura</h1>
+        <p className={styles.subtitle}>Gerencie seu plano e libere novos recursos para sua banca.</p>
       </div>
 
-      <div className="plans-grid">
-        {plans.map(plan => (
-          <div key={plan.name} className={`plan-card ${plan.recommended ? 'recommended' : ''}`}>
-            {plan.recommended && <div className="recommended-tag">MAIS POPULAR</div>}
-            <div className="plan-icon">{plan.icon}</div>
-            <h3>{plan.name}</h3>
-            <div className="price">{plan.price}</div>
-            <ul className="features">
-              {plan.features.map(f => (
-                <li key={f}><Check size={16} /> {f}</li>
-              ))}
-            </ul>
-            <button className={`plan-btn ${plan.current ? 'current' : ''}`} disabled={plan.current}>
-              {plan.current ? 'Seu Plano Atual' : 'Mudar para este plano'}
-            </button>
-          </div>
-        ))}
+      <div className={styles.currentPlan}>
+        <div>
+          <p className={styles.planLabel}>Plano Atual</p>
+          <h2 className={styles.planName}>{currentSub?.plan_type || 'Básico'}</h2>
+        </div>
+        <div className={styles.planStatus}>
+          {currentSub?.status === 'active' ? 'Ativo' : 'Pendente'}
+        </div>
       </div>
 
-      <section className="faq-section">
-        <h2>Perguntas Frequentes</h2>
-        <div className="faq-grid">
-          <div className="faq-item">
-            <h4>Como funcionam as taxas?</h4>
-            <p>As taxas são descontadas automaticamente de cada venda realizada na plataforma.</p>
-          </div>
-          <div className="faq-item">
-            <h4>Posso cancelar a qualquer momento?</h4>
-            <p>Sim, você pode cancelar ou mudar de plano sem fidelidade ou multas.</p>
-          </div>
-        </div>
-      </section>
+      <div className={styles.grid}>
+        {PLANS.map(plan => {
+          const isActive = activePlanId === plan.id;
+          const Icon = plan.icon;
 
-      <style jsx>{`
-        .subscription-container {
-          padding: 20px;
-          max-width: 1200px;
-        }
-        .page-header {
-          margin-bottom: 40px;
-        }
-        h1 {
-          font-size: 28px;
-          margin-bottom: 8px;
-        }
-        .page-header p {
-          color: #666;
-        }
-        .current-plan-banner {
-          background: white;
-          padding: 32px;
-          border-radius: 24px;
-          border: 1px solid #eee;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 60px;
-        }
-        .plan-info h2 {
-          font-size: 24px;
-          margin: 8px 0;
-          color: var(--leaf-green);
-        }
-        .plan-info p {
-          color: #888;
-          font-size: 14px;
-        }
-        .plan-badge {
-          background: #eef7f2;
-          color: var(--leaf-green);
-          padding: 8px 16px;
-          border-radius: 10px;
-          font-weight: 700;
-          font-size: 13px;
-        }
-        .plans-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 32px;
-          margin-bottom: 80px;
-        }
-        .plan-card {
-          background: white;
-          padding: 40px;
-          border-radius: 32px;
-          border: 2px solid #eee;
-          position: relative;
-          display: flex;
-          flex-direction: column;
-        }
-        .plan-card.recommended {
-          border-color: var(--leaf-green);
-          transform: scale(1.05);
-          box-shadow: var(--shadow-md);
-          z-index: 2;
-        }
-        .recommended-tag {
-          position: absolute;
-          top: -15px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: var(--leaf-green);
-          color: white;
-          padding: 6px 16px;
-          border-radius: 100px;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 1px;
-        }
-        .plan-icon {
-          color: var(--leaf-green);
-          margin-bottom: 24px;
-        }
-        .plan-card h3 {
-          font-size: 22px;
-          margin-bottom: 8px;
-        }
-        .price {
-          font-size: 28px;
-          font-weight: 800;
-          margin-bottom: 32px;
-          color: var(--text-main);
-        }
-        .features {
-          list-style: none;
-          margin-bottom: 40px;
-          flex: 1;
-        }
-        .features li {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
-          font-size: 14px;
-          color: #555;
-        }
-        .features li :global(svg) {
-          color: var(--leaf-green);
-          flex-shrink: 0;
-        }
-        .plan-btn {
-          width: 100%;
-          padding: 16px;
-          border-radius: 16px;
-          border: none;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .plan-card.recommended .plan-btn {
-          background: var(--leaf-green);
-          color: white;
-        }
-        .plan-btn:not(.recommended):not(.current) {
-          background: #f5f5f5;
-          color: #555;
-        }
-        .plan-btn.current {
-          background: #eef7f2;
-          color: var(--leaf-green);
-          cursor: default;
-        }
-        .faq-section h2 {
-          margin-bottom: 32px;
-        }
-        .faq-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 40px;
-        }
-        .faq-item h4 {
-          font-size: 16px;
-          margin-bottom: 8px;
-        }
-        .faq-item p {
-          color: #666;
-          line-height: 1.6;
-        }
-        
-        @media (max-width: 1000px) {
-          .plans-grid {
-            grid-template-columns: 1fr;
-          }
-          .plan-card.recommended {
-            transform: none;
-          }
-        }
-      `}</style>
+          return (
+            <div key={plan.id} className={`${styles.pricingCard} ${isActive ? styles.active : ''}`}>
+              <div className={styles.planHeader}>
+                <h3 className={styles.planType}><Icon size={20} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: 6 }}/> {plan.name}</h3>
+                <div className={styles.planPrice}>
+                  R$ {plan.price.toFixed(2).replace('.', ',')} <span>/ mês</span>
+                </div>
+              </div>
+
+              <div className={styles.featuresList}>
+                {plan.features.map((feat, i) => (
+                  <div key={i} className={styles.feature}>
+                    <CheckCircle2 size={18} className={styles.featureIcon} />
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+
+              {isActive ? (
+                <button className={`${styles.btnUpgrade} ${styles.btnActive}`} disabled>
+                  Plano Atual
+                </button>
+              ) : (
+                <button 
+                  className={styles.btnUpgrade} 
+                  onClick={() => handleUpgrade(plan)}
+                  disabled={processing === plan.id}
+                >
+                  {processing === plan.id ? <Loader2 size={18} className="animate-spin" style={{ margin: '0 auto' }} /> : 'Assinar Plano'}
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

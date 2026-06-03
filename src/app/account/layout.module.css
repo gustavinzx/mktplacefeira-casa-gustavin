@@ -1,0 +1,130 @@
+.accountLayout {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  gap: 32px;
+  min-height: calc(100vh - 140px); /* header/footer approx */
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.profileCard {
+  background: var(--bg-main, #ffffff);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.1));
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  border: 3px solid var(--leaf-green, #10b981);
+}
+
+.profileName {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-main, #111827);
+}
+
+.profileEmail {
+  font-size: 13px;
+  color: var(--text-muted, #6b7280);
+  margin-bottom: 12px;
+}
+
+.roleBadge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--text-main, #374151);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.navItem:hover {
+  background: #f3f4f6;
+}
+
+.navItemActive {
+  background: var(--leaf-green, #10b981);
+  color: #ffffff;
+}
+
+.navItemActive:hover {
+  background: var(--leaf-green, #10b981);
+}
+
+.content {
+  flex: 1;
+  background: var(--bg-main, #ffffff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.1));
+  padding: 32px;
+}
+
+.logoutBtn {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  color: #ef4444;
+  font-weight: 600;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background: #fee2e2;
+}
+
+@media (max-width: 768px) {
+  .accountLayout {
+    flex-direction: column;
+    padding: 20px 16px;
+    gap: 24px;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .content {
+    padding: 20px;
+  }
+}

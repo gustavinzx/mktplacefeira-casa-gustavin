@@ -1,38 +1,49 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { CheckCircle, Truck, Package, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 const ConfirmationPage = () => {
+  const [orderId, setOrderId] = useState('');
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const id = localStorage.getItem('last_order_id');
+    const name = localStorage.getItem('user_name');
+    if (id) setOrderId(id.slice(0, 8).toUpperCase());
+    if (name) setUserName(name.split(' ')[0]);
+  }, []);
+
   return (
     <div style={{ backgroundColor: 'var(--background)' }}>
       <Header />
       <main className="container" style={{ padding: '80px 0', textAlign: 'center' }}>
-        <div style={{ 
-          maxWidth: '600px', 
-          margin: '0 auto', 
-          background: 'white', 
-          padding: '48px', 
-          borderRadius: 'var(--radius-xl)', 
-          boxShadow: 'var(--shadow-3)' 
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto',
+          background: 'white',
+          padding: '48px',
+          borderRadius: 'var(--radius-xl)',
+          boxShadow: 'var(--shadow-3)'
         }}>
           <CheckCircle size={80} color="var(--primary)" style={{ marginBottom: '24px' }} />
           <h1 style={{ fontFamily: 'var(--font-plus-jakarta)', fontSize: '32px', marginBottom: '12px' }}>
             Pedido Confirmado!
           </h1>
           <p style={{ color: 'var(--on-surface-variant)', marginBottom: '40px' }}>
-            Obrigado, Maria! Seu pedido **#88292** foi recebido e já está sendo separado pelos feirantes.
+            {userName ? `Obrigado, ${userName}! ` : ''}
+            {orderId ? `Seu pedido #${orderId} foi recebido` : 'Seu pedido foi recebido'} e já está sendo separado pelos feirantes.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', textAlign: 'left', marginBottom: '40px' }}>
             <div style={{ padding: '20px', background: 'var(--surface-container-low)', borderRadius: 'var(--radius-lg)' }}>
               <Calendar size={24} color="var(--primary)" style={{ marginBottom: '12px' }} />
               <h4 style={{ fontSize: '14px', marginBottom: '4px' }}>Previsão de Entrega</h4>
-              <p style={{ fontWeight: 700 }}>Amanhã, 27/04</p>
-              <p style={{ fontSize: '12px', color: 'var(--on-surface-variant)' }}>Entre 08:00 e 12:00</p>
+              <p style={{ fontWeight: 700 }}>Hoje</p>
+              <p style={{ fontSize: '12px', color: 'var(--on-surface-variant)' }}>Entre 18:00 e 20:00</p>
             </div>
             <div style={{ padding: '20px', background: 'var(--surface-container-low)', borderRadius: 'var(--radius-lg)' }}>
               <Truck size={24} color="var(--secondary)" style={{ marginBottom: '12px' }} />

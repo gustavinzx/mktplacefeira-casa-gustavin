@@ -11,6 +11,8 @@ import {
   ArrowLeft
 } from 'lucide-react';
 
+import styles from './page.module.css';
+
 export default function SignupSelection() {
   const profiles = [
     {
@@ -48,34 +50,33 @@ export default function SignupSelection() {
   ];
 
   return (
-    <div className="bg-[#ffffff] text-[#1b1c19] min-h-screen flex flex-col font-['Plus_Jakarta_Sans']">
-      {/* Header Padronizado do Signup */}
-      <header className="px-6 py-4 flex justify-between items-center border-b border-stone-100 sticky top-0 bg-white z-50">
-        <Link href="/login" className="flex items-center gap-1 text-stone-900 font-bold text-xs uppercase tracking-widest hover:text-[#0e6b17] transition-colors">
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <Link href="/login" className={styles.btnBack}>
            <ArrowLeft size={16} /> LOGIN
         </Link>
-        <div className="text-xl font-bold text-[#0e6b17]">feira.casa</div>
+        <div className={styles.logo}>feira.casa</div>
       </header>
 
-      <main className="flex-grow flex flex-col items-center pt-20 md:pt-32 px-4">
-        <div className="w-full max-w-4xl text-center mb-16">
-          <h1 className="text-[32px] md:text-[48px] font-black text-[#1b1c19] mb-4 leading-tight">Como você quer <br/><span className="text-[#0e6b17]">começar hoje?</span></h1>
-          <p className="text-base text-[#40493c] max-w-2xl mx-auto opacity-80">Selecione o perfil que melhor descreve você para personalizarmos sua experiência na plataforma.</p>
+      <main className={styles.main}>
+        <div className={styles.titleArea}>
+          <h1>Como você quer <br/><span>começar hoje?</span></h1>
+          <p>Selecione o perfil que melhor descreve você para personalizarmos sua experiência na plataforma.</p>
         </div>
 
-        <div className="w-full max-w-4xl border-t border-stone-200">
+        <div className={styles.list}>
           {profiles.map(profile => {
             const Icon = profile.icon;
             return (
-              <Link key={profile.id} href={profile.href} className="flex items-center gap-4 py-6 px-4 border-b border-stone-200 hover:bg-[#faf9f4] transition-all group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110" style={{ color: profile.color }}>
+              <Link key={profile.id} href={profile.href} className={styles.card}>
+                <div className={styles.iconWrap} style={{ color: profile.color }}>
                   <Icon size={28} />
                 </div>
-                <div className="flex-grow">
-                  <h3 className="text-lg font-bold text-[#1b1c19] group-hover:text-[#0e6b17] transition-colors">{profile.title}</h3>
-                  <p className="text-sm text-[#40493c] opacity-70 leading-snug">{profile.description}</p>
+                <div className={styles.cardInfo}>
+                  <h3>{profile.title}</h3>
+                  <p>{profile.description}</p>
                 </div>
-                <div className="text-stone-300 group-hover:text-stone-900 transition-all group-hover:translate-x-1">
+                <div className={styles.arrow}>
                   <ChevronRight size={20} />
                 </div>
               </Link>
@@ -84,7 +85,7 @@ export default function SignupSelection() {
         </div>
       </main>
 
-      <footer className="py-12 text-center text-stone-400 text-[11px] font-medium uppercase tracking-widest">
+      <footer className={styles.footer}>
         <p>© 2024 Feira Viva - O frescor do campo na sua porta.</p>
       </footer>
     </div>

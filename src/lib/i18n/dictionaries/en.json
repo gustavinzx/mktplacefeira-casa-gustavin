@@ -1,0 +1,26 @@
+{
+  "common": {
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search...",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "profile": "My Profile",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "overview": "Overview",
+    "users": "Users & Profiles",
+    "vendors": "Vendors Management",
+    "franchisees": "Franchisees Management",
+    "logistics": "Logistics",
+    "marketing": "Marketing",
+    "finance": "Finance & ERP",
+    "crm": "CRM & Expansion",
+    "system_settings": "System Settings"
+  }
+}

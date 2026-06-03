@@ -38,8 +38,7 @@ const Footer = () => {
           {/* Brand and Mission */}
           <div className={styles.brandCol}>
             <Link href="/" className={styles.logo}>
-              <Leaf size={24} fill="currentColor" />
-              <span>Feira <strong>Casa</strong></span>
+              <img src="/Logo-feira.png" alt="feira.casa" style={{ height: '32px', width: 'auto' }} />
             </Link>
             <p className={styles.description}>
               Levando o frescor das melhores feiras livres diretamente para sua casa, apoiando produtores locais.
@@ -50,20 +49,20 @@ const Footer = () => {
           <div className={styles.linksCol}>
             <h4>Categorias</h4>
             <ul>
-              <li><Link href="/category/frutas">Frutas</Link></li>
-              <li><Link href="/category/legumes">Legumes</Link></li>
-              <li><Link href="/category/verduras">Verduras</Link></li>
-              <li><Link href="/category/organicos">Orgânicos</Link></li>
+              <li><Link href="/categories/frutas">Frutas</Link></li>
+              <li><Link href="/categories/legumes">Legumes</Link></li>
+              <li><Link href="/categories/verduras">Verduras</Link></li>
+              <li><Link href="/categories/organicos">Orgânicos</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksCol}>
             <h4>Institucional</h4>
             <ul>
-              <li><Link href="/about">Sobre nós</Link></li>
-              <li><Link href="/how-it-works">Como funciona</Link></li>
-              <li><Link href="/vendors">Produtores</Link></li>
-              <li><Link href="/contact">Contato</Link></li>
+              <li><Link href="/sobre">Sobre nós</Link></li>
+              <li><Link href="/sobre">Como funciona</Link></li>
+              <li><Link href="/search">Produtores</Link></li>
+              <li><Link href="/contato">Contato</Link></li>
             </ul>
           </div>
 
@@ -86,12 +85,11 @@ const Footer = () => {
             <p className={styles.madeWith}>
               Feito com <Heart size={14} fill="#e11d48" color="#e11d48" /> por Antigravity
             </p>
-            {/* Botão de Escudo para Acesso Admin (padrão Stitch) */}
             <div className={styles.adminWrapper}>
-              <Link href="/admin" className={styles.adminAccess} title="Acesso Administrativo">
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>security</span>
+              <Link href="/admin/login" className={styles.adminAccess}>
+                <ShieldCheck size={16} />
               </Link>
-              <span className={styles.adminTooltip}>Admin</span>
+              <div className={styles.adminTooltip}>Acesso Restrito</div>
             </div>
           </div>
         </div>

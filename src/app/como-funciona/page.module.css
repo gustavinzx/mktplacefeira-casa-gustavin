@@ -1,0 +1,154 @@
+.page {
+  background-color: #faf9f4;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.hero h1 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 48px;
+  font-weight: 800;
+  color: #1b1c19;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #707a6b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-bottom: 100px;
+}
+
+.stepCard {
+  background: white;
+  padding: 40px;
+  border-radius: 32px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.stepNumber {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0e6b17;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  border: 4px solid #faf9f4;
+}
+
+.iconWrapper {
+  color: #0e6b17;
+  margin-bottom: 24px;
+}
+
+.stepCard h3 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b1c19;
+  margin-bottom: 16px;
+}
+
+.stepCard p {
+  font-size: 15px;
+  color: #707a6b;
+  line-height: 1.5;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 100px;
+  padding: 60px;
+  background: #eef7f2;
+  border-radius: 40px;
+}
+
+.featureItem {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.featureIcon {
+  color: #0e6b17;
+  flex-shrink: 0;
+}
+
+.featureItem h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1b1c19;
+}
+
+.featureItem p {
+  font-size: 14px;
+  color: #40493c;
+  line-height: 1.5;
+}
+
+.cta {
+  text-align: center;
+}
+
+.cta h2 {
+  font-family: var(--font-plus-jakarta);
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.cta p {
+  color: #707a6b;
+  margin-bottom: 32px;
+}
+
+.btnPrimary {
+  background: #0e6b17;
+  color: white;
+  text-decoration: none;
+  padding: 18px 48px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 18px;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btnPrimary:hover {
+  background: #0a5211;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(14, 107, 23, 0.2);
+}
+
+@media (max-width: 900px) {
+  .features { grid-template-columns: 1fr; padding: 40px; }
+}

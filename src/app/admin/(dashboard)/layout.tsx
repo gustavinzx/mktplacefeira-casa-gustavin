@@ -38,6 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const handleLogout = () => {
     localStorage.removeItem('user_role');
     localStorage.removeItem('user_name');
+    document.cookie = 'feira_role=; path=/; max-age=0';
     router.push('/admin/login');
   };
 

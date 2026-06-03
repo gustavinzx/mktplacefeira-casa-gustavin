@@ -1,32 +1,68 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CategoryGrid.module.css';
-import { Apple, Salad, Carrot, Cookie, Sprout, Milk } from 'lucide-react';
+import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 
-const categories = [
-  { id: '1', name: 'Frutas', icon: Apple, color: 'rgba(14, 107, 23, 0.1)', iconColor: '#0e6b17' },
-  { id: '2', name: 'Legumes', icon: Carrot, color: 'rgba(166, 59, 0, 0.1)', iconColor: '#a63b00' },
-  { id: '3', name: 'Verduras', icon: Salad, color: 'rgba(48, 133, 47, 0.1)', iconColor: '#30852f' },
-  { id: '4', name: 'Pastel', icon: Cookie, color: 'rgba(255, 193, 7, 0.1)', iconColor: '#ffc107' },
-  { id: '5', name: 'Temperos', icon: Sprout, color: 'rgba(186, 26, 26, 0.1)', iconColor: '#ba1a1a' },
-  { id: '6', name: 'Laticínios', icon: Milk, color: 'rgba(251, 188, 4, 0.1)', iconColor: '#fbbc04' },
+import { Loader2 } from 'lucide-react';
+
+type Category = { id: string; name: string; slug: string; icon: string | null; };
+
+const PALETTE = [
+  { bg: 'rgba(252,108,41,0.1)', color: '#fc6c29' },
+  { bg: 'rgba(251,188,4,0.1)', color: '#fbbc04' },
+  { bg: 'rgba(14,107,23,0.1)', color: '#0e6b17' },
+  { bg: 'rgba(74,161,93,0.1)', color: '#4aa15d' },
+  { bg: 'rgba(121,85,72,0.1)', color: '#795548' },
+  { bg: 'rgba(186,26,26,0.1)', color: '#ba1a1a' },
+  { bg: 'rgba(18,93,48,0.1)', color: '#125d30' },
+  { bg: 'rgba(33,33,33,0.1)', color: '#212121' },
 ];
 
 const CategoryGrid = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase
+      .from('mktplace_feira_categories')
+      .select('id, name, slug, icon')
+      .is('parent_id', null)
+      .order('name')
+      .then(({ data }) => { 
+        if (data) setCategories(data); 
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+        <Loader2 size={32} className="animate-spin" color="#0e6b17" />
+      </div>
+    );
+  }
+
+  if (!categories.length) return null;
+
   return (
     <div className={styles.container}>
-      {categories.map((cat) => (
-        <div key={cat.id} className={styles.item}>
-          <div 
-            className={styles.iconWrapper} 
-            style={{ backgroundColor: cat.color }}
-          >
-            <cat.icon size={32} style={{ color: cat.iconColor }} />
-          </div>
-          <span className={styles.name}>{cat.name}</span>
-        </div>
-      ))}
+      {categories.map((cat, i) => {
+        const { bg, color } = PALETTE[i % PALETTE.length];
+        return (
+          <Link href={`/search?category=${cat.slug}`} key={cat.id} className={styles.item}>
+            <div className={styles.iconWrapper} style={{ backgroundColor: bg }}>
+              {cat.icon ? (
+                <span style={{ fontSize: 32, lineHeight: 1 }}>{cat.icon}</span>
+              ) : (
+                <span style={{ fontSize: 28, lineHeight: 1, color }}>📦</span>
+              )}
+            </div>
+            <span className={styles.name}>{cat.name}</span>
+          </Link>
+        );
+      })}
     </div>
   );
 };

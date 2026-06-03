@@ -1,89 +1,253 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import styles from './page.module.css';
-import { MapPin, Search, Sliders, Calendar, Clock, Navigation, Star } from 'lucide-react';
+import { Search, Calendar, Clock, Navigation, Loader2 } from 'lucide-react';
+import { supabase, getTableName } from '@/lib/supabase';
 
-const FairsPage = () => {
-  const fairs = [
-    {
-      id: '1',
-      name: 'Feira de Pinheiros',
-      distance: '1.2 km',
-      address: 'Praça Benedito Calixto, 112',
-      days: 'Sábados',
-      hours: '07h - 14h',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6ssFQPUXXvyiF4bMba9a5an_wVGGn-GpPCx1GTPQ5_jtaCHV7iBvN0X7n6zn8JzJzVieayEIIhlUJnvrvBy8fq5DtbNTGOuC7W1JSs7XG_Ru1bZz7i5DTrOlSb5UyCgHsrPRpbIavVd1NhGywsRUrQELRGEIVKzc1AaVlZu91ih7HkPI5dYmc-w2mL_em0MjvJYLQ_qZHgBmXT1h_31-qjKQYRUlAhcXt5CBKC6R_TZt9WHeM16vWju1aK26bxKnsd1B5nT23PUU',
-      type: 'tradicional'
-    },
-    {
-      id: '2',
-      name: 'Orgânicos Ibirapuera',
-      distance: '4.8 km',
-      address: 'Rua Tutóia, 1125',
-      days: 'Ter, Qui, Dom',
-      hours: '06h - 13h',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDvX99-vNl1pggolXOmdCCDiQnVV3YWb84RJ5evnwZ2eCoRUyO3MpJfVDP-UyQpCG70N6ccuw9BMb7wyB1N30k1StwSqTwJq5_ur9CirVVzMtDEHQcz3zB924CQXgoD3rZ_etqOHO7c4FEUMnFhyjJkmXhIX1aoozKLhnbDCDidMfWjQIG7LxbJd8g6OVkBx1bC5MjIxzA6j-Kp2vhOE7eHI2kTIcavT7D4q3b-gTflcmptZRFUnHX6W2_Qo3eRxydbDxP3ywoWgs8',
-      type: 'organica'
-    },
-    {
-      id: '3',
-      name: 'Feira da Vila Madalena',
-      distance: '2.1 km',
-      address: 'Rua Mourato Coelho, 800',
-      days: 'Domingos',
-      hours: '07h - 15h',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBPAWoSDCpTlXJ4IoZsRxUj3d6yRUgmWgQCuRfi2yROKX9YYhmzMv99DDP_dqFv_K9ajhK2SfzPrHszrJLSDWDrsgrtm-Bz0F2cUq9Lxg-gJlY_t8CoD4AlEU036AJfmoPaX021hEV7_cqXVmSwJAV82Mwa6coRgQBPuhorg2g6oZqY3X3PM5qVkEtgUKEbMExKSLvx_tlambCqLejsgtRCKVCFhhCxrr6Y-c9Q-5vOkOR3PqA6tV9UTVn86bfpSPagKDiobXsZJqA',
-      type: 'tradicional'
-    },
-    {
-      id: '4',
-      name: 'Feira Noturna Pacaembu',
-      distance: '7.5 km',
-      address: 'Praça Charles Miller, s/n',
-      days: 'Quintas',
-      hours: '17h - 21h',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAEPf99_7BuGMkh7RHa79sKFRwUZu6HWMXGM2ueMNThjRgX1N_tmaQGggDodQpWlf3DqWGBxiMZGNLMlYk_tnmLeo04fga8WF9_oaHrUD0WC_GHJVJuHqraWY4So6tatuIeaV4tduQF0gG-KtU3-C0IRKfUD5ytob0rhoNSgF-k2PpJYOlQ0z12ln79ftC632czSWHTtitL92TTBsqJbZN_RtFX5mYTQqkjP4BxxeX1Qw6i-l2zNuLNOQLFlCGryCGq06kjRK9_X6Q',
-      type: 'noturna'
+import dynamic from 'next/dynamic';
+
+const FairsMap = dynamic(() => import('@/components/FairsMap'), {
+  ssr: false,
+  loading: () => (
+    <div style={{ width: '100%', height: '100%', background: '#e0e0e0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      Carregando mapa interativo...
+    </div>
+  ),
+});
+
+interface DBFair {
+  id: string;
+  name: string;
+  address: string;
+  neighborhood: string | null;
+  city: string;
+  state: string;
+  operating_days: string[];
+  operating_hours: string;
+  hours?: string;
+  image_url: string | null;
+  is_active: boolean;
+  latitude?: number;
+  longitude?: number;
+  distance?: number;
+}
+
+const DAY_ORDER = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+
+function parseOperatingHoursStr(raw: string | null): string {
+  if (!raw) return '';
+  try {
+    const parsed = JSON.parse(raw);
+    if (typeof parsed !== 'object' || Array.isArray(parsed)) return raw;
+    const entries = (Object.entries(parsed) as Array<[string, { start: string; end: string }]>)
+      .sort((a, b) => {
+        const ai = DAY_ORDER.findIndex(d => a[0].startsWith(d));
+        const bi = DAY_ORDER.findIndex(d => b[0].startsWith(d));
+        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      });
+    const groups: Array<{ days: string[]; start: string; end: string }> = [];
+    for (const [day, hours] of entries) {
+      const last = groups[groups.length - 1];
+      const lastIdx = last ? DAY_ORDER.findIndex(d => last.days[last.days.length - 1].startsWith(d)) : -1;
+      const curIdx = DAY_ORDER.findIndex(d => day.startsWith(d));
+      if (last && last.start === hours.start && last.end === hours.end && curIdx === lastIdx + 1) {
+        last.days.push(day);
+      } else {
+        groups.push({ days: [day], start: hours.start, end: hours.end });
+      }
     }
-  ];
+    return groups.map(g => {
+      const label =
+        g.days.length === 1
+          ? g.days[0]
+          : g.days.length === 2
+          ? `${g.days[0]} e ${g.days[1]}`
+          : `${g.days[0]} a ${g.days[g.days.length - 1]}`;
+      return `${label}: ${g.start}-${g.end}`;
+    }).join(' | ');
+  } catch {
+    return raw;
+  }
+}
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function FairsPageInner() {
+  const searchParams = useSearchParams();
+  const [userLat, setUserLat] = useState<number | null>(parseFloat(searchParams.get('lat') ?? '') || null);
+  const [userLng, setUserLng] = useState<number | null>(parseFloat(searchParams.get('lng') ?? '') || null);
+  const radiusKm = parseFloat(searchParams.get('radius') ?? '') || 30;
+
+  useEffect(() => {
+    // If not in URL, try to get from localStorage
+    if (!userLat || !userLng) {
+      try {
+        const saved = localStorage.getItem('feira_region');
+        if (saved) {
+          const region = JSON.parse(saved);
+          if (region.lat && region.lng) {
+            setUserLat(region.lat);
+            setUserLng(region.lng);
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to parse saved region', e);
+      }
+    }
+  }, [userLat, userLng]);
+
+  const [fairs, setFairs] = useState<DBFair[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [locating, setLocating] = useState(false);
+  const [flyTrigger, setFlyTrigger] = useState(0);
+
+  const handleLocateUser = () => {
+    if (!navigator.geolocation) {
+      alert('Geolocalização não suportada pelo seu navegador.');
+      return;
+    }
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLat(pos.coords.latitude);
+        setUserLng(pos.coords.longitude);
+        setLocating(false);
+        setFlyTrigger(prev => prev + 1);
+      },
+      (err) => {
+        console.error(err);
+        alert('Não foi possível obter sua localização exata.');
+        setLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  };
+
+  useEffect(() => {
+    async function fetchFairs() {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/fairs');
+        const json = await res.json();
+        if (!json.success) throw new Error(json.error || 'Failed to fetch fairs');
+        
+        const data = (json.data || []).filter((f: any) => f.is_active !== false);
+
+        const mappedFairs: DBFair[] = (data || [])
+          .filter((f: any) => f.latitude && f.longitude)
+          .map((f: any) => {
+            const distance =
+              userLat && userLng
+                ? haversineKm(userLat, userLng, f.latitude, f.longitude)
+                : undefined;
+            return {
+              ...f,
+              operating_days: f.operating_days || [],
+              hours: parseOperatingHoursStr(f.operating_hours),
+              latitude: f.latitude,
+              longitude: f.longitude,
+              distance,
+            };
+          })
+          .filter((f: DBFair) =>
+            userLat && userLng && f.distance !== undefined
+              ? f.distance <= radiusKm
+              : true
+          )
+          .sort((a: DBFair, b: DBFair) =>
+            (a.distance ?? 999) - (b.distance ?? 999)
+          );
+
+        setFairs(mappedFairs);
+      } catch (err) {
+        console.error('Error fetching fairs:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchFairs();
+  }, [userLat, userLng, radiusKm]);
+
+  const filteredFairs = fairs.filter(
+    f =>
+      f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (f.neighborhood || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      f.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const mapCenter = userLat && userLng
+    ? { lat: userLat, lng: userLng }
+    : filteredFairs.length > 0
+    ? { lat: filteredFairs[0].latitude!, lng: filteredFairs[0].longitude! }
+    : { lat: -15.7975, lng: -47.8919 };
 
   return (
     <div className={styles.page}>
       <Header />
-      
+
       <main className={styles.main}>
-        {/* Left Area: Map Preview */}
         <section className={styles.mapArea}>
-          <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyyzQMCJr5SWuC-TvVanlPjRXke814hsNXyyR4uqaJ4Gt93eBE1qP70ws3wHkUUqAzGNcVB8MeqQaLwQ6loHM9s3qHA7nWaTO9YMOE0gSbJScSKPWODpJZ8tLc1_StlevHNu8lz6ttA6yw86pAuqSBaVYQaNztxtX78oZr8i2YAbx8doIQuzXW9cA6iHi-WnnJKfra9RbmtUIqUj5MVIclu2pDQvp-C1Qlhd3fB0PDNJJt1EMwp88K8sqdRiwRCz5vQhWFJiyAQdg" 
-            alt="Mapa das Feiras" 
-            className={styles.mapImage}
+          <FairsMap
+            fairs={filteredFairs
+              .filter(f => f.latitude && f.longitude)
+              .map(f => ({
+                id: f.id,
+                name: f.name,
+                address: f.address,
+                lat: f.latitude!,
+                lng: f.longitude!,
+              }))}
+            centerLat={mapCenter.lat}
+            centerLng={mapCenter.lng}
+            flyTrigger={flyTrigger}
+            onLocationChange={(lat, lng) => {
+              setUserLat(lat);
+              setUserLng(lng);
+              setFlyTrigger(prev => prev + 1);
+            }}
           />
           <div className={styles.mapSearch}>
             <Search size={18} />
-            <input type="text" placeholder="Buscar feira ou bairro..." />
-          </div>
-          
-          {/* Mock Map Markers */}
-          <div className={styles.marker} style={{ top: '30%', left: '40%' }}>
-            <div className={styles.markerIcon}><MapPin size={16} fill="currentColor" /></div>
-          </div>
-          <div className={styles.marker} style={{ top: '60%', left: '70%' }}>
-            <div className={`${styles.markerIcon} ${styles.markerSecondary}`}><MapPin size={16} fill="currentColor" /></div>
+            <input
+              type="text"
+              placeholder="Buscar feira ou bairro..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+            <button 
+              className={styles.locateBtn} 
+              onClick={handleLocateUser} 
+              disabled={locating}
+              title="Obter localização exata"
+              style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: locating ? '#aaa' : '#0e6b17', display: 'flex', alignItems: 'center' }}
+            >
+              {locating ? <Loader2 size={18} className="animate-spin" /> : <Navigation size={18} />}
+            </button>
           </div>
         </section>
 
-        {/* Right Area: Sidebar List */}
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
             <div className={styles.titleRow}>
               <h1>Feiras Próximas</h1>
-              <span className={styles.radiusBadge}>Raio 24km</span>
+              <span className={styles.radiusBadge}>Raio {radiusKm}km</span>
             </div>
             <div className={styles.filterChips}>
-              <button className={styles.btnFilter}><Navigation size={14} /> Filtrar</button>
+              <button className={styles.btnFilter}>
+                <Navigation size={14} /> Filtrar
+              </button>
               <button className={styles.chip}>Hoje</button>
               <button className={styles.chip}>Orgânicas</button>
               <button className={styles.chip}>Noturnas</button>
@@ -91,33 +255,70 @@ const FairsPage = () => {
           </div>
 
           <div className={styles.list}>
-            {fairs.map(fair => (
-              <div key={fair.id} className={styles.fairCard}>
-                <div className={styles.fairImage}>
-                  <img src={fair.imageUrl} alt={fair.name} />
-                </div>
-                <div className={styles.fairInfo}>
-                  <div className={styles.fairTitleRow}>
-                    <h3>{fair.name}</h3>
-                    <span className={styles.distance}>{fair.distance}</span>
-                  </div>
-                  <p className={styles.address}>{fair.address}</p>
-                  <div className={styles.tags}>
-                    <span className={fair.type === 'organica' ? styles.tagGreen : styles.tagOrange}>
-                      <Calendar size={12} /> {fair.days}
-                    </span>
-                    <span className={styles.tagGray}>
-                      <Clock size={12} /> {fair.hours}
-                    </span>
-                  </div>
-                </div>
+            {loading ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px', gap: '12px' }}>
+                <Loader2 className="animate-spin text-primary" />
+                <p>Carregando feiras...</p>
               </div>
-            ))}
+            ) : filteredFairs.length > 0 ? (
+              filteredFairs.map(fair => (
+                <div key={fair.id} className={styles.fairCard}>
+                  <div className={styles.fairImage}>
+                    <img
+                      src={fair.image_url || 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400'}
+                      alt={fair.name}
+                    />
+                  </div>
+                  <div className={styles.fairInfo}>
+                    <div className={styles.fairTitleRow}>
+                      <h3>{fair.name}</h3>
+                      {fair.distance !== undefined && (
+                        <span className={styles.distance}>
+                          {fair.distance < 1
+                            ? `${Math.round(fair.distance * 1000)}m`
+                            : `${fair.distance.toFixed(1)}km`}
+                        </span>
+                      )}
+                    </div>
+                    <p className={styles.address}>
+                      {fair.address}
+                      {fair.neighborhood ? ` - ${fair.neighborhood}` : ''}
+                    </p>
+                    <div className={styles.tags}>
+                      <span className={styles.tagOrange}>
+                        <Calendar size={12} /> {fair.operating_days?.join(', ') || 'Sem dias'}
+                      </span>
+                      <span className={styles.tagGray}>
+                        <Clock size={12} /> {fair.hours || fair.operating_hours}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                {userLat && userLng ? (
+                  <p>Nenhuma feira encontrada num raio de {radiusKm}km.</p>
+                ) : (
+                  <p>Nenhuma feira encontrada.</p>
+                )}
+              </div>
+            )}
           </div>
         </aside>
       </main>
     </div>
   );
-};
+}
 
-export default FairsPage;
+export default function FairsPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <Loader2 style={{ animation: 'spin 1s linear infinite' }} />
+      </div>
+    }>
+      <FairsPageInner />
+    </Suspense>
+  );
+}

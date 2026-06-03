@@ -1,92 +1,376 @@
 'use client';
 
-import React from 'react';
-import styles from './page.module.css';
-import { Upload, ChevronLeft, Save } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Loader2, ArrowLeft, Check, Wand2 } from 'lucide-react';
 import Link from 'next/link';
 
-const NovoProduto = () => {
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export default function NovoProdutoPage() {
+  const router = useRouter();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [rewriting, setRewriting] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState('');
+
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    price: '',
+    unit: 'kg',
+    category_id: '',
+    image_url: '',
+    is_organic: false,
+    is_promotion: false,
+    stock: '10',
+    is_wholesale: false,
+    wholesale_price: '',
+  });
+
+  useEffect(() => {
+    fetch('/api/categories')
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) setCategories(data.data || []);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      setForm(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
+    } else {
+      setForm(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleRewrite = async () => {
+    if (!form.description.trim()) return;
+    setRewriting(true);
+    try {
+      const res = await fetch('/api/products/ai-rewrite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: form.description, title: form.title })
+      });
+      const data = await res.json();
+      if (data.success && data.data.rewritten) {
+        setForm(prev => ({ ...prev, description: data.data.rewritten }));
+      } else {
+        alert('Erro ao otimizar texto.');
+      }
+    } catch (err) {
+      alert('Erro de conexão com a IA.');
+    } finally {
+      setRewriting(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (!form.title || !form.price || !form.unit) {
+      setError('Preencha nome, preço e unidade.');
+      return;
+    }
+
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      setError('Você precisa estar logado.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: form.title,
+          description: form.description || null,
+          price: parseFloat(form.price),
+          unit: form.unit,
+          category_id: form.category_id || null,
+          image_url: form.image_url || null,
+          is_organic: form.is_organic,
+          is_promotion: form.is_promotion,
+          is_wholesale: form.is_wholesale,
+          wholesale_price: form.is_wholesale ? parseFloat(form.wholesale_price) : null,
+          stock: parseInt(form.stock) || 0,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success || res.status === 201) {
+        setSaved(true);
+        setTimeout(() => router.push('/portal/feirante/produtos'), 1500);
+      } else {
+        setError(data.error || 'Erro ao salvar produto.');
+      }
+    } catch {
+      setError('Erro de conexão.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '10px 14px',
+    border: '1px solid #ddd',
+    borderRadius: 10,
+    fontSize: 15,
+    outline: 'none',
+    boxSizing: 'border-box',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontSize: 13,
+    fontWeight: 700,
+    color: '#444',
+    marginBottom: 6,
+    display: 'block',
+  };
+
+  const fieldStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4,
+  };
+
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <Link href="/portal/feirante/produtos" className={styles.backBtn}>
-          <ChevronLeft size={20} /> Voltar para Produtos
-        </Link>
-        <h1>Cadastrar Novo Produto</h1>
-      </header>
+    <div style={{ padding: '32px 40px', maxWidth: 640 }}>
+      <Link
+        href="/portal/feirante/produtos"
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#30852f', textDecoration: 'none', fontSize: 14, marginBottom: 24 }}
+      >
+        <ArrowLeft size={16} /> Voltar para meus produtos
+      </Link>
 
-      <div className={styles.formCard}>
-        <form className={styles.grid}>
-          <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
-            <label>Fotos do Produto</label>
-            <div className={styles.uploadGrid}>
-              <div className={styles.uploadBoxMain}>
-                <Upload size={32} />
-                <p>Foto Principal</p>
-              </div>
-              <div className={styles.uploadBox}> <Upload size={20} /> </div>
-              <div className={styles.uploadBox}> <Upload size={20} /> </div>
-              <div className={styles.uploadBox}> <Upload size={20} /> </div>
-            </div>
-          </div>
+      <h1 style={{ fontSize: 28, marginBottom: 8 }}>Novo Produto</h1>
+      <p style={{ color: '#666', marginBottom: 32 }}>Adicione um produto ao seu catálogo na Feira Casa.</p>
 
-          <div className={styles.inputGroup}>
-            <label>Nome do Produto</label>
-            <input type="text" placeholder="Ex: Maçã Fuji Orgânica" />
-          </div>
+      {error && (
+        <div style={{ background: '#ffebee', color: '#ba1a1a', padding: '12px 16px', borderRadius: 10, marginBottom: 20, fontSize: 14 }}>
+          {error}
+        </div>
+      )}
 
-          <div className={styles.inputGroup}>
-            <label>Categoria</label>
-            <select>
-              <option>Selecione...</option>
-              <option>Frutas</option>
-              <option>Legumes</option>
-              <option>Verduras</option>
-            </select>
-          </div>
+      {saved && (
+        <div style={{ background: '#e8f5e9', color: '#2e7d32', padding: '12px 16px', borderRadius: 10, marginBottom: 20, fontSize: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Check size={18} /> Produto salvo! Redirecionando…
+        </div>
+      )}
 
-          <div className={styles.inputGroup}>
-            <label>Preço</label>
-            <div style={{ position: 'relative' }}>
-              <span style={{ position: 'absolute', left: '12px', top: '12px', color: 'var(--on-surface-variant)' }}>R$</span>
-              <input type="text" placeholder="0,00" style={{ paddingLeft: '40px' }} />
-            </div>
-          </div>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={fieldStyle}>
+          <label style={labelStyle} htmlFor="title">Nome do produto *</label>
+          <input
+            id="title"
+            name="title"
+            required
+            value={form.title}
+            onChange={handleChange}
+            placeholder="Ex: Tomate Italiano Selecionado"
+            style={inputStyle}
+          />
+        </div>
 
-          <div className={styles.inputGroup}>
-            <label>Unidade de Medida</label>
-            <select>
-              <option>Quilo (kg)</option>
-              <option>Unidade (un)</option>
-              <option>Bandeja</option>
-              <option>Maço</option>
-            </select>
-          </div>
-
-          <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
-            <label>Descrição</label>
-            <textarea rows={4} placeholder="Descreva as características do produto, origem, etc."></textarea>
-          </div>
-
-          <div style={{ gridColumn: 'span 2', display: 'flex', gap: '24px', marginTop: '12px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-              <input type="checkbox" /> É um produto orgânico?
-            </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-              <input type="checkbox" /> Colocar em promoção?
-            </label>
-          </div>
-
-          <div className={styles.actions}>
-            <button type="button" className="btn-secondary">Descartar</button>
-            <button type="submit" className="btn-primary">
-              <Save size={20} /> Salvar Produto
+        <div style={fieldStyle}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+            <label style={{ ...labelStyle, marginBottom: 0 }} htmlFor="description">Descrição</label>
+            <button 
+              type="button" 
+              onClick={handleRewrite}
+              disabled={rewriting || !form.description.trim()}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)', color: 'white', border: 'none', padding: '4px 10px', borderRadius: 20, fontSize: 12, fontWeight: 700, cursor: rewriting || !form.description.trim() ? 'not-allowed' : 'pointer', opacity: rewriting || !form.description.trim() ? 0.6 : 1 }}
+            >
+              {rewriting ? <Loader2 size={12} className="animate-spin" /> : <Wand2 size={12} />} 
+              {rewriting ? 'Otimizando...' : '✨ Otimizar com IA'}
             </button>
           </div>
-        </form>
-      </div>
+          <textarea
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="Conte um pouco sobre seu produto…"
+            rows={3}
+            style={{ ...inputStyle, resize: 'vertical', fontFamily: 'inherit' }}
+          />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={fieldStyle}>
+            <label style={labelStyle} htmlFor="price">Preço (R$) *</label>
+            <input
+              id="price"
+              name="price"
+              type="number"
+              required
+              min="0.01"
+              step="0.01"
+              value={form.price}
+              onChange={handleChange}
+              placeholder="9.90"
+              style={inputStyle}
+            />
+          </div>
+          <div style={fieldStyle}>
+            <label style={labelStyle} htmlFor="unit">Unidade *</label>
+            <select id="unit" name="unit" value={form.unit} onChange={handleChange} style={inputStyle}>
+              <option value="kg">kg</option>
+              <option value="un">unidade</option>
+              <option value="dz">dúzia</option>
+              <option value="maço">maço</option>
+              <option value="bandeja">bandeja</option>
+              <option value="pct">pacote</option>
+              <option value="500g">500g</option>
+              <option value="kit">kit</option>
+            </select>
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={fieldStyle}>
+            <label style={labelStyle} htmlFor="category_id">Categoria</label>
+            <select id="category_id" name="category_id" value={form.category_id} onChange={handleChange} style={inputStyle}>
+              <option value="">Sem categoria</option>
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
+          </div>
+          <div style={fieldStyle}>
+            <label style={labelStyle} htmlFor="stock">Estoque (unidades)</label>
+            <input
+              id="stock"
+              name="stock"
+              type="number"
+              min="0"
+              value={form.stock}
+              onChange={handleChange}
+              placeholder="10"
+              style={inputStyle}
+            />
+          </div>
+        </div>
+
+        <div style={fieldStyle}>
+          <label style={labelStyle} htmlFor="image_url">URL da imagem</label>
+          <input
+            id="image_url"
+            name="image_url"
+            type="url"
+            value={form.image_url}
+            onChange={handleChange}
+            placeholder="https://..."
+            style={inputStyle}
+          />
+          {form.image_url && (
+            <img
+              src={form.image_url}
+              alt="Prévia"
+              style={{ width: 80, height: 80, borderRadius: 8, objectFit: 'cover', marginTop: 8 }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
+          )}
+        </div>
+
+        <div style={{ padding: '16px', background: '#f5f5f5', borderRadius: 10, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 600, color: '#333' }}>
+            <input
+              type="checkbox"
+              name="is_wholesale"
+              checked={form.is_wholesale}
+              onChange={handleChange}
+              style={{ width: 18, height: 18, accentColor: '#30852f' }}
+            />
+            Vender no Atacado (B2B)
+          </label>
+          {form.is_wholesale && (
+            <div style={fieldStyle}>
+              <label style={labelStyle} htmlFor="wholesale_price">Preço de Atacado (R$) *</label>
+              <input
+                id="wholesale_price"
+                name="wholesale_price"
+                type="number"
+                min="0.01"
+                step="0.01"
+                required={form.is_wholesale}
+                value={form.wholesale_price}
+                onChange={handleChange}
+                placeholder="Ex: 8.50"
+                style={inputStyle}
+              />
+            </div>
+          )}
+        </div>
+
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', userSelect: 'none', fontSize: 15 }}>
+            <input
+              type="checkbox"
+              name="is_organic"
+              checked={form.is_organic}
+              onChange={handleChange}
+              style={{ width: 18, height: 18, accentColor: '#30852f' }}
+            />
+            Produto 100% Orgânico 🌱
+          </label>
+
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', userSelect: 'none', fontSize: 15 }}>
+            <input
+              type="checkbox"
+              name="is_promotion"
+              checked={form.is_promotion}
+              onChange={handleChange}
+              style={{ width: 18, height: 18, accentColor: '#e11d48' }}
+            />
+            Oferta do Dia (Preço promocional) 💥
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading || saved}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            background: saved ? '#2e7d32' : '#30852f',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 12,
+            padding: '14px 28px',
+            fontSize: 16,
+            fontWeight: 700,
+            cursor: loading || saved ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.7 : 1,
+            marginTop: 8,
+          }}
+        >
+          {loading ? (
+            <><Loader2 size={20} className="animate-spin" /> Salvando…</>
+          ) : saved ? (
+            <><Check size={20} /> Salvo!</>
+          ) : (
+            'Cadastrar Produto'
+          )}
+        </button>
+      </form>
     </div>
   );
-};
-
-export default NovoProduto;
+}

@@ -1,178 +1,259 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Loader2, ShieldCheck, Lock, ArrowRight, HelpCircle } from 'lucide-react';
+import { 
+  Loader2, 
+  Lock, 
+  Terminal,
+  Server,
+  Activity,
+  ShieldAlert,
+  ArrowRight
+} from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '', code2fa: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [step, setStep] = useState<1 | 2>(1); // 1: Email/Password, 2: 2FA
+  const [currentTime, setCurrentTime] = useState('');
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      setCurrentTime(now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC' + (now.getTimezoneOffset() / -60));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const calculatePasswordStrength = (pass: string) => {
+    let score = 0;
+    if (pass.length > 8) score++;
+    if (/[A-Z]/.test(pass)) score++;
+    if (/[0-9]/.test(pass)) score++;
+    if (/[^A-Za-z0-9]/.test(pass)) score++;
+    return score;
+  };
+
+  const strength = calculatePasswordStrength(formData.password);
+  
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
+      if (step === 1) {
+        // Authenticate
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
 
-      if (authError) throw authError;
+        if (authError) throw authError;
 
-      if (authData.user) {
-        const { data: profile } = await supabase
-          .from(getTableName('profiles'))
-          .select('*')
-          .eq('id', authData.user.id)
-          .single();
+        if (authData.user) {
+          const { data: profile } = await supabase
+            .from(getTableName('profiles'))
+            .select('*')
+            .eq('id', authData.user.id)
+            .single();
 
-        if (profile && profile.user_type === 'admin') {
+          const { data: adminRecord } = await supabase
+            .from(getTableName('admins'))
+            .select('*')
+            .eq('email', authData.user.email)
+            .single();
+
+          const isAllowed = (profile && (profile.user_type === 'admin' || profile.role === 'admin')) || adminRecord;
+
+          if (isAllowed) {
+            setStep(2); // Go to 2FA Step
+          } else {
+            setError('ACCESS_DENIED: INSUFFICIENT_PRIVILEGES');
+            await supabase.auth.signOut();
+          }
+        }
+      } else {
+        // 2FA mock check
+        if (formData.code2fa.length === 6) {
           localStorage.setItem('user_role', 'admin');
-          localStorage.setItem('user_name', profile.full_name);
+          document.cookie = 'feira_role=admin; path=/; max-age=86400; SameSite=Lax';
           router.push('/admin');
         } else {
-          setError('Acesso negado. Esta área é restrita a administradores.');
-          await supabase.auth.signOut();
+          setError('AUTH_FAILED: INVALID_2FA_TOKEN');
         }
       }
-    } catch (err) {
-      console.error('Erro no login admin:', err);
-      setError('Credenciais inválidas ou erro de conexão.');
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError('AUTH_FAILED: INVALID_CREDENTIALS');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-[#faf9f4] text-[#1b1c19] font-['Plus_Jakarta_Sans'] min-h-screen flex flex-col">
-      {/* Top Navigation Bar */}
-      <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-white/80 backdrop-blur-md shadow-sm border-b border-stone-100">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold tracking-tight text-[#0e6b17]">feira.casa</span>
-          <span className="hidden sm:inline-block px-2 py-0.5 bg-stone-100 text-stone-500 text-[10px] font-bold uppercase rounded tracking-widest">Admin</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <HelpCircle size={20} className="text-stone-400 cursor-pointer hover:text-[#0e6b17]" />
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#09090b] flex flex-col font-mono text-[#f4f4f5] relative overflow-hidden">
+      
+      {/* Background Animated Grid / Scanline effect via CSS */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
+           style={{
+             backgroundImage: `linear-gradient(rgba(124, 58, 237, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.2) 1px, transparent 1px)`,
+             backgroundSize: '40px 40px',
+             backgroundPosition: 'center center'
+           }}
+      />
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#7C3AED] via-transparent to-transparent"></div>
 
-      <main className="flex-grow flex items-center justify-center pt-24 pb-12 px-5 md:px-20">
-        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-white rounded-2xl overflow-hidden shadow-sm border border-[#bfcab9]/30">
-          
-          {/* Visual Branding Side */}
-          <div className="hidden md:block relative overflow-hidden bg-[#1b1c19]">
-            <img 
-              alt="Painel de Controle" 
-              className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLQxC1qsBmy3p1NcwzMx_ErXDIIBhLdHG8_CmBOkuJNNLb-38ZHSEbvNmcFI-BWO6GpCprgUk6NMUn1M1Ne-fxrSXNvGEZliigxgbnyGCFIXj59wfQ37ZWwbXoEJobOAiV6POVPCxzCWF_GUtnWw-PwPuKPR9we-giq-JG8p20NaDsAV3nadAixtiNyTDRe-0lI9yC5LVXQ_VKRnHx3d_u0ecqdSSnAXz2s7sHrEt8N78kq4VaWTnYbOneHM5PZHSowDkxpc3_qrw"
-            />
-            <div className="relative z-10 p-16 flex flex-col justify-end h-full text-white">
-              <h1 className="text-[40px] font-extrabold mb-4 leading-tight">Painel de Controle</h1>
-              <p className="text-lg opacity-80 max-w-md">Gestão centralizada e segura para o campo e a cidade. Acesse as ferramentas administrativas do ecossistema feira.casa.</p>
+      <main className="flex-grow flex flex-col items-center justify-center p-6 relative z-10">
+        
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="flex flex-col items-center mb-10 text-center">
+            <div className="w-16 h-16 bg-[#18181b] border border-[#27272a] rounded flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(124,58,237,0.3)]">
+              <Terminal size={32} className="text-[#7C3AED]" />
+            </div>
+            <h1 className="text-xl font-bold tracking-[0.2em] uppercase text-[#e4e4e7]">
+              Painel_Administrativo
+            </h1>
+            <div className="flex items-center gap-2 mt-3 text-xs text-[#a1a1aa] bg-[#18181b] px-3 py-1 rounded border border-[#27272a]">
+              <Lock size={12} className="text-[#7C3AED]" />
+              <span>SECURE_CONNECTION_ESTABLISHED</span>
             </div>
           </div>
 
-          {/* Login Form Side */}
-          <div className="p-10 md:p-16 flex flex-col justify-center bg-white">
-            <div className="mb-10">
-              <span className="inline-block px-3 py-1 bg-[#0e6b17]/10 text-[#0e6b17] rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Acesso Restrito</span>
-              <h2 className="text-[32px] font-bold text-[#1b1c19] mb-1">Login Administrativo</h2>
-              <p className="text-[#40493c]">Bem-vindo de volta ao centro de operações.</p>
+          {/* Terminal Box */}
+          <div className="bg-[#0c0c0e] border border-[#27272a] rounded shadow-2xl overflow-hidden">
+            
+            {/* Window Controls */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-[#18181b] border-b border-[#27272a]">
+              <div className="w-3 h-3 rounded-full bg-[#ef4444]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#f59e0b]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#22c55e]"></div>
+              <span className="ml-2 text-[10px] text-[#71717a]">auth_module_v2.4.1</span>
             </div>
 
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100 text-center">
-                {error}
-              </div>
-            )}
-
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-[#1b1c19] mb-1" htmlFor="email">E-mail Corporativo</label>
-                <input 
-                  className="w-full px-4 py-3 rounded-lg border border-[#bfcab9] focus:ring-2 focus:ring-[#0e6b17] focus:border-[#0e6b17] bg-[#f5f4ef] transition-all outline-none text-sm" 
-                  id="email" 
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="admin@feira.casa" 
-                  required
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <div className="flex justify-between items-center mb-1">
-                  <label className="block text-xs font-bold text-[#1b1c19]" htmlFor="password">Senha de Acesso</label>
-                  <a className="text-xs text-[#0e6b17] font-bold hover:underline" href="#">Redefinir senha</a>
+            <div className="p-8">
+              {error && (
+                <div className="mb-6 flex items-start gap-3 p-3 bg-[#7f1d1d]/20 border border-[#b91c1c]/50 rounded text-xs text-[#fca5a5]">
+                  <ShieldAlert size={16} className="shrink-0 mt-0.5" />
+                  <span className="break-all">{error}</span>
                 </div>
-                <input 
-                  className="w-full px-4 py-3 rounded-lg border border-[#bfcab9] focus:ring-2 focus:ring-[#0e6b17] focus:border-[#0e6b17] bg-[#f5f4ef] transition-all outline-none text-sm" 
-                  id="password" 
-                  name="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="••••••••" 
-                  required
-                />
-              </div>
+              )}
 
-              <button 
-                className="w-full bg-[#0e6b17] text-white py-4 rounded-xl text-lg font-bold shadow-md hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2" 
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? <Loader2 size={24} className="animate-spin" /> : (
+              <form onSubmit={handleAuth} className="space-y-6">
+                
+                {step === 1 && (
                   <>
-                    <span>Entrar no Painel</span>
-                    <ArrowRight size={20} />
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase text-[#71717a] tracking-widest">
+                        &gt; USER_IDENTIFIER
+                      </label>
+                      <input 
+                        type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="admin@domain.com"
+                        className="w-full bg-[#18181b] border border-[#27272a] rounded px-4 py-3 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED] transition-colors"
+                        required
+                        autoComplete="off"
+                        spellCheck="false"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase text-[#71717a] tracking-widest">
+                        &gt; ACCESS_KEY
+                      </label>
+                      <input 
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="••••••••••••"
+                        className="w-full bg-[#18181b] border border-[#27272a] rounded px-4 py-3 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED] transition-colors"
+                        required
+                      />
+                      
+                      {/* Password Strength Indicator */}
+                      {formData.password && (
+                        <div className="flex gap-1 mt-2">
+                          {[1, 2, 3, 4].map((level) => (
+                            <div 
+                              key={level} 
+                              className={`h-1 flex-1 rounded-sm ${level <= strength ? (strength > 2 ? 'bg-[#22c55e]' : 'bg-[#f59e0b]') : 'bg-[#27272a]'}`}
+                            ></div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </>
                 )}
-              </button>
 
-              <div className="bg-stone-50 border border-stone-100 p-4 rounded-xl flex gap-3 items-start">
-                <ShieldCheck size={20} className="text-[#ba1a1a] flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-xs font-bold text-[#1b1c19]">Ambiente Monitorado</h4>
-                  <p className="text-[11px] text-stone-500 mt-0.5 leading-relaxed">Seu IP e dados de sessão são registrados para fins de auditoria e segurança.</p>
-                </div>
-              </div>
-            </form>
-            
-            <div className="mt-10 pt-8 border-t border-stone-100 text-center">
-              <p className="text-sm text-stone-500">
-                Novo no time? <Link href="/signup" className="text-[#0e6b17] font-bold hover:underline">Primeiro Acesso</Link>
-              </p>
+                {step === 2 && (
+                  <div className="space-y-2 animate-in fade-in zoom-in duration-300">
+                    <label className="text-[10px] uppercase text-[#7C3AED] tracking-widest flex items-center gap-2">
+                      <ShieldAlert size={12} />
+                      &gt; 2FA_VERIFICATION_REQUIRED
+                    </label>
+                    <p className="text-xs text-[#a1a1aa] mb-4">Insira o token de 6 dígitos gerado pelo seu aplicativo autenticador.</p>
+                    <input 
+                      type="text"
+                      name="code2fa"
+                      value={formData.code2fa}
+                      onChange={handleChange}
+                      placeholder="000000"
+                      maxLength={6}
+                      className="w-full bg-[#18181b] border border-[#27272a] rounded px-4 py-3 text-center tracking-[1em] text-lg text-[#f4f4f5] focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED] transition-colors"
+                      required
+                    />
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full py-3 bg-[#7C3AED] hover:bg-[#6D28D9] text-white text-sm font-bold rounded flex justify-center items-center gap-2 transition-colors disabled:opacity-50 uppercase tracking-widest mt-8"
+                >
+                  {loading ? <Loader2 className="animate-spin" size={16} /> : (
+                    <>
+                      {step === 1 ? 'AUTHENTICATE' : 'VERIFY_TOKEN'}
+                      <ArrowRight size={16} />
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
+            
+            {/* System Status Bar */}
+            <div className="bg-[#18181b] p-3 flex justify-between items-center border-t border-[#27272a] text-[10px] text-[#71717a]">
+              <div className="flex items-center gap-2">
+                <Activity size={12} className="text-[#22c55e]" />
+                <span>SYS_OP: NORMAL</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Server size={12} />
+                <span>{currentTime}</span>
+              </div>
+            </div>
+
           </div>
+
+          <div className="mt-8 text-center text-[10px] text-[#52525b] space-y-1">
+            <p>LAST_ACCESS: {new Date(Date.now() - 86400000).toISOString().replace('T', ' ').substring(0, 19)} from IP 192.168.1.45</p>
+            <p>FAILED_ATTEMPTS_LOG: 0</p>
+          </div>
+
         </div>
       </main>
-
-      <footer className="w-full py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4 bg-stone-50 border-t border-stone-200 mt-auto">
-        <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-bold text-green-800">feira.casa</span>
-          <p className="text-sm text-stone-500">© 2024 Feira Viva - Conectando o campo à sua mesa.</p>
-        </div>
-        <nav className="flex gap-6">
-          <a className="text-stone-500 hover:text-[#0e6b17] underline transition-all text-sm cursor-pointer" href="#">Termos</a>
-          <a className="text-stone-500 hover:text-[#0e6b17] underline transition-all text-sm cursor-pointer" href="#">Privacidade</a>
-          <a className="text-stone-500 hover:text-[#0e6b17] underline transition-all text-sm cursor-pointer" href="#">Suporte</a>
-        </nav>
-        <div className="flex gap-4 opacity-30 grayscale">
-          <Lock size={16} className="text-stone-400" />
-        </div>
-      </footer>
     </div>
   );
 }

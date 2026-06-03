@@ -15,6 +15,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
+import { syncProfileAfterSignup } from '@/lib/signup';
 
 const AdminSignup = () => {
   const [formData, setFormData] = useState({
@@ -46,25 +47,34 @@ const AdminSignup = () => {
     }
 
     try {
-      // Regra de TI: Acesso total se o departamento for TI
+      // O banco de dados suporta apenas o enum 'admin' para role.
+      // O nível de acesso super_admin pode ser controlado via department ou permissions internamente.
       const userPermissions = formData.dept === 'ti' ? 'all' : 'restricted';
-      const userRole = formData.dept === 'ti' ? 'super_admin' : 'admin';
+      const userRole = 'admin';
 
-      const { data, error } = await supabase
-        .from(getTableName('admins'))
-        .insert([
-          {
-            full_name: formData.fullName,
-            email: formData.email,
+      // Cria a conta real de autenticação do Supabase
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            role: userRole,
+            fullName: formData.fullName,
             department: formData.dept,
-            job_role: formData.role,
-            permissions: userPermissions,
-            access_level: userRole,
-            created_at: new Date().toISOString()
           }
-        ]);
+        }
+      });
 
-      if (error) throw error;
+      if (authError) throw authError;
+
+      // Grava no perfil geral para que o login e roteamento funcionem, usando a API com service_role para evitar RLS
+      if (authData.user) {
+        await syncProfileAfterSignup(authData.session?.access_token, {
+          role: userRole,
+          fullName: formData.fullName,
+          email: formData.email,
+        });
+      }
 
       setMessage({ type: 'success', text: 'Administrador cadastrado com sucesso!' });
       
@@ -78,9 +88,9 @@ const AdminSignup = () => {
         confirmPassword: ''
       });
 
-    } catch (err: unknown) {
+    } catch (err: any) {
       console.error('Erro ao cadastrar:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
+      const errorMessage = err.message || 'Erro desconhecido';
       setMessage({ type: 'error', text: 'Erro ao salvar: ' + errorMessage });
     } finally {
       setLoading(false);

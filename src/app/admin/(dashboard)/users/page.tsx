@@ -20,20 +20,46 @@ import { supabase, getTableName } from '@/lib/supabase';
 export default function UserManagement() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [users, setUsers] = useState([
-    { id: '1', name: 'Eurico Fernandes', email: 'eurico@feira.casa', role: 'TI', type: 'Admin', status: 'Ativo' },
-    { id: '2', name: 'Maria da Horta', email: 'contato@horta.com', role: 'Vendas', type: 'Feirante', status: 'Pendente' },
-    { id: '3', name: 'Restaurante Sabor', email: 'compras@sabor.com', role: 'Comprador', type: 'B2B', status: 'Ativo' },
-    { id: '4', name: 'Chef Felipe', email: 'felipe@gourmet.com', role: 'Cozinha', type: 'Chef Gourmet', status: 'Ativo' },
-  ]);
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const tabs = [
     { id: 'all', name: 'Todos' },
     { id: 'admin', name: 'Admins' },
-    { id: 'vendor', name: 'Feirantes' },
+    { id: 'feirante', name: 'Feirantes' },
     { id: 'b2b', name: 'B2B/Atacado' },
     { id: 'chef', name: 'Chefs' },
   ];
+
+  useEffect(() => {
+    fetchUsers();
+  }, [activeTab]);
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      let query = supabase.from('mktplace_feira_profiles').select('*');
+      
+      if (activeTab !== 'all') {
+        query = query.eq('role', activeTab);
+      }
+
+      const { data, error } = await query;
+      
+      if (error) throw error;
+      if (data) setUsers(data);
+    } catch (err) {
+      console.error('Error fetching users:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredUsers = users.filter(user => {
+    if (!searchTerm) return true;
+    const s = searchTerm.toLowerCase();
+    return (user.full_name?.toLowerCase().includes(s) || user.email?.toLowerCase().includes(s));
+  });
 
   return (
     <div className={styles.page}>
@@ -76,52 +102,64 @@ export default function UserManagement() {
       </div>
 
       <section className={styles.tableSection}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Usuário</th>
-              <th>Perfil / Cargo</th>
-              <th>Tipo de Conta</th>
-              <th>Status</th>
-              <th className={styles.textRight}>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td>
-                  <div className={styles.userCell}>
-                    <div className={styles.avatar}>
-                      <UserCircle size={20} />
-                    </div>
-                    <div>
-                      <p className={styles.userName}>{user.name}</p>
-                      <p className={styles.userEmail}>{user.email}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className={styles.roleTag}>
-                    <Lock size={12} /> {user.role}
-                  </div>
-                </td>
-                <td>
-                  <span className={styles.typeLabel}>{user.type}</span>
-                </td>
-                <td>
-                  <span className={`${styles.statusBadge} ${user.status === 'Ativo' ? styles.statusActive : styles.statusPending}`}>
-                    {user.status}
-                  </span>
-                </td>
-                <td className={styles.textRight}>
-                  <button className={styles.btnOptions}>
-                    <MoreHorizontal size={18} />
-                  </button>
-                </td>
+        {loading ? (
+          <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>Carregando perfis...</div>
+        ) : (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Usuário</th>
+                <th>Perfil / Cargo</th>
+                <th>Tipo de Conta</th>
+                <th>Status</th>
+                <th className={styles.textRight}>Ações</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredUsers.length === 0 ? (
+                <tr>
+                  <td colSpan={5} style={{ textAlign: 'center', padding: '30px', color: '#888' }}>
+                    Nenhum usuário encontrado.
+                  </td>
+                </tr>
+              ) : (
+                filteredUsers.map(user => (
+                  <tr key={user.id}>
+                    <td>
+                      <div className={styles.userCell}>
+                        <div className={styles.avatar}>
+                          <UserCircle size={20} />
+                        </div>
+                        <div>
+                          <p className={styles.userName}>{user.full_name || 'Usuário Sem Nome'}</p>
+                          <p className={styles.userEmail}>{user.email || '—'}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className={styles.roleTag}>
+                        <Lock size={12} /> {user.role?.toUpperCase() || 'CLIENTE'}
+                      </div>
+                    </td>
+                    <td>
+                      <span className={styles.typeLabel}>{user.role === 'admin' ? 'Administrador' : 'Padrão'}</span>
+                    </td>
+                    <td>
+                      <span className={`${styles.statusBadge} ${styles.statusActive}`}>
+                        Ativo
+                      </span>
+                    </td>
+                    <td className={styles.textRight}>
+                      <button className={styles.btnOptions}>
+                        <MoreHorizontal size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        )}
       </section>
     </div>
   );

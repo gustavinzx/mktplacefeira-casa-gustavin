@@ -39,8 +39,8 @@
   border-radius: var(--radius-lg);
   background: var(--surface-container-low);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .paymentMethods {

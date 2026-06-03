@@ -71,6 +71,8 @@ CREATE TABLE IF NOT EXISTS mktplace_feira_products (
   image_url TEXT,
   is_organic BOOLEAN DEFAULT FALSE,
   is_promotion BOOLEAN DEFAULT FALSE,
+  is_wholesale BOOLEAN DEFAULT FALSE,
+  wholesale_price NUMERIC(10,2),
   stock INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -99,6 +101,38 @@ CREATE TABLE IF NOT EXISTS mktplace_feira_recipe_ingredients (
   is_sponsored BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE IF NOT EXISTS mktplace_feira_chef_services (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  chef_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  price NUMERIC NOT NULL,
+  status TEXT DEFAULT 'Ativo',
+  rating NUMERIC DEFAULT 5.0,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Agendamentos de Chefs
+CREATE TABLE IF NOT EXISTS mktplace_feira_chef_appointments (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  customer_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+  chef_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+  service_id UUID REFERENCES mktplace_feira_chef_services(id) ON DELETE SET NULL,
+  event_date TIMESTAMPTZ NOT NULL,
+  status TEXT DEFAULT 'pendente', -- pendente, confirmado, concluido, cancelado
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Blog Posts (Artigos do Portal)
+CREATE TABLE IF NOT EXISTS mktplace_feira_blog_posts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Endereços
 CREATE TABLE IF NOT EXISTS mktplace_feira_addresses (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -118,6 +152,7 @@ CREATE TABLE IF NOT EXISTS mktplace_feira_addresses (
 CREATE TABLE IF NOT EXISTS mktplace_feira_orders (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   customer_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+  producer_id UUID REFERENCES mktplace_feira_producers(id) ON DELETE CASCADE,
   address_id UUID REFERENCES mktplace_feira_addresses(id),
   total_amount NUMERIC(10,2) NOT NULL,
   status order_status DEFAULT 'pendente',
@@ -294,12 +329,27 @@ CREATE POLICY "Chefs gerenciam ingredientes de suas receitas" ON mktplace_feira_
   EXISTS (SELECT 1 FROM mktplace_feira_recipes WHERE id = mktplace_feira_recipe_ingredients.recipe_id AND chef_id = auth.uid())
 );
 
+ALTER TABLE mktplace_feira_chef_services ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Servicos sao publicos para leitura" ON mktplace_feira_chef_services FOR SELECT USING (true);
+CREATE POLICY "Chefs gerenciam seus servicos" ON mktplace_feira_chef_services FOR ALL USING (chef_id = auth.uid());
+
+ALTER TABLE mktplace_feira_chef_appointments ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Clientes veem seus proprios agendamentos" ON mktplace_feira_chef_appointments FOR SELECT USING (customer_id = auth.uid());
+CREATE POLICY "Clientes criam seus agendamentos" ON mktplace_feira_chef_appointments FOR INSERT WITH CHECK (customer_id = auth.uid());
+CREATE POLICY "Chefs veem seus agendamentos" ON mktplace_feira_chef_appointments FOR SELECT USING (chef_id = auth.uid());
+CREATE POLICY "Chefs atualizam seus agendamentos" ON mktplace_feira_chef_appointments FOR UPDATE USING (chef_id = auth.uid());
+
+ALTER TABLE mktplace_feira_blog_posts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Blog posts são públicos" ON mktplace_feira_blog_posts FOR SELECT USING (true);
+
 ALTER TABLE mktplace_feira_addresses ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Usuários gerenciam seus endereços" ON mktplace_feira_addresses FOR ALL USING (auth.uid() = user_id);
 
 ALTER TABLE mktplace_feira_orders ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Usuários veem seus próprios pedidos" ON mktplace_feira_orders FOR SELECT USING (auth.uid() = customer_id);
 CREATE POLICY "Usuários criam seus pedidos" ON mktplace_feira_orders FOR INSERT WITH CHECK (auth.uid() = customer_id);
+CREATE POLICY "Feirantes veem seus proprios pedidos" ON mktplace_feira_orders FOR SELECT USING (producer_id = auth.uid());
+CREATE POLICY "Feirantes atualizam status de seus pedidos" ON mktplace_feira_orders FOR UPDATE USING (producer_id = auth.uid());
 
 ALTER TABLE mktplace_feira_order_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Usuários veem itens de seus pedidos" ON mktplace_feira_order_items FOR SELECT USING (

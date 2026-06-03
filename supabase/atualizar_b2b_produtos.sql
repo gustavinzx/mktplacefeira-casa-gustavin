@@ -1,0 +1,3 @@
+ALTER TABLE mktplace_feira_products 
+ADD COLUMN IF NOT EXISTS is_wholesale BOOLEAN DEFAULT FALSE,
+ADD COLUMN IF NOT EXISTS wholesale_price NUMERIC(10,2);

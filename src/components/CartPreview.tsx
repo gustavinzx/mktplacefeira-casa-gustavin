@@ -5,11 +5,22 @@ import Link from 'next/link';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 const CartPreview = () => {
-  // Mock data - in real app, get from context/store
-  const items = [
-    { id: '1', title: 'Tomate Grape Orgânico', price: 12.90, quantity: 2, imageUrl: '/images/tomato.png' },
-    { id: '3', title: 'Alface Crespa Fresca', price: 4.50, quantity: 1, imageUrl: '/images/lettuce.png' },
-  ];
+  const [items, setItems] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const loadCart = () => {
+      const saved = localStorage.getItem('cart');
+      if (saved) {
+        try {
+          setItems(JSON.parse(saved));
+        } catch (e) {}
+      }
+    };
+    
+    loadCart();
+    window.addEventListener('cartUpdated', loadCart);
+    return () => window.removeEventListener('cartUpdated', loadCart);
+  }, []);
 
   const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
