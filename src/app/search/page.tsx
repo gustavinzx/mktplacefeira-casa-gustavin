@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
 import { SlidersHorizontal, ChevronDown, Loader2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { useDebounce } from '@/hooks/useDebounce'; // ← LINHA 1: import do hook
 
 interface Product {
   id: string;
@@ -25,6 +26,8 @@ function SearchContent() {
   const [loading, setLoading] = useState(true);
   const [organic, setOrganic] = useState(false);
 
+  const debouncedQuery = useDebounce(query, 400); // ← LINHA 2: debounce de 400ms
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -33,7 +36,7 @@ function SearchContent() {
         const categoryId = searchParams.get('category_id');
         const slug = searchParams.get('slug');
         if (categoryId) params.set('category_id', categoryId);
-        if (query) params.set('q', query);
+        if (debouncedQuery) params.set('q', debouncedQuery); // ← LINHA 3: usa debouncedQuery
         if (organic) params.set('organic', 'true');
         params.set('limit', '20');
 
@@ -57,7 +60,7 @@ function SearchContent() {
     };
 
     fetchProducts();
-  }, [query, organic, searchParams]);
+  }, [debouncedQuery, organic, searchParams]); // ← usa debouncedQuery na dependência
 
   return (
     <div className="search-page">
