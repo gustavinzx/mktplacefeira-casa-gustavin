@@ -1,0 +1,10 @@
+ALTER TABLE mktplace_feira_orders
+ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+ADD COLUMN IF NOT EXISTS producer_id UUID REFERENCES mktplace_feira_producers(id) ON DELETE CASCADE,
+ADD COLUMN IF NOT EXISTS subtotal NUMERIC(10,2) DEFAULT 0,
+ADD COLUMN IF NOT EXISTS discount NUMERIC(10,2) DEFAULT 0,
+ADD COLUMN IF NOT EXISTS shipping_cost NUMERIC(10,2) DEFAULT 0,
+ADD COLUMN IF NOT EXISTS total NUMERIC(10,2) DEFAULT 0;
+
+-- Recarregar cache da API do Supabase
+NOTIFY pgrst, 'reload schema';

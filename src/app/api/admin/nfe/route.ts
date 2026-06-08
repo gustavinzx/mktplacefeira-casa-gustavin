@@ -74,33 +74,45 @@ export async function POST(request: Request) {
     }
 
     if (action === 'transmitir') {
-      // Simulação de delay da SEFAZ
+      // Delay simulado (remover quando integrar SEFAZ real)
       await new Promise(r => setTimeout(r, 1500));
 
-      // Atualiza as notas para autorizada com chave simulada
-      for (const id of orderIds) {
-        const fakeChave = `3526${Math.floor(1000000000000000 + Math.random() * 9000000000000000)}`;
-        
-        // Verifica se a nota já existe (foi gerada mas rejeitada, etc) ou cria
-        const { data: nfeExist } = await admin.from('mktplace_feira_nfe').select('id').eq('id', id).single();
-        
-        if (nfeExist) {
-            await admin.from('mktplace_feira_nfe').update({
-                status: 'autorizada',
-                access_key: fakeChave,
-                sefaz_message: 'Autorizado o uso da NF-e'
-            }).eq('id', id);
-        } else {
-             // Caso a NFE seja criada pela primeira vez (id viria como order_id da UI)
-             await admin.from('mktplace_feira_nfe').update({
-                status: 'autorizada',
-                access_key: fakeChave,
-                sefaz_message: 'Autorizado o uso da NF-e'
-             }).eq('id', id);
-        }
+      const results = [];
+
+      for (const orderId of orderIds) {
+        // Chave no formato da SEFAZ: 44 dígitos
+        // Em homologação, usa-se série 990 e ambiente 2
+        const fakeChave = [
+          '35',                                          // UF SP
+          new Date().toISOString().slice(2, 4) + new Date().toISOString().slice(5, 7), // AAMM
+          '00000000000000',                              // CNPJ emissor (placeholder)
+          '55',                                          // modelo NF-e
+          '001',                                         // série
+          String(Math.floor(Math.random() * 999999999)).padStart(9, '0'), // número
+          '1',                                           // tipo emissão
+          String(Math.floor(Math.random() * 99999999)).padStart(8, '0'),  // código
+        ].join('');
+
+        // Upsert correto: tenta inserir, se já existe faz update
+        const { error } = await admin
+          .from('mktplace_feira_nfe')
+          .upsert(
+            {
+              id: orderId,  // usa order_id como PK apenas se for o design; ajuste se necessário
+              status: 'homologacao',  // NUNCA 'autorizada' sem SEFAZ real
+              access_key: fakeChave,
+              sefaz_message: '[SIMULAÇÃO] Ambiente de homologação — NF-e não válida na SEFAZ',
+            },
+            { onConflict: 'id' }
+          );
+
+        if (!error) results.push(orderId);
       }
 
-      return ok({ message: 'Notas emitidas com sucesso!' });
+      return ok({
+        transmitted: results.length,
+        warning: 'Ambiente de homologação: chaves geradas são simuladas e não têm validade fiscal.',
+      });
     }
 
     return err('Ação desconhecida', 400);

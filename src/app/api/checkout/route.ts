@@ -123,7 +123,7 @@ export async function POST(request: Request) {
           shipping_cost: orderDeliveryFee,
           total_amount: Math.max(0, totalAmount),
           total: Math.max(0, totalAmount),
-          status: 'pending',
+          status: 'pendente',
           payment_method: payment_method || 'Pix'
         })
         .select()

@@ -66,12 +66,13 @@ const PortalSidebar = ({ role, isOpen, onClose }: PortalSidebarProps) => {
     sessionStorage.setItem('has_logged_out', 'true');
     await supabase.auth.signOut();
     
-    let redirectUrl = '/logincliente';
-    switch (role) {
+    let redirectUrl = '/login';
+    const actualRole = role;
+    switch (actualRole) {
       case 'admin': redirectUrl = '/admin/login'; break;
-      case 'feirante': redirectUrl = '/login/vendor'; break;
-      case 'chef': redirectUrl = '/login/chef'; break;
-      case 'logistica': redirectUrl = '/login/delivery'; break;
+      case 'feirante': redirectUrl = '/login'; break;
+      case 'chef': redirectUrl = '/login'; break;
+      case 'logistica': redirectUrl = '/login'; break;
     }
     window.location.href = redirectUrl;
   };

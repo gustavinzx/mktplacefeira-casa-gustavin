@@ -123,6 +123,15 @@ export default function AdminNotasFiscaisPage() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
+      <div className="flex items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-2xl px-5 py-4 mb-6">
+        <span className="text-yellow-600 text-xl">⚠️</span>
+        <p className="text-sm text-yellow-800 font-medium">
+          <strong>Ambiente de homologação:</strong> As NF-es transmitidas aqui são simulações
+          e não têm validade fiscal na SEFAZ. Para produção real, integre com um emissor
+          certificado (ex: Focus NFe, eNotas, Tiny).
+        </p>
+      </div>
+
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>

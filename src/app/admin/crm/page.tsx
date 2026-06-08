@@ -118,18 +118,33 @@ function LeadDetailModal({ lead, onClose, onUpdate }: { lead: Lead; onClose: () 
 
   const addHistory = async () => {
     if (!action.trim()) return;
-    const updated: Lead = {
-      ...lead,
-      stage: newStage,
-      nextContact: nextDate || lead.nextContact,
-      lastContact: 'Agora',
-      history: [
-        { id: Math.random().toString(36).substring(7), date: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }), action, channel },
-        ...lead.history,
-      ],
-    };
-    onUpdate(updated);
-    setAction('');
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/crm', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({
+        id: lead.id,
+        stage: newStage,
+        next_contact: nextDate || null,
+        last_contact: 'Agora',
+        newInteraction: { action, channel },
+      }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      onUpdate({
+        ...data.data,
+        lastContact: data.data.last_contact,
+        nextContact: data.data.next_contact,
+        history: data.data.history?.map((h: any) => ({
+             id: h.id, action: h.action, channel: h.channel, date: new Date(h.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+        })) || []
+      });
+      setAction('');
+    }
   };
 
   const Icon = CHANNEL_ICON[channel];
@@ -332,26 +347,28 @@ function NovoLeadModal({ onClose, onSave }: { onClose: () => void; onSave: (l: L
   const canNext1 = form.name.trim() && form.city.trim() && form.phone.trim();
   const canNext2 = form.category.trim();
 
-  const handleSave = () => {
-    const lead: Lead = {
-      id: Math.random().toString(36).substring(7),
-      name: form.name,
-      type: form.type,
-      stage: 'novo',
-      city: form.city,
-      phone: form.phone,
-      email: form.email,
-      category: form.category,
-      source: form.source,
-      score: parseFloat(form.score) || 7,
-      lastContact: 'Agora',
-      nextContact: form.nextContact || undefined,
-      notes: form.notes,
-      history: firstAction.trim()
-        ? [{ id: Math.random().toString(36).substring(7), date: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }), action: firstAction, channel: firstChannel }]
-        : [],
-    };
-    onSave(lead);
+  const handleSave = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/crm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({ ...form, firstAction, firstChannel }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      onSave({
+        ...data.data,
+        lastContact: data.data.last_contact,
+        nextContact: data.data.next_contact,
+        history: data.data.history?.map((h: any) => ({
+             id: h.id, action: h.action, channel: h.channel, date: new Date(h.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+        })) || []
+      });
+      onClose();
+    }
   };
 
   return (
@@ -632,34 +649,29 @@ export default function AdminCRMPage() {
 
   React.useEffect(() => {
     async function loadCRM() {
-      const { data: leadsData } = await supabase.from('mktplace_feira_crm_leads').select('*').order('created_at', { ascending: false });
-      const { data: campsData } = await supabase.from('mktplace_feira_crm_campaigns').select('*').order('created_at', { ascending: false });
-      
-      if (leadsData) {
-        setLeads(leadsData.map(l => ({
-          id: l.id,
-          name: l.name,
-          type: l.type as LeadType,
-          stage: l.status.toLowerCase() as LeadStage,
-          city: l.metadata?.city || '—',
-          phone: l.phone || '',
-          email: l.email || '',
-          category: l.metadata?.category || '—',
-          source: l.metadata?.source || '—',
-          score: l.metadata?.score || 5.0,
-          lastContact: l.last_contact ? new Date(l.last_contact).toLocaleDateString('pt-BR') : '—',
-          nextContact: l.metadata?.nextContact || '',
-          notes: l.metadata?.notes || '',
-          history: l.history || [],
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/admin/crm', {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLeads(data.data.map((l: any) => ({
+          ...l,
+          lastContact: l.last_contact,
+          nextContact: l.next_contact,
+          history: l.history?.map((h: any) => ({
+             id: h.id, action: h.action, channel: h.channel, date: new Date(h.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+          })) || []
         })));
       }
       
+      const { data: campsData } = await supabase.from('mktplace_feira_crm_campaigns').select('*').order('created_at', { ascending: false });
       if (campsData) {
         setDisparos(campsData.map(c => ({
           id: c.id,
           channel: c.audience?.includes('whatsapp') ? 'whatsapp' : 'email',
           target: c.audience || '',
-          message: c.name || '', // simplified
+          message: c.name || '',
           scheduledAt: c.scheduled_for ? new Date(c.scheduled_for).toLocaleDateString('pt-BR') : '—',
           status: c.status as any,
           count: c.sent || 0,
@@ -712,7 +724,7 @@ export default function AdminCRMPage() {
     e.dataTransfer.dropEffect = 'move';
   };
 
-  const handleDrop = (e: React.DragEvent, targetStage: LeadStage) => {
+  const handleDrop = async (e: React.DragEvent, targetStage: LeadStage) => {
     e.preventDefault();
     const leadId = e.dataTransfer.getData('leadId');
     if (!leadId) return;
@@ -721,7 +733,17 @@ export default function AdminCRMPage() {
         ? { ...l, stage: targetStage, lastContact: 'Agora' }
         : l
     ));
-    supabase.from('mktplace_feira_crm_leads').update({ status: targetStage }).eq('id', leadId);
+    
+    const { data: { session } } = await supabase.auth.getSession();
+    await fetch('/api/admin/crm', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({ id: leadId, stage: targetStage, last_contact: 'Agora' }),
+    });
+
     setDraggingId(null);
     setDragOverStage(null);
     dragCounter.current = {};
@@ -731,40 +753,11 @@ export default function AdminCRMPage() {
   const updateLead = async (updated: Lead) => {
     setLeads(prev => prev.map(l => l.id === updated.id ? updated : l));
     setSelectedLead(updated);
-    await supabase.from('mktplace_feira_crm_leads').update({
-      status: updated.stage,
-      metadata: { city: updated.city, category: updated.category, source: updated.source, score: updated.score, nextContact: updated.nextContact, notes: updated.notes },
-      history: updated.history
-    }).eq('id', updated.id);
   };
 
   const addLead = async (l: Lead) => {
-    // Optimistic UI update
     setLeads(prev => [l, ...prev]);
     setNovoLeadOpen(false);
-
-    // Save to database
-    try {
-      await supabase.from('mktplace_feira_crm_leads').insert([{
-        id: l.id,
-        name: l.name,
-        type: l.type,
-        status: l.stage,
-        phone: l.phone,
-        email: l.email,
-        history: l.history,
-        metadata: {
-          city: l.city,
-          category: l.category,
-          source: l.source,
-          score: l.score,
-          nextContact: l.nextContact,
-          notes: l.notes
-        }
-      }]);
-    } catch (err) {
-      console.error('Erro ao salvar lead no banco:', err);
-    }
   };
 
   const filtered = leads.filter(l => {

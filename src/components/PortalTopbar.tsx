@@ -46,12 +46,12 @@ export default function PortalTopbar({ setSidebarOpen, centerContent, rightActio
     document.cookie = 'feira_role=; path=/; max-age=0';
     sessionStorage.setItem('has_logged_out', 'true');
     
-    let redirectUrl = '/logincliente';
+    let redirectUrl = '/login';
     switch (actualRole) {
       case 'admin': redirectUrl = '/admin/login'; break;
-      case 'feirante': redirectUrl = '/login/vendor'; break;
-      case 'chef': redirectUrl = '/login/chef'; break;
-      case 'logistica': redirectUrl = '/login/delivery'; break;
+      case 'feirante': redirectUrl = '/login'; break;
+      case 'chef': redirectUrl = '/login'; break;
+      case 'logistica': redirectUrl = '/login'; break;
     }
     window.location.href = redirectUrl;
   };

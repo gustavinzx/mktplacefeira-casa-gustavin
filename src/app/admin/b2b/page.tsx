@@ -21,33 +21,74 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminB2BPage() {
   const { showToast } = useToast();
   
-  const [pendentes, setPendentes] = useState([
-    { id: 'RM', name: 'Restaurante Mani', status: 'PENDENTE' },
-    { id: 'HG', name: 'Hotel Grand Hyatt', status: 'EM ANÁLISE' },
-  ]);
+  const [pendentes, setPendentes] = useState<any[]>([]);
+  const [contratos, setContratos] = useState<any[]>([]);
 
-  const [contratos, setContratos] = useState([
-    { name: 'Bistrô do Chef Juca', id: '44210-B2B', cat: 'Hortifruti Orgânico', date: '15 Jul 2024', credit: 'R$ 15.000,00', status: 'NORMALIZADO', color: 'green' },
-    { name: 'Rede Sushi Premium', id: '39882-B2B', cat: 'Pescados & Frutos', date: '02 Jun 2024', credit: 'R$ 45.000,00', status: 'REVISÃO', color: 'orange', warning: true },
-    { name: 'Cantina Toscana', id: '55102-B2B', cat: 'Queijos & Frios', date: '22 Ago 2024', credit: 'R$ 8.500,00', status: 'NORMALIZADO', color: 'green' },
-  ]);
+  React.useEffect(() => {
+    const load = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const [pendRes, contRes] = await Promise.all([
+        fetch('/api/admin/b2b?status=pending', {
+          headers: { Authorization: `Bearer ${session?.access_token}` },
+        }),
+        fetch('/api/admin/b2b?status=active', {
+          headers: { Authorization: `Bearer ${session?.access_token}` },
+        }),
+      ]);
+      const [pendData, contData] = await Promise.all([pendRes.json(), contRes.json()]);
+      if (pendData.success) {
+        setPendentes(pendData.data.map((p: any) => ({
+          id: p.id,
+          name: p.restaurant?.full_name || p.producer?.full_name || 'Desconhecido',
+          status: p.status === 'pending' ? 'PENDENTE' : p.status,
+        })));
+      }
+      if (contData.success) {
+        setContratos(contData.data.map((c: any) => ({
+          id: c.id,
+          name: c.restaurant?.full_name || c.producer?.full_name || 'Desconhecido',
+          cat: c.category || 'Misto',
+          date: new Date(c.created_at).toLocaleDateString('pt-BR'),
+          credit: `R$ ${c.credit_limit || '0,00'}`,
+          status: c.status === 'active' ? 'NORMALIZADO' : c.status,
+          color: c.status === 'active' ? 'green' : 'orange',
+        })));
+      }
+    };
+    load();
+  }, []);
 
-  const aprovarCredito = (id: string, name: string) => {
-    setPendentes(prev => prev.filter(p => p.id !== id));
-    setContratos(prev => [{
-      name,
-      id: `${Math.floor(Math.random() * 90000) + 10000}-B2B`,
-      cat: 'Misto Geral',
-      date: '12 Nov 2024',
-      credit: 'R$ 10.000,00',
-      status: 'NORMALIZADO',
-      color: 'green'
-    }, ...prev]);
-    showToast(`Crédito aprovado para ${name}. Contrato ativado!`, 'success');
+  const aprovarCredito = async (id: string, name: string) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/b2b', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({ id, status: 'active' }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setPendentes(prev => prev.filter(p => p.id !== id));
+      setContratos(prev => [{
+        id: data.data.id,
+        name: name,
+        cat: data.data.category || 'Misto',
+        date: new Date(data.data.created_at || Date.now()).toLocaleDateString('pt-BR'),
+        credit: `R$ ${data.data.credit_limit || '0,00'}`,
+        status: 'NORMALIZADO',
+        color: 'green'
+      }, ...prev]);
+      showToast(`Crédito aprovado para ${name}. Contrato ativado!`, 'success');
+    } else {
+      showToast('Erro ao aprovar: ' + data.error, 'error');
+    }
   };
 
   return (

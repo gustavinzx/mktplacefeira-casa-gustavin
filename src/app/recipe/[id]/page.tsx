@@ -9,6 +9,7 @@ import { useCartStore } from '@/store/useCartStore';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
+import { Clock, Users, Flame, Play, CheckCircle2, ShoppingBag } from 'lucide-react';
 
 export default function RecipeDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = React.use(params);
