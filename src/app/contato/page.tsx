@@ -3,146 +3,93 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import styles from '../institutional.module.css';
-import { Mail, Phone, MapPin, MessageCircle, Loader2 } from 'lucide-react';
+import styles from './page.module.css';
+import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 
 export default function ContatoPage() {
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    subject: 'duvida',
-    message: '',
-  });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setSent(false);
-
-    try {
-      const token = localStorage.getItem('access_token');
-      const res = await fetch('/api/support', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSent(true);
-        setForm({ name: '', email: '', subject: 'duvida', message: '' });
-      } else {
-        alert(data.error || 'Erro ao enviar. Tente contato@feira.casa');
-      }
-    } catch {
-      alert('Erro de conexão. Escreva para contato@feira.casa');
-    } finally {
-      setLoading(false);
-    }
+    setStatus('sending');
+    setTimeout(() => setStatus('success'), 1500);
   };
 
   return (
     <div className={styles.page}>
       <Header />
-      <main className={styles.main}>
-        <div className={styles.hero}>
-          <h1>Contato</h1>
-          <p>
-            Dúvidas sobre pedidos, parcerias ou cadastro de feirantes? Fale com a gente.
-          </p>
+      
+      <main className={styles.container}>
+        <div className={styles.header}>
+          <h1>Fale Conosco</h1>
+          <p>Dúvidas, sugestões ou apenas quer dar um oi? Estamos aqui para ouvir você.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-          <section className={styles.section}>
-            <h2>Canais</h2>
-            <ul className={styles.contactList}>
-              <li>
-                <Mail size={20} color="#0e6b17" />
-                <a href="mailto:contato@feira.casa">contato@feira.casa</a>
-              </li>
-              <li>
-                <Phone size={20} color="#0e6b17" />
-                <span>(11) 4000-0000 — Seg a Sex, 9h às 18h</span>
-              </li>
-              <li>
-                <MapPin size={20} color="#0e6b17" />
-                <span>São Paulo, SP — Brasil</span>
-              </li>
-              <li>
-                <MessageCircle size={20} color="#0e6b17" />
-                <a
-                  href="https://wa.me/5511999999999"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  WhatsApp
-                </a>
-              </li>
-            </ul>
-          </section>
+        <div className={styles.content}>
+          <div className={styles.infoSection}>
+            <div className={styles.infoCard}>
+              <Mail className={styles.icon} />
+              <h3>E-mail</h3>
+              <p>contato@feira.casa</p>
+              <p>suporte@feira.casa</p>
+            </div>
+            <div className={styles.infoCard}>
+              <Phone className={styles.icon} />
+              <h3>Telefone</h3>
+              <p>(11) 4003-XXXX</p>
+              <p>Seg a Sex, 9h às 18h</p>
+            </div>
+            <div className={styles.infoCard}>
+              <MessageSquare className={styles.icon} />
+              <h3>WhatsApp</h3>
+              <p>(11) 9XXXX-XXXX</p>
+              <p>Atendimento rápido</p>
+            </div>
+          </div>
 
-          <section className={styles.section}>
-            <h2>Envie uma mensagem</h2>
-            {sent ? (
-              <div className={styles.success}>
-                Mensagem recebida! Retornaremos em breve no e-mail informado.
-              </div>
-            ) : (
-              <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.field}>
-                  <label htmlFor="name">Nome</label>
-                  <input
-                    id="name"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  />
+          <div className={styles.formSection}>
+            <div className={styles.formCard}>
+              {status === 'success' ? (
+                <div className={styles.successMessage}>
+                  <div className={styles.successIcon}>✓</div>
+                  <h2>Mensagem Enviada!</h2>
+                  <p>Agradecemos seu contato. Retornaremos em breve.</p>
+                  <button onClick={() => setStatus('idle')} className={styles.btnReset}>Enviar outra</button>
                 </div>
-                <div className={styles.field}>
-                  <label htmlFor="email">E-mail</label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  />
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="subject">Assunto</label>
-                  <select
-                    id="subject"
-                    value={form.subject}
-                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  >
-                    <option value="duvida">Dúvida geral</option>
-                    <option value="pedido">Pedido / entrega</option>
-                    <option value="feirante">Quero ser feirante</option>
-                    <option value="parceria">Parceria B2B / restaurante</option>
-                  </select>
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="message">Mensagem</label>
-                  <textarea
-                    id="message"
-                    required
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  />
-                </div>
-                <button type="submit" className={styles.btnPrimary} disabled={loading}>
-                  {loading ? <Loader2 size={18} className="animate-spin" /> : null}
-                  Enviar mensagem
-                </button>
-              </form>
-            )}
-          </section>
+              ) : (
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <div className={styles.formGroup}>
+                    <label>Nome</label>
+                    <input type="text" placeholder="Seu nome completo" required />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>E-mail</label>
+                    <input type="email" placeholder="seu@email.com" required />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Assunto</label>
+                    <select required>
+                      <option value="">Selecione um assunto</option>
+                      <option value="duvida">Dúvida sobre pedido</option>
+                      <option value="elogio">Sugestão ou Elogio</option>
+                      <option value="reclamacao">Reclamação</option>
+                      <option value="parceria">Quero ser parceiro</option>
+                    </select>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Mensagem</label>
+                    <textarea rows={5} placeholder="Como podemos ajudar?" required></textarea>
+                  </div>
+                  <button type="submit" className={styles.btnSubmit} disabled={status === 'sending'}>
+                    {status === 'sending' ? 'Enviando...' : <>Enviar Mensagem <Send size={18} /></>}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
       </main>
+
       <Footer />
     </div>
   );

@@ -1,78 +1,95 @@
-import Link from 'next/link';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import styles from '../institutional.module.css';
-import { Leaf, Truck, Users, Heart } from 'lucide-react';
+import styles from './page.module.css';
+import { Leaf, Users, ShieldCheck, Heart } from 'lucide-react';
 
-export const metadata = {
-  title: 'Quem somos | Feira Casa',
-  description: 'Conheça a Feira Casa — frescor da feira livre direto na sua porta.',
+// Textos padrão (fallback enquanto carrega ou se o banco estiver vazio)
+const DEFAULTS = {
+  sobre_titulo: 'Sobre nós',
+  sobre_subtitulo: 'Conectando o frescor da feira diretamente à sua mesa, com tecnologia e propósito.',
+  sobre_missao_titulo: 'Nossa Missão',
+  sobre_missao_texto1:
+    'A Feira.Casa nasceu da vontade de democratizar o acesso a alimentos frescos e de qualidade, apoiando diretamente o produtor local e o feirante tradicional. Acreditamos que a tecnologia deve servir para aproximar as pessoas daquilo que é essencial: a saúde e o sabor de verdade.',
+  sobre_missao_texto2:
+    'Trabalhamos para que cada pedido seja uma experiência de descoberta, onde você conhece a origem do que consome e fortalece a economia da sua região.',
 };
 
 export default function SobrePage() {
+  const [content, setContent] = useState<Record<string, string>>(DEFAULTS);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/site-settings')
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          // Merge com defaults para garantir que campos vazios mostram o fallback
+          setContent((prev) => ({ ...prev, ...json.data }));
+        }
+      })
+      .catch(() => {
+        // silently fail — usa defaults
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const g = (key: string) => content[key] || DEFAULTS[key as keyof typeof DEFAULTS] || '';
+
   return (
     <div className={styles.page}>
       <Header />
-      <main className={styles.main}>
-        <div className={styles.hero}>
-          <h1>Quem somos</h1>
-          <p>
-            A Feira Casa conecta famílias, restaurantes e chefs aos melhores produtores
-            das feiras livres da sua região — com a praticidade de um marketplace digital.
-          </p>
-        </div>
-
-        <section className={styles.section}>
-          <h2>Nossa missão</h2>
-          <p>
-            Levar o frescor da feira direto à sua porta, valorizando o pequeno produtor e
-            reduzindo a distância entre o campo e a mesa. Acreditamos em alimentos frescos,
-            sazonais e em comércio justo.
-          </p>
+      
+      <main className={styles.container}>
+        <section className={styles.hero}>
+          <div className={styles.heroContent}>
+            <h1>{g('sobre_titulo')}</h1>
+            <p>{g('sobre_subtitulo')}</p>
+          </div>
         </section>
 
-        <section className={styles.section}>
-          <h2>Como funciona</h2>
-          <div className={styles.grid}>
-            <div className={styles.card}>
-              <Leaf size={32} color="#0e6b17" />
-              <h3>Produtores locais</h3>
-              <p>Feirantes verificados vendem o que colheram no dia.</p>
+        <section className={styles.missionSection}>
+          <div className={styles.contentGrid}>
+            <div className={styles.textContent}>
+              <h2>{g('sobre_missao_titulo')}</h2>
+              <p>{g('sobre_missao_texto1')}</p>
+              <p>{g('sobre_missao_texto2')}</p>
             </div>
-            <div className={styles.card}>
-              <Truck size={32} color="#0e6b17" />
-              <h3>Entrega rápida</h3>
-              <p>Pedidos separados na feira e entregues na sua região.</p>
-            </div>
-            <div className={styles.card}>
-              <Users size={32} color="#0e6b17" />
-              <h3>Para todos</h3>
-              <p>Consumidor final, restaurantes, chefs e compra atacado.</p>
-            </div>
-            <div className={styles.card}>
-              <Heart size={32} color="#0e6b17" />
-              <h3>Comunidade</h3>
-              <p>Fortalecemos feiras livres e a economia local.</p>
+            <div className={styles.imageContent}>
+              <img
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop"
+                alt="Feira tradicional"
+              />
             </div>
           </div>
         </section>
 
-        <section className={styles.section}>
-          <h2>Quer fazer parte?</h2>
-          <p>Seja feirante, chef parceiro ou comprador atacadista.</p>
-          <div className={styles.ctaRow}>
-            <Link href="/signup/vendor" className={styles.btnPrimary}>
-              Sou Produtor/Feirante
-            </Link>
-            <Link href="/signup/chef" className={styles.btnOutline}>
-              Restaurantes &amp; Chefs
-            </Link>
-            <Link href="/fairs" className={styles.btnOutline}>
-              Ver feiras próximas
-            </Link>
+        <section className={styles.values}>
+          <div className={styles.valueCard}>
+            <Leaf size={40} className={styles.icon} />
+            <h3>Sustentabilidade</h3>
+            <p>Focamos em circuitos curtos de consumo, reduzindo desperdício e emissão de carbono.</p>
+          </div>
+          <div className={styles.valueCard}>
+            <Users size={40} className={styles.icon} />
+            <h3>Comunidade</h3>
+            <p>Valorizamos o trabalho humano e as relações de confiança entre produtores e consumidores.</p>
+          </div>
+          <div className={styles.valueCard}>
+            <ShieldCheck size={40} className={styles.icon} />
+            <h3>Qualidade</h3>
+            <p>Curadoria rigorosa de parceiros para garantir que apenas o melhor chegue até você.</p>
+          </div>
+          <div className={styles.valueCard}>
+            <Heart size={40} className={styles.icon} />
+            <h3>Paixão</h3>
+            <p>Amamos o que fazemos e acreditamos no poder transformador da alimentação consciente.</p>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );

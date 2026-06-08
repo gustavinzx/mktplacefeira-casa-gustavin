@@ -61,7 +61,7 @@ const Footer = () => {
             <ul>
               <li><Link href="/sobre">Sobre nós</Link></li>
               <li><Link href="/sobre">Como funciona</Link></li>
-              <li><Link href="/search">Produtores</Link></li>
+              <li><Link href="/feirantes">Produtores</Link></li>
               <li><Link href="/contato">Contato</Link></li>
             </ul>
           </div>
@@ -86,9 +86,15 @@ const Footer = () => {
               Feito com <Heart size={14} fill="#e11d48" color="#e11d48" /> por Antigravity
             </p>
             <div className={styles.adminWrapper}>
-              <Link href="/admin/login" className={styles.adminAccess}>
+              <button 
+                onClick={() => {
+                  sessionStorage.setItem('admin_entry_unlocked', 'true');
+                  window.location.href = '/admin/login';
+                }} 
+                className={styles.adminAccess}
+              >
                 <ShieldCheck size={16} />
-              </Link>
+              </button>
               <div className={styles.adminTooltip}>Acesso Restrito</div>
             </div>
           </div>

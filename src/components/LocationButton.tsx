@@ -77,9 +77,9 @@ export default function LocationButton({ onLocationFound }: LocationButtonProps)
         }
       },
       {
-        enableHighAccuracy: true, // Força uso do GPS (alta precisão)
-        timeout: 10000,           // Tempo máximo de espera: 10 segundos
-        maximumAge: 0             // Não aceita cache de posições antigas
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: Infinity
       }
     );
   };
@@ -116,6 +116,9 @@ export default function LocationButton({ onLocationFound }: LocationButtonProps)
           {errorMsg}
         </p>
       )}
+      <p style={{ fontSize: '11px', color: '#777', margin: 0, textAlign: 'center', lineHeight: 1.4 }}>
+        *No computador, o GPS pode errar o bairro. Recomenda-se buscar por CEP se impreciso.
+      </p>
     </div>
   );
 }

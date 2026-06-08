@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Modal from './Modal';
+import { useRouter } from 'next/navigation';
 import { MapPin, Search, Navigation, Loader2 } from 'lucide-react';
 import { formatCep, saveRegion, type SavedRegion } from '@/lib/region';
 
@@ -10,8 +11,6 @@ interface RegionModalProps {
   onClose: () => void;
   onSelect: (region: SavedRegion) => void;
 }
-
-import { useRouter } from 'next/navigation';
 
 const popularRegions: SavedRegion[] = [
   { label: 'São Paulo, SP', city: 'São Paulo', state: 'SP', lat: -23.5505, lng: -46.6333 },
@@ -79,8 +78,15 @@ const RegionModal = ({ isOpen, onClose, onSelect }: RegionModalProps) => {
         console.warn('Could not geocode CEP', err);
       }
 
+      let finalCity = city;
+      if (state === 'DF' && city === 'Brasília' && neighborhood) {
+        finalCity = neighborhood;
+      }
+
+      const formattedLabel = `${finalCity} - ${state}`;
+
       selectRegion({
-        label: `${city}, ${state}`,
+        label: formattedLabel,
         city,
         state,
         cep: formatCep(digits),
@@ -109,36 +115,38 @@ const RegionModal = ({ isOpen, onClose, onSelect }: RegionModalProps) => {
 
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
-        const { latitude: lat, longitude: lng } = pos.coords;
-        let cityName = 'Sua Região';
-        let stateName = '';
+        const { latitude, longitude } = pos.coords;
         try {
           const res = await fetch('/api/location', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ latitude: lat, longitude: lng })
+            body: JSON.stringify({ latitude, longitude })
           });
           const data = await res.json();
+          
           if (data.success && data.details) {
-            cityName = data.details.city || data.details.town || data.details.village || 'Sua Região';
-            stateName = data.details.state === 'Distrito Federal' ? 'DF' : (data.details.state || '');
+            selectRegion({
+              label: data.address,
+              city: data.details.city,
+              state: data.details.state,
+              lat: latitude,
+              lng: longitude,
+            });
+          } else {
+            setError(data.error || 'Erro ao identificar local.');
           }
-        } catch {}
-
-        selectRegion({
-          label: stateName ? `${cityName}, ${stateName}` : cityName,
-          city: cityName,
-          state: stateName,
-          lat,
-          lng,
-        });
-        setLoading(false);
+        } catch (e) {
+          console.warn('Erro geoloc', e);
+          setError('Falha na comunicação com o servidor.');
+        } finally {
+          setLoading(false);
+        }
       },
       () => {
         setError('Permissão de localização negada.');
         setLoading(false);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: Infinity }
     );
   };
 
@@ -179,6 +187,9 @@ const RegionModal = ({ isOpen, onClose, onSelect }: RegionModalProps) => {
           >
             <Navigation size={18} /> Usar minha localização atual
           </button>
+          <p className="desktop-warning">
+            *No computador, o GPS pode errar o seu bairro por conta da rede. Se estiver incorreto, <strong>busque pelo CEP</strong>.
+          </p>
         </div>
 
         <div className="popular-section">
@@ -272,6 +283,16 @@ const RegionModal = ({ isOpen, onClose, onSelect }: RegionModalProps) => {
         }
         .location-btn:disabled {
           opacity: 0.6;
+        }
+        .desktop-warning {
+          font-size: 11px;
+          color: #777;
+          margin-top: 8px;
+          text-align: center;
+          line-height: 1.4;
+        }
+        .desktop-warning strong {
+          color: var(--text-main, #1b1c19);
         }
         .popular-section h4 {
           font-size: 13px;

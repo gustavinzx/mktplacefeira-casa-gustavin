@@ -131,7 +131,7 @@ function FairsPageInner() {
         alert('Não foi possível obter sua localização exata.');
         setLocating(false);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: Infinity }
     );
   };
 

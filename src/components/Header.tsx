@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './Header.module.css';
 import RegionModal from '@/components/RegionModal';
-import { getSavedRegion, regionButtonLabel, type SavedRegion } from '@/lib/region';
+import { getSavedRegion, saveRegion, regionButtonLabel, type SavedRegion } from '@/lib/region';
 import { clearAuthSession } from '@/lib/profile';
 import { useCartStore } from '@/store/useCartStore';
 import { 
@@ -13,17 +13,46 @@ import {
   MapPin, 
   User, 
   ShoppingBasket, 
-  Leaf,
   ChevronDown,
   LayoutDashboard,
   LogOut,
   ShoppingBag,
-  Settings,
   Store,
   ChefHat,
   Building2,
   Loader2,
 } from 'lucide-react';
+
+async function reverseGeocode(lat: number, lng: number): Promise<{
+  neighborhood: string | null;
+  city: string;
+  state: string;
+  label: string;
+}> {
+  try {
+    const res = await fetch('/api/location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ latitude: lat, longitude: lng })
+    });
+
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    
+    if (data.success && data.details) {
+      return { 
+        neighborhood: data.details.neighborhood, 
+        city: data.details.city, 
+        state: data.details.state, 
+        label: data.address 
+      };
+    }
+    
+    throw new Error('No address found');
+  } catch {
+    return { neighborhood: null, city: 'Sua Localização', state: 'BR', label: 'Sua Localização' };
+  }
+}
 
 const Header = () => {
   const router = useRouter();
@@ -33,15 +62,14 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
-  const cartCount = useCartStore(state => state.getItemCount());
-  // The global store updates instantly, we don't need manual localStorage sync here anymore.
-  const [mounted, setMounted] = useState(false);
 
+  const cartCount = useCartStore(state => state.getItemCount());
+  const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [region, setRegion] = useState<SavedRegion | null>(null);
   const [showRegionModal, setShowRegionModal] = useState(false);
 
+  // Fechar dropdown ao clicar fora
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -52,8 +80,11 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Auth + Geolocalização
   useEffect(() => {
     setMounted(true);
+
+    // Auth do localStorage
     const role = localStorage.getItem('user_role');
     const name = localStorage.getItem('user_name');
     if (role) {
@@ -64,60 +95,55 @@ const Header = () => {
       }, 0);
     }
 
-
+    // Região salva
     const saved = getSavedRegion();
     setRegion(saved);
 
-    // Auto-detect location on first load if not set
+    // Auto-detectar localização se ainda não tiver
     if (!saved?.lat) {
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
             try {
               const { latitude, longitude } = position.coords;
-              // Utiliza a nova rota de Backend construída especificamente para nós
-              const res = await fetch('/api/location', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ latitude, longitude })
-              });
-              const data = await res.json();
-              
-              if (data.success && data.details) {
-                const city = data.details.city || data.details.town || 'Sua Localização';
-                const state = data.details.state === 'Distrito Federal' ? 'DF' : (data.details.state || 'BR');
-                
-                const newRegion = {
-                  label: `${city}, ${state}`,
-                  city: city,
-                  state: state,
-                  lat: latitude,
-                  lng: longitude,
-                  radius: 30
-                };
-                localStorage.setItem('feira_region', JSON.stringify(newRegion));
-                setRegion(newRegion);
-                window.dispatchEvent(new Event('regionUpdated'));
-              }
+
+              // Busca bairro/cidade real via Nominatim
+              const geo = await reverseGeocode(latitude, longitude);
+
+              const newRegion: SavedRegion = {
+                label: geo.label,
+                neighborhood: geo.neighborhood || undefined,
+                city: geo.city,
+                state: geo.state,
+                lat: latitude,
+                lng: longitude,
+                radius: 30,
+                timestamp: Date.now(),
+              };
+
+              // Salva usando a função centralizada (cuida das duas chaves)
+              saveRegion(newRegion);
+              setRegion(newRegion);
             } catch (err) {
-              console.warn('Erro ao bater na API local de localização:', err);
+              console.warn('[Header] Erro ao detectar localização:', err);
             }
           },
-          (error) => {
-            console.warn('GPS denied or failed. Sem localização IP fallback.');
-            // Omitimos intencionalmente o IP-API para evitar o erro do "Cruzeiro Novo"
+          () => {
+            // GPS negado — usuário pode definir manualmente pelo modal
           },
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: Infinity, // Permite usar cache do navegador para maior precisão
+          }
         );
       }
     }
 
+    // Ouvir mudanças de região feitas pelo modal
     const onRegion = () => setRegion(getSavedRegion());
     window.addEventListener('regionUpdated', onRegion);
-
-    return () => {
-      window.removeEventListener('regionUpdated', onRegion);
-    };
+    return () => window.removeEventListener('regionUpdated', onRegion);
   }, []);
 
   const handleLogout = async () => {
@@ -143,23 +169,20 @@ const Header = () => {
 
   const getDashboardLink = () => {
     switch (userRole) {
-      case 'admin': return { label: 'Painel Admin', icon: LayoutDashboard, path: '/admin' };
-      case 'feirante': return { label: 'Minha Banca', icon: Store, path: '/portal/feirante' };
-      case 'chef': return { label: 'Meu Ateliê', icon: ChefHat, path: '/portal/chef' };
-      case 'b2b': return { label: 'Portal Atacado', icon: Building2, path: '/b2b' };
-      default: return { label: 'Minha Conta', icon: User, path: '/account' };
+      case 'admin':    return { label: 'Painel Admin',    icon: LayoutDashboard, path: '/admin' };
+      case 'feirante': return { label: 'Minha Banca',     icon: Store,           path: '/portal/feirante' };
+      case 'chef':     return { label: 'Meu Ateliê',      icon: ChefHat,         path: '/portal/chef' };
+      case 'b2b':      return { label: 'Portal Atacado',  icon: Building2,       path: '/b2b' };
+      default:         return { label: 'Minha Conta',     icon: User,            path: '/account' };
     }
   };
 
   const getRoleLabel = (role: string) => {
-    switch (role) {
-      case 'feirante': return 'Feirante';
-      case 'b2b': return 'Atacadista';
-      case 'chef': return 'Chef';
-      case 'admin': return 'Admin';
-      case 'cliente': return 'Consumidor';
-      default: return 'Visitante';
-    }
+    const labels: Record<string, string> = {
+      feirante: 'Feirante', b2b: 'Atacadista', chef: 'Chef',
+      admin: 'Admin', cliente: 'Consumidor', customer: 'Consumidor', b2c: 'Consumidor',
+    };
+    return labels[role] || 'Visitante';
   };
 
   const dashInfo = getDashboardLink();
@@ -170,21 +193,22 @@ const Header = () => {
       <div className={styles.topBar}>
         <div className={styles.topBarContainer}>
           <div className={styles.topBarLeft}>
-            <Link href="/sobre">Quem somos</Link>
+            <Link href="/sobre">Sobre nós</Link>
             <Link href="/contato">Contato</Link>
+            <Link href="/fairs">Feiras</Link>
+            <Link href="/feirantes">Feirantes</Link>
           </div>
           <div className={styles.topBarRight}>
             {isLogged ? (
               <>
                 <Link href={dashInfo.path}>Acessar Meu Painel</Link>
-                <Link href="/account/orders">Meus Pedidos</Link>
+                <Link href="/orders">Meus Pedidos</Link>
               </>
             ) : (
               <>
                 <Link href="/signup/vendor">Seja um Feirante</Link>
                 <Link href="/signup/chef">Restaurantes &amp; Chefs</Link>
                 <Link href="/signup/b2b">Comprador Atacadista</Link>
-                <Link href="/login">Comprador B2C</Link>
               </>
             )}
           </div>
@@ -211,6 +235,7 @@ const Header = () => {
 
         {/* Actions */}
         <div className={styles.actions}>
+          {/* Botão de Região */}
           <button
             type="button"
             className={styles.regionBtn}
@@ -222,13 +247,25 @@ const Header = () => {
           </button>
 
           {/* User Menu */}
-          <div className={styles.userMenu} ref={dropdownRef} onClick={() => setShowMenu(!showMenu)}>
+          <div
+            className={styles.userMenu}
+            ref={dropdownRef}
+            onClick={() => setShowMenu(!showMenu)}
+          >
             <User size={22} />
             {isLogged && userName && (
               <span className={styles.userName} style={{ display: 'flex', alignItems: 'center' }}>
                 {userName.split(' ')[0]}
                 {userRole && (
-                  <span style={{ fontSize: 10, backgroundColor: 'var(--primary)', color: '#fff', padding: '2px 6px', borderRadius: 4, marginLeft: 6, fontWeight: 700 }}>
+                  <span style={{
+                    fontSize: 10,
+                    backgroundColor: 'var(--primary)',
+                    color: '#fff',
+                    padding: '2px 6px',
+                    borderRadius: 4,
+                    marginLeft: 6,
+                    fontWeight: 700,
+                  }}>
                     {getRoleLabel(userRole)}
                   </span>
                 )}
@@ -242,15 +279,18 @@ const Header = () => {
                   <>
                     <div className={styles.dropdownSection}>
                       <span className={styles.dropdownTitle}>Área do Comprador</span>
-                      <Link href="/account" className={styles.dropdownItem}>
+                      <Link href="/profile" className={styles.dropdownItem}>
                         <User size={18} /> Minha Conta
                       </Link>
-                      <Link href="/account/orders" className={styles.dropdownItem}>
+                      <Link href="/orders" className={styles.dropdownItem}>
                         <ShoppingBag size={18} /> Meus Pedidos
+                      </Link>
+                      <Link href="/settings" className={styles.dropdownItem}>
+                        <LayoutDashboard size={18} /> Configurações
                       </Link>
                     </div>
 
-                    {userRole && userRole !== 'cliente' && (
+                    {userRole && userRole !== 'cliente' && userRole !== 'customer' && userRole !== 'b2c' && (
                       <>
                         <div className={styles.dropdownDivider} />
                         <div className={styles.dropdownSection}>
@@ -262,16 +302,15 @@ const Header = () => {
                       </>
                     )}
 
-                    {/* Links Novas Funções do Professor */}
                     {(userRole === 'admin' || userRole === 'logistica') && (
                       <>
                         <div className={styles.dropdownDivider} />
                         <div className={styles.dropdownSection}>
                           <span className={styles.dropdownTitle}>Gestão & Logística</span>
-                          <Link href={userRole === 'admin' ? "/admin/logistica/rotas" : "/portal/logistica/rotas"} className={styles.dropdownItem}>
+                          <Link href={userRole === 'admin' ? '/admin/logistica/rotas' : '/portal/logistica/rotas'} className={styles.dropdownItem}>
                             <MapPin size={18} /> Rotas PickNGo
                           </Link>
-                          <Link href={userRole === 'admin' ? "/admin/logistica/fornecedores" : "/portal/logistica/entregadores"} className={styles.dropdownItem}>
+                          <Link href={userRole === 'admin' ? '/admin/logistica/fornecedores' : '/portal/logistica/entregadores'} className={styles.dropdownItem}>
                             <User size={18} /> Gestão de Frota
                           </Link>
                           {userRole === 'admin' && (
@@ -290,15 +329,16 @@ const Header = () => {
                       disabled={isLoggingOut}
                       aria-label="Sair da conta"
                     >
-                      {isLoggingOut ? <Loader2 size={18} className="animate-spin" /> : <LogOut size={18} />} Sair
+                      {isLoggingOut
+                        ? <Loader2 size={18} className="animate-spin" />
+                        : <LogOut size={18} />
+                      } Sair
                     </button>
                   </>
                 ) : (
-                  <>
-                    <Link href="/login" className={styles.dropdownItem}>
-                      <User size={18} /> Entrar
-                    </Link>
-                  </>
+                  <Link href="/login" className={styles.dropdownItem}>
+                    <User size={18} /> Entrar
+                  </Link>
                 )}
               </div>
             )}
@@ -307,7 +347,7 @@ const Header = () => {
           {/* Cart */}
           <Link href="/cart" className={styles.cartBtn}>
             <ShoppingBasket size={24} />
-            {cartCount > 0 && (
+            {mounted && cartCount > 0 && (
               <span className={styles.cartBadge}>{cartCount}</span>
             )}
           </Link>

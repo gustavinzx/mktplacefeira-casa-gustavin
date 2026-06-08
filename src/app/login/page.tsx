@@ -15,7 +15,8 @@ import {
   Store,
   Briefcase,
   ChefHat,
-  ArrowRight
+  ArrowRight,
+  ArrowLeft
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { persistAuthSession } from "@/lib/profile";
@@ -141,6 +142,13 @@ function LoginContent() {
           }
 
           if (profile && active) {
+            if (profile.role === 'admin') {
+              await supabase.auth.signOut();
+              setError("Acesso bloqueado. Administradores devem usar a entrada de segurança no rodapé.");
+              if (active) setCheckingSession(false);
+              return;
+            }
+
             persistAuthSession(session.access_token, profile);
             useCartStore.getState().clearCart();
             localStorage.removeItem('checkout_items');
@@ -232,6 +240,13 @@ function LoginContent() {
           .eq("id", authData.user.id)
           .single();
 
+        if (profile?.role === 'admin') {
+          await supabase.auth.signOut();
+          setError("Acesso bloqueado. Administradores devem usar a entrada de segurança no rodapé.");
+          setLoading(false);
+          return;
+        }
+
         persistAuthSession(authData.session.access_token, profile);
         useCartStore.getState().clearCart();
         localStorage.removeItem('checkout_items');
@@ -301,341 +316,293 @@ function LoginContent() {
 
   if (checkingSession) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#faf9f4] gap-4">
-        <Loader2 size={48} className="animate-spin text-green-700" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white gap-4">
+        <Loader2 size={48} className="animate-spin text-green-600" />
         <p className="text-gray-500 font-bold text-lg">Carregando sua sessão...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 font-['Plus_Jakarta_Sans'] selection:bg-green-200 selection:text-green-900">
+    <div className="min-h-screen relative font-['Plus_Jakarta_Sans'] text-white overflow-hidden flex flex-col md:flex-row">
       
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
-        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <img src="/Logo-feira.png" alt="feira.casa" className="object-contain drop-shadow-sm" style={{ height: '40px', width: 'auto', maxWidth: '200px' }} />
+      {/* HEADER LOGO ABSOLUTO (TOP LEFT) */}
+      <div className="absolute top-8 left-8 lg:top-12 lg:left-12 z-50">
+        <Link href="/" className="inline-flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+          <span className="font-black text-white text-3xl lg:text-4xl tracking-tighter drop-shadow-lg" style={{ textShadow: "0 0 25px currentColor" }} data-glow="true">feira.casa</span>
+          <span className="font-extrabold tracking-tighter text-[#4ade80] text-3xl lg:text-4xl drop-shadow-lg" style={{ textShadow: "0 0 25px currentColor" }} data-glow="true">acesso</span>
         </Link>
-        <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-gray-500 hover:text-green-700 hover:scale-105 transition-all">
-          <HelpCircle size={20} />
-        </button>
-      </header>
+      </div>
+      
+      {/* BACKGROUND DA TELA TODA */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/bg/login_bg.png"
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#062411]/85 backdrop-blur-[2px]" />
+      </div>
 
-      <main className="flex-1 flex items-center justify-center p-6 sm:p-12 pt-28">
-        
-        {/* Main Card */}
-        <div className="w-full max-w-[1100px] flex flex-col md:flex-row bg-white rounded-[32px] overflow-hidden shadow-2xl shadow-gray-200/50 border border-gray-100 relative z-10">
-          
-          {/* Left Media Side */}
-          <aside className="relative hidden md:flex flex-col w-[45%] bg-green-900 overflow-hidden">
-            <img src={MEDIA_IMG} alt="Produtos frescos" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-green-950 via-green-900/60 to-transparent" />
-            
-            <div className="relative z-10 p-10 h-full flex flex-col justify-end text-white">
-              <span className="absolute top-10 right-10 bg-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase shadow-lg shadow-orange-900/50">
-                COLHIDO HOJE
-              </span>
-              
-              <h1 className="text-4xl lg:text-5xl font-black mb-4 leading-[1.1] tracking-tight">
-                Produtos frescos,<br/>perto de você.
-              </h1>
-              <p className="text-lg text-green-100 mb-10 font-medium max-w-sm">
-                Conectando você diretamente aos produtores locais com rastreabilidade e qualidade.
-              </p>
-              
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20">
-                <div className="flex items-center gap-4">
-                  <img src="https://i.pravatar.cc/100?img=32" alt="Avatar" className="w-12 h-12 rounded-full border-2 border-white/50" />
-                  <div>
-                    <p className="text-sm italic font-medium text-green-50">"Nunca foi tão fácil comprar verduras orgânicas direto de quem planta. Chega fresco toda terça-feira!"</p>
-                    <p className="text-xs font-bold text-green-200 mt-2">— Mariana S., Consumidora</p>
-                  </div>
-                </div>
+      {/* LADO ESQUERDO: TEXTO E TESTEMUNHO */}
+      <div className="relative z-10 hidden md:flex flex-col w-1/2 p-12 lg:p-16 justify-between">
+        <div className="mt-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-8">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#4ade80]">COLHIDO HOJE</span>
+          </div>
+          <h1 className="text-5xl lg:text-6xl font-extralight tracking-tight mb-6 leading-[1.1]" style={{ color: "#ffffff" }}>
+            Produtos frescos, <br />
+            <span className="font-black text-[#4ade80]">perto de você.</span>
+          </h1>
+          <p className="text-lg font-medium max-w-md leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
+            Conectando você diretamente aos produtores locais com rastreabilidade e qualidade certificada.
+          </p>
+        </div>
+
+        <div className="mt-auto pb-10">
+          <div className="bg-[#0f4422]/60 backdrop-blur-md p-6 rounded-3xl border border-white/10 max-w-md shadow-2xl">
+            <div className="flex items-center gap-4">
+              <img src="https://i.pravatar.cc/100?img=32" alt="Avatar" className="w-14 h-14 rounded-full border-2 border-[#4ade80]" />
+              <div>
+                <p className="text-sm italic font-medium text-white/90 leading-relaxed">"Nunca foi tão fácil comprar verduras orgânicas direto de quem planta. Chega fresco toda terça-feira!"</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-[#4ade80] mt-2">— Mariana S., Consumidora</p>
               </div>
             </div>
-          </aside>
+          </div>
+        </div>
+      </div>
 
-          {/* Right Form Side */}
-          <div className="flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+      {/* LADO DIREITO: FORMULÁRIO */}
+      <div className="relative z-10 w-full md:w-1/2 flex flex-col h-screen overflow-y-auto">
+        
+
+
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-[540px] w-full mx-auto pb-20">
+          
+          {/* Card do Formulário */}
+          <div className="bg-[#0a2e16]/80 backdrop-blur-xl p-8 sm:p-12 rounded-[32px] border border-white/10 shadow-2xl">
             
-            {/* Custom Tabs */}
-            <div className="flex gap-8 border-b border-gray-100 mb-8 relative">
+
+
+            {/* Abas */}
+            <div className="flex bg-black/20 p-1 rounded-2xl mb-10 border border-white/5">
               <button
                 onClick={() => { setActiveTab("login"); setError(""); setSuccess(""); }}
-                className={`pb-4 text-lg font-black transition-all relative ${activeTab === 'login' ? 'text-green-700' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`flex-1 py-3 text-[11px] font-black uppercase tracking-widest transition-all rounded-xl ${activeTab === 'login' ? 'bg-[#4ade80] text-[#062411] shadow-lg' : 'text-white/50 hover:text-white'}`}
               >
-                Acesse sua conta
-                {activeTab === 'login' && <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-700 rounded-t-full" />}
+                ACESSAR
               </button>
               <button
                 onClick={() => { setActiveTab("signup"); setError(""); setSuccess(""); }}
-                className={`pb-4 text-lg font-black transition-all relative ${activeTab === 'signup' ? 'text-green-700' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`flex-1 py-3 text-[11px] font-black uppercase tracking-widest transition-all rounded-xl ${activeTab === 'signup' ? 'bg-[#4ade80] text-[#062411] shadow-lg' : 'text-white/50 hover:text-white'}`}
               >
-                Criar conta
-                {activeTab === 'signup' && <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-700 rounded-t-full" />}
+                CRIAR CONTA
               </button>
             </div>
 
-            {error && <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl font-bold text-sm border border-red-100 flex items-center gap-3"><Info size={18} /> {error}</div>}
-            {success && <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl font-bold text-sm border border-green-100 flex items-center gap-3"><Info size={18} /> {success}</div>}
+            {error && <div className="mb-6 p-4 bg-red-500/20 text-red-200 rounded-xl font-bold text-sm border border-red-500/30 flex items-center gap-2"><Info size={18} /> {error}</div>}
+            {success && <div className="mb-6 p-4 bg-[#4ade80]/20 text-[#4ade80] rounded-xl font-bold text-sm border border-[#4ade80]/30 flex items-center gap-2"><Info size={18} /> {success}</div>}
 
             {activeTab === "login" ? (
-              <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-
-                {/* Forgot Password View */}
+              <div className="animate-in fade-in duration-500">
                 {showForgotPassword ? (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-300">
                     <button
                       onClick={() => { setShowForgotPassword(false); setForgotEmail(""); setForgotSuccess(""); setError(""); }}
-                      className="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-green-700 mb-6 transition-colors"
+                      className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white mb-8 transition-colors"
                     >
-                      ← Voltar ao login
+                      <ArrowLeft size={16} /> Voltar
                     </button>
-                    <h2 className="text-2xl font-black text-gray-900 tracking-tight mb-2">Recuperar senha</h2>
-                    <p className="text-gray-500 font-medium mb-8">Informe seu e-mail e enviaremos um link para criar uma nova senha.</p>
+                    <h2 className="text-3xl font-black tracking-tighter mb-2" style={{ color: "#ffffff" }}>Recuperar senha</h2>
+                    <p className=" text-sm font-medium mb-10" style={{ color: "rgba(255,255,255,0.7)" }}>Informe seu e-mail e enviaremos um link para criar uma nova senha.</p>
 
                     {forgotSuccess ? (
-                      <div className="p-5 bg-green-50 text-green-700 rounded-2xl font-bold text-sm border border-green-100 flex items-center gap-3">
-                        <Info size={20} /> {forgotSuccess}
+                      <div className="p-4 bg-[#4ade80]/20 text-[#4ade80] rounded-xl font-bold text-sm border border-[#4ade80]/30 flex items-center gap-2">
+                        <Info size={18} /> {forgotSuccess}
                       </div>
                     ) : (
-                      <form onSubmit={handleForgotPassword} className="space-y-5">
+                      <form onSubmit={handleForgotPassword} className="space-y-6">
                         <div>
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">Seu e-mail</label>
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>E-mail</label>
                           <input
-                            type="email"
-                            value={forgotEmail}
-                            onChange={e => setForgotEmail(e.target.value)}
-                            required
-                            placeholder="seu@email.com"
-                            className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all"
+                            type="email" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} required placeholder="seu@email.com"
+                            className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2"
                           />
                         </div>
-                        <button
-                          type="submit"
-                          disabled={forgotLoading}
-                          className="w-full py-4 mt-2 bg-green-700 text-white rounded-2xl font-black text-lg shadow-lg shadow-green-900/20 hover:bg-green-800 transition-all flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-70 disabled:scale-100"
-                        >
-                          {forgotLoading ? <Loader2 size={24} className="animate-spin" /> : <>Enviar link de recuperação <ArrowRight size={20} /></>}
+                        <button type="submit" disabled={forgotLoading} className="w-full bg-[#4ade80] text-[#062411] py-4 rounded-[18px] font-black text-sm hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-lg shadow-[#4ade80]/20">
+                          {forgotLoading ? <Loader2 size={20} className="animate-spin" /> : 'Enviar link de recuperação'}
                         </button>
                       </form>
                     )}
                   </div>
                 ) : (
                   <>
-                    <div className="flex items-center gap-4 mb-2">
-                      <div className="w-12 h-12 rounded-[16px] bg-green-50 flex items-center justify-center text-green-600 border border-green-100">
-                        <ShoppingBag size={24} />
-                      </div>
-                      <h2 className="text-3xl font-black text-gray-900 tracking-tight">Bem-vindo!</h2>
+                    <div className="mb-10">
+                      <h2 className="text-3xl font-black tracking-tighter mb-2" style={{ color: "#ffffff" }}>Bem-vindo de volta!</h2>
+                      <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>Faça login para continuar suas compras.</p>
                     </div>
-                    <p className="text-gray-500 font-medium mb-8 ml-16">Faça login para continuar suas compras.</p>
 
                     {/* Social Logins */}
                     <div className="grid grid-cols-2 gap-4 mb-8">
-                      <button
-                        onClick={() => handleOAuthLogin('google')}
-                        disabled={!!oauthLoading}
-                        className="flex justify-center items-center gap-3 py-3.5 px-4 bg-white border-2 border-gray-100 rounded-2xl hover:border-gray-300 hover:bg-gray-50 transition-all font-bold text-sm text-gray-700 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
+                      <button onClick={() => handleOAuthLogin('google')} disabled={!!oauthLoading} className="flex justify-center items-center gap-3 py-3.5 px-4 bg-white/10 border border-white/20 rounded-[18px] hover:bg-white/20 transition-all font-bold text-sm text-white disabled:opacity-60">
                         {oauthLoading === 'google' ? <Loader2 size={20} className="animate-spin" /> : <img src="https://www.google.com/favicon.ico" alt="" className="w-5 h-5" />}
                         Google
                       </button>
-                      <button
-                        onClick={() => handleOAuthLogin('apple')}
-                        disabled={!!oauthLoading}
-                        className="flex justify-center items-center gap-3 py-3.5 px-4 bg-black text-white rounded-2xl hover:bg-gray-900 transition-all font-bold text-sm active:scale-95 shadow-lg shadow-black/10 disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
+                      <button onClick={() => handleOAuthLogin('apple')} disabled={!!oauthLoading} className="flex justify-center items-center gap-3 py-3.5 px-4 bg-white text-black rounded-[18px] hover:bg-gray-100 transition-all font-bold text-sm disabled:opacity-60">
                         {oauthLoading === 'apple' ? <Loader2 size={20} className="animate-spin" /> : <Shield size={18} />}
                         Apple
                       </button>
                     </div>
 
-                    <div className="relative mb-8">
-                      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div>
-                      <div className="relative flex justify-center"><span className="px-4 bg-white text-xs font-black text-gray-400 uppercase tracking-widest">Ou use seu e-mail</span></div>
+                    <div className="relative mb-8 flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10" /></div>
+                      <span className="relative bg-[#0a2e16] px-4 text-[10px] font-black text-white/40 uppercase tracking-widest">Ou use seu e-mail</span>
                     </div>
 
-                    <form onSubmit={handleLoginSubmit} className="space-y-5">
+                    <form onSubmit={handleLoginSubmit} className="space-y-6">
                       <div>
-                        <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">E-mail ou CPF</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>E-mail ou CPF</label>
                         <input
-                          name="email" type="text" value={loginData.email} onChange={handleLoginChange} required
-                          placeholder="Digite seu e-mail"
-                          className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all"
+                          name="email" type="text" value={loginData.email} onChange={handleLoginChange} required placeholder="Digite seu e-mail"
+                          className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2"
                         />
                       </div>
                       
                       <div>
                         <div className="flex justify-between items-center mb-2">
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest">Senha</label>
-                          <button
-                            type="button"
-                            onClick={() => { setShowForgotPassword(true); setForgotEmail(loginData.email); setError(""); }}
-                            className="text-[11px] font-black text-orange-600 hover:text-green-700 uppercase tracking-widest transition-colors"
-                          >
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>Senha</label>
+                          <button type="button" onClick={() => { setShowForgotPassword(true); setForgotEmail(loginData.email); setError(""); }} className="text-[10px] font-black text-[#4ade80] hover:underline uppercase tracking-widest">
                             Esqueceu a senha?
                           </button>
                         </div>
                         <input
-                          name="password" type="password" value={loginData.password} onChange={handleLoginChange} required
-                          placeholder="••••••••"
-                          className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all"
+                          name="password" type="password" value={loginData.password} onChange={handleLoginChange} required placeholder="••••••••"
+                          className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2"
                         />
                       </div>
 
-                      <label className="flex items-center gap-3 cursor-pointer group">
-                        <div className="relative flex items-center justify-center w-5 h-5 rounded-md border-2 border-gray-300 group-hover:border-green-600 transition-colors">
+                      <label className="flex items-center gap-3 cursor-pointer group w-max ml-1">
+                        <div className="relative flex items-center justify-center w-5 h-5 rounded-[6px] border-2 border-white/30 group-hover:border-[#4ade80] transition-colors bg-white/10">
                           <input type="checkbox" className="peer opacity-0 absolute inset-0 cursor-pointer" />
-                          <CheckIcon className="opacity-0 peer-checked:opacity-100 text-green-600 transition-opacity" />
+                          <CheckIcon className="opacity-0 peer-checked:opacity-100 text-[#4ade80] transition-opacity" />
                         </div>
-                        <span className="text-sm font-bold text-gray-600">Lembrar de mim</span>
+                        <span className="text-sm font-bold text-white/60 group-hover:text-white transition-colors">Lembrar de mim</span>
                       </label>
 
-                      <button type="submit" disabled={loading} className="w-full py-4 mt-2 bg-green-700 text-white rounded-2xl font-black text-lg shadow-lg shadow-green-900/20 hover:bg-green-800 hover:shadow-xl hover:shadow-green-900/30 transition-all flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-70 disabled:scale-100">
-                        {loading ? <Loader2 size={24} className="animate-spin" /> : <>Entrar na feira <ArrowRight size={20} /></>}
+                      <button type="submit" disabled={loading} className="w-full bg-[#4ade80] text-[#062411] py-4 mt-2 rounded-[18px] font-black text-sm hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-lg shadow-[#4ade80]/20">
+                        {loading ? <Loader2 size={20} className="animate-spin" /> : <>Entrar na feira <ArrowRight size={18} /></>}
                       </button>
                     </form>
                   </>
                 )}
               </div>
             ) : (
-              <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+              <div className="animate-in fade-in duration-500">
                 {!showB2CForm ? (
                   <>
-                    <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-2">Escolha seu perfil</h2>
-                    <p className="text-gray-500 font-medium mb-8">Temos uma experiência customizada para cada necessidade.</p>
+                    <div className="mb-10">
+                      <h2 className="text-3xl font-black tracking-tighter mb-2" style={{ color: "#ffffff" }}>Escolha seu perfil</h2>
+                      <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>Temos uma experiência customizada para cada necessidade.</p>
+                    </div>
 
                     <div className="grid grid-cols-1 gap-4">
-                      
-                      {/* B2C - Verde */}
-                      <button onClick={() => setShowB2CForm(true)} className="group text-left p-6 rounded-[24px] bg-white border-2 border-gray-100 hover:border-green-500 hover:bg-green-50/50 hover:shadow-xl hover:shadow-green-900/5 transition-all relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-green-100/50 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-                        <div className="flex items-center gap-5 relative z-10">
-                          <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-green-600 group-hover:text-white transition-all shadow-sm">
-                            <ShoppingBag size={28} />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-lg font-black text-gray-900 group-hover:text-green-800 transition-colors">Para sua Casa (B2C)</h3>
-                            <p className="text-sm font-medium text-gray-500 mt-1">Compre produtos frescos para sua família.</p>
-                          </div>
-                          <ArrowRight size={20} className="text-gray-300 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+                      {/* B2C */}
+                      <button onClick={() => setShowB2CForm(true)} className="group text-left p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#4ade80]/50 hover:bg-white/10 transition-all flex items-center gap-5">
+                        <div className="w-12 h-12 rounded-xl bg-[#4ade80]/20 text-[#4ade80] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#4ade80] group-hover:text-[#062411] transition-all">
+                          <ShoppingBag size={24} />
                         </div>
+                        <div className="flex-1">
+                          <h3 className="text-sm font-black text-white">Para sua Casa (B2C)</h3>
+                          <p className="text-[11px] font-bold text-white font-extrabold mt-1">Compre produtos frescos para sua família.</p>
+                        </div>
+                        <ArrowRight size={18} className="text-white/30 group-hover:text-[#4ade80] group-hover:translate-x-1 transition-all" />
                       </button>
 
-                      {/* Feirante - Laranja Quente */}
-                      <Link href="/signup/vendor" className="group text-left p-6 rounded-[24px] bg-white border-2 border-gray-100 hover:border-orange-500 hover:bg-orange-50/50 hover:shadow-xl hover:shadow-orange-900/5 transition-all relative overflow-hidden block">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-orange-100/50 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-                        <div className="flex items-center gap-5 relative z-10">
-                          <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-sm">
-                            <Store size={28} />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-lg font-black text-gray-900 group-hover:text-orange-800 transition-colors">Sou Feirante / Produtor</h3>
-                            <p className="text-sm font-medium text-gray-500 mt-1">Traga sua banca para o digital e venda mais.</p>
-                          </div>
-                          <ArrowRight size={20} className="text-gray-300 group-hover:text-orange-500 group-hover:translate-x-1 transition-all" />
+                      {/* Feirante */}
+                      <Link href="/signup/vendor" className="group text-left p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#ea580c]/50 hover:bg-white/10 transition-all flex items-center gap-5">
+                        <div className="w-12 h-12 rounded-xl bg-[#ea580c]/20 text-[#ea580c] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#ea580c] group-hover:text-white transition-all">
+                          <Store size={24} />
                         </div>
+                        <div className="flex-1">
+                          <h3 className="text-sm font-black text-white">Sou Feirante / Produtor</h3>
+                          <p className="text-[11px] font-bold text-white font-extrabold mt-1">Traga sua banca para o digital e venda mais.</p>
+                        </div>
+                        <ArrowRight size={18} className="text-white/30 group-hover:text-[#ea580c] group-hover:translate-x-1 transition-all" />
                       </Link>
 
-                      {/* B2B - Azul Corporativo */}
-                      <Link href="/signup/b2b" className="group text-left p-6 rounded-[24px] bg-white border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50/50 hover:shadow-xl hover:shadow-blue-900/5 transition-all relative overflow-hidden block">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-100/50 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-                        <div className="flex items-center gap-5 relative z-10">
-                          <div className="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                            <Briefcase size={28} />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-lg font-black text-gray-900 group-hover:text-blue-800 transition-colors">Comprador Atacadista</h3>
-                            <p className="text-sm font-medium text-gray-500 mt-1">Condições especiais para compras em volume.</p>
-                          </div>
-                          <ArrowRight size={20} className="text-gray-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                      {/* B2B */}
+                      <Link href="/signup/b2b" className="group text-left p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all flex items-center gap-5">
+                        <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                          <Briefcase size={24} />
                         </div>
+                        <div className="flex-1">
+                          <h3 className="text-sm font-black text-white">Comprador Atacadista</h3>
+                          <p className="text-[11px] font-bold text-white font-extrabold mt-1">Condições especiais para compras em volume.</p>
+                        </div>
+                        <ArrowRight size={18} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                       </Link>
 
-                      {/* Chef - Vermelho/Dourado */}
-                      <Link href="/signup/chef" className="group text-left p-6 rounded-[24px] bg-white border-2 border-gray-100 hover:border-red-500 hover:bg-red-50/50 hover:shadow-xl hover:shadow-red-900/5 transition-all relative overflow-hidden block">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-red-100/50 to-transparent rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-                        <div className="flex items-center gap-5 relative z-10">
-                          <div className="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all shadow-sm">
-                            <ChefHat size={28} />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-lg font-black text-gray-900 group-hover:text-red-800 transition-colors">Restaurante ou Chef</h3>
-                            <p className="text-sm font-medium text-gray-500 mt-1">Abasteça sua cozinha com o melhor tempero.</p>
-                          </div>
-                          <ArrowRight size={20} className="text-gray-300 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+                      {/* Chef */}
+                      <Link href="/signup/chef" className="group text-left p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-red-500/50 hover:bg-white/10 transition-all flex items-center gap-5">
+                        <div className="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-red-500 group-hover:text-white transition-all">
+                          <ChefHat size={24} />
                         </div>
+                        <div className="flex-1">
+                          <h3 className="text-sm font-black text-white">Restaurante ou Chef</h3>
+                          <p className="text-[11px] font-bold text-white font-extrabold mt-1">Abasteça sua cozinha com o melhor tempero.</p>
+                        </div>
+                        <ArrowRight size={18} className="text-white/30 group-hover:text-red-400 group-hover:translate-x-1 transition-all" />
                       </Link>
-
                     </div>
                   </>
                 ) : (
-                  <div className="animate-in slide-in-from-right-4 duration-300">
-                    <button onClick={() => setShowB2CForm(false)} className="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-green-700 mb-6 transition-colors">
-                      ← Voltar às opções
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+                    <button onClick={() => setShowB2CForm(false)} className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white mb-8 transition-colors">
+                      <ArrowLeft size={16} /> Voltar
                     </button>
                     
-                    <div className="flex items-center gap-4 mb-2">
-                      <div className="w-12 h-12 rounded-[16px] bg-green-50 flex items-center justify-center text-green-600 border border-green-100">
-                        <ShoppingBag size={24} />
-                      </div>
-                      <h2 className="text-3xl font-black text-gray-900 tracking-tight">Crie sua conta</h2>
+                    <div className="mb-10">
+                      <h2 className="text-3xl font-black tracking-tighter mb-2" style={{ color: "#ffffff" }}>Crie sua conta B2C</h2>
+                      <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>Comece a colher o melhor hoje mesmo!</p>
                     </div>
-                    <p className="text-gray-500 font-medium mb-8 ml-16">Comece a colher o melhor hoje mesmo!</p>
 
                     <form onSubmit={handleSignupSubmit} className="space-y-5">
                       <div>
-                        <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">Seu nome</label>
-                        <input name="name" type="text" value={signupData.name} onChange={handleSignupChange} required placeholder="Nome completo" className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all" />
+                        <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>Seu nome completo</label>
+                        <input name="name" type="text" value={signupData.name} onChange={handleSignupChange} required placeholder="Nome e sobrenome" className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2" />
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">E-mail</label>
-                          <input name="email" type="email" value={signupData.email} onChange={handleSignupChange} required placeholder="seu@email.com" className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all" />
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>E-mail</label>
+                          <input name="email" type="email" value={signupData.email} onChange={handleSignupChange} required placeholder="seu@email.com" className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2" />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">WhatsApp</label>
-                          <div className="relative">
-                            <Phone size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input name="phone" type="tel" value={signupData.phone} onChange={handleSignupChange} required placeholder="(00) 00000-0000" className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all" />
-                          </div>
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>WhatsApp</label>
+                          <input name="phone" type="tel" value={signupData.phone} onChange={handleSignupChange} required placeholder="(00) 00000-0000" className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2" />
                         </div>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">Senha</label>
-                          <input name="password" type="password" value={signupData.password} onChange={handleSignupChange} required placeholder="••••••••" className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all" />
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>Senha</label>
+                          <input name="password" type="password" value={signupData.password} onChange={handleSignupChange} required placeholder="••••••••" className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2" />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">Confirmar Senha</label>
-                          <input name="confirmPassword" type="password" value={signupData.confirmPassword} onChange={handleSignupChange} required placeholder="••••••••" className="w-full px-5 py-4 bg-gray-50 border border-transparent focus:border-green-500/30 focus:bg-white focus:ring-4 focus:ring-green-500/10 rounded-2xl outline-none font-bold text-gray-900 transition-all" />
+                          <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>Confirmar Senha</label>
+                          <input name="confirmPassword" type="password" value={signupData.confirmPassword} onChange={handleSignupChange} required placeholder="••••••••" className="w-full bg-white rounded-[18px] px-6 py-4 border-2 border-transparent focus:border-[#] outline-none transition-all font-bold text-sm text-gray-900 placeholder:text-gray-400 mt-2" />
                         </div>
                       </div>
-                      
-                      <p className="text-xs font-bold text-gray-400 flex items-center gap-2 bg-gray-50 p-3 rounded-xl"><Info size={14} className="text-gray-400"/> As senhas devem ter pelo menos 6 caracteres.</p>
 
-                      <button type="submit" disabled={loading} className="w-full py-4 mt-2 bg-green-700 text-white rounded-2xl font-black text-lg shadow-lg shadow-green-900/20 hover:bg-green-800 hover:shadow-xl hover:shadow-green-900/30 transition-all flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-70 disabled:scale-100">
-                        {loading ? <Loader2 size={24} className="animate-spin" /> : <>Criar minha conta <UserPlus size={20} /></>}
+                      <button type="submit" disabled={loading} className="w-full bg-[#4ade80] text-[#062411] py-4 mt-4 rounded-[18px] font-black text-sm hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-lg shadow-[#4ade80]/20">
+                        {loading ? <Loader2 size={20} className="animate-spin" /> : <>Criar minha conta <UserPlus size={18} /></>}
                       </button>
                     </form>
                   </div>
                 )}
               </div>
             )}
-
           </div>
         </div>
-      </main>
-
-      {/* Footer minimalista */}
-      <footer className="py-8 text-center border-t border-gray-200 bg-white">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">© 2024 Feira.Casa — Conectando o campo à sua mesa.</p>
-        <div className="flex justify-center gap-6">
-          <a href="#" className="text-sm font-bold text-gray-500 hover:text-green-700 transition-colors">Termos de Uso</a>
-          <a href="#" className="text-sm font-bold text-gray-500 hover:text-green-700 transition-colors">Privacidade</a>
-          <a href="#" className="text-sm font-bold text-gray-500 hover:text-green-700 transition-colors">Suporte</a>
-        </div>
-      </footer>
+      </div>
     </div>
   );
 }

@@ -49,7 +49,7 @@ export async function middleware(request: NextRequest) {
   ];
 
   // Ignorar checagem para rotas de auth para evitar loop
-  if (path.startsWith('/login') || path.startsWith('/signup') || path.startsWith('/cadastro')) {
+  if (path.startsWith('/login') || path.startsWith('/signup') || path.startsWith('/cadastro') || path === '/admin/login') {
     return supabaseResponse;
   }
 

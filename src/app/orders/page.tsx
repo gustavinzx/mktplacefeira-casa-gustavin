@@ -15,11 +15,65 @@ interface OrderItem { name: string; qty: number; price: number; unit: string; }
 interface TrackingStep { label: string; done: boolean; time?: string; }
 interface Order {
   id: string; date: string; total: string; totalNum: number;
-  status: string;
+  status: 'A caminho' | 'Entregue' | 'Cancelado' | 'Aguardando';
   items: number; itemsList: OrderItem[]; image: string; vendor: string;
   address: string; deliveryTime?: string; trackingProgress?: number;
   trackingSteps?: TrackingStep[];
 }
+
+const ORDERS: Order[] = [
+  {
+    id: '#ORD-7482', date: '10 de Mai, 2024', total: 'R$ 142,50', totalNum: 142.50,
+    status: 'A caminho', items: 5,
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop',
+    vendor: 'Sítio Sol Nascente', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
+    deliveryTime: 'Hoje, até às 18:30', trackingProgress: 65,
+    trackingSteps: [
+      { label: 'Pedido Confirmado', done: true, time: '08:15' },
+      { label: 'Sendo Preparado', done: true, time: '09:30' },
+      { label: 'Saiu para Entrega', done: true, time: '14:00' },
+      { label: 'Entregue', done: false },
+    ],
+    itemsList: [
+      { name: 'Tomates Cereja', qty: 2, price: 12.50, unit: 'kg' },
+      { name: 'Alface Crespa', qty: 1, price: 5.00, unit: 'maço' },
+      { name: 'Cenouras', qty: 3, price: 8.90, unit: 'kg' },
+      { name: 'Chuchu', qty: 2, price: 6.00, unit: 'kg' },
+      { name: 'Pepinos', qty: 4, price: 4.50, unit: 'un' },
+    ],
+  },
+  {
+    id: '#ORD-7450', date: '08 de Mai, 2024', total: 'R$ 89,90', totalNum: 89.90,
+    status: 'Entregue', items: 3,
+    image: 'https://images.unsplash.com/photo-1518843875459-f738682238a6?q=80&w=200&auto=format&fit=crop',
+    vendor: 'Horta da Dona Maria', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
+    trackingSteps: [
+      { label: 'Pedido Confirmado', done: true, time: '09:00' },
+      { label: 'Sendo Preparado', done: true, time: '10:15' },
+      { label: 'Saiu para Entrega', done: true, time: '13:30' },
+      { label: 'Entregue', done: true, time: '16:00' },
+    ],
+    itemsList: [
+      { name: 'Bananas Nanicas', qty: 1, price: 8.00, unit: 'cacho' },
+      { name: 'Laranjas', qty: 2, price: 14.00, unit: 'kg' },
+      { name: 'Mamão Papaia', qty: 1, price: 12.90, unit: 'un' },
+    ],
+  },
+  {
+    id: '#ORD-7422', date: '05 de Mai, 2024', total: 'R$ 215,00', totalNum: 215.00,
+    status: 'Cancelado', items: 2,
+    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=200&auto=format&fit=crop',
+    vendor: 'Ovos de Ouro', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
+    trackingSteps: [
+      { label: 'Pedido Confirmado', done: true, time: '11:00' },
+      { label: 'Cancelado pelo Feirante', done: true, time: '11:30' },
+    ],
+    itemsList: [
+      { name: 'Ovos Caipiras', qty: 30, price: 18.00, unit: 'dz' },
+      { name: 'Mel de Abelha', qty: 2, price: 45.00, unit: 'pote' },
+    ],
+  },
+];
 
 export default function MyOrdersPage() {
   const { dictionary } = useI18n();
@@ -32,60 +86,11 @@ export default function MyOrdersPage() {
   const [chatMsgs, setChatMsgs] = useState<{ from: 'user' | 'support'; text: string; time: string }[]>([
     { from: 'support', text: 'Olá! Como posso ajudar você com seu pedido?', time: '10:23' },
   ]);
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    fetch('/api/orders', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
-          const mappedOrders: Order[] = data.data.map((o: any) => {
-            const statusMap: Record<string, string> = {
-              'pendente': 'Aguardando',
-              'preparando': 'Sendo Preparado',
-              'enviado': 'A caminho',
-              'entregue': 'Entregue',
-              'cancelado': 'Cancelado'
-            };
-            
-            const firstItemImage = o.items?.[0]?.product?.image_url || 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop';
-            
-            return {
-              id: `#ORD-${o.id.substring(0, 4).toUpperCase()}`,
-              date: new Date(o.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }),
-              total: `R$ ${Number(o.total_amount).toFixed(2)}`,
-              totalNum: Number(o.total_amount),
-              status: statusMap[o.status] || o.status,
-              items: o.items?.reduce((acc: number, item: any) => acc + item.quantity, 0) || 0,
-              image: firstItemImage,
-              vendor: o.producer?.stall_name || 'Feirante',
-              address: 'Endereço cadastrado',
-              trackingSteps: [
-                { label: 'Pedido Confirmado', done: true, time: new Date(o.created_at).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}) },
-              ],
-              itemsList: o.items?.map((item: any) => ({
-                name: item.product?.title || 'Produto Excluído',
-                qty: item.quantity,
-                price: Number(item.price_at_time),
-                unit: item.product?.unit || 'un'
-              })) || []
-            };
-          });
-          setOrders(mappedOrders);
-        }
-      })
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const filtered = orders.filter(o => {
+  const filtered = ORDERS.filter(o => {
     const tabMatch =
       activeTab === 'all' ||
-      (activeTab === 'active' && (o.status === 'A caminho' || o.status === 'Aguardando' || o.status === 'Sendo Preparado')) ||
+      (activeTab === 'active' && (o.status === 'A caminho' || o.status === 'Aguardando')) ||
       (activeTab === 'delivered' && o.status === 'Entregue') ||
       (activeTab === 'cancelled' && o.status === 'Cancelado');
     const searchMatch =
@@ -120,10 +125,10 @@ export default function MyOrdersPage() {
   };
 
   const TABS = [
-    { id: 'all', label: 'Todos', count: orders.length },
-    { id: 'active', label: 'Em Aberto', count: orders.filter(o => o.status === 'A caminho' || o.status === 'Aguardando' || o.status === 'Sendo Preparado').length },
-    { id: 'delivered', label: 'Entregues', count: orders.filter(o => o.status === 'Entregue').length },
-    { id: 'cancelled', label: 'Cancelados', count: orders.filter(o => o.status === 'Cancelado').length },
+    { id: 'all', label: 'Todos', count: ORDERS.length },
+    { id: 'active', label: 'Em Aberto', count: ORDERS.filter(o => o.status === 'A caminho' || o.status === 'Aguardando').length },
+    { id: 'delivered', label: 'Entregues', count: ORDERS.filter(o => o.status === 'Entregue').length },
+    { id: 'cancelled', label: 'Cancelados', count: ORDERS.filter(o => o.status === 'Cancelado').length },
   ];
 
   return (
@@ -175,11 +180,7 @@ export default function MyOrdersPage() {
         </div>
 
         <div className="orders-list">
-          {loading ? (
-            <div className="empty-state">
-              <p>Carregando pedidos...</p>
-            </div>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 ? (
             <div className="empty-state">
               <ShoppingBag size={48} strokeWidth={1} />
               <p>Nenhum pedido encontrado</p>
