@@ -17,12 +17,7 @@ type Campaign = {
   status: CampStatus;
 };
 
-const initialCampaigns: Campaign[] = [
-  { nome: 'Bem-vindo Novato', tipo: 'popup', gatilho: '1ª visita', publico: 'Novos visitantes', impressoes: '12.400', conversao: '8,2%', status: 'ativa' },
-  { nome: 'Abandono de Carrinho', tipo: 'popup', gatilho: 'Exit Intent', publico: 'Com carrinho', impressoes: '8.800', conversao: '5,1%', status: 'ativa' },
-  { nome: 'Black Feira', tipo: 'banner', gatilho: 'Tempo (30s)', publico: 'Todos', impressoes: '21.000', conversao: '3,4%', status: 'pausada' },
-  { nome: 'Newsletter Semanal', tipo: 'email', gatilho: 'Agendado sexta', publico: 'Assinantes', impressoes: '4.200', conversao: '22,0%', status: 'ativa' },
-];
+import { supabase } from '@/lib/supabase';
 
 const tipoOptions: CampTipo[] = ['popup', 'banner', 'email'];
 const gatilhoOptions: CampGatilho[] = ['1ª visita', 'Exit Intent', 'Tempo (30s)', 'Agendado sexta'];
@@ -39,9 +34,10 @@ const statusBadge: Record<CampStatus, string> = {
 };
 
 export default function CampanhasPage() {
-  const [campaigns, setCampaigns] = useState<Campaign[]>(initialCampaigns);
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [newModal, setNewModal] = useState(false);
-  const [viewCampaign, setViewCampaign] = useState<Campaign | null>(null);
+  const [viewCampaign, setViewCampaign] = useState<any | null>(null);
   const [form, setForm] = useState({
     nome: '',
     tipo: tipoOptions[0] as CampTipo,
@@ -51,17 +47,60 @@ export default function CampanhasPage() {
     abTest: false,
   });
 
-  const toggleStatus = (index: number) => {
-    setCampaigns((prev) =>
-      prev.map((c, i) =>
-        i === index ? { ...c, status: c.status === 'ativa' ? 'pausada' : 'ativa' } : c
-      )
-    );
+  const fetchCampaigns = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/admin/campaigns', {
+        headers: { Authorization: `Bearer ${session?.access_token}` }
+      });
+      const data = await res.json();
+      if (data.success) setCampaigns(data.data);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSubmit = () => {
-    setNewModal(false);
-    setForm({ nome: '', tipo: tipoOptions[0], gatilho: gatilhoOptions[0], publico: '', conteudo: '', abTest: false });
+  import('react').then(r => r.useEffect(() => { fetchCampaigns(); }, []));
+
+  const toggleStatus = async (id: string, currentStatus: string) => {
+    const novoStatus = currentStatus === 'ativa' ? 'pausada' : 'ativa';
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/campaigns', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({ id, status: novoStatus }),
+    });
+    if ((await res.json()).success) {
+      setCampaigns(prev => prev.map(c => c.id === id ? { ...c, status: novoStatus } : c));
+    }
+  };
+
+  const handleSubmit = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/admin/campaigns', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({
+        nome: form.nome,
+        tipo: form.tipo,
+        gatilho: form.gatilho,
+        publico: form.publico,
+        impressoes: '0',
+        conversao: '0%',
+        status: 'ativa'
+      }),
+    });
+    if ((await res.json()).success) {
+      setNewModal(false);
+      setForm({ nome: '', tipo: tipoOptions[0], gatilho: gatilhoOptions[0], publico: '', conteudo: '', abTest: false });
+      fetchCampaigns();
+    }
   };
 
   const ativas = campaigns.filter((c) => c.status === 'ativa').length;
@@ -116,8 +155,12 @@ export default function CampanhasPage() {
               </tr>
             </thead>
             <tbody>
-              {campaigns.map((c, i) => (
-                <tr key={i} className="border-b border-gray-50 hover:bg-gray-50/60 transition-colors">
+              {loading ? (
+                <tr><td colSpan={8} className="text-center py-10 text-gray-400">Carregando campanhas...</td></tr>
+              ) : campaigns.length === 0 ? (
+                <tr><td colSpan={8} className="text-center py-10 text-gray-400">Nenhuma campanha criada ainda.</td></tr>
+              ) : campaigns.map((c) => (
+                <tr key={c.id} className="border-b border-gray-50 hover:bg-gray-50/60 transition-colors">
                   <td className="px-6 py-4 font-bold text-gray-900 text-sm whitespace-nowrap">{c.nome}</td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1.5 rounded-full text-[11px] font-black capitalize ${tipoBadge[c.tipo]}`}>{c.tipo}</span>
@@ -134,7 +177,7 @@ export default function CampanhasPage() {
                       <button onClick={() => setViewCampaign(c)} className="text-gray-400 hover:text-blue-600 transition-colors">
                         <Eye size={16} />
                       </button>
-                      <button onClick={() => toggleStatus(i)} className="text-gray-400 hover:text-[#125d30] transition-colors">
+                      <button onClick={() => toggleStatus(c.id, c.status)} className="text-gray-400 hover:text-[#125d30] transition-colors">
                         {c.status === 'ativa' ? <ToggleRight size={22} className="text-[#125d30]" /> : <ToggleLeft size={22} />}
                       </button>
                     </div>

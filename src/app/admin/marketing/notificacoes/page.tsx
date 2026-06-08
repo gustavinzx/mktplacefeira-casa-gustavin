@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { Send, Bell, CheckCheck, MousePointerClick, Clock } from 'lucide-react';
 
 type Agendamento = 'imediato' | 'agendado';
@@ -39,14 +40,32 @@ export default function NotificacoesPage() {
   const [dataHora, setDataHora] = useState('');
   const [enviando, setEnviando] = useState(false);
 
-  const handleEnviar = () => {
+  const handleEnviar = async () => {
     if (!titulo || !mensagem) return;
     setEnviando(true);
-    setTimeout(() => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/notifications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.access_token}`,
+        },
+        body: JSON.stringify({ titulo, mensagem, publico }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert(`✅ Notificação enviada para ${data.data?.count || data.count} usuários.`);
+        setTitulo('');
+        setMensagem('');
+      } else {
+        alert('Erro: ' + data.error);
+      }
+    } catch {
+      alert('Erro de conexão');
+    } finally {
       setEnviando(false);
-      setTitulo('');
-      setMensagem('');
-    }, 1200);
+    }
   };
 
   return (

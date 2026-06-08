@@ -100,10 +100,11 @@ export function useNotifications(userId: string | null) {
     setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     setUnreadCount(0);
 
-    // Call update in chunks or use multiple updates
-    for (const id of unreadIds) {
-       await supabase.from('mktplace_feira_notifications').update({ read: true }).eq('id', id);
-    }
+    // Uma única query com .in()
+    await supabase
+      .from('mktplace_feira_notifications')
+      .update({ read: true })
+      .in('id', unreadIds);
   };
 
   return { notifications, unreadCount, markAsRead, markAllAsRead };

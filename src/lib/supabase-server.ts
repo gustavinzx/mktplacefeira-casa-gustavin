@@ -38,9 +38,11 @@ export const TABLE = {
   anomalyLogs: 'mktplace_feira_anomaly_logs',
   productViews: 'mktplace_feira_product_views',
   orderStatusHistory: 'mktplace_feira_order_status_history',
+  banners: 'mktplace_feira_banners',
   producerFairs: 'mktplace_feira_producer_fairs',
   campaigns: 'mktplace_feira_marketing_campaigns',
   adPackages: 'mktplace_feira_ad_packages',
+  notifications: 'mktplace_feira_notifications',
 } as const;
 
 // Extrai o usuário autenticado do header Authorization: Bearer <token> ou dos cookies SSR

@@ -79,31 +79,36 @@ export default function AdminUsersDirectoryPage() {
     return matchesSearch && matchesRole && matchesStatus;
   });
 
-  const handleInviteUser = () => {
+  const handleInviteUser = async () => {
     if (!inviteName || !inviteEmail) {
       return showToast('Preencha nome e e-mail para enviar o convite.', 'error');
     }
     setIsInviting(true);
-    // Simulando o envio de convite
-    setTimeout(() => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/admin/users/invite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.access_token}`,
+        },
+        body: JSON.stringify({ full_name: inviteName, email: inviteEmail, role: inviteRole }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        fetchUsers();
+        setInviteName('');
+        setInviteEmail('');
+        setIsModalOpen(false);
+        showToast('Convite enviado com sucesso!', 'success');
+      } else {
+        showToast('Erro: ' + data.error, 'error');
+      }
+    } catch {
+      showToast('Erro de conexão', 'error');
+    } finally {
       setIsInviting(false);
-      setIsModalOpen(false);
-      setInviteName('');
-      setInviteEmail('');
-      setInviteRole('cliente');
-      showToast('Convite enviado com sucesso! O usuário receberá um e-mail para definir a senha.', 'success');
-      // Adicionando usuário mock na lista para dar feedback visual
-      const mockUser: UserProfile = {
-        id: Math.random().toString(),
-        full_name: inviteName,
-        email: inviteEmail,
-        role: inviteRole,
-        avatar_url: '',
-        status: 'pending',
-        region: 'Global'
-      };
-      setUsers(prev => [mockUser, ...prev]);
-    }, 1500);
+    }
   };
 
   return (

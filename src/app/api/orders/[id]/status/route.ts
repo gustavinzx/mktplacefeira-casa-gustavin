@@ -28,3 +28,5 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   return ok(data);
 }
+
+export const PATCH = PUT;
