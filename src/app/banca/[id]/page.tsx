@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import styles from './page.module.css';
 import { MapPin, Star, BadgeCheck, Search, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/components/Toast';
 
 export default function ProducerDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = React.use(params);
@@ -16,6 +17,7 @@ export default function ProducerDetailsPage({ params }: { params: Promise<{ id: 
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const { showToast } = useToast();
 
   useEffect(() => {
     fetchProducerData();
@@ -161,7 +163,7 @@ export default function ProducerDetailsPage({ params }: { params: Promise<{ id: 
               
               <div style={{ display: 'flex', gap: '16px', marginBottom: '2rem' }}>
                 <input type="text" placeholder="Deixe seu comentário sobre a banca..." style={{ flex: 1, padding: '12px 16px', borderRadius: '12px', border: '1px solid #e5e7eb', outline: 'none' }} />
-                <button style={{ padding: '12px 24px', background: '#16a34a', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => alert('Em breve: Avaliações conectadas à API')}>Publicar</button>
+                <button style={{ padding: '12px 24px', background: '#16a34a', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => showToast('Em breve: Avaliações conectadas à API', 'info')}>Publicar</button>
               </div>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

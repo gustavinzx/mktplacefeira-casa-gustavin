@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Send, Bell, CheckCheck, MousePointerClick, Clock } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 type Agendamento = 'imediato' | 'agendado';
 type Publico = 'todos' | 'feirantes' | 'clientes' | 'entregadores' | 'franqueados';
@@ -39,6 +40,7 @@ export default function NotificacoesPage() {
   const [agendamento, setAgendamento] = useState<Agendamento>('imediato');
   const [dataHora, setDataHora] = useState('');
   const [enviando, setEnviando] = useState(false);
+  const { showToast } = useToast();
 
   const handleEnviar = async () => {
     if (!titulo || !mensagem) return;
@@ -55,14 +57,14 @@ export default function NotificacoesPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`✅ Notificação enviada para ${data.data?.count || data.count} usuários.`);
+        showToast(`Notificação enviada para ${data.data?.count || data.count} usuários.`, 'success');
         setTitulo('');
         setMensagem('');
       } else {
-        alert('Erro: ' + data.error);
+        showToast('Erro: ' + data.error, 'error');
       }
     } catch {
-      alert('Erro de conexão');
+      showToast('Erro de conexão', 'error');
     } finally {
       setEnviando(false);
     }

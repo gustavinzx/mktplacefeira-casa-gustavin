@@ -577,7 +577,7 @@ export async function fetchSiteSettings(): Promise<Record<string, string>> {
     const { data, error } = await supabasePublic
       .from(getTableName('site_settings'))
       .select('key, value')
-      .order('sort_order', { ascending: true });
+      .order('key', { ascending: true });
 
     if (error) throw error;
 

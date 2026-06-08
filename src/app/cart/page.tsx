@@ -87,14 +87,8 @@ export default function CartPage() {
         setDiscount(0);
       }
     } catch {
-      // Se o endpoint de cupom não existir ainda, usa validação simples
-      if (coupon.toUpperCase() === 'PRIMEIRAFEIRA') {
-        setDiscount(10);
-        setCouponMsg('✅ Cupom aplicado! Desconto de R$ 10,00');
-      } else {
-        setCouponMsg('❌ Cupom inválido.');
-        setDiscount(0);
-      }
+      setCouponMsg('❌ Erro de conexão ou cupom inválido.');
+      setDiscount(0);
     } finally {
       setApplyingCoupon(false);
     }
