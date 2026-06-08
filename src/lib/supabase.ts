@@ -13,6 +13,16 @@ export const supabaseAdmin = supabaseServiceKey
   ? createClient(supabaseUrl, supabaseServiceKey)
   : (null as any);
 
+export function getAdminClient() {
+  if (!supabaseAdmin) {
+    throw new Error(
+      '[Feira Casa] SUPABASE_SERVICE_ROLE_KEY não configurada. ' +
+      'Operações administrativas requerem a service role key.'
+    );
+  }
+  return supabaseAdmin;
+}
+
 // Helper para prefixo das tabelas
 export const TABLE_PREFIX = 'mktplace_feira_';
 

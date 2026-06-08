@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         .from('mktplace_feira_coupons')
         .select('*')
         .ilike('code', coupon_code)
-        .eq('is_active', true)
+        .eq('active', true)
         .single();
 
       if (!coupon) {

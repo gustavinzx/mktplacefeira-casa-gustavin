@@ -1,4 +1,4 @@
-import { supabase, supabaseAdmin, supabasePublic, getTableName } from './supabase';
+import { supabase, supabaseAdmin, supabasePublic, getTableName, getAdminClient } from './supabase';
 
 /**
  * REGRA DE OURO - PERSISTÊNCIA FEIRA.CASA:
@@ -70,7 +70,7 @@ export async function syncRole(roleData: {
   is_active?: boolean;
 }) {
   try {
-    const { data: result, error } = await (supabaseAdmin || supabase)
+    const { data: result, error } = await getAdminClient()
       .from(getTableName('roles'))
       .upsert(roleData, { onConflict: 'name' })
       .select()
@@ -89,7 +89,7 @@ export async function syncRole(roleData: {
  * Usa supabaseAdmin para garantir leitura mesmo sem perfil admin configurado.
  */
 export async function fetchRoles() {
-  const { data, error } = await (supabaseAdmin || supabase)
+  const { data, error } = await getAdminClient()
     .from(getTableName('roles'))
     .select('*')
     .order('name', { ascending: true });

@@ -16,7 +16,7 @@
 
 -- ---------- 1. ENUMS ----------
 DO $$ BEGIN
-    CREATE TYPE user_role AS ENUM ('cliente', 'feirante', 'chef', 'admin');
+    CREATE TYPE user_role AS ENUM ('cliente', 'feirante', 'chef', 'admin', 'delivery', 'logistica', 'franchisee', 'b2b');
 EXCEPTION WHEN duplicate_object THEN null;
 END $$;
 
@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS mktplace_feira_producers (
   rating      NUMERIC(2,1) DEFAULT 5.0,
   banner_url  TEXT,
   is_verified BOOLEAN DEFAULT FALSE,
+  status      TEXT DEFAULT 'pending',
+  document    TEXT,
   created_at  TIMESTAMPTZ DEFAULT NOW(),
   updated_at  TIMESTAMPTZ DEFAULT NOW()
 );
@@ -127,6 +129,13 @@ CREATE TABLE IF NOT EXISTS mktplace_feira_coupons (
   expires_at     TIMESTAMPTZ,
   created_at     TIMESTAMPTZ DEFAULT NOW(),
   updated_at     TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS mktplace_feira_carts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES mktplace_feira_profiles(id) ON DELETE CASCADE,
+  items JSONB NOT NULL DEFAULT '[]',
+  updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mktplace_feira_subscriptions (
@@ -371,6 +380,10 @@ CREATE POLICY "Usuários criam devoluções" ON mktplace_feira_return_requests F
 ALTER TABLE mktplace_feira_payment_methods ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Usuários gerenciam pagamentos" ON mktplace_feira_payment_methods;
 CREATE POLICY "Usuários gerenciam pagamentos" ON mktplace_feira_payment_methods FOR ALL USING (auth.uid() = user_id);
+
+ALTER TABLE mktplace_feira_carts ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Usuários gerenciam seus próprios carrinhos" ON mktplace_feira_carts;
+CREATE POLICY "Usuários gerenciam seus próprios carrinhos" ON mktplace_feira_carts FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 ALTER TABLE mktplace_feira_subscriptions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Feirantes veem suas assinaturas" ON mktplace_feira_subscriptions;
@@ -637,3 +650,35 @@ CREATE POLICY "Users can manage their own favorites" ON public.mktplace_feira_fa
 CREATE POLICY "Chefs can manage their recipes" ON public.mktplace_feira_chef_recipes FOR ALL TO authenticated USING (auth.uid() = chef_id) WITH CHECK (auth.uid() = chef_id);
 CREATE POLICY "Anyone can view recipes" ON public.mktplace_feira_chef_recipes FOR SELECT USING (true);
 
+
+-- ============================================================
+-- SCRIPT DE CORREÇÕES CRÍTICAS DE ESTABILIDADE E PERFORMANCE
+-- ============================================================
+
+-- DESEMPENHO DE BUSCA DE FEIRAS POR LOCALIZAÇÃO (POSTGIS)
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+ALTER TABLE public.mktplace_feira_fairs 
+ADD COLUMN IF NOT EXISTS geog geography(Point, 4326);
+
+CREATE OR REPLACE FUNCTION update_fair_geography()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.latitude IS NOT NULL AND NEW.longitude IS NOT NULL THEN
+    NEW.geog := st_setsrid(st_makepoint(NEW.longitude, NEW.latitude), 4326)::geography;
+  ELSE
+    NEW.geog := NULL;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trg_update_fair_geog ON public.mktplace_feira_fairs;
+CREATE TRIGGER trg_update_fair_geog
+BEFORE INSERT OR UPDATE OF latitude, longitude
+ON public.mktplace_feira_fairs
+FOR EACH ROW
+EXECUTE PROCEDURE update_fair_geography();
+
+CREATE INDEX IF NOT EXISTS idx_mktplace_feira_fairs_geog 
+ON public.mktplace_feira_fairs USING GIST (geog);
