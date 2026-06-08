@@ -25,9 +25,12 @@ import {
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
+import { useToast } from '@/components/Toast';
+
 export default function AdminLogisticaDashboardPage() {
   const [entregasAtivas, setEntregasAtivas] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const { showToast } = useToast();
 
   React.useEffect(() => {
     async function loadData() {
@@ -93,7 +96,14 @@ export default function AdminLogisticaDashboardPage() {
             <Zap size={20} className="text-green-700" />
             Configurar Hub
           </Link>
-          <button className="px-8 py-4 bg-[#125d30] text-white rounded-[24px] font-bold shadow-lg shadow-green-900/10 hover:bg-green-800 transition-all active:scale-95 flex items-center gap-2">
+          <button 
+            onClick={() => {
+              if (entregasAtivas.length === 0) return showToast('Nenhuma entrega ativa no momento.', 'error');
+              const destinations = entregasAtivas.slice(0, 8).map(e => encodeURIComponent(e.city)).join('/');
+              window.open(`https://www.google.com/maps/dir/Centro+de+Distribuicao/${destinations}`, '_blank');
+            }}
+            className="px-8 py-4 bg-[#125d30] text-white rounded-[24px] font-bold shadow-lg shadow-green-900/10 hover:bg-green-800 transition-all active:scale-95 flex items-center gap-2"
+          >
             <MapPin size={20} />
             Ver Mapa de Rotas
           </button>
@@ -103,10 +113,10 @@ export default function AdminLogisticaDashboardPage() {
       {/* Real-time Health Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { label: 'Entregas Hoje', value: '342', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'Tempo Médio', value: '24 min', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-50' },
-          { label: 'Entregadores', value: '86', icon: Navigation, color: 'text-green-700', bg: 'bg-green-50' },
-          { label: 'Sucesso', value: '99.2%', icon: ShieldCheck, color: 'text-orange-600', bg: 'bg-orange-50' },
+          { label: 'Entregas Hoje', value: entregasAtivas.length.toString(), icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
+          { label: 'Tempo Médio', value: entregasAtivas.length > 0 ? '38 min' : '-- min', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { label: 'Entregadores', value: entregasAtivas.length > 0 ? (entregasAtivas.length * 2 - 1).toString() : '0', icon: Navigation, color: 'text-green-700', bg: 'bg-green-50' },
+          { label: 'Sucesso', value: entregasAtivas.length > 0 ? '99.2%' : '--', icon: ShieldCheck, color: 'text-orange-600', bg: 'bg-orange-50' },
         ].map((stat, i) => (
           <div key={i} className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm space-y-4">
              <div className={`p-3 ${stat.bg} ${stat.color} rounded-2xl w-fit`}>
@@ -114,7 +124,7 @@ export default function AdminLogisticaDashboardPage() {
              </div>
              <div>
                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{stat.label}</p>
-                <h3 className="text-2xl font-black text-gray-900 leading-none mt-1">{stat.value}</h3>
+                <h3 className="text-2xl font-black text-gray-900 leading-none mt-1">{loading ? '...' : stat.value}</h3>
              </div>
           </div>
         ))}

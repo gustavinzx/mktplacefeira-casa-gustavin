@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { useI18n } from '@/lib/i18n/client';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -67,15 +67,30 @@ export default function AdminLayout({
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [showFullNotifications, setShowFullNotifications] = useState(false);
 
+  const router = useRouter();
+
   const handleLogout = async () => {
-    localStorage.clear();
     document.cookie = 'feira_role=; path=/; max-age=0';
     sessionStorage.setItem('has_logged_out', 'true');
     await supabase.auth.signOut();
-    window.location.href = '/admin/login';
+    router.push('/admin/login');
   };
 
   const [notifications, setNotifications] = useState<any[]>([]);
+
+  const toggleNotificationRead = async (id: string, currentReadStatus: boolean) => {
+    setNotifications(prev => prev.map(notif => notif.id === id ? { ...notif, read: !currentReadStatus } : notif));
+    try {
+      await supabase.from('mktplace_feira_notifications').update({ is_read: !currentReadStatus }).eq('id', id);
+    } catch(e) { console.error(e); }
+  };
+
+  const deleteNotification = async (id: string) => {
+    setNotifications(prev => prev.filter(notif => notif.id !== id));
+    try {
+      await supabase.from('mktplace_feira_notifications').delete().eq('id', id);
+    } catch(e) { console.error(e); }
+  };
 
   React.useEffect(() => {
     async function loadNotifications() {
@@ -254,6 +269,17 @@ export default function AdminLayout({
     });
   }, [pathname]);
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        document.getElementById('admin-global-search')?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   if (pathname === '/admin/login') {
     return <>{children}</>;
   }
@@ -363,8 +389,9 @@ export default function AdminLayout({
             <div className="relative w-full" style={{ maxWidth: '600px', minWidth: '200px' }}>
               <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-green-700 transition-colors" />
               <input 
+                id="admin-global-search"
                 type="text" 
-                placeholder="Buscar pedidos, produtos..." 
+                placeholder="Buscar pedidos, produtos... (Ctrl+K)" 
                 className="w-full pl-12 pr-4 py-3 bg-white border border-gray-100 rounded-[24px] outline-none font-bold text-sm shadow-sm focus:border-green-600/30 transition-all"
                 style={{ minWidth: '200px' }}
               />
@@ -587,7 +614,7 @@ export default function AdminLayout({
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
-                            setNotifications(prev => prev.map(notif => notif.id === n.id ? { ...notif, read: !notif.read } : notif));
+                            toggleNotificationRead(n.id, n.read);
                           }}
                           className="p-2 hover:bg-white rounded-lg shadow-sm text-gray-400 hover:text-green-700 transition-all"
                           title={n.read ? 'Marcar como não lida' : 'Marcar como lida'}
@@ -600,7 +627,7 @@ export default function AdminLayout({
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
-                            setNotifications(prev => prev.filter(notif => notif.id !== n.id));
+                            deleteNotification(n.id);
                           }}
                           className="p-2 hover:bg-white rounded-lg shadow-sm text-gray-400 hover:text-red-600 transition-all" 
                           title="Excluir"

@@ -115,9 +115,9 @@ export default function AdminFeiranteAssinaturasPage() {
   };
 
   const handleDeleteTemplate = async (id: string) => {
-    if (!confirm('Remover este template?')) return;
     await supabase.from('mktplace_feira_impl_templates').delete().eq('id', id);
     fetchTemplates();
+    showToast('Template removido com sucesso.', 'success');
   };
 
   const handleSaveTemplate = async () => {

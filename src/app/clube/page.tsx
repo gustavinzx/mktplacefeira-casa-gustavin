@@ -22,7 +22,7 @@ const ClubePage = () => {
             id: p.id,
             title: p.title,
             price: Number(p.price),
-            oldPrice: Number(p.price) * 1.3, // Mocking a 30% discount old price
+            oldPrice: p.old_price ? Number(p.old_price) : undefined,
             unit: p.unit,
             imageUrl: p.image_url || '/images/placeholder.png',
             producer: p.producer?.full_name || 'Feirante',

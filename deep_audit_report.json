@@ -1,0 +1,837 @@
+[
+  {
+    "file": "app/admin/usuarios/page.tsx",
+    "bugs": [
+      "Line 96: Contains word 'mock'",
+      "Line 105: Contains word 'mock'"
+    ],
+    "brokenButtons": [],
+    "security": [],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/addresses/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/addresses/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/orders/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/settings/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/summary/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/account/wallet/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/addresses/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/audit-logs/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/cadastros/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/contador/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/crm/disparos/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/crm/leads/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/feirantes/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/financeiro/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/fornecedores/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/franqueados/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/frete/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/logs/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/metrics/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/ml/anomalias/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/ml/insights/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/nfe/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/overview/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/planos/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/roles/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin/users/create/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/admin-profile/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/appointments/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/appointments/[id]/status/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/categories/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/categories/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/checkout/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/chefs/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/contact/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/coupons/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/fairs/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/fairs/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/feirante/feiras/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/feirante/marketing/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/feirante/pos/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/feirante/returns/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/feirante/subscription/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/franchisee/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/home/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/location/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/logistics/proxy/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/orders/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/orders/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/orders/[id]/status/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/payments/checkout/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/payments/coupon/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/payments/webhook/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/producers/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/products/ai-rewrite/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/products/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/products/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/recipes/ai-rewrite/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/recipes/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/recipes/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/region-radius/region-radius/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/region-radius/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/returns/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/returns/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/sales/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/services/public/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/services/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/shipping/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/site-settings/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/stripe/checkout/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/subscriptions/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/subscriptions/[id]/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/support/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/users/me/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/users/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/wallet/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/api/webhooks/pickngo/route.ts",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Potential missing auth check in API route"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/b2b/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 247: Unsafe use of localStorage for tokens/state",
+      "Line 252: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/banca/[id]/page.tsx",
+    "bugs": [],
+    "brokenButtons": [
+      "Line 164: Uses alert() instead of toast/modal"
+    ],
+    "security": [],
+    "missing": []
+  },
+  {
+    "file": "app/checkout/confirmation/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 14: Unsafe use of localStorage for tokens/state",
+      "Line 15: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/checkout/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 185: Unsafe use of localStorage for tokens/state",
+      "Line 186: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/fairs/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 97: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/feirantes/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 61: Unsafe use of localStorage for tokens/state",
+      "Line 62: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/feiras/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 19: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 26: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/chef/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 16: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 20: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/usuario/favoritos/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 26: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/usuario/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 60: Unsafe use of localStorage for tokens/state",
+      "Line 73: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/usuario/pedidos/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 62: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/portal/usuario/perfil/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 35: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  },
+  {
+    "file": "app/profile/page.tsx",
+    "bugs": [],
+    "brokenButtons": [],
+    "security": [
+      "Line 43: Unsafe use of localStorage for tokens/state",
+      "Line 83: Unsafe use of localStorage for tokens/state"
+    ],
+    "missing": []
+  }
+]

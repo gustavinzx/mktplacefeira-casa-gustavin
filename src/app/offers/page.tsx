@@ -51,15 +51,15 @@ export default function OfertasSemanaPage() {
       .then(data => {
         if (data.success && data.data?.products) {
           setProducts(data.data.products.map((p: any) => {
-            // Mock a discount for visual purposes if original price isn't saved
-            const discount = Math.floor(Math.random() * 20) + 15; // 15-35% discount
-            const original = Number(p.price) / (1 - discount/100);
+            const salePrice = Number(p.price);
+            const originalPrice = p.old_price ? Number(p.old_price) : salePrice;
+            const discount = originalPrice > salePrice ? Math.round(((originalPrice - salePrice) / originalPrice) * 100) : 0;
             return {
               id: p.id,
               name: p.title,
               vendor: p.producer?.stall_name || 'Produtor Local',
-              original: original,
-              sale: Number(p.price),
+              original: originalPrice,
+              sale: salePrice,
               discount: discount,
               image: p.image_url || '/images/tomato.png',
               category: p.category?.name || 'Hortifruti',
@@ -201,9 +201,11 @@ export default function OfertasSemanaPage() {
                   <div className="aspect-square relative overflow-hidden">
                     <img src={product.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={product.name} />
                     {/* Discount badge */}
-                    <div className="absolute top-4 left-4 bg-[#fc6c29] text-white font-black text-[11px] px-2.5 py-1.5 rounded-xl shadow-lg">
-                      -{product.discount}% OFF
-                    </div>
+                    {product.discount > 0 && (
+                      <div className="absolute top-4 left-4 bg-[#fc6c29] text-white font-black text-[11px] px-2.5 py-1.5 rounded-xl shadow-lg">
+                        -{product.discount}% OFF
+                      </div>
+                    )}
                     {product.badge && (
                       <div className={`absolute top-4 right-4 font-black text-[10px] px-2.5 py-1.5 rounded-xl shadow-lg uppercase tracking-wider flex items-center gap-1 ${
                         product.badge === 'Orgânico' ? 'bg-green-700 text-white' : product.badge === 'Colhido Hoje' ? 'bg-yellow-500 text-white' : 'bg-blue-600 text-white'
@@ -228,7 +230,9 @@ export default function OfertasSemanaPage() {
                     </div>
                     <div className="flex items-end justify-between">
                       <div>
-                        <p className="text-xs text-gray-400 line-through font-medium">R$ {product.original.toFixed(2).replace('.', ',')}</p>
+                        {product.original > product.sale && (
+                          <p className="text-xs text-gray-400 line-through font-medium">R$ {product.original.toFixed(2).replace('.', ',')}</p>
+                        )}
                         <p className="text-2xl font-black text-gray-900">R$ {product.sale.toFixed(2).replace('.', ',')}</p>
                       </div>
                       <button

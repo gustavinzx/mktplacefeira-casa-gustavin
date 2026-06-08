@@ -61,7 +61,7 @@ export default function AdminProfilePage() {
     try {
       const { data: authData } = await supabase.auth.getUser();
       const user = authData?.user;
-      const userId = localStorage.getItem('user_id') || user?.id;
+      const userId = user?.id;
       const userEmail = user?.email;
 
       if (!userId) {
@@ -114,7 +114,7 @@ export default function AdminProfilePage() {
     try {
       const { data: authData } = await supabase.auth.getUser();
       const user = authData?.user;
-      const userId = localStorage.getItem('user_id') || user?.id;
+      const userId = user?.id;
       const userEmail = user?.email;
 
       const res = await fetch('/api/admin-profile', {

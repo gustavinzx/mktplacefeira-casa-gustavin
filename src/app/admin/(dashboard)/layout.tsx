@@ -15,6 +15,7 @@ import {
   Search,
   HelpCircle
 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,21 +24,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [userName, setUserName] = React.useState('Ricardo Silva');
 
   React.useEffect(() => {
-    const role = localStorage.getItem('user_role');
-    const name = localStorage.getItem('user_name');
-    
-    if (role !== 'admin') {
-      router.push('/admin/login');
-    } else {
-      // eslint-disable-next-line
-      setIsAuthorized(true);
-      if (name) setUserName(name);
-    }
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      // Em uma aplicação real, você deve validar o role a partir dos dados do usuário ou do metadata da sessão
+      // Por agora, assumimos que se tem sessão na rota de admin, ele está autorizado (ou validação acontece via middleware)
+      if (!session) {
+        router.push('/admin/login');
+      } else {
+        setIsAuthorized(true);
+        setUserName(session.user.user_metadata?.name || 'Ricardo Silva');
+      }
+    };
+    checkAuth();
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user_role');
-    localStorage.removeItem('user_name');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     document.cookie = 'feira_role=; path=/; max-age=0';
     router.push('/admin/login');
   };

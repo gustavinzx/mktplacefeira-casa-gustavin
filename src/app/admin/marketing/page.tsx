@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Megaphone, 
   ChevronRight, 
@@ -22,6 +22,18 @@ import {
 import Link from 'next/link';
 
 export default function AdminMarketingPage() {
+  const [canais, setCanais] = useState([
+    { id: 1, label: 'E-mail Marketing', icon: Mail, status: '98% entrega', active: true },
+    { id: 2, label: 'WhatsApp Bot', icon: Megaphone, status: 'Conectado', active: true },
+    { id: 3, label: 'SMS Gateway', icon: Bell, status: 'Pausado', active: false },
+  ]);
+
+  const toggleCanal = (id: number) => {
+    setCanais(canais.map(c => 
+      c.id === id ? { ...c, active: !c.active, status: !c.active ? 'Conectado' : 'Pausado' } : c
+    ));
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
       
@@ -158,22 +170,21 @@ export default function AdminMarketingPage() {
            <div className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm space-y-8">
               <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest px-4">CANAIS DE COMUNICAÇÃO</h4>
               <div className="space-y-4">
-                 {[
-                   { label: 'E-mail Marketing', icon: Mail, status: '98% entrega', active: true },
-                   { label: 'WhatsApp Bot', icon: Megaphone, status: 'Conectado', active: true },
-                   { label: 'SMS Gateway', icon: Bell, status: 'Pausado', active: false },
-                 ].map((channel, i) => (
-                    <div key={i} className="flex items-center justify-between p-5 bg-gray-50 rounded-3xl group">
+                 {canais.map((channel) => (
+                    <div key={channel.id} className="flex items-center justify-between p-5 bg-gray-50 rounded-3xl group">
                        <div className="flex items-center gap-4">
                           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-gray-400 group-hover:text-green-700 transition-all">
                              <channel.icon size={18} />
                           </div>
                           <div>
                              <p className="text-sm font-black text-gray-900">{channel.label}</p>
-                             <p className="text-[10px] font-bold text-gray-400 uppercase">{channel.status}</p>
+                             <p className={`text-[10px] font-bold uppercase ${channel.active ? 'text-green-600' : 'text-gray-400'}`}>{channel.status}</p>
                           </div>
                        </div>
-                       <div className={`w-10 h-5 rounded-full relative p-1 transition-all ${channel.active ? 'bg-green-600' : 'bg-gray-200'}`}>
+                       <div 
+                         onClick={() => toggleCanal(channel.id)}
+                         className={`w-10 h-5 rounded-full relative p-1 transition-all cursor-pointer ${channel.active ? 'bg-green-600' : 'bg-gray-200'}`}
+                       >
                           <div className={`w-3 h-3 bg-white rounded-full transition-all ${channel.active ? 'translate-x-5' : 'translate-x-0'}`}></div>
                        </div>
                     </div>

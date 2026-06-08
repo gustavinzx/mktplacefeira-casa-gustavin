@@ -1,9 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Briefcase, Building, FileText, Users2, ShieldCheck, History, ArrowUpRight, FolderKanban, Plus } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function GestaoAdmPage() {
+  const { showToast } = useToast();
+  const [parcerias, setParcerias] = useState([
+    { id: 1, name: 'Prefeitura de SP', desc: 'Convênio de fomento a feiras orgânicas municipais. Vencimento em 12 meses.', status: 'Ativo', icon: Building, color: 'text-[#a63b00]' },
+    { id: 2, name: 'Sindicato Rural', desc: 'Programa de capacitação para produtores rurais. Aguardando renovação.', status: 'Pendente', icon: ShieldCheck, color: 'text-[#707a6f]' }
+  ]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newParceriaNome, setNewParceriaNome] = useState('');
+  const [newParceriaDesc, setNewParceriaDesc] = useState('');
+
+  const handleNovaParceria = () => {
+    if (!newParceriaNome) return showToast('Nome é obrigatório', 'error');
+    if (!newParceriaDesc) return showToast('Descrição é obrigatória', 'error');
+    
+    setParcerias([{
+      id: Date.now(),
+      name: newParceriaNome,
+      desc: newParceriaDesc,
+      status: 'Ativo',
+      icon: Briefcase,
+      color: 'text-[#0e6b17]'
+    }, ...parcerias]);
+    
+    showToast('Nova parceria firmada com sucesso!', 'success');
+    setIsModalOpen(false);
+    setNewParceriaNome('');
+    setNewParceriaDesc('');
+  };
+
   const departments = [
     { id: 'fin', name: 'Financeiro', status: 'Operacional', color: '#0e6b17' },
     { id: 'log', name: 'Logística', status: 'Atenção', color: '#a63b00' },
@@ -95,30 +124,53 @@ export default function GestaoAdmPage() {
               <p className="text-sm text-[#707a6f] font-medium">Gestão de contratos com prefeituras, associações e sindicatos.</p>
             </div>
           </div>
-          <button className="bg-[#a63b00] text-white px-8 py-4 rounded-2xl text-sm font-black flex items-center gap-2 hover:bg-[#7f2b00] transition-all shadow-lg shadow-[#a63b00]/20">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#a63b00] text-white px-8 py-4 rounded-2xl text-sm font-black flex items-center gap-2 hover:bg-[#7f2b00] transition-all shadow-lg shadow-[#a63b00]/20"
+          >
             <Plus size={20} />
             <span>Nova Parceria</span>
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-8 rounded-3xl bg-[#fbfaf5] border border-[#bfc9bd]/10 flex flex-col gap-4">
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-[#a63b00]">
-              <Building size={20} />
+          {parcerias.map(parceria => (
+            <div key={parceria.id} className={`p-8 rounded-3xl bg-[#fbfaf5] border border-[#bfc9bd]/10 flex flex-col gap-4 ${parceria.status === 'Pendente' ? 'opacity-60 grayscale' : ''}`}>
+              <div className={`w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm ${parceria.color}`}>
+                <parceria.icon size={20} />
+              </div>
+              <h4 className="text-lg font-black font-['Plus_Jakarta_Sans']">{parceria.name}</h4>
+              <p className="text-xs text-[#707a6f] font-medium leading-relaxed">{parceria.desc}</p>
+              <span className={`mt-auto inline-block px-3 py-1 text-[9px] font-black rounded-full uppercase self-start ${parceria.status === 'Ativo' ? 'bg-[#9ef892] text-[#002202]' : 'bg-[#efeee9] text-[#707a6f]'}`}>
+                {parceria.status}
+              </span>
             </div>
-            <h4 className="text-lg font-black font-['Plus_Jakarta_Sans']">Prefeitura de SP</h4>
-            <p className="text-xs text-[#707a6f] font-medium leading-relaxed">Convênio de fomento a feiras orgânicas municipais. Vencimento em 12 meses.</p>
-            <span className="mt-auto inline-block px-3 py-1 bg-[#9ef892] text-[#002202] text-[9px] font-black rounded-full uppercase self-start">Ativo</span>
-          </div>
-          <div className="p-8 rounded-3xl bg-[#fbfaf5] border border-[#bfc9bd]/10 flex flex-col gap-4 opacity-60 grayscale">
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-[#707a6f]">
-              <ShieldCheck size={20} />
-            </div>
-            <h4 className="text-lg font-black font-['Plus_Jakarta_Sans']">Sindicato Rural</h4>
-            <p className="text-xs text-[#707a6f] font-medium leading-relaxed">Programa de capacitação para produtores rurais. Aguardando renovação.</p>
-            <span className="mt-auto inline-block px-3 py-1 bg-[#efeee9] text-[#707a6f] text-[9px] font-black rounded-full uppercase self-start">Pendente</span>
-          </div>
+          ))}
         </div>
       </div>
+      
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-md">
+            <h3 className="text-lg font-bold mb-4">Nova instituição parceira</h3>
+            <input 
+              className="w-full border border-gray-200 rounded-lg p-3 mb-4 text-sm"
+              placeholder="Nome da instituição"
+              value={newParceriaNome}
+              onChange={e => setNewParceriaNome(e.target.value)}
+            />
+            <input 
+              className="w-full border border-gray-200 rounded-lg p-3 mb-4 text-sm"
+              placeholder="Breve descrição"
+              value={newParceriaDesc}
+              onChange={e => setNewParceriaDesc(e.target.value)}
+            />
+            <div className="flex gap-4 justify-end">
+              <button className="px-4 py-2 font-bold text-gray-500 hover:text-gray-900" onClick={() => setIsModalOpen(false)}>Cancelar</button>
+              <button className="px-4 py-2 font-bold bg-[#a63b00] text-white rounded-lg" onClick={handleNovaParceria}>Salvar</button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

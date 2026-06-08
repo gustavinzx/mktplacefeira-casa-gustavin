@@ -101,8 +101,7 @@ function WeeklyChart({
 }) {
   const [type, setType] = React.useState<'bar' | 'line'>('bar');
 
-  const hasReal = data.some(b => b.b2c > 0 || b.b2b > 0);
-  const bars = hasReal ? data : DEMO_BARS;
+  const bars = data;
   const maxVal = Math.max(...bars.map(b => Math.max(b.b2c, b.b2b)), 1);
 
   // SVG layout constants
@@ -137,11 +136,6 @@ function WeeklyChart({
       <div className="flex items-start justify-between mb-6 gap-4">
         <div className="flex items-center gap-3 flex-shrink-0">
           <h3 className="text-xl font-black text-gray-900 dark:text-white">Desempenho Semanal</h3>
-          {!hasReal && !loading && (
-            <span className="px-2.5 py-0.5 bg-amber-50 text-amber-600 text-[9px] font-black uppercase tracking-widest rounded-lg border border-amber-100">
-              Exemplo
-            </span>
-          )}
         </div>
 
         <div className="flex items-center gap-3 flex-wrap justify-end">
@@ -472,7 +466,6 @@ export default function AdminDashboardPage() {
   };
 
   const handleReject = async (id: string) => {
-    if (!confirm('Confirmar rejeição? O feirante será marcado como rejeitado.')) return;
     setProcessingId(id);
     try {
       await supabase
@@ -481,6 +474,7 @@ export default function AdminDashboardPage() {
         .eq('id', id);
       setApprovals(prev => prev.filter(a => a.id !== id));
       setApprovalDetail(null);
+      showToast('Rejeitado com sucesso.', 'success');
     } catch (e: any) {
       showToast('Erro ao rejeitar: ' + e.message, 'error');
     } finally {

@@ -101,7 +101,7 @@ const Footer = () => {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            © 2024 feira.casa - Cultivando conexões reais.
+            © 2026 feira.casa - Cultivando conexões reais.
           </p>
           <div className={styles.bottomActions}>
             <p className={styles.madeWith}>

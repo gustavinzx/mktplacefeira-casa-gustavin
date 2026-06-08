@@ -19,6 +19,8 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { getTableName } from '@/lib/supabase';
 import Modal from '@/components/admin/Modal';
+import { useToast } from '@/components/Toast';
+import { Loader2 } from 'lucide-react';
 
 interface UserProfile {
   id: string;
@@ -37,6 +39,13 @@ export default function AdminUsersDirectoryPage() {
   const [roleFilter, setRoleFilter] = useState('All Roles');
   const [statusFilter, setStatusFilter] = useState('All Statuses');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { showToast } = useToast();
+
+  // Invite Modal States
+  const [inviteName, setInviteName] = useState('');
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteRole, setInviteRole] = useState('cliente');
+  const [isInviting, setIsInviting] = useState(false);
 
 
   useEffect(() => {
@@ -69,6 +78,33 @@ export default function AdminUsersDirectoryPage() {
     
     return matchesSearch && matchesRole && matchesStatus;
   });
+
+  const handleInviteUser = () => {
+    if (!inviteName || !inviteEmail) {
+      return showToast('Preencha nome e e-mail para enviar o convite.', 'error');
+    }
+    setIsInviting(true);
+    // Simulando o envio de convite
+    setTimeout(() => {
+      setIsInviting(false);
+      setIsModalOpen(false);
+      setInviteName('');
+      setInviteEmail('');
+      setInviteRole('cliente');
+      showToast('Convite enviado com sucesso! O usuário receberá um e-mail para definir a senha.', 'success');
+      // Adicionando usuário mock na lista para dar feedback visual
+      const mockUser: UserProfile = {
+        id: Math.random().toString(),
+        full_name: inviteName,
+        email: inviteEmail,
+        role: inviteRole,
+        avatar_url: '',
+        status: 'pending',
+        region: 'Global'
+      };
+      setUsers(prev => [mockUser, ...prev]);
+    }, 1500);
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -324,15 +360,31 @@ export default function AdminUsersDirectoryPage() {
         <div className="space-y-6">
           <div>
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Nome Completo</label>
-            <input type="text" className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20" placeholder="Ex: João da Silva" />
+            <input 
+              type="text" 
+              value={inviteName}
+              onChange={e => setInviteName(e.target.value)}
+              className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20" 
+              placeholder="Ex: João da Silva" 
+            />
           </div>
           <div>
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">E-mail Profissional</label>
-            <input type="email" className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20" placeholder="joao@email.com" />
+            <input 
+              type="email" 
+              value={inviteEmail}
+              onChange={e => setInviteEmail(e.target.value)}
+              className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20" 
+              placeholder="joao@email.com" 
+            />
           </div>
           <div>
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Atribuir Papel (Role)</label>
-            <select className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20">
+            <select 
+              value={inviteRole}
+              onChange={e => setInviteRole(e.target.value)}
+              className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-green-500/20"
+            >
               <option value="cliente">Cliente</option>
               <option value="feirante">Feirante</option>
               <option value="chef">Chef</option>
@@ -343,12 +395,18 @@ export default function AdminUsersDirectoryPage() {
           <div className="pt-4 flex gap-4">
             <button 
               onClick={() => setIsModalOpen(false)}
-              className="flex-1 py-4 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-2xl font-bold hover:bg-gray-200 transition-all"
+              disabled={isInviting}
+              className="flex-1 py-4 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-2xl font-bold hover:bg-gray-200 transition-all disabled:opacity-50"
             >
               Cancelar
             </button>
-            <button className="flex-1 py-4 bg-green-600 text-white rounded-2xl font-bold shadow-lg shadow-green-900/20 hover:bg-green-800 transition-all">
-              Enviar Convite
+            <button 
+              onClick={handleInviteUser}
+              disabled={isInviting}
+              className="flex-1 py-4 bg-green-600 text-white rounded-2xl font-bold shadow-lg shadow-green-900/20 hover:bg-green-800 transition-all disabled:opacity-50 flex justify-center items-center gap-2"
+            >
+              {isInviting && <Loader2 size={16} className="animate-spin" />}
+              {isInviting ? 'Enviando...' : 'Enviar Convite'}
             </button>
           </div>
         </div>

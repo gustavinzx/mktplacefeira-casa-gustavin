@@ -94,7 +94,6 @@ export default function AdminAdvancedPermissionsPage() {
   }
 
   async function deleteRole(role: any) {
-    if (!confirm(`Excluir o perfil "${role.name}"? Esta ação não pode ser desfeita.`)) return;
     try {
       const res = await fetch(`/api/admin/roles?id=${role.id}`, { method: 'DELETE' });
       const json = await res.json();
@@ -105,6 +104,7 @@ export default function AdminAdvancedPermissionsPage() {
       const updated = roles.filter(r => r.id !== role.id);
       setRoles(updated);
       if (selectedRole?.id === role.id) setSelectedRole(updated[0] ?? null);
+      showToast('Perfil excluído.', 'success');
     } catch (error: any) {
       showToast('Erro ao excluir: ' + error.message, 'error');
     }

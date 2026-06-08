@@ -67,21 +67,6 @@ export default function ModoImplementacaoPage() {
   }
 
   const handleImpersonate = (user: UserProfile) => {
-    const isAdmin = localStorage.getItem('user_role') === 'admin';
-    if (!isAdmin) return;
-
-    // Save actual admin context
-    if (localStorage.getItem('is_impersonating') !== 'true') {
-      localStorage.setItem('admin_real_id', localStorage.getItem('user_id') || '');
-      localStorage.setItem('admin_real_name', localStorage.getItem('user_name') || '');
-      localStorage.setItem('admin_real_role', localStorage.getItem('user_role') || '');
-    }
-
-    // Set impersonation target context
-    localStorage.setItem('user_id', user.id);
-    localStorage.setItem('user_name', user.full_name || 'Usuário');
-    localStorage.setItem('user_role', user.role);
-    localStorage.setItem('is_impersonating', 'true');
     
     document.cookie = `feira_role=${user.role}; path=/; max-age=86400`;
 

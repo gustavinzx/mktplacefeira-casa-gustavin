@@ -286,9 +286,7 @@ const LeafletMap = ({ selectedCity, fairs, onSelectCoordinates, isPicker = false
 export default function AdminLogisticaRotasPage() {
   const { showToast } = useToast();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-  const [rotas, setRotas] = React.useState([
-    { id: 'ROTA-DF-248B', region: 'Brasília - DF', city: 'Brasília', estado: 'DF', shippingTypes: ['Distância'], partner: 'PicknGo', drivers: 8, orders: 95, status: 'Otimizada', time: '19:20' },
-  ]);
+  const [rotas, setRotas] = React.useState<any[]>([]);
 
   const [loadingZones, setLoadingZones] = React.useState(true);
   const [dbTags, setDbTags] = React.useState<LogisticsTag[]>([]);
@@ -492,14 +490,12 @@ export default function AdminLogisticaRotasPage() {
   };
 
   const handleDeleteCity = async (city: string, uf: string) => {
-    if (confirm(`Tem certeza que deseja excluir a configuração de ${city}-${uf}?`)) {
-      const result = await deleteLogisticsConfig(city, uf);
-      if (result.success) {
-        showToast('Configuração excluída com sucesso!', 'success');
-        setRotas(prev => prev.filter(r => !(r.city === city && r.estado === uf)));
-      } else {
-        showToast('Erro ao excluir: ' + result.error, 'error');
-      }
+    const result = await deleteLogisticsConfig(city, uf);
+    if (result.success) {
+      showToast('Configuração excluída com sucesso!', 'success');
+      setRotas(prev => prev.filter(r => !(r.city === city && r.estado === uf)));
+    } else {
+      showToast('Erro ao excluir: ' + result.error, 'error');
     }
   };
 

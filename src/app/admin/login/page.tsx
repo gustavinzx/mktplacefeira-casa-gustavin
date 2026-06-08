@@ -86,8 +86,6 @@ export default function AdminLoginPage() {
         const isAllowed = (profile && profile.role === 'admin') || adminRecord;
 
         if (isAllowed) {
-          localStorage.setItem('user_role', 'admin');
-          localStorage.setItem('user_name', profile?.full_name || adminRecord?.full_name || 'Admin');
           document.cookie = 'feira_role=admin; path=/; max-age=86400; SameSite=Lax';
           router.push('/admin');
         } else {
@@ -132,29 +130,29 @@ export default function AdminLoginPage() {
       <div className="absolute top-8 left-8 lg:top-12 lg:left-12 z-50">
         <Link href="/" className="inline-flex items-center gap-2.5 hover:opacity-80 transition-opacity">
           <span className="font-black text-white text-3xl lg:text-4xl tracking-tighter drop-shadow-lg" style={{ textShadow: "0 0 25px currentColor" }} data-glow="true">feira.casa</span>
-          <span className="font-extrabold tracking-tighter text-emerald-400 text-3xl lg:text-4xl drop-shadow-lg" style={{ textShadow: "0 0 25px currentColor" }} data-glow="true">admin</span>
+          <span className="font-extrabold tracking-tighter text-cyan-400 text-3xl lg:text-4xl drop-shadow-lg" style={{ textShadow: "0 0 25px currentColor" }} data-glow="true">admin</span>
         </Link>
       </div>
       
       {/* BACKGROUND FULLSCREEN */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/bg/admin_bg.png"
+          src="/bg/admin_tech_bg.png"
           alt="Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#042008]/85 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-[#010915]/75 backdrop-blur-[1px]" />
       </div>
 
       {/* LADO ESQUERDO: TEXTO */}
       <div className="relative z-10 hidden md:flex flex-col w-1/2 p-12 lg:p-16 justify-between">
         <div className="mt-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-8">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">ACESSO ADMINISTRATIVO</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">ACESSO ADMINISTRATIVO</span>
           </div>
           <h1 className="text-5xl lg:text-6xl font-extralight tracking-tight mb-6 leading-[1.1]" style={{ color: "#ffffff" }}>
             Painel de <br />
-            <span className="font-black text-emerald-400">Controle.</span>
+            <span className="font-black text-cyan-400">Controle.</span>
           </h1>
           <p className="text-lg font-medium max-w-md leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
             Gestão centralizada e segura para o campo e a cidade. Acesse as ferramentas administrativas do ecossistema feira.casa.
@@ -162,8 +160,8 @@ export default function AdminLoginPage() {
         </div>
 
         <div className="mt-auto pb-10">
-          <div className="bg-[#020a04]/60 backdrop-blur-md p-6 rounded-3xl border border-white/10 max-w-md shadow-2xl flex items-start gap-4">
-            <ShieldCheck className="text-emerald-400 shrink-0" size={32} />
+          <div className="bg-[#020611]/60 backdrop-blur-md p-6 rounded-3xl border border-white/10 max-w-md shadow-2xl flex items-start gap-4">
+            <ShieldCheck className="text-cyan-400 shrink-0" size={32} />
             <div>
               <p className="text-sm font-black" style={{ color: "#ffffff" }}>Ambiente Restrito</p>
               <p className="text-[11px]  font-medium mt-1" style={{ color: "rgba(255,255,255,0.7)" }}>
@@ -182,7 +180,7 @@ export default function AdminLoginPage() {
         <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-[540px] w-full mx-auto pb-20">
           
           {/* Card do Formulário */}
-          <div className="bg-[#020a04]/80 backdrop-blur-xl p-8 sm:p-12 rounded-[32px] border border-white/10 shadow-2xl">
+          <div className="bg-[#020611]/80 backdrop-blur-xl p-8 sm:p-12 rounded-[32px] border border-white/10 shadow-2xl">
             
 
 
@@ -205,12 +203,12 @@ export default function AdminLoginPage() {
                     <form onSubmit={handleForgotPassword} className="space-y-5">
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>E-mail Corporativo</label>
-                        <div className="relative">
-                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
-                          <input type="email" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} placeholder="admin@feira.casa" required className="w-full pl-12 pr-4 py-4 bg-white/10-white placeholder:text-white/40 transition-all" />
+                        <div className="flex items-center w-full bg-white rounded-xl focus-within:ring-2 focus-within:ring-cyan-500 transition-all shadow-inner px-4 overflow-hidden">
+                          <Mail className="text-gray-400 shrink-0" size={18} />
+                          <input type="email" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} placeholder="admin@feira.casa" required className="flex-1 w-full py-4 px-3 bg-transparent text-gray-900 border-none outline-none focus:ring-0 shadow-none m-0" />
                         </div>
                       </div>
-                      <button type="submit" disabled={loading} className="w-full py-4 bg-emerald-600 text-white font-black text-sm rounded-xl shadow-lg shadow-emerald-600/20 hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-3 disabled:opacity-50">
+                      <button type="submit" disabled={loading} className="w-full py-4 bg-cyan-600 text-white font-black text-sm rounded-xl shadow-lg shadow-cyan-600/20 hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-3 disabled:opacity-50">
                         {loading ? <Loader2 size={18} className="animate-spin" /> : 'Enviar link de recuperação'}
                       </button>
                       <button type="button" onClick={() => setView('login')} className="w-full text-sm font-bold text-white/40 hover:text-white transition-colors">← Voltar ao login</button>
@@ -229,15 +227,15 @@ export default function AdminLoginPage() {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold ml-1" style={{ color: "#ffffff" }}>E-mail Corporativo</label>
-                      <div className="relative">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                      <div className="flex items-center w-full bg-white rounded-xl focus-within:ring-2 focus-within:ring-cyan-500 transition-all shadow-inner px-4 overflow-hidden">
+                        <Mail className="text-gray-400 shrink-0" size={18} />
                         <input 
                           type="email" 
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="admin@feira.casa" 
-                          className="w-full pl-12 pr-4 py-4 bg-white/10-white placeholder:text-white/40 transition-all"
+                          className="flex-1 w-full py-4 px-3 bg-transparent text-gray-900 border-none outline-none focus:ring-0 shadow-none m-0"
                           required
                         />
                       </div>
@@ -246,23 +244,23 @@ export default function AdminLoginPage() {
                     <div className="space-y-1.5">
                       <div className="flex justify-between items-center px-1">
                         <label className="text-[10px] font-black uppercase tracking-widest  font-extrabold" style={{ color: "#ffffff" }}>Senha de Acesso</label>
-                        <button type="button" onClick={() => { setError(''); setForgotSent(false); setForgotEmail(formData.email); setView('forgot'); }} className="text-[10px] font-black text-emerald-400 hover:text-white uppercase tracking-widest transition-colors">Esqueci a senha</button>
+                        <button type="button" onClick={() => { setError(''); setForgotSent(false); setForgotEmail(formData.email); setView('forgot'); }} className="text-[10px] font-black text-cyan-400 hover:text-white uppercase tracking-widest transition-colors">Esqueci a senha</button>
                       </div>
-                      <div className="relative">
-                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                      <div className="flex items-center w-full bg-white rounded-xl focus-within:ring-2 focus-within:ring-cyan-500 transition-all shadow-inner px-4 overflow-hidden">
+                        <Lock className="text-gray-400 shrink-0" size={18} />
                         <input 
                           type={showPassword ? "text" : "password"}
                           name="password"
                           value={formData.password}
                           onChange={handleChange}
                           placeholder="••••••••" 
-                          className="w-full pl-12 pr-12 py-4 bg-white/10-white placeholder:text-white/40 transition-all"
+                          className="flex-1 w-full py-4 px-3 bg-transparent text-gray-900 border-none outline-none focus:ring-0 shadow-none m-0"
                           required
                         />
                         <button 
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900"
+                          className="text-gray-400 hover:text-cyan-500 transition-colors shrink-0"
                         >
                           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
@@ -273,7 +271,7 @@ export default function AdminLoginPage() {
                       <button 
                         type="submit" 
                         disabled={loading}
-                        className="w-full py-4 bg-emerald-600 text-white font-black text-sm rounded-[18px] shadow-lg shadow-emerald-600/20 hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-3 disabled:opacity-50"
+                        className="w-full py-4 bg-cyan-600 text-white font-black text-sm rounded-[18px] shadow-lg shadow-cyan-600/20 hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-3 disabled:opacity-50"
                       >
                         {loading ? <Loader2 className="animate-spin" /> : (
                           <>

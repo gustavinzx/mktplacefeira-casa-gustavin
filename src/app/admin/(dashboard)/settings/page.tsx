@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/Toast';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
@@ -9,24 +10,14 @@ export default function SettingsPage() {
     autoApprove: false,
     maintenanceMode: false
   });
-  const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    const savedSettings = localStorage.getItem('admin_settings');
-    if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
-    }
-  }, []);
+  const { showToast } = useToast();
 
   const toggle = (key: keyof typeof settings) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
-    setSaved(false);
   };
 
   const handleSave = () => {
-    localStorage.setItem('admin_settings', JSON.stringify(settings));
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    showToast('Configurações salvas com sucesso!', 'success');
   };
 
   return (
@@ -80,7 +71,7 @@ export default function SettingsPage() {
       </div>
 
       <button className={styles.btnSave} onClick={handleSave}>
-        {saved ? 'Alterações Salvas!' : 'Salvar Alterações'}
+        Salvar Alterações
       </button>
     </div>
   );

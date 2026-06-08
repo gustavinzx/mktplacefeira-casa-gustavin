@@ -206,15 +206,14 @@ export default function AdminCatalogoMasterPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Remover este produto do catálogo?')) return;
     await supabase.from('mktplace_feira_products').delete().eq('id', id);
     setProducts(prev => prev.filter(p => p.id !== id));
+    showToast('Produto removido com sucesso.', 'success');
   };
 
   // Migra base64 → Supabase Storage para todos os produtos
   // Busca IDs primeiro (sem image_url) para não estourar o limite de 10MB do PostgREST
   const handleMigrateImages = async () => {
-    if (!confirm('Isso vai migrar todos os base64 do banco para o Supabase Storage.\nPode demorar alguns minutos. Continuar?')) return;
     setMigrating(true);
 
     // Só IDs — evita baixar todos os base64 de uma vez

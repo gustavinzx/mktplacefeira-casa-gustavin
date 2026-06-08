@@ -10,6 +10,7 @@ export async function GET() {
       .select(`
         id,
         total_amount,
+        delivery_fee,
         created_at,
         status,
         customer:mktplace_feira_profiles!customer_id(full_name, role)
@@ -31,11 +32,12 @@ export async function GET() {
       const clientName = (o.customer as any)?.full_name || 'Cliente';
       
       const val = Number(o.total_amount || 0);
+      const deliveryFee = Number(o.delivery_fee || 0);
       const aliqPercent = isB2B ? 12 : 18; 
       const taxVal = val * (aliqPercent / 100);
       
       const feeVal = val * 0.12; // 12% taxa feira casa
-      const shippingVal = val * 0.05; // 5% estimativa de frete (mock para dados reais ausentes)
+      const shippingVal = deliveryFee; // Valor real do frete
       const repasseVal = val - feeVal - shippingVal;
       const profitVal = feeVal + (shippingVal * 0.2); // spread de 20% no frete pro marketplace
 

@@ -138,10 +138,8 @@ export default function VendorsPage() {
                     <button 
                       className={styles.btnOptions}
                       onClick={() => {
-                        if(confirm(`Tem certeza que deseja desativar a loja ${v.full_name || v.email}?`)) {
-                          setVendors(vendors.filter(u => u.id !== v.id));
-                          showToast('Loja desativada temporariamente. Para remoção definitiva, gerencie através do painel completo em "Gestão de Feirantes".', 'info');
-                        }
+                        setVendors(vendors.filter(u => u.id !== v.id));
+                        showToast(`Loja ${v.full_name || v.email} desativada temporariamente.`, 'success');
                       }}
                     >
                       <MoreHorizontal size={18} />

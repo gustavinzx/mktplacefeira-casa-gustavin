@@ -619,39 +619,6 @@ export default function SystemLogsPage() {
         description: form.description || null,
         how_to: form.how_to || null,
         solution: form.solution || null,
-        status: form.status,
-        priority: form.priority,
-        area: form.area,
-        updated_at: new Date().toISOString(),
-      };
-      if (editId) {
-        await supabase.from('mktplace_feira_build_tasks').update(payload).eq('id', editId);
-      } else {
-        const maxIdx = Math.max(0, ...tasks.filter(t => t.status === form.status).map(t => t.order_index));
-        await supabase.from('mktplace_feira_build_tasks').insert({ ...payload, order_index: maxIdx + 1 });
-      }
-      await fetchTasks();
-      setIsModalOpen(false);
-    } catch (e: any) { alert('Erro ao salvar: ' + e.message); }
-    finally { setSaving(false); }
-  };
-
-  // ── Delete task ─────────────────────────────────────────────────────────────
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Excluir esta tarefa?')) return;
-    await supabase.from('mktplace_feira_build_tasks').delete().eq('id', id);
-    setTasks(prev => prev.filter(t => t.id !== id));
-  };
-
-  const handleMove = async (id: string, dir: 'left' | 'right') => {
-    const task = tasks.find(t => t.id === id);
-    if (!task) return;
-    const colIdx = COLUMNS.findIndex(c => c.id === task.status);
-    const newIdx = dir === 'left' ? colIdx - 1 : colIdx + 1;
-    if (newIdx < 0 || newIdx >= COLUMNS.length) return;
-    const newStatus = COLUMNS[newIdx].id;
-    setTasks(prev => prev.map(t => t.id === id ? { ...t, status: newStatus } : t));
     await supabase.from('mktplace_feira_build_tasks').update({ status: newStatus, updated_at: new Date().toISOString() }).eq('id', id);
   };
 

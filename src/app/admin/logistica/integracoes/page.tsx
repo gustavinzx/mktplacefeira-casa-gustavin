@@ -288,16 +288,7 @@ export default function AdminLogisticaIntegracoesPage() {
 
   const [regionalMapping, setRegionalMapping] = useState<{ city: string; platform: string; status: string }[]>([]);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('feira_regional_mapping');
-      if (saved) setRegionalMapping(JSON.parse(saved));
-    } catch {}
-  }, []);
 
-  useEffect(() => {
-    localStorage.setItem('feira_regional_mapping', JSON.stringify(regionalMapping));
-  }, [regionalMapping]);
 
   const activeRegionsCount = regionalMapping.filter(m => m.status === 'Operacional').length;
 

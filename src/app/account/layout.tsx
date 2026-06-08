@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { User, Package, MapPin, Wallet, Settings, LogOut, Loader2 } from 'lucide-react';
+import { User, Package, MapPin, Wallet, Settings, LogOut, Loader2, ChefHat, Tag } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './layout.module.css';
@@ -20,7 +20,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
     const fetchProfile = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
-    const token = session?.access_token;
+        const token = session?.access_token;
         if (!token) {
           router.push('/login');
           return;
@@ -42,8 +42,6 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
           throw new Error('Perfil não encontrado');
         }
 
-        // Se for feirante ou admin, avisar mas deixar acessar? Ou redirecionar para o portal respectivo?
-        // Vamos permitir que todos acessem "Minha Conta" como compradores.
         setProfile({
           ...profileData,
           email: user.email
@@ -67,8 +65,10 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   const navItems = [
     { label: 'Visão Geral', path: '/account', icon: User },
     { label: 'Meus Pedidos', path: '/account/orders', icon: Package },
+    { label: 'Meus Serviços', path: '/account/services', icon: ChefHat },
     { label: 'Meus Endereços', path: '/account/addresses', icon: MapPin },
-    { label: 'Carteira e Cupons', path: '/account/wallet', icon: Wallet },
+    { label: 'Minha Carteira', path: '/account/wallet', icon: Wallet },
+    { label: 'Meus Cupons', path: '/account/coupons', icon: Tag },
     { label: 'Configurações', path: '/account/settings', icon: Settings },
   ];
 

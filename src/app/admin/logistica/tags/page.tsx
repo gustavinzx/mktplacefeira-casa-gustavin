@@ -125,49 +125,6 @@ export default function AdminLogisticaTagsPage() {
       setIsModalOpen(false);
       loadTags();
     } else {
-      // Falha ao salvar no banco (provavelmente tabela não criada)
-      setDbError(result.error || 'Erro ao sincronizar com o banco.');
-      
-      // Modificar localmente para simular o comportamento se falhar no banco (para fins de demonstração)
-      if (editingTag) {
-        setTags(prev => prev.map(t => t.id === editingTag.id || (t.name === editingTag.name && t.group_type === editingTag.group_type) ? { ...t, ...tagData } : t));
-      } else {
-        setTags(prev => [...prev, { ...tagData, id: String(Date.now()) }]);
-      }
-      setIsModalOpen(false);
-      showToast('Aviso: Os dados foram salvos temporariamente na sessão local, pois a tabela mktplace_feira_logistics_tags ainda não foi criada no Supabase. Por favor, execute a migration SQL correspondente.', 'success');
-    }
-    setIsSaving(false);
-  };
-
-  const handleDelete = async (tag: LogisticsTag) => {
-    if (!confirm(`Deseja realmente excluir a tag "${tag.name}"?`)) return;
-
-    if (tag.id) {
-      const result = await deleteLogisticsTag(tag.id);
-      if (result.success) {
-        loadTags();
-      } else {
-        showToast('Erro ao excluir do banco de dados.', 'error');
-        // Excluir localmente como fallback
-        setTags(prev => prev.filter(t => t.id !== tag.id));
-      }
-    } else {
-      // Excluir localmente (caso seja padrão sem ID)
-      setTags(prev => prev.filter(t => !(t.name === tag.name && t.group_type === tag.group_type)));
-    }
-  };
-
-  // Filter tags based on current tab and search term
-  const filteredTags = tags.filter(tag => {
-    const matchesTab = tag.group_type === activeTab;
-    const matchesSearch = tag.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesTab && matchesSearch;
-  });
-
-  const getTabLabel = (tab: typeof activeTab) => {
-    switch (tab) {
-      case 'tipo_feira': return 'Tipos de Feira';
       case 'modalidade': return 'Modalidades de Venda';
       case 'periodicidade': return 'Periodicidades';
     }

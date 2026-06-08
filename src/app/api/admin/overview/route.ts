@@ -56,18 +56,34 @@ export async function GET(request: Request) {
     const deliveredCount = orders?.filter(o => o.status === 'entregue').length || 0;
     const totalLogistics = orders?.filter(o => o.status !== 'pendente' && o.status !== 'cancelado').length || 1;
     let eficiencia = (deliveredCount / totalLogistics) * 100;
-    if (totalLogistics === 0 || isNaN(eficiencia)) eficiencia = 94.8; // default mock
+    if (totalLogistics === 0 || isNaN(eficiencia)) eficiencia = 0;
 
-    // 4. Desempenho Semanal (Mock data)
+    // 4. Desempenho Semanal (Real data)
     const desempenhoSemanal = [
-      { day: 'SEG', h1: 40, h2: 25 },
-      { day: 'TER', h1: 55, h2: 30 },
-      { day: 'QUA', h1: 85, h2: 45 },
-      { day: 'QUI', h1: 50, h2: 25 },
-      { day: 'SEX', h1: 65, h2: 40 },
-      { day: 'SAB', h1: Math.floor(Math.random() * 50) + 50, h2: 60 },
-      { day: 'DOM', h1: 35, h2: 20 },
+      { day: 'SEG', h1: 0, h2: 0 },
+      { day: 'TER', h1: 0, h2: 0 },
+      { day: 'QUA', h1: 0, h2: 0 },
+      { day: 'QUI', h1: 0, h2: 0 },
+      { day: 'SEX', h1: 0, h2: 0 },
+      { day: 'SAB', h1: 0, h2: 0 },
+      { day: 'DOM', h1: 0, h2: 0 },
     ];
+
+    orders?.forEach(o => {
+      const date = new Date(o.created_at);
+      // getDay() is 0 for Sunday, 1 for Monday... We want SEG to DOM
+      const dayIndex = date.getDay(); // 0 = DOM, 1 = SEG ... 6 = SAB
+      // Map to array index: SEG=0, TER=1, QUA=2, QUI=3, SEX=4, SAB=5, DOM=6
+      const mappedIndex = dayIndex === 0 ? 6 : dayIndex - 1;
+      
+      const role = (o.customer as any)?.role || 'cliente';
+      const amount = Number(o.total_amount || 0);
+      if (role === 'b2b' || role === 'chef') {
+        desempenhoSemanal[mappedIndex].h2 += amount;
+      } else {
+        desempenhoSemanal[mappedIndex].h1 += amount;
+      }
+    });
 
     // 5. Fila de Aprovações Pendentes
     const { data: pendingProducers } = await admin

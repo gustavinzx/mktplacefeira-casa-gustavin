@@ -211,9 +211,6 @@ export default function AdminDiretorioFeirantesPage() {
   };
 
   async function handleDeleteVendor(id: string, name: string) {
-    if (!confirm(`Tem certeza que deseja excluir o feirante "${name}"? Esta ação não pode ser desfeita.`)) {
-      return;
-    }
     try {
       if (!id.startsWith('local-')) {
         const { error } = await supabase

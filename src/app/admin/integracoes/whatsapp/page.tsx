@@ -243,7 +243,6 @@ export default function WhatsAppAdminPage() {
   }
 
   async function logoutInstance() {
-    if (!confirm('Desconectar o WhatsApp e remover a sessão desta instância?')) return;
     try {
       // DELETE /instance/logout — instance token
       await instanceCall('DELETE', '/instance/logout');
@@ -314,7 +313,6 @@ export default function WhatsAppAdminPage() {
   }
 
   async function deleteInstance(instanceId: string) {
-    if (!confirm(`Excluir a instância "${instanceId}"? Esta ação não pode ser desfeita.`)) return;
     try {
       // DELETE /instance/delete/:instanceId — adminToken
       await adminCall('DELETE', `/instance/delete/${instanceId}`);

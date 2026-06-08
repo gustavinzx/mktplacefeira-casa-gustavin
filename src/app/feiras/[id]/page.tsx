@@ -7,19 +7,22 @@ import styles from './page.module.css';
 import { MapPin, Clock, Star, ArrowRight, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-export default function FairDetailsPage({ params }: { params: { id: string } }) {
+export default function FairDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = React.use(params);
+  const fairId = unwrappedParams.id;
+  
   const [fair, setFair] = useState<any>(null);
   const [producers, setProducers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchFairData();
-  }, [params.id]);
+  }, [fairId]);
 
   const fetchFairData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/fairs/${params.id}`);
+      const res = await fetch(`/api/fairs/${fairId}`);
       const data = await res.json();
       if (data.success) {
         setFair(data.data.fair);

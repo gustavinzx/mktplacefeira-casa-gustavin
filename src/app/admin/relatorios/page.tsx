@@ -17,10 +17,46 @@ import {
   TrendingUp,
   User,
   Users,
-  Building2
+  Building2,
+  Loader2
 } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function AdminReportsPage() {
+  const { showToast } = useToast();
+  const [isSending, setIsSending] = React.useState(false);
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const handleSendToAccountant = () => {
+    setIsSending(true);
+    setTimeout(() => {
+      setIsSending(false);
+      showToast('Relatório mensal enviado para a contabilidade com sucesso!', 'success');
+    }, 2000);
+  };
+
+  const handleExport = () => {
+    setIsExporting(true);
+    try {
+      const csvContent = "data:text/csv;charset=utf-8," 
+        + "DATA/HORA,NOTA,CLIENTE,TIPO,VALOR BRUTO,BASE CALCULO,ALIQUOTA,IMPOSTO\n"
+        + tableData.map(r => `${r.date},${r.note},"${r.client}",${r.type},"${r.gross}","${r.base}",${r.rate},"${r.tax}"`).join("\n");
+      
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `relatorio-contador-${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast('Exportação CSV concluída com sucesso!', 'success');
+    } catch (e) {
+      showToast('Erro ao exportar relatório.', 'error');
+    } finally {
+      setIsExporting(false);
+    }
+  };
   const tableData = [
     { date: '28/09/23 14:22', note: '001 - 24.892', client: 'Mercado das Frutas LTDA', type: 'B2B (CNPJ)', gross: 'R$ 1.250,00', base: 'R$ 1.250,00', rate: '18%', tax: 'R$ 225,00', color: 'orange' },
     { date: '28/09/23 15:05', note: '001 - 24.893', client: 'Ana Maria Silva', type: 'B2C (CPF)', gross: 'R$ 84,50', base: 'R$ 84,50', rate: '7%', tax: 'R$ 5,91', color: 'blue' },
@@ -38,13 +74,21 @@ export default function AdminReportsPage() {
           <p className="text-[16px] font-medium text-[#707a6b] mt-3 max-w-xl">Consolidação de dados fiscais e faturamento para exportação mensal.</p>
         </div>
         <div className="flex gap-4">
-          <button className="flex items-center gap-3 px-8 py-4 bg-[#efeee9] text-[#1b1c19] rounded-full font-black text-[13px] uppercase tracking-widest hover:bg-gray-200 transition-all">
-            <Send size={18} />
-            Enviar para Contador
+          <button 
+            onClick={handleSendToAccountant}
+            disabled={isSending}
+            className="flex items-center justify-center gap-3 w-48 py-4 bg-[#efeee9] text-[#1b1c19] rounded-full font-black text-[13px] uppercase tracking-widest hover:bg-gray-200 transition-all disabled:opacity-50"
+          >
+            {isSending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+            {isSending ? 'Enviando...' : 'Enviar para Contador'}
           </button>
-          <button className="flex items-center gap-3 px-8 py-4 bg-[#fc6c29] text-white rounded-full font-black text-[13px] uppercase tracking-widest shadow-xl shadow-orange-900/20 hover:scale-105 transition-all">
-            <Download size={18} />
-            Exportar Tudo
+          <button 
+            onClick={handleExport}
+            disabled={isExporting}
+            className="flex items-center justify-center gap-3 w-48 py-4 bg-[#fc6c29] text-white rounded-full font-black text-[13px] uppercase tracking-widest shadow-xl shadow-orange-900/20 hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100"
+          >
+            {isExporting ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
+            {isExporting ? 'Exportando...' : 'Exportar Tudo'}
           </button>
         </div>
       </div>

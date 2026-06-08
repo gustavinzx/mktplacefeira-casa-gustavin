@@ -10,70 +10,19 @@ import {
   X, Star, Send
 } from 'lucide-react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 
 interface OrderItem { name: string; qty: number; price: number; unit: string; }
 interface TrackingStep { label: string; done: boolean; time?: string; }
 interface Order {
-  id: string; date: string; total: string; totalNum: number;
+  id: string; realId?: string; date: string; total: string; totalNum: number;
   status: 'A caminho' | 'Entregue' | 'Cancelado' | 'Aguardando';
   items: number; itemsList: OrderItem[]; image: string; vendor: string;
   address: string; deliveryTime?: string; trackingProgress?: number;
   trackingSteps?: TrackingStep[];
 }
 
-const ORDERS: Order[] = [
-  {
-    id: '#ORD-7482', date: '10 de Mai, 2024', total: 'R$ 142,50', totalNum: 142.50,
-    status: 'A caminho', items: 5,
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop',
-    vendor: 'Sítio Sol Nascente', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
-    deliveryTime: 'Hoje, até às 18:30', trackingProgress: 65,
-    trackingSteps: [
-      { label: 'Pedido Confirmado', done: true, time: '08:15' },
-      { label: 'Sendo Preparado', done: true, time: '09:30' },
-      { label: 'Saiu para Entrega', done: true, time: '14:00' },
-      { label: 'Entregue', done: false },
-    ],
-    itemsList: [
-      { name: 'Tomates Cereja', qty: 2, price: 12.50, unit: 'kg' },
-      { name: 'Alface Crespa', qty: 1, price: 5.00, unit: 'maço' },
-      { name: 'Cenouras', qty: 3, price: 8.90, unit: 'kg' },
-      { name: 'Chuchu', qty: 2, price: 6.00, unit: 'kg' },
-      { name: 'Pepinos', qty: 4, price: 4.50, unit: 'un' },
-    ],
-  },
-  {
-    id: '#ORD-7450', date: '08 de Mai, 2024', total: 'R$ 89,90', totalNum: 89.90,
-    status: 'Entregue', items: 3,
-    image: 'https://images.unsplash.com/photo-1518843875459-f738682238a6?q=80&w=200&auto=format&fit=crop',
-    vendor: 'Horta da Dona Maria', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
-    trackingSteps: [
-      { label: 'Pedido Confirmado', done: true, time: '09:00' },
-      { label: 'Sendo Preparado', done: true, time: '10:15' },
-      { label: 'Saiu para Entrega', done: true, time: '13:30' },
-      { label: 'Entregue', done: true, time: '16:00' },
-    ],
-    itemsList: [
-      { name: 'Bananas Nanicas', qty: 1, price: 8.00, unit: 'cacho' },
-      { name: 'Laranjas', qty: 2, price: 14.00, unit: 'kg' },
-      { name: 'Mamão Papaia', qty: 1, price: 12.90, unit: 'un' },
-    ],
-  },
-  {
-    id: '#ORD-7422', date: '05 de Mai, 2024', total: 'R$ 215,00', totalNum: 215.00,
-    status: 'Cancelado', items: 2,
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=200&auto=format&fit=crop',
-    vendor: 'Ovos de Ouro', address: 'Rua das Flores, 123 — Centro, Quirinópolis - GO',
-    trackingSteps: [
-      { label: 'Pedido Confirmado', done: true, time: '11:00' },
-      { label: 'Cancelado pelo Feirante', done: true, time: '11:30' },
-    ],
-    itemsList: [
-      { name: 'Ovos Caipiras', qty: 30, price: 18.00, unit: 'dz' },
-      { name: 'Mel de Abelha', qty: 2, price: 45.00, unit: 'pote' },
-    ],
-  },
-];
+// Constante removida, agora busca da API
 
 export default function MyOrdersPage() {
   const { dictionary } = useI18n();
@@ -83,11 +32,103 @@ export default function MyOrdersPage() {
   const [chatOrder, setChatOrder] = useState<Order | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Order | null>(null);
   const [chatMsg, setChatMsg] = useState('');
-  const [chatMsgs, setChatMsgs] = useState<{ from: 'user' | 'support'; text: string; time: string }[]>([
-    { from: 'support', text: 'Olá! Como posso ajudar você com seu pedido?', time: '10:23' },
-  ]);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [chatMsgs, setChatMsgs] = useState<any[]>([]);
+  const [chatId, setChatId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const filtered = ORDERS.filter(o => {
+  React.useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id || null));
+  }, []);
+
+  React.useEffect(() => {
+    if (!chatOrder?.realId || !userId) {
+      setChatMsgs([]);
+      setChatId(null);
+      return;
+    }
+
+    const initChat = async () => {
+      // 1. Tenta achar o chat
+      let { data: chat } = await supabase.from('mktplace_feira_chats').select('id').eq('order_id', chatOrder.realId).single();
+      
+      if (!chat) {
+        // Se não tem, cria
+        const vendorId = (chatOrder as any).producer_id || (chatOrder as any).vendor_id || (chatOrder as any).feirante_id;
+        const res = await supabase.from('mktplace_feira_chats').insert({
+          order_id: chatOrder.realId,
+          customer_id: userId,
+          vendor_id: vendorId || userId // fallback seguro para não quebrar NOT NULL
+        }).select('id').single();
+        chat = res.data;
+      }
+
+      if (chat) {
+        setChatId(chat.id);
+        const { data: msgs } = await supabase.from('mktplace_feira_messages')
+          .select('*').eq('chat_id', chat.id).order('created_at', { ascending: true });
+        if (msgs) setChatMsgs(msgs);
+      }
+    };
+    initChat();
+  }, [chatOrder, userId]);
+
+  React.useEffect(() => {
+    if (!chatId) return;
+    const channel = supabase.channel(`chat-${chatId}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mktplace_feira_messages', filter: `chat_id=eq.${chatId}` }, (payload) => {
+        setChatMsgs(prev => {
+          // evita duplicatas
+          if (prev.find(m => m.id === payload.new.id)) return prev;
+          return [...prev, payload.new];
+        });
+      }).subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [chatId]);
+
+
+  React.useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
+        const res = await fetch('/api/account/orders?status=all');
+        const json = await res.json();
+        if (json.success && json.data) {
+          const mapped: Order[] = json.data.map((o: any) => ({
+            id: `#ORD-${o.id.split('-')[0].toUpperCase()}`,
+            realId: o.id,
+            date: new Date(o.created_at).toLocaleDateString('pt-BR'),
+            total: `R$ ${Number(o.total_amount).toFixed(2).replace('.', ',')}`,
+            totalNum: Number(o.total_amount),
+            status: o.status === 'delivered' ? 'Entregue' : 
+                    o.status === 'cancelled' ? 'Cancelado' : 
+                    o.status === 'pending' ? 'Aguardando' : 'A caminho',
+            items: o.items?.length || 0,
+            image: o.items?.[0]?.product?.image_url || 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop',
+            vendor: o.vendor?.company_name || 'Feira.casa',
+            producer_id: o.producer_id || o.vendor_id,
+            address: o.shipping_address?.street ? `${o.shipping_address.street}, ${o.shipping_address.number}` : 'Endereço de entrega',
+            itemsList: o.items?.map((i: any) => ({
+              name: i.product?.title || 'Produto',
+              qty: i.quantity,
+              price: Number(i.unit_price),
+              unit: 'un'
+            })) || []
+          }));
+          setOrders(mapped);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrders();
+  }, []);
+
+  const filtered = orders.filter(o => {
     const tabMatch =
       activeTab === 'all' ||
       (activeTab === 'active' && (o.status === 'A caminho' || o.status === 'Aguardando')) ||
@@ -113,22 +154,39 @@ export default function MyOrdersPage() {
     return <Clock size={14} />;
   };
 
-  const sendChat = () => {
-    if (!chatMsg.trim()) return;
-    const now = new Date();
-    const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    setChatMsgs(prev => [...prev, { from: 'user', text: chatMsg.trim(), time: t }]);
+  const sendChat = async () => {
+    if (!chatMsg.trim() || !chatId || !userId) return;
+    
+    const text = chatMsg.trim();
     setChatMsg('');
-    setTimeout(() => {
-      setChatMsgs(prev => [...prev, { from: 'support', text: 'Entendido! Estou verificando seu pedido e te respondo em instantes.', time: t }]);
-    }, 1200);
+
+    // Optimistic update
+    const tempId = Math.random().toString();
+    const newMsg = {
+      id: tempId,
+      chat_id: chatId,
+      sender_id: userId,
+      text,
+      created_at: new Date().toISOString()
+    };
+    setChatMsgs(prev => [...prev, newMsg]);
+
+    const { error } = await supabase.from('mktplace_feira_messages').insert({
+      chat_id: chatId,
+      sender_id: userId,
+      text
+    });
+
+    if (error) {
+      setChatMsgs(prev => prev.filter(m => m.id !== tempId));
+    }
   };
 
   const TABS = [
-    { id: 'all', label: 'Todos', count: ORDERS.length },
-    { id: 'active', label: 'Em Aberto', count: ORDERS.filter(o => o.status === 'A caminho' || o.status === 'Aguardando').length },
-    { id: 'delivered', label: 'Entregues', count: ORDERS.filter(o => o.status === 'Entregue').length },
-    { id: 'cancelled', label: 'Cancelados', count: ORDERS.filter(o => o.status === 'Cancelado').length },
+    { id: 'all', label: 'Todos', count: orders.length },
+    { id: 'active', label: 'Em Aberto', count: orders.filter(o => o.status === 'A caminho' || o.status === 'Aguardando').length },
+    { id: 'delivered', label: 'Entregues', count: orders.filter(o => o.status === 'Entregue').length },
+    { id: 'cancelled', label: 'Cancelados', count: orders.filter(o => o.status === 'Cancelado').length },
   ];
 
   return (
@@ -362,14 +420,21 @@ export default function MyOrdersPage() {
             </div>
 
             <div className="chat-messages">
-              {chatMsgs.map((m, i) => (
-                <div key={i} className={`bubble-wrap ${m.from}`}>
-                  <div className="bubble">
-                    <p>{m.text}</p>
-                    <span className="bubble-time">{m.time}</span>
+              {chatMsgs.length === 0 && (
+                <div style={{ textAlign: 'center', padding: 20, color: '#888', fontSize: 14 }}>Inicie a conversa...</div>
+              )}
+              {chatMsgs.map((m) => {
+                const isUser = m.sender_id === userId;
+                const timeStr = new Date(m.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                return (
+                  <div key={m.id} className={`bubble-wrap ${isUser ? 'user' : 'support'}`}>
+                    <div className="bubble">
+                      <p>{m.text}</p>
+                      <span className="bubble-time">{timeStr}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="chat-input-row">

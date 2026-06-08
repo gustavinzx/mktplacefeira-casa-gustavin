@@ -164,10 +164,10 @@ function PixPanel({ total }: { total: number }) {
 // ─── Checkout Page ──────────────────────────────────────────────────────────
 const CheckoutPage = () => {
   const router = useRouter();
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [subtotal, setSubtotal] = useState(0);
+  const { items } = useCartStore();
+  const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const [discount, setDiscount] = useState(0);
-  const [deliveryFee, setDeliveryFee] = useState(0);
+  const [deliveryFee, setDeliveryFee] = useState(5.00);
   const [coupon, setCoupon] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [address, setAddress] = useState<Address | null>(null);
@@ -181,16 +181,11 @@ const CheckoutPage = () => {
   const total = subtotal + deliveryFee - discount;
 
   useEffect(() => {
-    const savedItems = localStorage.getItem('checkout_items');
-    const savedSubtotal = localStorage.getItem('checkout_subtotal');
+    // Remove localStorage reading logic for items and subtotal since we use Zustand
     const savedDiscount = localStorage.getItem('checkout_discount');
-    const savedDelivery = localStorage.getItem('checkout_deliveryFee');
     const savedCoupon = localStorage.getItem('checkout_coupon');
 
-    if (savedItems) setItems(JSON.parse(savedItems));
-    if (savedSubtotal) setSubtotal(parseFloat(savedSubtotal));
     if (savedDiscount) setDiscount(parseFloat(savedDiscount));
-    if (savedDelivery) setDeliveryFee(parseFloat(savedDelivery));
     if (savedCoupon) setCoupon(savedCoupon);
 
     async function loadAddresses() {
@@ -228,8 +223,7 @@ const CheckoutPage = () => {
         // Limpa tudo e redireciona
         setAddresses([]);
         setAddress(null);
-        setItems([]);
-        setSubtotal(0);
+        useCartStore.getState().clearCart();
         setDiscount(0);
         setDeliveryFee(0);
         router.push('/login');
@@ -322,7 +316,7 @@ const CheckoutPage = () => {
 
       localStorage.setItem('last_order_id', data.orders?.[0]?.id || '');
       useCartStore.getState().clearCart();
-      ['checkout_items', 'checkout_subtotal', 'checkout_discount', 'checkout_deliveryFee', 'checkout_coupon'].forEach(k => localStorage.removeItem(k));
+      ['checkout_discount', 'checkout_coupon'].forEach(k => localStorage.removeItem(k));
 
       router.push('/checkout/confirmation');
     } catch {

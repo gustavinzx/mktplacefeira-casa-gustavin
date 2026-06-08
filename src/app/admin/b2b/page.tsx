@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Handshake, 
   TrendingUp, 
@@ -17,10 +17,39 @@ import {
   Clock,
   ShieldCheck,
   ChefHat,
-  ArrowRight
+  ArrowRight,
+  CheckCircle
 } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function AdminB2BPage() {
+  const { showToast } = useToast();
+  
+  const [pendentes, setPendentes] = useState([
+    { id: 'RM', name: 'Restaurante Mani', status: 'PENDENTE' },
+    { id: 'HG', name: 'Hotel Grand Hyatt', status: 'EM ANÁLISE' },
+  ]);
+
+  const [contratos, setContratos] = useState([
+    { name: 'Bistrô do Chef Juca', id: '44210-B2B', cat: 'Hortifruti Orgânico', date: '15 Jul 2024', credit: 'R$ 15.000,00', status: 'NORMALIZADO', color: 'green' },
+    { name: 'Rede Sushi Premium', id: '39882-B2B', cat: 'Pescados & Frutos', date: '02 Jun 2024', credit: 'R$ 45.000,00', status: 'REVISÃO', color: 'orange', warning: true },
+    { name: 'Cantina Toscana', id: '55102-B2B', cat: 'Queijos & Frios', date: '22 Ago 2024', credit: 'R$ 8.500,00', status: 'NORMALIZADO', color: 'green' },
+  ]);
+
+  const aprovarCredito = (id: string, name: string) => {
+    setPendentes(prev => prev.filter(p => p.id !== id));
+    setContratos(prev => [{
+      name,
+      id: `${Math.floor(Math.random() * 90000) + 10000}-B2B`,
+      cat: 'Misto Geral',
+      date: '12 Nov 2024',
+      credit: 'R$ 10.000,00',
+      status: 'NORMALIZADO',
+      color: 'green'
+    }, ...prev]);
+    showToast(`Crédito aprovado para ${name}. Contrato ativado!`, 'success');
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
@@ -60,20 +89,30 @@ export default function AdminB2BPage() {
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg flex items-center justify-center text-xs font-black text-gray-400 border border-gray-100 dark:border-gray-800">RM</div>
-                  <span className="text-sm font-bold text-gray-900 dark:text-white">Restaurante Mani</span>
+              {pendentes.length === 0 ? (
+                <div className="text-center py-6 text-gray-400 font-bold text-sm">
+                  Nenhuma empresa na fila.
                 </div>
-                <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-[9px] font-black uppercase tracking-wider">PENDENTE</span>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg flex items-center justify-center text-xs font-black text-gray-400 border border-gray-100 dark:border-gray-800">HG</div>
-                  <span className="text-sm font-bold text-gray-900 dark:text-white">Hotel Grand Hyatt</span>
-                </div>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-[9px] font-black uppercase tracking-wider">EM ANÁLISE</span>
-              </div>
+              ) : (
+                pendentes.map(p => (
+                  <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl group">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white dark:bg-gray-900 rounded-lg flex items-center justify-center text-xs font-black text-gray-400 border border-gray-100 dark:border-gray-800">{p.id}</div>
+                      <span className="text-sm font-bold text-gray-900 dark:text-white">{p.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider ${p.status === 'PENDENTE' ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'}`}>{p.status}</span>
+                      <button 
+                        onClick={() => aprovarCredito(p.id, p.name)}
+                        className="opacity-0 group-hover:opacity-100 p-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-600 hover:text-white transition-all"
+                        title="Aprovar Crédito"
+                      >
+                        <CheckCircle size={14} />
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
           <button className="mt-8 text-green-700 dark:text-green-400 text-xs font-black uppercase tracking-widest hover:underline text-center">Ver fila completa</button>
@@ -139,11 +178,7 @@ export default function AdminB2BPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
-                {[
-                  { name: 'Bistrô do Chef Juca', id: '44210-B2B', cat: 'Hortifruti Orgânico', date: '15 Jul 2024', credit: 'R$ 15.000,00', status: 'NORMALIZADO', color: 'green' },
-                  { name: 'Rede Sushi Premium', id: '39882-B2B', cat: 'Pescados & Frutos', date: '02 Jun 2024', credit: 'R$ 45.000,00', status: 'REVISÃO', color: 'orange', warning: true },
-                  { name: 'Cantina Toscana', id: '55102-B2B', cat: 'Queijos & Frios', date: '22 Ago 2024', credit: 'R$ 8.500,00', status: 'NORMALIZADO', color: 'green' },
-                ].map((row, i) => (
+                {contratos.map((row, i) => (
                   <tr key={i} className="group hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
                     <td className="px-8 py-5">
                       <div>

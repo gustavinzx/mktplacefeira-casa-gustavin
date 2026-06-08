@@ -8,7 +8,10 @@ import styles from './page.module.css';
 import { MapPin, Star, BadgeCheck, Search, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-export default function ProducerDetailsPage({ params }: { params: { id: string } }) {
+export default function ProducerDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = React.use(params);
+  const producerId = unwrappedParams.id;
+  
   const [producer, setProducer] = useState<any>(null);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,12 +19,12 @@ export default function ProducerDetailsPage({ params }: { params: { id: string }
 
   useEffect(() => {
     fetchProducerData();
-  }, [params.id]);
+  }, [producerId]);
 
   const fetchProducerData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/producers/${params.id}`);
+      const res = await fetch(`/api/producers/${producerId}`);
       const data = await res.json();
       if (data.success) {
         setProducer(data.data.producer);
@@ -149,6 +152,35 @@ export default function ProducerDetailsPage({ params }: { params: { id: string }
                 ))}
               </div>
             )}
+
+            {/* Reviews Section */}
+            <div style={{ marginTop: '4rem', background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Star fill="#fbbf24" color="#fbbf24" size={24} /> Avaliações dos Clientes
+              </h3>
+              
+              <div style={{ display: 'flex', gap: '16px', marginBottom: '2rem' }}>
+                <input type="text" placeholder="Deixe seu comentário sobre a banca..." style={{ flex: 1, padding: '12px 16px', borderRadius: '12px', border: '1px solid #e5e7eb', outline: 'none' }} />
+                <button style={{ padding: '12px 24px', background: '#16a34a', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => alert('Em breve: Avaliações conectadas à API')}>Publicar</button>
+              </div>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ padding: '1.5rem', background: '#f9fafb', borderRadius: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span style={{ fontWeight: 'bold' }}>João Pedro</span>
+                    <span style={{ color: '#fbbf24', fontSize: '0.875rem' }}>★★★★★</span>
+                  </div>
+                  <p style={{ color: '#4b5563', fontSize: '0.875rem' }}>Produtos muito frescos, comprei a alface e os tomates e vieram perfeitos! Recomendo.</p>
+                </div>
+                <div style={{ padding: '1.5rem', background: '#f9fafb', borderRadius: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span style={{ fontWeight: 'bold' }}>Maria S.</span>
+                    <span style={{ color: '#fbbf24', fontSize: '0.875rem' }}>★★★★☆</span>
+                  </div>
+                  <p style={{ color: '#4b5563', fontSize: '0.875rem' }}>Atendimento ótimo, só atrasou um pouquinho a separação, mas a qualidade compensa.</p>
+                </div>
+              </div>
+            </div>
           </section>
 
         </div>

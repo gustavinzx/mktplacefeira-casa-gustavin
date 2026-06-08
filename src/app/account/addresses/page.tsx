@@ -32,45 +32,19 @@ export default function AccountAddressesPage() {
       if (!session) return;
       const res = await fetch('/api/account/addresses');
       const data = await res.json();
-      if (data.success && data.data.length > 0) {
-        setAddresses(data.data);
+      if (data.success) {
+        setAddresses(data.data || []);
       } else {
-        setAddresses(getMockAddresses());
+        setAddresses([]);
       }
     } catch (err) {
       console.error(err);
-      setAddresses(getMockAddresses());
+      setAddresses([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const getMockAddresses = () => {
-    return [
-      {
-        id: 'mock-addr-1',
-        zip_code: '01310-100',
-        street: 'Avenida Paulista',
-        number: '1578',
-        complement: 'Apt 42',
-        neighborhood: 'Bela Vista',
-        city: 'São Paulo',
-        state: 'SP',
-        is_default: true
-      },
-      {
-        id: 'mock-addr-2',
-        zip_code: '13010-111',
-        street: 'Rua Barão de Jaguara',
-        number: '1022',
-        complement: 'Casa',
-        neighborhood: 'Centro',
-        city: 'Campinas',
-        state: 'SP',
-        is_default: false
-      }
-    ];
-  };
 
   useEffect(() => {
     fetchAddresses();

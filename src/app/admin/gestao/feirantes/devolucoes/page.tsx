@@ -549,6 +549,7 @@ function NewTicketModal({ onClose, onSave }: { onClose: () => void; onSave: () =
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AdminFeiranteDevolucoesPage() {
+  const { showToast } = useToast();
   const [devolucoes, setDevolucoes] = useState<Devolucao[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -573,9 +574,9 @@ export default function AdminFeiranteDevolucoesPage() {
   useEffect(() => { fetchDevolucoes(); }, [fetchDevolucoes]);
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Excluir este ticket permanentemente?')) return;
     await supabase.from('mktplace_feira_devolucoes').delete().eq('id', id);
     fetchDevolucoes();
+    showToast('Ticket excluído com sucesso.', 'success');
   };
 
   const pendentes = devolucoes.filter(d => d.status === 'pendente').length;

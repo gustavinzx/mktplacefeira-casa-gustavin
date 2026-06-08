@@ -4,32 +4,84 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
-import { Clock, Users, Flame, Play, CheckCircle2, ShoppingBag } from 'lucide-react';
+import { useToast } from '@/components/Toast';
+import { useCartStore } from '@/store/useCartStore';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 
-export default function RecipeDetailsPage({ params }: { params: { id: string } }) {
-  const recipe = {
-    title: 'Risoto de Tomate Grape e Manjericão Orgânico',
-    chef: 'Chef Eduardo Castro',
-    prepTime: '45 min',
-    servings: '2 pessoas',
-    difficulty: 'Médio',
-    description: 'Um prato clássico da culinária italiana revisitado com o frescor dos ingredientes da nossa feira. O segredo está no caldo caseiro e no manjericão colhido na hora.',
-    ingredients: [
-      { name: 'Arroz Arbóreo', amount: '1 xícara', isSponsored: false },
-      { name: 'Tomate Grape Orgânico', amount: '1 bandeja', isSponsored: true, productId: '1' },
-      { name: 'Manjericão Fresco', amount: '1 maço', isSponsored: true, productId: '10' },
-      { name: 'Cebola Branca', amount: '1 unidade', isSponsored: false },
-      { name: 'Vinho Branco Seco', amount: '1/2 xícara', isSponsored: false },
-    ],
-    steps: [
-      'Refogue a cebola picada no azeite até ficar transparente.',
-      'Adicione o arroz e frite por 2 minutos mexendo sempre.',
-      'Acrescente o vinho e mexa até evaporar completamente.',
-      'Vá adicionando o caldo quente concha a concha, mexendo sempre.',
-      'Aos 15 minutos, adicione os tomates cortados ao meio.',
-      'Finalize com manteiga, parmesão e as folhas de manjericão.'
-    ]
+export default function RecipeDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = React.use(params);
+  const recipeId = unwrappedParams.id;
+  const [recipe, setRecipe] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+  const addItem = useCartStore(s => s.addItem);
+  const { showToast } = useToast();
+  const requireAuth = useRequireAuth();
+  const router = useRouter();
+
+  const handleBuy = async (product: any) => {
+    requireAuth(() => {
+      addItem({
+        id: product.id,
+        title: product.title,
+        price: Number(product.price),
+        unit: product.unit,
+        quantity: 1,
+        imageUrl: product.image_url || '/images/placeholder.png',
+        producer: product.producer?.stall_name || 'Feirante',
+        producer_id: product.producer_id
+      });
+      showToast('Produto adicionado ao carrinho', 'success');
+    }, `/recipe/${recipeId}`);
   };
+
+  const handleBuyAll = async () => {
+    requireAuth(() => {
+      sponsoredProducts.forEach((ing: any) => {
+        const p = ing.suggested_product;
+        if (p) {
+          addItem({
+            id: p.id,
+            title: p.title,
+            price: Number(p.price),
+            unit: p.unit,
+            quantity: 1,
+            imageUrl: p.image_url || '/images/placeholder.png',
+            producer: p.producer?.stall_name || 'Feirante',
+            producer_id: p.producer_id
+          });
+        }
+      });
+      
+      showToast(`${sponsoredProducts.length} itens adicionados ao carrinho`, 'success');
+      setTimeout(() => {
+        router.push('/carrinho');
+      }, 1000);
+    }, `/recipe/${recipeId}`);
+  };
+
+  React.useEffect(() => {
+    fetch(`/api/recipes/${recipeId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setRecipe(data.data);
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [recipeId]);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Carregando receita...</div>;
+  }
+
+  if (!recipe) {
+    return <div className="min-h-screen flex items-center justify-center">Receita não encontrada.</div>;
+  }
+
+  const stepsArray = recipe.instructions ? recipe.instructions.split('\n').filter((s: string) => s.trim() !== '') : [];
+  const sponsoredProducts = (recipe.ingredients || []).filter((i: any) => i.suggested_product != null);
 
   return (
     <div className="recipe-page">
@@ -38,18 +90,18 @@ export default function RecipeDetailsPage({ params }: { params: { id: string } }
       <main className="container">
         <section className="recipe-hero">
           <div className="hero-content">
-            <div className="chef-info">Por <strong>{recipe.chef}</strong></div>
+            <div className="chef-info">Por <strong>{recipe.chef?.full_name || 'Chef'}</strong></div>
             <h1>{recipe.title}</h1>
             <p>{recipe.description}</p>
             <div className="meta-grid">
-              <div className="meta"><Clock size={18} /> {recipe.prepTime}</div>
-              <div className="meta"><Users size={18} /> {recipe.servings}</div>
-              <div className="meta"><Flame size={18} /> {recipe.difficulty}</div>
+              <div className="meta"><Clock size={18} /> {recipe.prep_time || '40 min'}</div>
+              <div className="meta"><Users size={18} /> {recipe.servings || '2'} porções</div>
+              <div className="meta"><Flame size={18} /> {recipe.difficulty || 'Médio'}</div>
             </div>
             <button className="play-btn"><Play fill="currentColor" /> Ver Vídeo da Receita</button>
           </div>
           <div className="hero-image">
-            <img src="/images/tomato.png" alt="" /> {/* Placeholder */}
+            <img src={recipe.image_url || "/images/tomato.png"} alt={recipe.title} />
           </div>
         </section>
 
@@ -57,27 +109,27 @@ export default function RecipeDetailsPage({ params }: { params: { id: string } }
           <aside className="ingredients-card">
             <h2>Ingredientes</h2>
             <ul className="ingredients-list">
-              {recipe.ingredients.map((ing, idx) => (
-                <li key={idx} className={ing.isSponsored ? 'sponsored' : ''}>
+              {(recipe.ingredients || []).map((ing: any, idx: number) => (
+                <li key={idx} className={ing.suggested_product ? 'sponsored' : ''}>
                   <div className="ing-main">
                     <CheckCircle2 size={16} />
                     <span>{ing.amount} {ing.name}</span>
                   </div>
-                  {ing.isSponsored && (
-                    <button className="buy-now">
+                  {ing.suggested_product && (
+                    <button className="buy-now" onClick={() => handleBuy(ing.suggested_product)}>
                       <ShoppingBag size={14} /> Comprar na Feira
                     </button>
                   )}
                 </li>
               ))}
             </ul>
-            <button className="buy-all">Comprar Todos os Ingredientes</button>
+            <button className="buy-all" onClick={handleBuyAll}>Comprar Todos os Ingredientes</button>
           </aside>
 
           <section className="steps-section">
             <h2>Modo de Preparo</h2>
             <div className="steps-list">
-              {recipe.steps.map((step, idx) => (
+              {stepsArray.map((step: string, idx: number) => (
                 <div key={idx} className="step-item">
                   <div className="step-number">{idx + 1}</div>
                   <p>{step}</p>
@@ -87,13 +139,24 @@ export default function RecipeDetailsPage({ params }: { params: { id: string } }
           </section>
         </div>
 
-        <section className="sponsored-products">
-          <h2>Produtos desta Receita</h2>
-          <div className="products-grid">
-            <ProductCard id="1" title="Tomate Grape Orgânico" price={12.90} unit="bandeja" imageUrl="/images/tomato.png" isOrganic={true} />
-            <ProductCard id="10" title="Manjericão Fresco" price={3.50} unit="maço" imageUrl="/images/lettuce.png" isOrganic={true} />
-          </div>
-        </section>
+        {sponsoredProducts.length > 0 && (
+          <section className="sponsored-products">
+            <h2>Produtos desta Receita</h2>
+            <div className="products-grid">
+              {sponsoredProducts.map((ing: any) => (
+                <ProductCard 
+                  key={ing.suggested_product.id}
+                  id={ing.suggested_product.id} 
+                  title={ing.suggested_product.title} 
+                  price={Number(ing.suggested_product.price)} 
+                  unit={ing.suggested_product.unit} 
+                  imageUrl={ing.suggested_product.image_url || "/images/placeholder.png"} 
+                  isOrganic={true} 
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

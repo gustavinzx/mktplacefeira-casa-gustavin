@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { PackageX, Loader2, ArrowRight } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 import styles from './page.module.css';
 
 const STATUS_TABS = [
@@ -40,6 +41,19 @@ export default function AccountOrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
+  const { showToast } = useToast();
+
+  const handleCancelOrder = async (id: string) => {
+    if (!confirm('Deseja realmente cancelar este pedido?')) return;
+    try {
+      const { error } = await supabase.from('mktplace_feira_orders').update({ status: 'cancelled' }).eq('id', id);
+      if (error) throw error;
+      showToast('Pedido cancelado com sucesso.', 'success');
+      setOrders(prev => prev.map(o => o.id === id ? { ...o, status: 'cancelled' } : o));
+    } catch (err: any) {
+      showToast('Erro ao cancelar pedido: ' + err.message, 'error');
+    }
+  };
 
   const fetchOrders = async (status: string) => {
     setLoading(true);
@@ -49,45 +63,19 @@ export default function AccountOrdersPage() {
 
       const res = await fetch(`/api/account/orders?status=${status}`);
       const data = await res.json();
-      if (data.success && data.data.length > 0) {
-        setOrders(data.data);
+      if (data.success) {
+        setOrders(data.data || []);
       } else {
-        // Mock state as requested
-        setOrders(getMockOrders(status));
+        setOrders([]);
       }
     } catch (err) {
       console.error(err);
-      setOrders(getMockOrders(status));
+      setOrders([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const getMockOrders = (status: string) => {
-    const allMocks = [
-      {
-        id: '1093-B',
-        created_at: new Date().toISOString(),
-        total_amount: 45.90,
-        status: 'pending',
-        items: [
-          { id: 1, quantity: 2, unit_price: 15.00, product: { title: 'Tomate Orgânico', image_url: '/images/products/tomate.png' } },
-          { id: 2, quantity: 1, unit_price: 15.90, product: { title: 'Alface Crespa', image_url: '/images/products/alface.png' } }
-        ]
-      },
-      {
-        id: '1088-A',
-        created_at: new Date(Date.now() - 86400000).toISOString(),
-        total_amount: 89.00,
-        status: 'delivered',
-        items: [
-          { id: 3, quantity: 1, unit_price: 89.00, product: { title: 'Cesta da Semana', image_url: '/images/products/cesta.png' } }
-        ]
-      }
-    ];
-    if (status === 'all') return allMocks;
-    return allMocks.filter(o => o.status === status);
-  };
 
   useEffect(() => {
     fetchOrders(activeTab);
@@ -145,11 +133,17 @@ export default function AccountOrdersPage() {
 
               <div className={styles.orderFooter}>
                 {order.status === 'pending' && (
-                  <button className="btn-outline-danger" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                  <button 
+                    onClick={() => handleCancelOrder(order.id)}
+                    className="btn-outline-danger" style={{ padding: '8px 16px', fontSize: '13px' }}
+                  >
                     Cancelar Pedido
                   </button>
                 )}
-                <button className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                <button 
+                  onClick={() => showToast('Detalhes completos em breve!', 'info')}
+                  className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}
+                >
                   Ver Detalhes
                 </button>
               </div>

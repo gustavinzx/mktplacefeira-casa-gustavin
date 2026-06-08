@@ -738,9 +738,33 @@ export default function AdminCRMPage() {
     }).eq('id', updated.id);
   };
 
-  const addLead = (l: Lead) => {
+  const addLead = async (l: Lead) => {
+    // Optimistic UI update
     setLeads(prev => [l, ...prev]);
     setNovoLeadOpen(false);
+
+    // Save to database
+    try {
+      await supabase.from('mktplace_feira_crm_leads').insert([{
+        id: l.id,
+        name: l.name,
+        type: l.type,
+        status: l.stage,
+        phone: l.phone,
+        email: l.email,
+        history: l.history,
+        metadata: {
+          city: l.city,
+          category: l.category,
+          source: l.source,
+          score: l.score,
+          nextContact: l.nextContact,
+          notes: l.notes
+        }
+      }]);
+    } catch (err) {
+      console.error('Erro ao salvar lead no banco:', err);
+    }
   };
 
   const filtered = leads.filter(l => {

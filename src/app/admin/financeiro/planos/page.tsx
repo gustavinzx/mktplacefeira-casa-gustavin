@@ -312,9 +312,9 @@ export default function AdminPlanosPage() {
   const openNew = () => { setEditingPlan(null); setIsModalOpen(true); };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Desativar este plano? Assinantes existentes não serão afetados.')) return;
     await supabase.from('mktplace_feira_subscription_plans').update({ is_active: false }).eq('id', id);
     fetchPlans();
+    showToast('Plano desativado com sucesso.', 'success');
   };
 
   const handleReactivate = async (id: string) => {

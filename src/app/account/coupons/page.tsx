@@ -1,14 +1,39 @@
 'use client';
 
-import React from 'react';
-import { Tag, Clock, Info } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Tag, Clock, Info, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function CouponsPage() {
-  const coupons = [
-    { code: 'VERDE10', description: '10% de desconto em todo o hortifrúti', expiry: '30 Abr 2026', minPurchase: 'R$ 50,00', status: 'active' },
-    { code: 'BEMVINDO', description: 'Frete grátis na sua primeira compra', expiry: 'Validade indeterminada', minPurchase: 'Sem valor mínimo', status: 'active' },
-    { code: 'ORGANICO20', description: 'R$ 20,00 OFF em cestas selecionadas', expiry: 'Expirado', minPurchase: 'R$ 100,00', status: 'expired' },
-  ];
+  const [coupons, setCoupons] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
+
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
+        
+        // Fetch all active coupons for now
+        const { data, error } = await supabase
+          .from('mktplace_feira_coupons')
+          .select('*')
+          .order('created_at', { ascending: false });
+          
+        if (!error && data) {
+          setCoupons(data);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchCoupons();
+  }, []);
 
   return (
     <div className="coupons-container">
@@ -21,31 +46,53 @@ export default function CouponsPage() {
       </div>
 
       <div className="coupons-list">
-        {coupons.map((coupon, idx) => (
-          <div key={idx} className={`coupon-card ${coupon.status}`}>
-            <div className="coupon-left">
-              <div className="icon-circle">
-                <Tag size={24} />
-              </div>
-              <div className="coupon-main">
-                <div className="code-row">
-                  <span className="code">{coupon.code}</span>
-                  {coupon.status === 'active' && <span className="status-badge">Ativo</span>}
-                </div>
-                <h3>{coupon.description}</h3>
-                <div className="coupon-meta">
-                  <span><Clock size={12} /> Expira em: {coupon.expiry}</span>
-                  <span><Info size={12} /> Min: {coupon.minPurchase}</span>
-                </div>
-              </div>
-            </div>
-            <div className="coupon-right">
-              <button disabled={coupon.status === 'expired'}>
-                {coupon.status === 'active' ? 'Copiar Código' : 'Indisponível'}
-              </button>
-            </div>
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+            <Loader2 size={32} className="animate-spin" style={{ color: 'var(--leaf-green)' }} />
           </div>
-        ))}
+        ) : coupons.length > 0 ? (
+          coupons.map((coupon, idx) => {
+            const isExpired = coupon.expires_at && new Date(coupon.expires_at) < new Date();
+            const statusClass = isExpired ? 'expired' : (coupon.is_active ? 'active' : 'expired');
+            
+            return (
+              <div key={idx} className={`coupon-card ${statusClass}`}>
+                <div className="coupon-left">
+                  <div className="icon-circle">
+                    <Tag size={24} />
+                  </div>
+                  <div className="coupon-main">
+                    <div className="code-row">
+                      <span className="code">{coupon.code}</span>
+                      {statusClass === 'active' && <span className="status-badge">Ativo</span>}
+                    </div>
+                    <h3>{coupon.discount_type === 'percentage' ? `${coupon.discount_value}% OFF` : `R$ ${coupon.discount_value} OFF`}</h3>
+                    <div className="coupon-meta">
+                      <span><Clock size={12} /> Expira em: {coupon.expires_at ? new Date(coupon.expires_at).toLocaleDateString('pt-BR') : 'Indeterminado'}</span>
+                      <span><Info size={12} /> Min: R$ {Number(coupon.min_purchase_amount || 0).toFixed(2).replace('.', ',')}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="coupon-right">
+                  <button 
+                    disabled={statusClass === 'expired'}
+                    onClick={() => {
+                      navigator.clipboard.writeText(coupon.code);
+                      showToast('Cupom copiado!', 'success');
+                    }}
+                  >
+                    {statusClass === 'active' ? 'Copiar Código' : 'Indisponível'}
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+            <Tag size={48} color="#ccc" style={{ margin: '0 auto 16px' }} />
+            <p>Nenhum cupom disponível no momento.</p>
+          </div>
+        )}
       </div>
 
       <style jsx>{`

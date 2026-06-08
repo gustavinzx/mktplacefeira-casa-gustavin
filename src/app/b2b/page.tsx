@@ -241,20 +241,10 @@ export default function B2BPage() {
 
   // Fetch initial data
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    const name = localStorage.getItem('user_name');
-    setIsLogged(!!token);
-    if (name) setUserName(name);
-
-    // Load saved company details from localStorage if they exist
-    const savedCompany = localStorage.getItem('b2b_company_profile');
-    if (savedCompany) {
-      const parsed = JSON.parse(savedCompany);
-      setCompanyForm(parsed);
-      setCompanyLine(parsed.companyName || parsed.cnpj);
-    }
-
-    if (token) {
+    const initB2B = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      if (token) {
       fetch('/api/users/me', { headers: { Authorization: `Bearer ${token}` } })
         .then((r) => r.json())
         .then((data) => {
@@ -263,17 +253,15 @@ export default function B2BPage() {
             if (data.data.full_name) {
               setUserName(data.data.full_name);
             }
-            // Update form with real profile details if localstorage is empty
-            if (!savedCompany) {
-              setCompanyForm(prev => ({
-                ...prev,
-                companyName: data.data.company_name || prev.companyName,
-                cnpj: data.data.cnpj || prev.cnpj,
-                phone: data.data.phone || prev.phone,
-                email: data.data.email || prev.email,
-              }));
-              if (data.data.company_name) setCompanyLine(data.data.company_name);
-            }
+            // Update form with real profile details
+            setCompanyForm(prev => ({
+              ...prev,
+              companyName: data.data.company_name || prev.companyName,
+              cnpj: data.data.cnpj || prev.cnpj,
+              phone: data.data.phone || prev.phone,
+              email: data.data.email || prev.email,
+            }));
+            if (data.data.company_name) setCompanyLine(data.data.company_name);
           }
         })
         .catch(() => {});
@@ -281,19 +269,20 @@ export default function B2BPage() {
       supabase.auth.getUser().then(({ data }) => {
         const m = data.user?.user_metadata;
         if (m) {
-          if (!savedCompany) {
-            if (m.company_name) {
-              setCompanyLine(String(m.company_name));
-              setCompanyForm(prev => ({ ...prev, companyName: String(m.company_name) }));
-            }
-            if (m.cnpj) {
-              setCompanyForm(prev => ({ ...prev, cnpj: String(m.cnpj) }));
-              if (!m.company_name) setCompanyLine(String(m.cnpj));
-            }
+          if (m.company_name) {
+            setCompanyLine(String(m.company_name));
+            setCompanyForm(prev => ({ ...prev, companyName: String(m.company_name) }));
+          }
+          if (m.cnpj) {
+            setCompanyForm(prev => ({ ...prev, cnpj: String(m.cnpj) }));
+            if (!m.company_name) setCompanyLine(String(m.cnpj));
           }
         }
       });
     }
+    
+    };
+    initB2B();
 
   }, []);
 
@@ -320,9 +309,11 @@ export default function B2BPage() {
 
   // Load orders when relevant tabs are active
   useEffect(() => {
-    if ((activeTab === 'pedidos' || activeTab === 'dashboard') && isLogged) {
-      const token = localStorage.getItem('access_token');
-      if (!token) return;
+    const loadTabOrders = async () => {
+      if ((activeTab === 'pedidos' || activeTab === 'dashboard') && isLogged) {
+        const { data: { session } } = await supabase.auth.getSession();
+        const token = session?.access_token;
+        if (!token) return;
       setLoadingOrders(true);
       fetch('/api/orders', { headers: { Authorization: `Bearer ${token}` } })
         .then(r => r.json())
@@ -334,7 +325,9 @@ export default function B2BPage() {
         })
         .catch(console.error)
         .finally(() => setLoadingOrders(false));
-    }
+      }
+    };
+    loadTabOrders();
   }, [activeTab, isLogged]);
 
   const filtered = useMemo(() => {
@@ -359,16 +352,29 @@ export default function B2BPage() {
     setTimeout(() => setAddedId(null), 2000);
   };
 
-  const handleSaveCompany = (e: React.FormEvent) => {
+  const handleSaveCompany = async (e: React.FormEvent) => {
     e.preventDefault();
     setSavingForm(true);
-    setTimeout(() => {
-      localStorage.setItem('b2b_company_profile', JSON.stringify(companyForm));
-      setCompanyLine(companyForm.companyName || companyForm.cnpj);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      
+      const { error } = await supabase.from('profiles').update({
+        company_name: companyForm.companyName,
+        cnpj: companyForm.cnpj,
+        phone: companyForm.phone
+      }).eq('id', user.id);
+      
+      if (!error) {
+        setCompanyLine(companyForm.companyName || companyForm.cnpj);
+        setShowSaveSuccess(true);
+        setTimeout(() => setShowSaveSuccess(false), 3000);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
       setSavingForm(false);
-      setShowSaveSuccess(true);
-      setTimeout(() => setShowSaveSuccess(false), 3000);
-    }, 850);
+    }
   };
 
   const avatarLetter = (userName || 'J').charAt(0).toUpperCase();

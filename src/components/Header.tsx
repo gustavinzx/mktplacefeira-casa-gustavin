@@ -21,7 +21,10 @@ import {
   ChefHat,
   Building2,
   Loader2,
+  Bell,
 } from 'lucide-react';
+import { useNotifications } from '@/hooks/useNotifications';
+import { supabase } from '@/lib/supabase';
 
 async function reverseGeocode(lat: number, lng: number): Promise<{
   neighborhood: string | null;
@@ -62,6 +65,11 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const notifRef = useRef<HTMLDivElement>(null);
+
+  const [userId, setUserId] = useState<string | null>(null);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications(userId);
 
   const cartCount = useCartStore(state => state.getItemCount());
   const [mounted, setMounted] = useState(false);
@@ -74,6 +82,9 @@ const Header = () => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setShowMenu(false);
+      }
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+        setShowNotifications(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -94,6 +105,10 @@ const Header = () => {
         setUserName(name);
       }, 0);
     }
+
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) setUserId(data.user.id);
+    });
 
     // Região salva
     const saved = getSavedRegion();
@@ -245,6 +260,51 @@ const Header = () => {
             <MapPin size={18} />
             <span>{regionButtonLabel(region)}</span>
           </button>
+
+          {/* Notificações */}
+          {isLogged && (
+            <div className={styles.userMenu} ref={notifRef} onClick={() => setShowNotifications(!showNotifications)}>
+              <div style={{ position: 'relative', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: '50%', backgroundColor: '#f0f9f1', color: '#0e6b17' }}>
+                <Bell size={20} />
+                {unreadCount > 0 && (
+                  <span style={{ position: 'absolute', top: 12, right: 12, width: 8, height: 8, backgroundColor: '#ef4444', borderRadius: '50%', border: '2px solid #f0f9f1' }} />
+                )}
+              </div>
+              
+              {showNotifications && (
+                <div className={styles.dropdown} style={{ right: -60, width: 320, padding: 0 }}>
+                  <div style={{ padding: '16px 20px', borderBottom: '1px solid #f0f2f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#231a11' }}>Notificações</h4>
+                    {unreadCount > 0 && (
+                      <button onClick={(e) => { e.stopPropagation(); markAllAsRead(); }} style={{ background: 'none', border: 'none', color: '#0e6b17', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+                        Lidas
+                      </button>
+                    )}
+                  </div>
+                  <div style={{ maxHeight: 360, overflowY: 'auto' }}>
+                    {notifications.length === 0 ? (
+                      <div style={{ padding: 30, textAlign: 'center', color: '#888', fontSize: 13, fontWeight: 600 }}>Nenhuma notificação</div>
+                    ) : notifications.map(n => (
+                      <div 
+                        key={n.id} 
+                        onClick={() => {
+                          if (!n.read) markAsRead(n.id);
+                          if (n.link) router.push(n.link);
+                        }}
+                        style={{ padding: '16px 20px', borderBottom: '1px solid #f9f9f9', cursor: 'pointer', background: n.read ? '#fff' : '#f4fbfa', transition: 'background 0.2s' }}
+                      >
+                        <h5 style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 700, color: '#231a11' }}>{n.title}</h5>
+                        <p style={{ margin: 0, fontSize: 13, color: '#707a6f', lineHeight: 1.4 }}>{n.message}</p>
+                        <span style={{ display: 'block', marginTop: 8, fontSize: 11, color: '#aaa', fontWeight: 600 }}>
+                          {new Date(n.created_at).toLocaleDateString('pt-BR')} às {new Date(n.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* User Menu */}
           <div

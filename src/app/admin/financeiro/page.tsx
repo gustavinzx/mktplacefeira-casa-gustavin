@@ -34,24 +34,31 @@ export default function AdminFinanceiroDashboardPage() {
 
   const [exporting, setExporting] = React.useState(false);
   const [adding, setAdding] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [newTransDesc, setNewTransDesc] = React.useState('');
+  const [newTransAmount, setNewTransAmount] = React.useState('');
+  const [newTransType, setNewTransType] = React.useState('Despesa Extra');
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const { data: { session } } = await import('@/lib/supabase').then(m => m.supabase.auth.getSession());
+      const token = session?.access_token;
+      if (!token) return;
+
+      const res = await fetch('/api/admin/financeiro', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
+      if (res.success) {
+        setData(res.data);
+      }
+    } catch (err) {
+      console.error("Erro ao carregar dados financeiros:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   React.useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data: { session } } = await import('@/lib/supabase').then(m => m.supabase.auth.getSession());
-        const token = session?.access_token;
-        if (!token) return;
-
-        const res = await fetch('/api/admin/financeiro', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
-        if (res.success) {
-          setData(res.data);
-        }
-      } catch (err) {
-        console.error("Erro ao carregar dados financeiros:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
     fetchData();
   }, []);
 
@@ -64,36 +71,57 @@ export default function AdminFinanceiroDashboardPage() {
   };
 
   const handleAdd = () => {
+    setIsModalOpen(true);
+  };
+
+  const submitTransaction = async (e: React.FormEvent) => {
+    e.preventDefault();
     setAdding(true);
-    setTimeout(() => {
+    try {
+      const { data: { session } } = await import('@/lib/supabase').then(m => m.supabase.auth.getSession());
+      const token = session?.access_token;
+      if (!token) return;
+
+      const res = await fetch('/api/admin/financeiro', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` 
+        },
+        body: JSON.stringify({
+          description: newTransDesc,
+          amount: parseFloat(newTransAmount),
+          type: newTransType
+        })
+      }).then(r => r.json());
+
+      if (res.success) {
+        showToast('Lançamento registrado com sucesso!', 'success');
+        setIsModalOpen(false);
+        setNewTransDesc('');
+        setNewTransAmount('');
+        fetchData(); // Recarrega os dados
+      } else {
+        showToast(res.error || 'Erro ao registrar', 'error');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('Erro interno ao registrar transação', 'error');
+    } finally {
       setAdding(false);
-      const val = prompt('Qual o valor do novo lançamento? (Apenas números e ponto)');
-      if (!val) return;
-      const desc = prompt('Descrição do Lançamento:');
-      if (!desc) return;
-      
-      const newTransaction = {
-        id: Date.now(),
-        desc,
-        valor: `R$ ${parseFloat(val).toFixed(2).replace('.', ',')}`,
-        type: 'Despesa Extra',
-        date: new Date().toLocaleDateString('pt-BR'),
-        status: 'pendente'
-      };
-      
-      setData((prev: any) => ({
-        ...prev,
-        transacoes: [newTransaction, ...(prev?.transacoes || [])]
-      }));
-      
-      showToast('Lançamento inserido no livro caixa com sucesso!', "success");
-    }, 500);
+    }
   };
 
   const faturamentoTotal = data?.faturamentoTotal || 0;
   const lucroOperacional = data?.lucroOperacional || 0;
   const repassesPendentes = data?.repassesPendentes || 0;
   const transacoes = data?.transacoes || [];
+
+  const filteredTransacoes = transacoes.filter((t: any) => 
+    t.desc.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    t.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    t.date.includes(searchTerm)
+  );
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
@@ -163,14 +191,12 @@ export default function AdminFinanceiroDashboardPage() {
                <h3 className="text-[40px] font-black text-gray-900 leading-none mt-1">R$ {repassesPendentes.toFixed(2).replace('.', ',')}</h3>
             </div>
             <button className="w-full py-4 bg-orange-50 hover:bg-orange-600 text-orange-600 hover:text-white font-black rounded-[20px] text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2" onClick={() => {
-              if (confirm(`Existem repasses pendentes. Deseja processar o lote de pagamento para todos os fornecedores via Pagar.me?`)) {
                 showToast('Processando pagamentos... Isso pode levar alguns segundos.', 'info');
                 setTimeout(() => {
                   showToast('Lote de pagamento processado com sucesso! Recibos gerados.', 'success');
                   // Update state to remove pendentes
                   setData((prev: any) => ({ ...prev, repassesPendentes: 0 }));
                 }, 2000);
-              }
             }}>
                Lote de Pagamento <ArrowRight size={14} />
             </button>
@@ -198,15 +224,27 @@ export default function AdminFinanceiroDashboardPage() {
          
          {/* Transações Recentes */}
          <div className="lg:col-span-8 bg-white rounded-[40px] border border-gray-100 shadow-sm overflow-hidden">
-            <div className="p-8 border-b border-gray-50 flex justify-between items-center">
+            <div className="p-8 border-b border-gray-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                <h3 className="text-2xl font-black text-gray-900">Extrato Consolidado</h3>
-               <button className="text-sm font-black text-green-700 hover:underline">Ver Full Log</button>
+               <div className="flex items-center gap-4 w-full md:w-auto">
+                 <div className="relative w-full md:w-64">
+                   <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                   <input 
+                     type="text" 
+                     placeholder="Buscar transação..."
+                     value={searchTerm}
+                     onChange={e => setSearchTerm(e.target.value)}
+                     className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-[13px] font-medium focus:ring-2 focus:ring-green-700 outline-none transition-all"
+                   />
+                 </div>
+                 <button className="text-sm font-black text-green-700 hover:underline whitespace-nowrap">Ver Full Log</button>
+               </div>
             </div>
             <div className="divide-y divide-gray-50">
-               {transacoes.length === 0 && (
-                 <div className="p-8 text-center text-gray-500 font-medium">Nenhuma transação registrada.</div>
+               {filteredTransacoes.length === 0 && (
+                 <div className="p-8 text-center text-gray-500 font-medium">Nenhuma transação encontrada.</div>
                )}
-               {transacoes.map((t: any) => (
+               {filteredTransacoes.map((t: any) => (
                   <div key={t.id} className="p-8 flex items-center justify-between group hover:bg-gray-50/50 transition-all cursor-pointer">
                      <div className="flex items-center gap-6">
                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border border-gray-100 bg-green-50 text-green-700`}>
@@ -273,6 +311,62 @@ export default function AdminFinanceiroDashboardPage() {
             </div>
          </div>
       </div>
+
+      {/* Modal de Nova Transação */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-[32px] p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <h3 className="text-2xl font-black text-gray-900 mb-6">Novo Lançamento</h3>
+            <form onSubmit={submitTransaction} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Descrição</label>
+                <input 
+                  type="text" 
+                  value={newTransDesc} 
+                  onChange={e => setNewTransDesc(e.target.value)} 
+                  className="w-full mt-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-green-500 transition-all font-medium text-gray-900" 
+                  placeholder="Ex: Compra de Equipamento" 
+                  required 
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Valor (R$)</label>
+                  <input 
+                    type="number" 
+                    step="0.01" 
+                    value={newTransAmount} 
+                    onChange={e => setNewTransAmount(e.target.value)} 
+                    className="w-full mt-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-green-500 transition-all font-medium text-gray-900" 
+                    placeholder="-150.00" 
+                    required 
+                  />
+                  <span className="text-[10px] text-gray-400 font-bold mt-1 block">Use "-" para despesas.</span>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Tipo</label>
+                  <select 
+                    value={newTransType} 
+                    onChange={e => setNewTransType(e.target.value)} 
+                    className="w-full mt-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-green-500 transition-all font-medium text-gray-900"
+                  >
+                    <option value="Despesa Extra">Despesa Extra</option>
+                    <option value="Aporte">Aporte</option>
+                    <option value="Saque">Saque / Retirada</option>
+                    <option value="Transferência">Transferência</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-4 bg-gray-100 text-gray-600 font-black rounded-2xl hover:bg-gray-200 transition-all">Cancelar</button>
+                <button type="submit" disabled={adding} className="flex-1 py-4 bg-[#125d30] text-white font-black rounded-2xl hover:bg-green-800 shadow-lg shadow-green-900/10 transition-all disabled:opacity-50">
+                  {adding ? 'Salvando...' : 'Salvar Transação'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );

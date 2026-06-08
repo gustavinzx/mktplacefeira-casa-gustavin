@@ -14,34 +14,38 @@ export default function BannersPage() {
   ];
 
   const [banners, setBanners] = useState(defaultBanners);
-
-  React.useEffect(() => {
-    const saved = localStorage.getItem('admin_banners');
-    if (saved) {
-      setBanners(JSON.parse(saved));
-    }
-  }, []);
-
-  const saveBanners = (newBanners: any[]) => {
-    setBanners(newBanners);
-    localStorage.setItem('admin_banners', JSON.stringify(newBanners));
-  };
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editingBanner, setEditingBanner] = useState<any>(null);
+  
+  const [formData, setFormData] = useState({ title: '', desc: '', tag: '', img: '' });
 
   const handleDelete = (id: number) => {
-    if (confirm('Tem certeza que deseja excluir este banner?')) {
-      saveBanners(banners.filter(b => b.id !== id));
-    }
+    setBanners(banners.filter(b => b.id !== id));
+    showToast('Banner excluído com sucesso', 'success');
   };
 
-  const handleAdd = () => {
-    const title = prompt('Título do Banner:');
-    if (!title) return;
-    const desc = prompt('Descrição (ex: Ativo até...):') || 'Sem descrição';
-    const tag = prompt('Tag (ex: Página Inicial):') || 'Geral';
-    const img = prompt('URL da Imagem:') || '/images/hero.png';
-    
-    const newBanner = { id: Date.now(), title, desc, tag, img };
-    saveBanners([...banners, newBanner]);
+  const openAdd = () => {
+    setEditingBanner(null);
+    setFormData({ title: '', desc: '', tag: '', img: '' });
+    setModalOpen(true);
+  };
+  
+  const openEdit = (b: any) => {
+    setEditingBanner(b);
+    setFormData({ title: b.title, desc: b.desc, tag: b.tag, img: b.img });
+    setModalOpen(true);
+  };
+
+  const handleSave = () => {
+    if (!formData.title) return showToast('Título é obrigatório', 'error');
+    if (editingBanner) {
+      setBanners(banners.map(b => b.id === editingBanner.id ? { ...b, ...formData } : b));
+      showToast('Banner editado com sucesso', 'success');
+    } else {
+      setBanners([...banners, { id: Date.now(), ...formData }]);
+      showToast('Banner criado com sucesso', 'success');
+    }
+    setModalOpen(false);
   };
 
   return (
@@ -51,7 +55,7 @@ export default function BannersPage() {
           <h1>Gestão de Banners</h1>
           <p>Adicione, edite ou remova os banners promocionais do aplicativo.</p>
         </div>
-        <button className={styles.btnPrimary} onClick={handleAdd}>
+        <button className={styles.btnPrimary} onClick={openAdd}>
           <Plus size={16} /> Novo Banner
         </button>
       </header>
@@ -70,16 +74,7 @@ export default function BannersPage() {
                 <h3>{b.title}</h3>
                 <p>{b.desc}</p>
                 <div className={styles.actions}>
-                  <button className={styles.btnAction} title="Editar" onClick={() => {
-                    const title = prompt('Novo título:', b.title);
-                    if (!title) return;
-                    const desc = prompt('Nova descrição:', b.desc) || b.desc;
-                    const tag = prompt('Nova tag:', b.tag) || b.tag;
-                    const img = prompt('Nova URL de imagem:', b.img) || b.img;
-                    const updated = banners.map(banner => banner.id === b.id ? { ...banner, title, desc, tag, img } : banner);
-                    saveBanners(updated);
-                    showToast('Banner editado com sucesso!', 'success');
-                  }}><Edit2 size={16} /></button>
+                  <button className={styles.btnAction} title="Editar" onClick={() => openEdit(b)}><Edit2 size={16} /></button>
                   <button className={`${styles.btnAction} ${styles.btnDelete}`} title="Excluir" onClick={() => handleDelete(b.id)}><Trash2 size={16} /></button>
                 </div>
               </div>
@@ -87,6 +82,44 @@ export default function BannersPage() {
           ))
         )}
       </div>
+
+      {modalOpen && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+          <div style={{ backgroundColor: 'white', borderRadius: '1rem', padding: '1.5rem', width: '100%', maxWidth: '400px' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#111827' }}>
+              {editingBanner ? 'Editar Banner' : 'Novo Banner'}
+            </h3>
+            <input 
+              style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '0.75rem', marginBottom: '1rem', color: '#111827' }}
+              placeholder="Título"
+              value={formData.title}
+              onChange={e => setFormData({ ...formData, title: e.target.value })}
+            />
+            <input 
+              style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '0.75rem', marginBottom: '1rem', color: '#111827' }}
+              placeholder="Descrição"
+              value={formData.desc}
+              onChange={e => setFormData({ ...formData, desc: e.target.value })}
+            />
+            <input 
+              style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '0.75rem', marginBottom: '1rem', color: '#111827' }}
+              placeholder="Tag"
+              value={formData.tag}
+              onChange={e => setFormData({ ...formData, tag: e.target.value })}
+            />
+            <input 
+              style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '0.5rem', padding: '0.75rem', marginBottom: '1rem', color: '#111827' }}
+              placeholder="URL da Imagem"
+              value={formData.img}
+              onChange={e => setFormData({ ...formData, img: e.target.value })}
+            />
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+              <button style={{ padding: '0.5rem 1rem', fontWeight: 'bold', color: '#6b7280' }} onClick={() => setModalOpen(false)}>Cancelar</button>
+              <button style={{ padding: '0.5rem 1rem', fontWeight: 'bold', backgroundColor: '#10b981', color: 'white', borderRadius: '0.5rem' }} onClick={handleSave}>Salvar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

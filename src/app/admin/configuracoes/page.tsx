@@ -25,8 +25,27 @@ import {
   Share2,
   MapPin
 } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function AdminSettingsPage() {
+  const { showToast } = useToast();
+  const [displayName, setDisplayName] = React.useState('TI Feira.Casa');
+  const [email, setEmail] = React.useState('ti@feiracasa.com.br');
+  const [bio, setBio] = React.useState('Responsável pela infraestrutura crítica e governança de dados do ecossistema Feira.Casa.');
+  const [checkoutActive, setCheckoutActive] = React.useState(true);
+  const [pushActive, setPushActive] = React.useState(true);
+  const [maintenanceActive, setMaintenanceActive] = React.useState(false);
+  const [isSaving, setIsSaving] = React.useState(false);
+
+  const handleSave = () => {
+    setIsSaving(true);
+    // Simula salvamento em API
+    setTimeout(() => {
+      setIsSaving(false);
+      showToast('Configurações do Master atualizadas com sucesso!', 'success');
+    }, 1500);
+  };
+
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
       
@@ -36,9 +55,13 @@ export default function AdminSettingsPage() {
           <h2 className="text-[32px] font-extrabold text-[#1b1c19] tracking-tight">Configurações Master</h2>
           <p className="text-base text-[#40493c] font-medium">Controle total sobre seu perfil, segurança e parâmetros globais do ecossistema.</p>
         </div>
-        <button className="bg-green-600 text-white px-8 py-4 rounded-[20px] font-black flex items-center gap-2 shadow-xl shadow-green-900/10 hover:scale-105 active:scale-95 transition-all text-xs uppercase tracking-[0.2em]">
-          <Save size={18} />
-          Salvar Alterações
+        <button 
+          onClick={handleSave}
+          disabled={isSaving}
+          className="bg-green-600 text-white px-8 py-4 rounded-[20px] font-black flex items-center gap-2 shadow-xl shadow-green-900/10 hover:scale-105 active:scale-95 transition-all text-xs uppercase tracking-[0.2em] disabled:opacity-50 disabled:hover:scale-100"
+        >
+          {isSaving ? <Activity size={18} className="animate-spin" /> : <Save size={18} />}
+          {isSaving ? 'Salvando...' : 'Salvar Alterações'}
         </button>
       </div>
 
@@ -90,15 +113,15 @@ export default function AdminSettingsPage() {
             <div className="p-10 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-[#707a6b] uppercase tracking-widest ml-1">Nome de Exibição</label>
-                <input type="text" defaultValue="TI Feira.Casa" className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10" />
+                <input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-[#707a6b] uppercase tracking-widest ml-1">Email Master</label>
-                <input type="email" defaultValue="ti@feiracasa.com.br" className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10" />
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10" />
               </div>
               <div className="md:col-span-2 space-y-2">
                 <label className="text-[10px] font-black text-[#707a6b] uppercase tracking-widest ml-1">Biografia Profissional</label>
-                <textarea defaultValue="Responsável pela infraestrutura crítica e governança de dados do ecossistema Feira.Casa." className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10 h-32 resize-none" />
+                <textarea value={bio} onChange={e => setBio(e.target.value)} className="w-full bg-[#f5f4ef] border-none rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#0e6b17]/10 h-32 resize-none" />
               </div>
             </div>
           </div>
@@ -111,9 +134,9 @@ export default function AdminSettingsPage() {
             </h4>
             <div className="space-y-4">
               {[
-                { title: 'Checkout Global', desc: 'Define se o marketplace está aberto para compras.', icon: Clock, active: true },
-                { title: 'Notificações Push', desc: 'Regras de disparo automático para campanhas.', icon: Bell, active: true },
-                { title: 'Modo Manutenção', desc: 'Bloqueia o acesso de todos os usuários comuns.', icon: ShieldAlert, active: false },
+                { title: 'Checkout Global', desc: 'Define se o marketplace está aberto para compras.', icon: Clock, state: checkoutActive, set: setCheckoutActive },
+                { title: 'Notificações Push', desc: 'Regras de disparo automático para campanhas.', icon: Bell, state: pushActive, set: setPushActive },
+                { title: 'Modo Manutenção', desc: 'Bloqueia o acesso de todos os usuários comuns.', icon: ShieldAlert, state: maintenanceActive, set: setMaintenanceActive },
               ].map((param, i) => (
                 <div key={i} className="flex items-center justify-between p-6 bg-[#faf9f4] rounded-3xl border border-gray-50 group hover:border-[#0e6b17]/10 transition-all">
                   <div className="flex items-center gap-4">
@@ -125,8 +148,11 @@ export default function AdminSettingsPage() {
                       <p className="text-[10px] font-bold text-[#707a6b] uppercase tracking-widest">{param.desc}</p>
                     </div>
                   </div>
-                  <div className={`w-14 h-7 rounded-full relative cursor-pointer transition-all ${param.active ? 'bg-green-600' : 'bg-[#bfc9bd]'}`}>
-                    <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${param.active ? 'right-1' : 'left-1'}`}></div>
+                  <div 
+                    onClick={() => param.set(!param.state)}
+                    className={`w-14 h-7 rounded-full relative cursor-pointer transition-all ${param.state ? 'bg-green-600' : 'bg-[#bfc9bd]'}`}
+                  >
+                    <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${param.state ? 'right-1' : 'left-1'}`}></div>
                   </div>
                 </div>
               ))}

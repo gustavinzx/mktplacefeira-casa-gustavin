@@ -8,6 +8,7 @@ import { ChefHat, Clock, ShoppingCart, Loader2, ArrowLeft, CheckCircle2 } from '
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/useCartStore';
 import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ReceitaDetalhePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
@@ -52,8 +53,14 @@ export default function ReceitaDetalhePage({ params }: { params: Promise<{ id: s
       .finally(() => setLoading(false));
   }, [id]);
 
-  const addIngredientsToCart = () => {
+  const addIngredientsToCart = async () => {
     setAddingToCart(true);
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      window.location.href = '/login?redirect=/receitas/' + id;
+      return;
+    }
     
     // Filtra apenas ingredientes que tiveram produtos sugeridos encontrados
     const availableIngredients = (recipe.ingredients || []).filter((i: any) => i.suggested_product);

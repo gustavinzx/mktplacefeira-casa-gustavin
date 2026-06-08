@@ -12,11 +12,10 @@ export async function POST(req: Request) {
     const isAtacadista = role === 'atacadista';
     const data = isAtacadista ? atacadista : varejista;
 
-    // 1. Create user in auth (mocking auth user creation for admin bypassing)
-    // Actually, creating a profile requires an auth.user if the FK is enforced.
+    // 1. Create user in auth bypassing the normal signup flow
     // In our schema: id UUID REFERENCES auth.users(id) ON DELETE CASCADE
     // We cannot create a profile without an auth.user!
-    // Since this is a demo/admin environment, let's create a fake user in auth using admin API
+    // Since this is the admin environment, let's create the user directly in auth using admin API
     const email = data.email || `${Date.now()}@feirante.com`;
     const password = 'Password123!';
     

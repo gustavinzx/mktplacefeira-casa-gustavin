@@ -28,6 +28,7 @@ interface Product {
 }
 
 import { useCartStore } from '@/store/useCartStore';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 
 export default function ProductDetailsPage({ params }: { params: any }) {
   const [quantity, setQuantity] = useState(1);
@@ -37,6 +38,7 @@ export default function ProductDetailsPage({ params }: { params: any }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
+  const requireAuth = useRequireAuth();
   
   const addStoreItem = useCartStore(state => state.addItem);
 
@@ -59,22 +61,24 @@ export default function ProductDetailsPage({ params }: { params: any }) {
     });
   }, [params]);
 
-  const addToCart = () => {
+  const addToCart = async () => {
     if (!product) return;
-    
-    addStoreItem({
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      unit: product.unit,
-      quantity: quantity,
-      imageUrl: product.image_url || '/images/tomato.png',
-      producer: product.producer?.stall_name || 'Produtor Local',
-      producer_id: (product as any).producer_id || product.producer?.id,
-    });
-    
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
+
+    requireAuth(() => {
+      addStoreItem({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        unit: product.unit,
+        quantity: quantity,
+        imageUrl: product.image_url || '/images/tomato.png',
+        producer: product.producer?.stall_name || 'Produtor Local',
+        producer_id: (product as any).producer_id || product.producer?.id,
+      });
+      
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+    }, `/product/${product.id}`);
   };
 
   const relatedProducts = [

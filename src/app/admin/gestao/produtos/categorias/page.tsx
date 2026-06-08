@@ -138,9 +138,9 @@ export default function AdminCategoriasTagsPage() {
     setIsTagModalOpen(true);
   };
   const handleDeleteTag = async (id: string) => {
-    if (!confirm('Remover este selo/tag?')) return;
     await supabase.from('mktplace_feira_tags').delete().eq('id', id);
     fetchTags();
+    showToast('Selo/tag removido com sucesso.', 'success');
   };
   const handleSaveTag = async () => {
     if (!tagForm || !tagForm.name.trim()) return;
@@ -172,9 +172,9 @@ export default function AdminCategoriasTagsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Remover esta categoria? Subcategorias ficarão órfãs.')) return;
     await supabase.from('mktplace_feira_categories').delete().eq('id', id);
     fetchCategories();
+    showToast('Categoria removida com sucesso.', 'success');
   };
 
   const handleSave = async () => {

@@ -24,6 +24,7 @@ export default function ProfilePage() {
     phone: '',
     cpf: ''
   });
+  const [activeTable, setActiveTable] = useState('profiles');
 
   useEffect(() => {
     fetchProfile();
@@ -39,15 +40,26 @@ export default function ProfilePage() {
         return;
       }
 
-      // Decidir a tabela com base no papel do usuário
-      const role = localStorage.getItem('user_role');
-      const tableName = role === 'b2c' ? 'userb2c' : 'profiles';
-
-      const { data, error } = await supabase
+      // Consulta de forma segura sem depender do localStorage
+      let tableName = 'profiles';
+      let { data, error } = await supabase
         .from(getTableName(tableName))
         .select('*')
         .eq('id', user.id)
         .single();
+
+      if (error || !data) {
+        tableName = 'userb2c';
+        const res = await supabase
+          .from(getTableName(tableName))
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        data = res.data;
+        error = res.error;
+      }
+      
+      setActiveTable(tableName);
 
       if (error) throw error;
 
@@ -80,8 +92,7 @@ export default function ProfilePage() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const role = localStorage.getItem('user_role');
-      const tableName = role === 'b2c' ? 'userb2c' : 'profiles';
+      const tableName = activeTable;
 
       const updateData: any = {
         full_name: formData.full_name,

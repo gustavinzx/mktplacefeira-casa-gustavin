@@ -9,6 +9,7 @@ import {
   Search, Store, ShieldCheck, Loader2,
   Filter, X, Pencil,
 } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 
 interface Vendor {
   id: string;
@@ -41,8 +42,10 @@ export default function FeirantesPage() {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [fairs, setFairs] = useState<FairOption[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
   const [selectedFair, setSelectedFair] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedState, setSelectedState] = useState('');
@@ -63,68 +66,74 @@ export default function FeirantesPage() {
     async function load() {
       setLoading(true);
       try {
-        // 1. Load approved partners
-        const { data: partners } = await supabase
-          .from(getTableName('partners'))
-          .select('id, full_name, business_name, specialty, avatar_url, status')
-          .eq('status', 'approved')
-          .order('business_name');
+        const { data: producers, error: pError } = await supabase
+          .from('mktplace_feira_producers')
+          .select(`
+            id,
+            stall_name,
+            specialty,
+            fair_id,
+            profile:mktplace_feira_profiles!inner(full_name, avatar_url)
+          `);
+
+        if (pError) throw pError;
+
+        const { data: producerFairs, error: pfError } = await supabase
+          .from('mktplace_feira_producer_fairs')
+          .select('producer_id, fair_id');
+
+        if (pfError) throw pfError;
+
+        const producerFairsMap: Record<string, string[]> = {};
+        for (const pf of producerFairs || []) {
+          if (!producerFairsMap[pf.producer_id]) producerFairsMap[pf.producer_id] = [];
+          producerFairsMap[pf.producer_id].push(pf.fair_id);
+        }
+
+        const formattedVendors = (producers || [])
+          .map((p: any) => {
+            const joinedFairs = producerFairsMap[p.id] || [];
+            // Se ele tiver fair_id na tabela principal, junta com as outras feiras
+            const allFairIds = [...new Set([...joinedFairs, p.fair_id].filter(Boolean))];
+
+            return {
+              id: p.id,
+              full_name: p.profile?.full_name,
+              business_name: p.stall_name,
+              specialty: p.specialty,
+              avatar_url: p.profile?.avatar_url,
+              fair_ids: allFairIds
+            };
+          });
 
         // 2. Load all active fairs
-        const { data: fairsData } = await supabase
-          .from(getTableName('fairs'))
+        const { data: fairsData, error: fError } = await supabase
+          .from('mktplace_feira_fairs')
           .select('id, name, city, state, operating_days')
-          .eq('is_active', true)
           .order('name');
 
-        // 3. Build fair→vendor map via pos chain
-        const { data: posFairs } = await supabase
-          .from(getTableName('pos_fairs'))
-          .select('pos_id, fair_id');
+        if (fError) throw fError;
 
-        const { data: posRows } = await supabase
-          .from(getTableName('pos'))
-          .select('id, producer_id');
-
-        const { data: producers } = await supabase
-          .from(getTableName('producers'))
-          .select('id, user_id');
-
-        // Build pos_id → fair_ids
-        const posFairMap: Record<string, string[]> = {};
-        for (const pf of posFairs || []) {
-          if (!posFairMap[pf.pos_id]) posFairMap[pf.pos_id] = [];
-          posFairMap[pf.pos_id].push(pf.fair_id);
-        }
-
-        // Build producer_id → user_id
-        const producerUserMap: Record<string, string> = {};
-        for (const p of producers || []) {
-          if (p.user_id) producerUserMap[p.id] = p.user_id;
-        }
-
-        // Build fair_id → Set<user_id>
-        const fvMap: Record<string, Set<string>> = {};
-        for (const pos of posRows || []) {
-          const fairIds = posFairMap[pos.id] || [];
-          const userId = producerUserMap[pos.producer_id];
-          if (!userId) continue;
-          for (const fairId of fairIds) {
-            if (!fvMap[fairId]) fvMap[fairId] = new Set();
-            fvMap[fairId].add(userId);
-          }
-        }
-
-        // Build fair_id → operating_days
         const fdMap: Record<string, string[]> = {};
         for (const f of fairsData || []) {
           fdMap[f.id] = f.operating_days || [];
         }
 
+        const fvMap: Record<string, Set<string>> = {};
+        for (const v of formattedVendors) {
+          for (const fid of v.fair_ids || []) {
+            if (!fvMap[fid]) fvMap[fid] = new Set();
+            fvMap[fid].add(v.id);
+          }
+        }
+
         setFairVendorMap(fvMap);
         setFairDaysMap(fdMap);
-        setVendors(partners || []);
+        setVendors(formattedVendors);
         setFairs(fairsData || []);
+      } catch (err: any) {
+        console.error('Error fetching data:', err);
+        setError(err.message || 'Erro desconhecido');
       } finally {
         setLoading(false);
       }
@@ -137,41 +146,28 @@ export default function FeirantesPage() {
     .filter(f => !selectedState || f.state === selectedState)
     .map(f => f.city).filter(Boolean))].sort();
 
-  // Build set of user_ids that match fair/day filters
-  const filteredByFairDay: Set<string> | null = (() => {
-    if (!selectedFair && !selectedDay && !selectedState && !selectedCity) return null;
-
-    // Determine which fair_ids are relevant
-    let relevantFairIds = fairs.map(f => f.id);
-    if (selectedFair) relevantFairIds = [selectedFair];
-    if (selectedState) relevantFairIds = relevantFairIds.filter(fid => {
-      const f = fairs.find(x => x.id === fid);
-      return f && f.state === selectedState;
-    });
-    if (selectedCity) relevantFairIds = relevantFairIds.filter(fid => {
-      const f = fairs.find(x => x.id === fid);
-      return f && f.city === selectedCity;
-    });
-    if (selectedDay) relevantFairIds = relevantFairIds.filter(fid => {
-      const days = fairDaysMap[fid] || [];
-      return days.some(d => d.startsWith(selectedDay.slice(0, 3)));
-    });
-
-    const result = new Set<string>();
-    for (const fairId of relevantFairIds) {
-      const userIds = fairVendorMap[fairId];
-      if (userIds) for (const uid of userIds) result.add(uid);
-    }
-    return result;
-  })();
-
   const displayedVendors = vendors.filter(v => {
-    const matchSearch = !searchTerm ||
-      (v.business_name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (v.full_name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (v.specialty || '').toLowerCase().includes(searchTerm.toLowerCase());
-    const matchFairDay = !filteredByFairDay || filteredByFairDay.has(v.id);
-    return matchSearch && matchFairDay;
+    const matchSearch = !debouncedSearchTerm ||
+      (v.business_name || '').toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      (v.full_name || '').toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      (v.specialty || '').toLowerCase().includes(debouncedSearchTerm.toLowerCase());
+
+    const matchFair = !selectedFair || (v.fair_ids || []).includes(selectedFair);
+    
+    // Find all fairs this vendor is associated with
+    const vendorFairs = (v.fair_ids || []).map((fid: string) => fairs.find(f => f.id === fid)).filter(Boolean);
+    
+    // They match State if at least one of their fairs is in that state
+    const matchState = !selectedState || vendorFairs.some((f: any) => f.state === selectedState);
+    
+    // They match City if at least one of their fairs is in that city
+    const matchCity = !selectedCity || vendorFairs.some((f: any) => f.city === selectedCity);
+    
+    // Check if any of their fair's operating days match
+    const matchDay = !selectedDay || 
+      vendorFairs.some((f: any) => (f.operating_days || []).some((d: string) => d.startsWith(selectedDay.slice(0, 3))));
+
+    return matchSearch && matchFair && matchState && matchCity && matchDay;
   });
 
   const hasFilters = selectedFair || selectedDay || selectedState || selectedCity || searchTerm;
@@ -285,6 +281,12 @@ export default function FeirantesPage() {
             </button>
           )}
         </div>
+
+      {error && (
+        <div style={{ margin: '0 auto', maxWidth: 800, padding: 16, background: '#fee2e2', color: '#b91c1c', borderRadius: 8, marginBottom: 24 }}>
+          <strong>Erro ao carregar dados:</strong> {error}
+        </div>
+      )}
 
         {/* Results count */}
         <p style={{ color: '#666', fontSize: 14, marginBottom: 20 }}>
