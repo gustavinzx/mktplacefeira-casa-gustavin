@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getHomePathForRole, normalizeRole } from '@/lib/profile';
+import { supabase } from '@/lib/supabase';
 
 export type PortalRole = 'feirante' | 'chef' | 'logistica';
 
@@ -23,22 +24,25 @@ export default function PortalAuthGate({
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    const role = normalizeRole(localStorage.getItem('user_role'));
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      const role = normalizeRole(localStorage.getItem('user_role'));
 
-    if (!token) {
-      const next = encodeURIComponent(window.location.pathname);
-      router.replace(`/login?next=${next}`);
-      return;
-    }
+      if (!token) {
+        const next = encodeURIComponent(window.location.pathname);
+        router.replace(`/login?next=${next}`);
+        return;
+      }
 
-    const allowed = ALLOWED_ROLES[portalRole];
-    if (!allowed.includes(role)) {
-      router.replace(getHomePathForRole(role));
-      return;
-    }
+      const allowed = ALLOWED_ROLES[portalRole];
+      if (!allowed.includes(role)) {
+        router.replace(getHomePathForRole(role));
+        return;
+      }
 
-    setReady(true);
+      setReady(true);
+    })();
   }, [portalRole, router]);
 
   if (!ready) {

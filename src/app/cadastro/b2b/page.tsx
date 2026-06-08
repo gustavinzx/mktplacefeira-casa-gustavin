@@ -362,9 +362,9 @@ export default function CadastroB2BPage() {
         
         <div className="flex items-center gap-10">
           <nav className="flex gap-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <Link href="#" className="hover:text-blue-600 transition-colors">Tabela de Preços</Link>
-            <Link href="#" className="hover:text-blue-600 transition-colors">Logística</Link>
-            <Link href="#" className="hover:text-blue-600 transition-colors">Suporte PJ</Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Tabela de Preços</Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Logística</Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Suporte PJ</Link>
           </nav>
           <div className="text-slate-200">
             <ShieldCheck size={20} />

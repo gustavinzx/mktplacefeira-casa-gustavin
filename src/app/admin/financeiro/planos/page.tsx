@@ -8,6 +8,7 @@ import {
   Check, Loader2,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export interface SubscriptionPlan {
   id: string;
@@ -66,6 +67,7 @@ interface WizardModalProps {
 }
 
 function PlanoWizardModal({ onClose, onSave, saving, initialData }: WizardModalProps) {
+  const { showToast } = useToast();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<Partial<SubscriptionPlan>>(
     initialData ?? { name: '', targetProfile: 'feirante', price: 0, recurrence: 'mensal', gracePeriodDays: 0, features: [''], isActive: true }
@@ -85,7 +87,7 @@ function PlanoWizardModal({ onClose, onSave, saving, initialData }: WizardModalP
 
   const handleSave = () => {
     const cleaned = (formData.features ?? []).filter(f => f.trim());
-    if (!cleaned.length) { alert('Adicione pelo menos um benefício.'); return; }
+    if (!cleaned.length) { showToast('Adicione pelo menos um benefício.', 'info'); return; }
     onSave({ ...formData, features: cleaned, id: initialData?.id });
   };
 
@@ -256,6 +258,7 @@ function PlanoWizardModal({ onClose, onSave, saving, initialData }: WizardModalP
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AdminPlanosPage() {
+  const { showToast } = useToast();
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -299,7 +302,7 @@ export default function AdminPlanosPage() {
       setEditingPlan(null);
       fetchPlans();
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     } finally {
       setSaving(false);
     }

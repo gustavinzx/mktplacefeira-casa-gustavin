@@ -160,9 +160,9 @@ export default function PortalTopbar({ setSidebarOpen, centerContent, rightActio
                 <button onClick={() => setShowFAQ(false)} className="text-blue-400 hover:text-blue-600"><X size={16} /></button>
               </div>
               <div className="p-2">
-                <a href="#" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Como gerenciar produtos?</a>
-                <a href="#" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Como confirmar um pedido?</a>
-                <a href="#" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Dúvidas sobre pagamentos</a>
+                <a href="/" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Como gerenciar produtos?</a>
+                <a href="/" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Como confirmar um pedido?</a>
+                <a href="/" className="block p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-xl transition-colors">Dúvidas sobre pagamentos</a>
               </div>
               <div className="p-3 text-center border-t border-gray-100">
                 <button className="text-xs font-bold text-blue-600 hover:underline">Acessar Central de Ajuda</button>

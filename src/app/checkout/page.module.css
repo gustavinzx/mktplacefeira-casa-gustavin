@@ -1,48 +1,113 @@
 .wrapper {
-  background-color: var(--background);
+  background-color: #fafaf9;
   min-height: 100vh;
 }
 
+/* ── Layout principal: responsivo ── */
 .container {
-  padding: 48px 0;
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding: 32px 24px 64px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    grid-template-rows: auto 1fr;
+    gap: 0 40px;
+    align-items: start;
+  }
+}
+
+/* Botão "Voltar" ocupa toda a linha */
+.backBtn {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: #0e6b17;
+}
+
+/* ── Coluna esquerda (formulário) ── */
+.formCol {
+  min-width: 0;
 }
 
 .title {
-  font-family: var(--font-plus-jakarta);
-  font-size: 32px;
-  margin-bottom: 32px;
+  font-family: var(--font-plus-jakarta, 'Inter', sans-serif);
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 28px;
+  color: #111;
 }
 
+/* ── Seções (endereço, pagamento) ── */
 .section {
   background: white;
-  padding: 32px;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-1);
-  margin-bottom: 24px;
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid #f0ede8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
 }
 
 .sectionTitle {
   display: flex;
   align-items: center;
+  gap: 10px;
+  font-family: var(--font-plus-jakarta, 'Inter', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* ── Endereços ── */
+.addressList {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  font-family: var(--font-plus-jakarta);
-  font-size: 20px;
-  margin-bottom: 24px;
 }
 
 .addressCard {
-  border: 2px solid var(--primary);
-  padding: 20px;
-  border-radius: var(--radius-lg);
-  background: var(--surface-container-low);
+  border: 2px solid #e5e7eb;
+  padding: 18px;
+  border-radius: 14px;
+  background: white;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
+.addressCard:hover {
+  border-color: #a3d9a5;
+}
+
+.addressCardActive {
+  border-color: #0e6b17;
+  background: #f0fdf4;
+}
+
+/* ── Métodos de pagamento ── */
 .paymentMethods {
   display: flex;
   flex-direction: column;
@@ -50,50 +115,103 @@
 }
 
 .method {
-  border: 1px solid var(--outline-variant);
-  padding: 16px;
-  border-radius: var(--radius-md);
+  border: 2px solid #e5e7eb;
+  padding: 18px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.method:hover {
+  border-color: #a3d9a5;
 }
 
 .methodActive {
-  border-color: var(--primary);
-  background: var(--surface-container-low);
+  border-color: #0e6b17;
+  background: #f0fdf4;
 }
 
+/* ── Sidebar Resumo (coluna direita) ── */
 .summary {
   background: white;
-  padding: 32px;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-2);
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid #f0ede8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   position: sticky;
-  top: 48px;
+  top: 32px;
 }
 
 .summaryTitle {
-  font-family: var(--font-plus-jakarta);
+  font-family: var(--font-plus-jakarta, 'Inter', sans-serif);
   font-size: 20px;
-  margin-bottom: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #111;
 }
 
 .summaryRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
-  font-size: 15px;
-  color: var(--on-surface-variant);
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
 }
 
 .totalRow {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 2px solid var(--outline-variant);
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #f0ede8;
   font-size: 20px;
   font-weight: 800;
-  color: var(--on-surface);
+  color: #111;
+}
+
+/* ── Erro ── */
+.errorBox {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  border: 1px solid #fecaca;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 48px;
+    gap: 0;
+  }
+
+  .summary {
+    position: static;
+    margin-top: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 20px 16px;
+  }
+
+  .summary {
+    padding: 20px 16px;
+  }
 }

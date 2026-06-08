@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Megaphone, TrendingUp, Users, Target, CheckCircle2, Loader2, MousePointerClick } from 'lucide-react';
 import styles from './page.module.css';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function MarketingHubPage() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -12,11 +14,13 @@ export default function MarketingHubPage() {
   // Form State
   const [form, setForm] = useState({ title: '', type: 'discount', discount_value: '' });
   const [creating, setCreating] = useState(false);
+  const { showToast } = useToast();
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/marketing', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -37,14 +41,15 @@ export default function MarketingHubPage() {
     e.preventDefault();
     setCreating(true);
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/marketing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(form)
       });
       if (res.ok) {
-        alert('Campanha criada com sucesso!');
+        showToast('Campanha criada com sucesso!', 'success');
         setForm({ title: '', type: 'discount', discount_value: '' });
         setActiveTab('dashboard');
         fetchData();
@@ -159,7 +164,7 @@ export default function MarketingHubPage() {
                   <div key={i} className={styles.pkgFeature}><CheckCircle2 size={16} color="#10b981" /> {f}</div>
                 ))}
               </div>
-              <button className={styles.btnBuy} onClick={() => alert('Integração de pagamento simulada com sucesso!')}>
+              <button className={styles.btnBuy} onClick={() => showToast('Integração de pagamento simulada com sucesso!', 'info')}>
                 Comprar Pacote
               </button>
             </div>

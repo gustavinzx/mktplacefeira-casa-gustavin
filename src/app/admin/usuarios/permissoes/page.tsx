@@ -25,10 +25,12 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function AdminAdvancedPermissionsPage() {
   const [roles, setRoles] = useState<any[]>([]);
   const [selectedRole, setSelectedRole] = useState<any>(null);
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [vendors, setVendors] = useState<any[]>([]);
@@ -97,14 +99,14 @@ export default function AdminAdvancedPermissionsPage() {
       const res = await fetch(`/api/admin/roles?id=${role.id}`, { method: 'DELETE' });
       const json = await res.json();
       if (!json.success) {
-        alert('Erro ao excluir: ' + json.error);
+        showToast('Erro ao excluir: ' + json.error, 'error');
         return;
       }
       const updated = roles.filter(r => r.id !== role.id);
       setRoles(updated);
       if (selectedRole?.id === role.id) setSelectedRole(updated[0] ?? null);
     } catch (error: any) {
-      alert('Erro ao excluir: ' + error.message);
+      showToast('Erro ao excluir: ' + error.message, 'error');
     }
   }
 
@@ -137,10 +139,10 @@ export default function AdminAdvancedPermissionsPage() {
         setNewRole({ name: '', description: '', color: '#125d30' });
         setShowNewRole(false);
       } else {
-        alert('Erro ao criar perfil: ' + result.error);
+        showToast('Erro ao criar perfil: ' + result.error, 'error');
       }
     } catch (e: any) {
-      alert('Erro ao criar perfil: ' + e.message);
+      showToast('Erro ao criar perfil: ' + e.message, 'error');
     }
     setIsCreating(false);
   }
@@ -184,12 +186,12 @@ export default function AdminAdvancedPermissionsPage() {
       
       if (result.success) {
         setRoles(roles.map(r => r.id === selectedRole.id ? selectedRole : r));
-        alert('Permissões atualizadas com sucesso!');
+        showToast('Permissões atualizadas com sucesso!', 'success');
       } else {
-        alert('Erro ao salvar: ' + result.error);
+        showToast('Erro ao salvar: ' + result.error, 'error');
       }
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     }
     
     setIsSaving(false);

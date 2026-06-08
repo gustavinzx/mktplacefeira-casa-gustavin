@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { fetchLogisticsTags, syncLogisticsTag, deleteLogisticsTag, type LogisticsTag } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 const DEFAULT_TAGS: LogisticsTag[] = [
   // Tipos de Feira
@@ -48,6 +49,7 @@ const DEFAULT_TAGS: LogisticsTag[] = [
 export default function AdminLogisticaTagsPage() {
   const [activeTab, setActiveTab] = useState<'tipo_feira' | 'modalidade' | 'periodicidade'>('tipo_feira');
   const [tags, setTags] = useState<LogisticsTag[]>([]);
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [dbError, setDbError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -133,7 +135,7 @@ export default function AdminLogisticaTagsPage() {
         setTags(prev => [...prev, { ...tagData, id: String(Date.now()) }]);
       }
       setIsModalOpen(false);
-      alert('Aviso: Os dados foram salvos temporariamente na sessão local, pois a tabela mktplace_feira_logistics_tags ainda não foi criada no Supabase. Por favor, execute a migration SQL correspondente.');
+      showToast('Aviso: Os dados foram salvos temporariamente na sessão local, pois a tabela mktplace_feira_logistics_tags ainda não foi criada no Supabase. Por favor, execute a migration SQL correspondente.', 'success');
     }
     setIsSaving(false);
   };
@@ -146,7 +148,7 @@ export default function AdminLogisticaTagsPage() {
       if (result.success) {
         loadTags();
       } else {
-        alert('Erro ao excluir do banco de dados.');
+        showToast('Erro ao excluir do banco de dados.', 'error');
         // Excluir localmente como fallback
         setTags(prev => prev.filter(t => t.id !== tag.id));
       }
@@ -334,7 +336,7 @@ export default function AdminLogisticaTagsPage() {
   created_at    TIMESTAMPTZ DEFAULT NOW(),
   CONSTRAINT mktplace_feira_logistics_tags_name_group_unique UNIQUE (name, group_type)
 );`);
-            alert('SQL de criação copiado para a área de transferência!');
+            showToast('SQL de criação copiado para a área de transferência!', 'info');
           }}
           className="px-8 py-4 bg-white text-gray-900 rounded-2xl font-black text-sm whitespace-nowrap hover:bg-green-50 transition-all active:scale-95"
         >

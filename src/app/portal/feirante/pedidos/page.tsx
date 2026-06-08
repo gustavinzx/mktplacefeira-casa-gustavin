@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2, Package, CheckCircle2, Clock, XCircle, Search } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 interface Order {
   id: string;
@@ -30,6 +31,7 @@ export default function FeirantePedidosPage() {
   const [error, setError] = useState('');
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>('todos');
+  const { showToast } = useToast();
 
   useEffect(() => {
     let active = true;
@@ -81,7 +83,7 @@ export default function FeirantePedidosPage() {
       setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
     } catch (e: any) {
       console.error('Erro ao atualizar pedido:', e);
-      alert('Falha ao atualizar o status: ' + (e.message || 'Erro desconhecido.'));
+      showToast('Falha ao atualizar o status: ' + (e.message || 'Erro desconhecido.'), 'error');
     } finally {
       setUpdatingId(null);
     }

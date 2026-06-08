@@ -17,7 +17,9 @@ import {
   MoreVertical,
   Navigation
 } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 export default function AdminDiretorioFranqueadosPage() {
+  const { showToast } = useToast();
   const [franqueados, setFranqueados] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +28,7 @@ export default function AdminDiretorioFranqueadosPage() {
 
   // Helper for quick alerts without a complex toast context
   const handleNotImplemented = (feature: string) => {
-    alert(`Processando e gerando o relatório do módulo: "${feature}"... O download/redirecionamento ocorrerá após a compilação final.`);
+    showToast(`Processando e gerando o relatório do módulo: "${feature}"... O download/redirecionamento ocorrerá após a compilação final.`, 'info');
   };
 
   const loadData = async () => {

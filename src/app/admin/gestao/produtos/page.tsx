@@ -9,6 +9,7 @@ import {
 import Link from 'next/link';
 import Modal from '@/components/admin/Modal';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 type CatalogProduct = {
   id: string;
@@ -35,6 +36,7 @@ type EditForm = {
 type Category = { id: string; name: string; parent_id: string | null; };
 
 export default function AdminCatalogoMasterPage() {
+  const { showToast } = useToast();
   const [products, setProducts] = useState<CatalogProduct[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
@@ -197,7 +199,7 @@ export default function AdminCatalogoMasterPage() {
       setIsModalOpen(false);
       fetchProducts();
     } catch (e: any) {
-      alert('Erro ao salvar: ' + (e.message ?? e));
+      showToast('Erro ao salvar: ' + (e.message ?? e), 'error');
     } finally {
       setSaving(false);
     }
@@ -259,7 +261,7 @@ export default function AdminCatalogoMasterPage() {
 
     setMigrating(false);
     setMigrateProgress('');
-    alert(`Migração concluída! ${done - skipped} imagens enviadas ao Storage.`);
+    showToast(`Migração concluída! ${done - skipped} imagens enviadas ao Storage.`, 'success');
     fetchProducts();
   };
 

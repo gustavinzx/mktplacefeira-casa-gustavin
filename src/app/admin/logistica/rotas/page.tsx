@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useToast } from '@/components/Toast';
 import { createPortal } from 'react-dom';
 import { NovaZonaModal } from '@/components/NovaZonaModal';
 import { 
@@ -283,6 +284,7 @@ const LeafletMap = ({ selectedCity, fairs, onSelectCoordinates, isPicker = false
 };
 
 export default function AdminLogisticaRotasPage() {
+  const { showToast } = useToast();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [rotas, setRotas] = React.useState([
     { id: 'ROTA-DF-248B', region: 'Brasília - DF', city: 'Brasília', estado: 'DF', shippingTypes: ['Distância'], partner: 'PicknGo', drivers: 8, orders: 95, status: 'Otimizada', time: '19:20' },
@@ -493,10 +495,10 @@ export default function AdminLogisticaRotasPage() {
     if (confirm(`Tem certeza que deseja excluir a configuração de ${city}-${uf}?`)) {
       const result = await deleteLogisticsConfig(city, uf);
       if (result.success) {
-        alert('Configuração excluída com sucesso!');
+        showToast('Configuração excluída com sucesso!', 'success');
         setRotas(prev => prev.filter(r => !(r.city === city && r.estado === uf)));
       } else {
-        alert('Erro ao excluir: ' + result.error);
+        showToast('Erro ao excluir: ' + result.error, 'error');
       }
     }
   };
@@ -517,7 +519,7 @@ export default function AdminLogisticaRotasPage() {
       // 1. Sincroniza a configuração de logística
       const result = await syncLogisticsConfig(logisticsConfig);
       if (!result.success) {
-        alert('Erro ao salvar: ' + result.error);
+        showToast('Erro ao salvar: ' + result.error, 'error');
         setIsSaving(false);
         return;
       }
@@ -559,12 +561,12 @@ export default function AdminLogisticaRotasPage() {
         }
       }
 
-      alert('Configurações da cidade salvas com sucesso!');
+      showToast('Configurações da cidade salvas com sucesso!', 'success');
       const updatedZones = await fetchDeliveryZones();
       setRotas(updatedZones.map(zoneToRota));
       setSelectedCity(null);
     } catch (err) {
-      alert('Erro inesperado ao conectar com o banco.');
+      showToast('Erro inesperado ao conectar com o banco.', 'error');
     } finally {
       setIsSaving(false);
     }
@@ -575,12 +577,12 @@ export default function AdminLogisticaRotasPage() {
     try {
       const result = await syncEngineConfig(engineConfig);
       if (result.success) {
-        alert('Configurações do motor aplicadas com sucesso!');
+        showToast('Configurações do motor aplicadas com sucesso!', 'success');
       } else {
-        alert('Erro ao salvar configurações do motor: ' + result.error);
+        showToast('Erro ao salvar configurações do motor: ' + result.error, 'error');
       }
     } catch (err) {
-      alert('Erro inesperado ao salvar configurações do motor.');
+      showToast('Erro inesperado ao salvar configurações do motor.', 'error');
     } finally {
       setIsSavingEngine(false);
     }
@@ -1888,7 +1890,7 @@ export default function AdminLogisticaRotasPage() {
                </button>
                <button 
                   onClick={() => {
-                    alert('Chave API salva com sucesso! O sistema usará essa chave para os cálculos de rotas.');
+                    showToast('Chave API salva com sucesso! O sistema usará essa chave para os cálculos de rotas.', 'success');
                     setShowApiKeyModal(false);
                   }}
                   className="px-10 py-4 bg-[#125d30] text-white rounded-[20px] font-black text-xs shadow-xl shadow-green-900/20 hover:bg-green-800 transition-all flex items-center gap-3 active:scale-95"

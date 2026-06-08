@@ -6,6 +6,7 @@ import {
   DollarSign, TrendingUp, Star, Truck, ChevronRight, AlertCircle
 } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
+import { supabase } from '@/lib/supabase';
 
 type DeliveryStatus = 'pendente' | 'a_caminho' | 'entregue' | 'problema';
 
@@ -39,8 +40,9 @@ export default function DeliveryDashboard() {
   const [problemModal, setProblemModal] = useState<Delivery | null>(null);
   const [problema, setProblema] = useState('');
 
-  React.useEffect(() => {
-    const token = localStorage.getItem('access_token');
+  React.useEffect(() => { (async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     fetch('/api/orders?type=delivery', {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -71,7 +73,7 @@ export default function DeliveryDashboard() {
       })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, []);
+  })(); }, []);
 
   const activeDelivery = deliveries.find(d => d.status === 'a_caminho');
   const pending = deliveries.filter(d => d.status === 'pendente');

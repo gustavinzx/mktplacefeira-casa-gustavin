@@ -21,8 +21,10 @@ import {
 import Link from 'next/link';
 import Modal from '@/components/admin/Modal';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function AdminFeiranteConfiguracoesPage() {
+  const { showToast } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -79,9 +81,9 @@ export default function AdminFeiranteConfiguracoesPage() {
     ];
     try {
       await supabase.from('mktplace_feira_site_settings').upsert(updates, { onConflict: 'key' });
-      alert('Configurações salvas com sucesso!');
+      showToast('Configurações salvas com sucesso!', 'success');
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     } finally {
       setSaving(false);
     }

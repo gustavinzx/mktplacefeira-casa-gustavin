@@ -3,15 +3,19 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Plus, Loader2, BookOpen, Clock, Users, ArrowLeft, Trash2, Edit } from 'lucide-react';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ChefReceitasPage() {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       if (!token) {
         window.location.href = '/login';
         return;
@@ -43,9 +47,10 @@ export default function ChefReceitasPage() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Tem certeza que deseja excluir esta receita?')) return;
+
     
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) return;
 
     try {
@@ -57,10 +62,10 @@ export default function ChefReceitasPage() {
       if (data.success) {
         setRecipes(recipes.filter(r => r.id !== id));
       } else {
-        alert(data.error || 'Erro ao excluir receita');
+        showToast(data.error || 'Erro ao excluir receita', 'error');
       }
     } catch (err) {
-      alert('Erro de conexão ao excluir');
+      showToast('Erro de conexão ao excluir', 'error');
     }
   };
 

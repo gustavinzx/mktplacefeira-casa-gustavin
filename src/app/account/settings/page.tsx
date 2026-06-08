@@ -5,6 +5,7 @@ import { Loader2, Save, AlertTriangle } from 'lucide-react';
 import styles from './page.module.css';
 
 import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function AccountSettingsPage() {
   const { showToast } = useToast();
@@ -16,12 +17,12 @@ export default function AccountSettingsPage() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('access_token');
+        const { data: { session } } = await supabase.auth.getSession();
+        const token = session?.access_token;
         const res = await fetch('/api/account/summary', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         // We use the summary endpoint just to check auth, but actually we need the profile from Supabase
-        const { supabase } = await import('@/lib/supabase');
         const { data: { user } } = await supabase.auth.getUser(token as string);
         if (user) {
           const { data } = await supabase.from('mktplace_feira_profiles').select('*').eq('id', user.id).single();
@@ -41,7 +42,8 @@ export default function AccountSettingsPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
       const res = await fetch('/api/account/settings', {
         method: 'PUT',
         headers: {

@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChefHat, PlusCircle, Star, Edit2, Trash2, Loader2, X } from 'lucide-react';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ChefServicosPage() {
   const [servicos, setServicos] = useState<any[]>([]);
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [newService, setNewService] = useState({ title: '', price: '' });
@@ -13,7 +16,8 @@ export default function ChefServicosPage() {
   const [activeTab, setActiveTab] = useState<'servicos' | 'agendamentos'>('servicos');
 
   const fetchServices = async () => {
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) return;
     try {
       const res = await fetch('/api/services', { headers: { Authorization: `Bearer ${token}` } });
@@ -38,7 +42,8 @@ export default function ChefServicosPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     
     try {
       const res = await fetch('/api/services', {
@@ -59,17 +64,18 @@ export default function ChefServicosPage() {
         setShowModal(false);
         fetchServices();
       } else {
-        alert(data.error || 'Erro ao salvar');
+        showToast(data.error || 'Erro ao salvar', 'error');
       }
     } catch (e) {
-      alert('Erro de conexão');
+      showToast('Erro de conexão', 'error');
     } finally {
       setSaving(false);
     }
   };
 
   const handleUpdateAppointment = async (id: string, status: string) => {
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     try {
       const res = await fetch(`/api/appointments/${id}/status`, {
         method: 'PUT',
@@ -83,10 +89,10 @@ export default function ChefServicosPage() {
       if (data.success) {
         setAppointments(appointments.map(a => a.id === id ? { ...a, status } : a));
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     } catch (e) {
-      alert('Erro de conexão.');
+      showToast('Erro de conexão.', 'error');
     }
   };
 

@@ -3,8 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2, Zap, Package, Crown } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function PacotesPage() {
+  const { showToast } = useToast();
   const plans = [
     { name: 'Pacote Básico', credits: 50, price: 49.90, icon: Package, color: '#3b82f6', bg: '#eff6ff', features: ['Destaque em buscas regionais', 'Relatório básico'] },
     { name: 'Pacote Avançado', credits: 150, price: 129.90, icon: Zap, color: '#0e6b17', bg: '#eef7f2', features: ['Tudo do básico', 'Destaque na home', 'Suporte prioritário'], popular: true },
@@ -51,7 +53,7 @@ export default function PacotesPage() {
               ))}
             </ul>
 
-            <button onClick={() => alert('Compra simulada.')} style={{ width: '100%', padding: '16px', borderRadius: '16px', border: 'none', background: plan.popular ? '#0e6b17' : '#f3f4f6', color: plan.popular ? 'white' : '#4b5563', fontWeight: 800, fontSize: '16px', cursor: 'pointer' }}>
+            <button onClick={() => showToast('Compra simulada.', 'info')} style={{ width: '100%', padding: '16px', borderRadius: '16px', border: 'none', background: plan.popular ? '#0e6b17' : '#f3f4f6', color: plan.popular ? 'white' : '#4b5563', fontWeight: 800, fontSize: '16px', cursor: 'pointer' }}>
               Comprar Agora
             </button>
           </div>

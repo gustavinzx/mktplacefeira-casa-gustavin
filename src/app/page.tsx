@@ -9,6 +9,7 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Clock, Star, ShoppingBag, Heart, Loader2 } from 'lucide-react';
 import CarouselHero from '@/components/CarouselHero';
+import { supabase } from '@/lib/supabase';
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
@@ -31,11 +32,12 @@ export default function Home() {
       }
     } catch (e) {}
 
-    const token = localStorage.getItem('access_token');
-    const headers: HeadersInit = {};
-    if (token) headers['Authorization'] = `Bearer ${token}`;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const token = session?.access_token;
+      const headers: HeadersInit = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    fetch(`/api/home${queryParams}`, { headers })
+      fetch(`/api/home${queryParams}`, { headers })
       .then((r) => r.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -68,6 +70,7 @@ export default function Home() {
       .finally(() => {
         setLoading(false);
       });
+    });
   }, []);
 
   return (

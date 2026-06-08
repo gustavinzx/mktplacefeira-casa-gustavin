@@ -31,6 +31,28 @@ const InstagramIcon = ({ size = 20, color = "currentColor", ...props }) => (
 );
 
 const Footer = () => {
+  const [socialLinks, setSocialLinks] = React.useState({
+    instagram: 'https://instagram.com/feira.casa',
+    whatsapp: '#',
+    facebook: '#'
+  });
+
+  React.useEffect(() => {
+    fetch('/api/site-settings')
+      .then(res => res.json())
+      .then(json => {
+        if (json.success && json.data) {
+          setSocialLinks(prev => ({
+            ...prev,
+            instagram: json.data.instagram_url || prev.instagram,
+            whatsapp: json.data.whatsapp_number ? `https://wa.me/${json.data.whatsapp_number}` : prev.whatsapp,
+            facebook: json.data.facebook_url || prev.facebook
+          }));
+        }
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -70,9 +92,9 @@ const Footer = () => {
           <div className={styles.socialCol}>
             <h4>Redes Sociais</h4>
             <div className={styles.socialIcons}>
-              <Link href="#"><InstagramIcon size={20} /></Link>
-              <Link href="#"><MessageCircle size={20} /></Link>
-              <Link href="#"><Send size={20} /></Link>
+              <Link href={socialLinks.instagram} target="_blank" rel="noopener noreferrer"><InstagramIcon size={20} /></Link>
+              <Link href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer"><MessageCircle size={20} /></Link>
+              <Link href={socialLinks.facebook} target="_blank" rel="noopener noreferrer"><Send size={20} /></Link>
             </div>
           </div>
         </div>

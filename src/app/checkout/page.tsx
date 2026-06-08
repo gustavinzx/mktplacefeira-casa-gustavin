@@ -197,7 +197,10 @@ const CheckoutPage = () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         const token = session?.access_token;
-        if (!token) { setAddressesLoading(false); return; }
+        if (!token) {
+          router.push('/login');
+          return;
+        }
 
         const res = await fetch('/api/addresses', { headers: { Authorization: `Bearer ${token}` } });
         const data = await res.json();
@@ -207,6 +210,8 @@ const CheckoutPage = () => {
           const def = data.data.find((a: Address) => a.is_default) || data.data[0];
           setAddress(def);
         } else {
+          setAddresses([]);
+          setAddress(null);
           setAddressesError('');
         }
       } catch {
@@ -216,12 +221,36 @@ const CheckoutPage = () => {
       }
     }
     loadAddresses();
-  }, []);
+
+    // Escuta mudanças de autenticação em tempo real (logout, troca de conta)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT' || !session) {
+        // Limpa tudo e redireciona
+        setAddresses([]);
+        setAddress(null);
+        setItems([]);
+        setSubtotal(0);
+        setDiscount(0);
+        setDeliveryFee(0);
+        router.push('/login');
+      } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        // Recarrega endereços para a nova sessão
+        setAddressesLoading(true);
+        loadAddresses();
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [router]);
 
   const handleConfirm = async () => {
+    setLoading(true);
     setError('');
 
     if (!address) {
+      setLoading(false);
       setError('Selecione ou cadastre um endereço de entrega para continuar.');
       return;
     }
@@ -252,6 +281,25 @@ const CheckoutPage = () => {
       const token = session?.access_token;
       if (!token) { router.push('/login'); return; }
 
+      if (paymentMethod === 'card') {
+        const stripeRes = await fetch('/api/stripe/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items,
+            customer_email: session?.user?.email,
+            order_id: 'temp_order' 
+          })
+        });
+        const stripeData = await stripeRes.json();
+        if (stripeData.url) {
+          window.location.href = stripeData.url;
+          return;
+        } else {
+          throw new Error(stripeData.error || 'Erro ao iniciar Stripe');
+        }
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -259,7 +307,6 @@ const CheckoutPage = () => {
           items: items.map(i => ({ id: i.id, product_id: i.id, quantity: i.quantity, price: i.price, title: i.title, producer_id: i.producer_id })),
           address_id: address.id,
           payment_method: paymentMethod,
-          card_data: paymentMethod === 'card' ? { last4: cardData.number.slice(-4), name: cardData.name, expiry: cardData.expiry } : undefined,
           coupon_code: coupon || undefined,
           delivery_fee: deliveryFee,
           discount,
@@ -287,17 +334,17 @@ const CheckoutPage = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
-      <main className={`${styles.container} container`}>
+      <main className={styles.container}>
 
         {/* Voltar ao Carrinho */}
         <button
+          className={styles.backBtn}
           onClick={() => router.push('/cart')}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'transparent', border: 'none', color: '#555', fontSize: '14px', fontWeight: 600, cursor: 'pointer', marginBottom: '24px', padding: '0' }}
         >
           <ArrowLeft size={18} /> Voltar ao Carrinho
         </button>
 
-        <div>
+        <div className={styles.formCol}>
           <h1 className={styles.title}>Finalizar Compra</h1>
 
           {/* Endereço */}
@@ -315,47 +362,49 @@ const CheckoutPage = () => {
             ) : (
               <div className={styles.addressList}>
                 {addresses.length > 0 ? (
-                  addresses.map((addr) => (
-                    <div
-                      key={addr.id}
-                      onClick={() => setAddress(addr)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={e => e.key === 'Enter' && setAddress(addr)}
-                      style={{
-                        border: `2px solid ${address?.id === addr.id ? '#0e6b17' : '#e5e7eb'}`,
-                        padding: '16px', borderRadius: '12px', marginBottom: '12px', cursor: 'pointer',
-                        background: address?.id === addr.id ? '#f0fdf4' : 'white',
-                        display: 'flex', alignItems: 'flex-start', gap: '12px',
-                        transition: 'all 0.2s',
-                      }}
-                    >
-                      <input type="radio" checked={address?.id === addr.id} readOnly style={{ marginTop: '4px', accentColor: '#0e6b17' }} />
-                      <div>
-                        <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px', color: address?.id === addr.id ? '#0e6b17' : '#111' }}>
-                          {addr.is_default ? '⭐ Endereço Principal' : 'Endereço'}
-                        </h3>
-                        <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.5' }}>
-                          {addr.street}, {addr.number}
-                          {addr.complement ? ` — ${addr.complement}` : ''}
-                          {addr.neighborhood ? <><br />{addr.neighborhood}</> : null}
-                          <br />
-                          {addr.city}, {addr.state} — CEP {addr.zip_code}
-                        </p>
+                  addresses.map((addr) => {
+                    const isSelected = address?.id === addr.id;
+                    return (
+                      <div
+                        key={addr.id}
+                        onClick={() => setAddress(addr)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={e => e.key === 'Enter' && setAddress(addr)}
+                        className={`${styles.addressCard} ${isSelected ? styles.addressCardActive : ''}`}
+                      >
+                        <div style={{
+                          width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0, marginTop: '2px',
+                          border: isSelected ? '6px solid #0e6b17' : '2px solid #ccc',
+                          background: 'white', transition: 'all 0.2s'
+                        }} />
+                        <div style={{ flex: 1 }}>
+                          <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px', color: isSelected ? '#0e6b17' : '#111' }}>
+                            {addr.is_default ? '⭐ Endereço Principal' : 'Endereço'}
+                          </h3>
+                          <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.6' }}>
+                            {addr.street}, {addr.number}
+                            {addr.complement ? ` — ${addr.complement}` : ''}
+                            {addr.neighborhood ? <><br />{addr.neighborhood}</> : null}
+                            <br />
+                            {addr.city}, {addr.state} — CEP {addr.zip_code}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
-                  <div style={{ textAlign: 'center', padding: '32px', background: '#f9fafb', borderRadius: '12px' }}>
-                    <MapPin size={32} style={{ color: '#ccc', marginBottom: '12px' }} />
-                    <p style={{ fontSize: '14px', color: '#666', fontWeight: 500, marginBottom: '16px' }}>
-                      Nenhum endereço cadastrado ainda.
+                  <div style={{ textAlign: 'center', padding: '40px 24px', background: '#fefce8', borderRadius: '16px', border: '2px dashed #e5e7eb' }}>
+                    <MapPin size={36} style={{ color: '#d97706', marginBottom: '12px' }} />
+                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#92400e', marginBottom: '6px' }}>Nenhum endereço cadastrado</h3>
+                    <p style={{ fontSize: '14px', color: '#78716c', marginBottom: '20px', lineHeight: '1.5' }}>
+                      Para finalizar sua compra, você precisa adicionar um endereço de entrega.
                     </p>
                     <a
                       href="/account/addresses"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#0e6b17', color: 'white', padding: '10px 20px', borderRadius: '10px', fontWeight: 700, fontSize: '14px', textDecoration: 'none' }}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#0e6b17', color: 'white', padding: '12px 24px', borderRadius: '12px', fontWeight: 700, fontSize: '14px', textDecoration: 'none', transition: 'background 0.2s' }}
                     >
-                      <Plus size={16} /> Adicionar Endereço
+                      <Plus size={18} /> Adicionar Endereço de Entrega
                     </a>
                   </div>
                 )}
@@ -373,14 +422,18 @@ const CheckoutPage = () => {
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPaymentMethod('pix')}
               >
-                <input type="radio" readOnly checked={paymentMethod === 'pix'} style={{ accentColor: '#0e6b17' }} />
+                <div style={{
+                  width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0,
+                  border: paymentMethod === 'pix' ? '6px solid #0e6b17' : '2px solid #ccc',
+                  background: 'white', transition: 'all 0.2s'
+                }} />
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 700, color: paymentMethod === 'pix' ? '#0e6b17' : '#111' }}>
-                    🟢 Pagar com PIX
+                  <p style={{ fontWeight: 700, color: paymentMethod === 'pix' ? '#0e6b17' : '#111', fontSize: '15px' }}>
+                    Pagar com PIX
                   </p>
                   <p style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>Aprovação instantânea • Mais seguro</p>
                 </div>
-                {paymentMethod === 'pix' && <span style={{ fontSize: '11px', background: '#0e6b17', color: 'white', padding: '2px 8px', borderRadius: '20px', fontWeight: 700 }}>RECOMENDADO</span>}
+                {paymentMethod === 'pix' && <span style={{ fontSize: '11px', background: '#0e6b17', color: 'white', padding: '4px 10px', borderRadius: '20px', fontWeight: 700 }}>RECOMENDADO</span>}
               </div>
 
               {paymentMethod === 'pix' && <PixPanel total={total} />}
@@ -390,12 +443,15 @@ const CheckoutPage = () => {
                 onClick={() => setPaymentMethod('card')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPaymentMethod('card')}
-                style={{ marginTop: '8px' }}
               >
-                <input type="radio" readOnly checked={paymentMethod === 'card'} style={{ accentColor: '#0e6b17' }} />
+                <div style={{
+                  width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0,
+                  border: paymentMethod === 'card' ? '6px solid #0e6b17' : '2px solid #ccc',
+                  background: 'white', transition: 'all 0.2s'
+                }} />
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 700, color: paymentMethod === 'card' ? '#0e6b17' : '#111' }}>
-                    💳 Cartão de Crédito
+                  <p style={{ fontWeight: 700, color: paymentMethod === 'card' ? '#0e6b17' : '#111', fontSize: '15px' }}>
+                    Cartão de Crédito
                   </p>
                   <p style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>Visa, Mastercard, Elo, Amex</p>
                 </div>
@@ -406,7 +462,7 @@ const CheckoutPage = () => {
           </div>
 
           {error && (
-            <div style={{ background: '#fee2e2', color: '#dc2626', padding: '16px', borderRadius: '12px', fontSize: '14px', marginTop: '16px', fontWeight: 500, display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+            <div className={styles.errorBox}>
               <span>⚠️</span> {error}
             </div>
           )}
@@ -442,7 +498,7 @@ const CheckoutPage = () => {
               className="btn-primary"
               style={{ width: '100%', justifyContent: 'center', marginTop: '32px', padding: '16px', borderRadius: '16px', fontSize: '16px' }}
               onClick={handleConfirm}
-              disabled={loading || items.length === 0 || addressesLoading}
+              disabled={loading || items.length === 0 || addressesLoading || !address}
             >
               {loading ? (
                 <><Loader2 size={20} className="animate-spin" /> Processando...</>

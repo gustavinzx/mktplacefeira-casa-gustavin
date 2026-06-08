@@ -14,6 +14,7 @@ import {
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 import { fetchRoles } from '@/lib/database';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -107,6 +108,7 @@ const LABEL = 'text-[10px] font-black text-gray-400 uppercase tracking-widest mb
 export default function AdminFeirantePerfilPage() {
   const params = useParams();
   const vendorId = params.id as string;
+  const { showToast } = useToast();
 
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [loading, setLoading] = useState(true);
@@ -411,7 +413,7 @@ export default function AdminFeirantePerfilPage() {
       }
       resetNpForm();
     } catch (err: any) {
-      alert('Erro ao salvar: ' + (err.message ?? err));
+      showToast('Erro ao salvar: ' + (err.message ?? err), 'error');
     } finally { setIsSavingNewProduct(false); }
   }
 
@@ -419,7 +421,7 @@ export default function AdminFeirantePerfilPage() {
     if (!vendor) return;
     const { error } = await supabase.from('mktplace_feira_partners').update({ status: 'approved' }).eq('id', vendor.id);
     if (!error) setVendor(prev => prev ? { ...prev, status: 'Ativo', is_verified: true } : null);
-    else alert('Erro ao aprovar feirante');
+    else showToast('Erro ao aprovar feirante', 'error');
   }
 
   async function handleProfileZip(raw: string) {
@@ -490,7 +492,7 @@ export default function AdminFeirantePerfilPage() {
       } : null);
       setIsEditProfileOpen(false);
     } catch (err: any) {
-      alert('Erro ao salvar: ' + (err.message ?? err));
+      showToast('Erro ao salvar: ' + (err.message ?? err), 'error');
     } finally {
       setIsSavingProfile(false);
     }

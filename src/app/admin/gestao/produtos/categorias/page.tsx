@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 type Category = {
   id: string;
@@ -81,6 +82,7 @@ function buildTree(flat: Category[]): Category[] {
 }
 
 export default function AdminCategoriasTagsPage() {
+  const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'categories' | 'tags'>('categories');
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -153,7 +155,7 @@ export default function AdminCategoriasTagsPage() {
       setIsTagModalOpen(false);
       fetchTags();
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     } finally {
       setSavingTag(false);
     }
@@ -193,7 +195,7 @@ export default function AdminCategoriasTagsPage() {
       setIsModalOpen(false);
       fetchCategories();
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     } finally {
       setSaving(false);
     }

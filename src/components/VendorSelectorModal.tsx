@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import styles from './VendorSelectorModal.module.css';
 import { X, Star, ShoppingCart, Store, Leaf, Clock, MapPin } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
+import { useToast } from '@/components/Toast';
 
 const Map = dynamic(() => import('./Map'), {
   ssr: false,
@@ -52,6 +53,7 @@ const VendorSelectorModal: React.FC<VendorSelectorModalProps> = ({
 }) => {
   const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (isOpen) {
@@ -201,7 +203,7 @@ const VendorSelectorModal: React.FC<VendorSelectorModalProps> = ({
                     imageUrl: productImage || '/images/placeholder.png',
                     producer: activeVendor.name
                   });
-                  alert('Item adicionado ao carrinho com sucesso!');
+                  showToast('Item adicionado ao carrinho com sucesso!', 'success');
                 }
                 onClose();
               }}

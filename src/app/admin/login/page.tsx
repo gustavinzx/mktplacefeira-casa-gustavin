@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
       if (authError) throw authError;
 
       if (authData.user) {
-        console.log('Login Auth OK, verificando permissões para:', authData.user.email);
+        // console.log('Login Auth OK, verificando permissões para:', authData.user.email);
         
         // Busca o perfil geral
         const { data: profile } = await supabase

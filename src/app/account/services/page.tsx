@@ -4,23 +4,24 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import { ChefHat, Calendar, Clock, Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ServicesPage() {
   const router = useRouter();
   const [appointments, setAppointments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const token = localStorage.getItem('access_token');
-      if (!token) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
         router.push('/login/b2c');
         return;
       }
       try {
-        const res = await fetch('/api/appointments', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await fetch('/api/appointments');
         const data = await res.json();
         if (data.success) {
           setAppointments(Array.isArray(data.data) ? data.data : []);
@@ -36,21 +37,22 @@ export default function ServicesPage() {
 
   const cancelAppointment = async (id: string) => {
     if (!confirm('Deseja realmente cancelar este agendamento?')) return;
-    const token = localStorage.getItem('access_token');
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
       const res = await fetch(`/api/appointments/${id}/status`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'cancelado' })
       });
       const data = await res.json();
       if (data.success) {
         setAppointments(appointments.map(a => a.id === id ? { ...a, status: 'cancelado' } : a));
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     } catch (e) {
-      alert('Erro ao cancelar.');
+      showToast('Erro ao cancelar.', 'error');
     }
   };
 

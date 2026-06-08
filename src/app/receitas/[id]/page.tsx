@@ -7,9 +7,11 @@ import Link from 'next/link';
 import { ChefHat, Clock, ShoppingCart, Loader2, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/useCartStore';
+import { useToast } from '@/components/Toast';
 
 export default function ReceitaDetalhePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
+  const { showToast } = useToast();
   const router = useRouter();
   const [recipe, setRecipe] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -57,7 +59,7 @@ export default function ReceitaDetalhePage({ params }: { params: Promise<{ id: s
     const availableIngredients = (recipe.ingredients || []).filter((i: any) => i.suggested_product);
     
     if (availableIngredients.length === 0) {
-      alert('Nenhum ingrediente disponível na feira no momento.');
+      showToast('Nenhum ingrediente disponível na feira no momento.', 'info');
       setAddingToCart(false);
       return;
     }

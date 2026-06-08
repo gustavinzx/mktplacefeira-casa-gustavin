@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Loader2, Star, Zap, Shield } from 'lucide-react';
 import styles from './page.module.css';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 const PLANS = [
   {
@@ -49,11 +51,13 @@ export default function SubscriptionPage() {
   const [currentSub, setCurrentSub] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const fetchSubscription = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/subscription', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -73,11 +77,11 @@ export default function SubscriptionPage() {
   }, []);
 
   const handleUpgrade = async (plan: any) => {
-    if (!confirm(`Deseja alterar seu plano para ${plan.name}?`)) return;
     
     try {
       setProcessing(plan.id);
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/subscription', {
         method: 'POST',
         headers: {
@@ -87,12 +91,12 @@ export default function SubscriptionPage() {
         body: JSON.stringify({ plan_type: plan.id, amount: plan.price })
       });
       if (res.ok) {
-        alert('Plano atualizado com sucesso!');
+        showToast('Plano atualizado com sucesso!', 'success');
         fetchSubscription();
       }
     } catch (err) {
       console.error(err);
-      alert('Erro ao atualizar plano.');
+      showToast('Erro ao atualizar plano.', 'error');
     } finally {
       setProcessing(null);
     }

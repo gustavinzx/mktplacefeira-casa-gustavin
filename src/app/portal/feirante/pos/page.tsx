@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Search, ShoppingCart, Minus, Plus, CreditCard, Banknote, Loader2, CheckCircle2 } from 'lucide-react';
 import styles from './page.module.css';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function POSPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -14,10 +16,12 @@ export default function POSPage() {
   const [paymentMethod, setPaymentMethod] = useState('pix'); // pix, cartao, dinheiro
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { showToast } = useToast();
 
   const fetchProducts = async () => {
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/produtos', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -64,7 +68,8 @@ export default function POSPage() {
     setProcessing(true);
 
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/pos', {
         method: 'POST',
         headers: {
@@ -85,11 +90,11 @@ export default function POSPage() {
         fetchProducts(); // Refresh stock
         setTimeout(() => setSuccess(false), 3000);
       } else {
-        alert(data.error || 'Erro ao processar venda');
+        showToast(data.error || 'Erro ao processar venda', 'error');
       }
     } catch (err) {
       console.error(err);
-      alert('Erro na conexão');
+      showToast('Erro na conexão', 'error');
     } finally {
       setProcessing(false);
     }

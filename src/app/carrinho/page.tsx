@@ -65,14 +65,14 @@ export default function CartPage() {
                       <div className={styles.quantityControl}>
                         <button 
                           className={styles.qtyBtn}
-                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                          onClick={() => updateQuantity(item.id, -1)}
                         >
                           <Minus size={16} />
                         </button>
                         <span className={styles.qtyValue}>{item.quantity}</span>
                         <button 
                           className={styles.qtyBtn}
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id, 1)}
                         >
                           <Plus size={16} />
                         </button>
@@ -113,8 +113,12 @@ export default function CartPage() {
                   className={styles.checkoutBtn}
                   onClick={() => {
                     localStorage.setItem('checkout_items', JSON.stringify(items));
-                    localStorage.setItem('checkout_subtotal', subtotal.toString());
-                    localStorage.setItem('checkout_deliveryFee', deliveryFee.toString());
+                    localStorage.setItem('checkout_subtotal', subtotal.toFixed(2));
+                    localStorage.setItem('checkout_deliveryFee', deliveryFee.toFixed(2));
+                    localStorage.setItem('checkout_discount', '0.00');
+                    localStorage.setItem('checkout_total', total.toFixed(2));
+                    localStorage.setItem('checkout_coupon', '');
+                    localStorage.setItem('checkout_cep', '');
                     router.push('/checkout');
                   }}
                 >

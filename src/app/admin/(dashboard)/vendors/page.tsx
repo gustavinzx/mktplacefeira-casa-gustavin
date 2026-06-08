@@ -4,8 +4,10 @@ import React, { useState, useEffect } from 'react';
 import styles from '../users/page.module.css';
 import { Search, Store, MoreHorizontal, UserCheck, Loader2 } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function VendorsPage() {
+  const { showToast } = useToast();
   const [vendors, setVendors] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('Todos');
@@ -138,7 +140,7 @@ export default function VendorsPage() {
                       onClick={() => {
                         if(confirm(`Tem certeza que deseja desativar a loja ${v.full_name || v.email}?`)) {
                           setVendors(vendors.filter(u => u.id !== v.id));
-                          alert('Loja desativada temporariamente. Para remoção definitiva, gerencie através do painel completo em "Gestão de Feirantes".');
+                          showToast('Loja desativada temporariamente. Para remoção definitiva, gerencie através do painel completo em "Gestão de Feirantes".', 'info');
                         }
                       }}
                     >

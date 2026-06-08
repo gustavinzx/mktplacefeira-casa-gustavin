@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Phone, Mail, ChevronRight, UtensilsCrossed, ChefHat, DollarSign, Calendar, MapPin, Filter } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
 import { fetchCRMLeads, syncCRMLead, type CRMLead } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 const tipoLabels = ['Todos', 'Restaurante', 'Dark Kitchen', 'Chef Autônomo'];
 
@@ -36,6 +37,7 @@ function PotencialBadge({ valor }: { valor: number }) {
 }
 
 export default function RestaurantesProspeccaoPage() {
+  const { showToast } = useToast();
   const [leads, setLeads] = useState<CRMLead[]>([]);
   const [loading, setLoading] = useState(true);
   const [tipoFiltro, setTipoFiltro] = useState('Todos');
@@ -76,7 +78,7 @@ export default function RestaurantesProspeccaoPage() {
       setForm({ nome: '', tipo: 'Restaurante', culinaria: '', cidade: '', telefone: '', email: '', potencial: '', reuniaoData: '', reuniaoHora: '' });
       loadLeads();
     } else {
-      alert('Erro ao salvar lead.');
+      showToast('Erro ao salvar lead.', 'error');
     }
   }
 

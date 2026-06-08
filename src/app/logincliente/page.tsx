@@ -519,9 +519,9 @@ export default function LoginClientePage() {
         
         <div className="flex items-center gap-10">
           <nav className="flex gap-8 text-[11px] font-black text-[#707a6f] uppercase tracking-widest">
-            <Link href="#" className="hover:text-[#0e6b17] transition-colors">Termos de Uso</Link>
-            <Link href="#" className="hover:text-[#0e6b17] transition-colors">Privacidade</Link>
-            <Link href="#" className="hover:text-[#0e6b17] transition-colors">Suporte</Link>
+            <Link href="/" className="hover:text-[#0e6b17] transition-colors">Termos de Uso</Link>
+            <Link href="/" className="hover:text-[#0e6b17] transition-colors">Privacidade</Link>
+            <Link href="/" className="hover:text-[#0e6b17] transition-colors">Suporte</Link>
           </nav>
           <div className="text-[#bfc9bd]">
             <ShieldCheck size={20} />

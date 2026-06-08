@@ -639,7 +639,7 @@ export default function AdminLogisticaIntegracoesPage() {
                     <div className="space-y-3">
                       <div className="flex justify-between">
                         <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest">URL DE WEBHOOK (ENVIO)</label>
-                        <Link href="#" className="text-[10px] font-black text-blue-600 hover:underline flex items-center gap-1">DOCS <ExternalLink size={10} /></Link>
+                        <Link href="/" className="text-[10px] font-black text-blue-600 hover:underline flex items-center gap-1">DOCS <ExternalLink size={10} /></Link>
                       </div>
                       <div className="relative group">
                         <Server size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-blue-600 transition-colors" />

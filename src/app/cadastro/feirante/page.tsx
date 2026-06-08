@@ -515,9 +515,9 @@ export default function CadastroFeirantePage() {
         </div>
         <div className="flex items-center gap-10">
           <nav className="flex gap-8 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-            <Link href="#" className="hover:text-[#125d30] transition-colors">Vantagens</Link>
-            <Link href="#" className="hover:text-[#125d30] transition-colors">Taxas</Link>
-            <Link href="#" className="hover:text-[#125d30] transition-colors">Suporte</Link>
+            <Link href="/" className="hover:text-[#125d30] transition-colors">Vantagens</Link>
+            <Link href="/" className="hover:text-[#125d30] transition-colors">Taxas</Link>
+            <Link href="/" className="hover:text-[#125d30] transition-colors">Suporte</Link>
           </nav>
           <div className="text-gray-200">
             <ShieldCheck size={20} />

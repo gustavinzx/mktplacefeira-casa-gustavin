@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { MapPin, Calendar, Clock, Loader2, Store } from 'lucide-react';
 import styles from './page.module.css';
+import { supabase } from '@/lib/supabase';
 
 export default function FeirasPage() {
   const [myFairs, setMyFairs] = useState<any[]>([]);
@@ -12,7 +13,8 @@ export default function FeirasPage() {
   const fetchFairs = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/feiras', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -34,7 +36,8 @@ export default function FeirasPage() {
 
   const handleJoin = async (fair_id: string) => {
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/feiras', {
         method: 'POST',
         headers: {
@@ -52,7 +55,8 @@ export default function FeirasPage() {
   const handleLeave = async (fair_id: string) => {
     if (!confirm('Tem certeza que deseja sair desta feira? Você perderá seu espaço reservado.')) return;
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch(`/api/feirante/feiras?fair_id=${fair_id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }

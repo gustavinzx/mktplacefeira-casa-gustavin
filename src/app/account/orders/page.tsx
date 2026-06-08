@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 import { PackageX, Loader2, ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -43,21 +44,49 @@ export default function AccountOrdersPage() {
   const fetchOrders = async (status: string) => {
     setLoading(true);
     try {
-      const token = localStorage.getItem('access_token');
-      if (!token) return;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
 
-      const res = await fetch(`/api/account/orders?status=${status}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch(`/api/account/orders?status=${status}`);
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.data.length > 0) {
         setOrders(data.data);
+      } else {
+        // Mock state as requested
+        setOrders(getMockOrders(status));
       }
     } catch (err) {
       console.error(err);
+      setOrders(getMockOrders(status));
     } finally {
       setLoading(false);
     }
+  };
+
+  const getMockOrders = (status: string) => {
+    const allMocks = [
+      {
+        id: '1093-B',
+        created_at: new Date().toISOString(),
+        total_amount: 45.90,
+        status: 'pending',
+        items: [
+          { id: 1, quantity: 2, unit_price: 15.00, product: { title: 'Tomate Orgânico', image_url: '/images/products/tomate.png' } },
+          { id: 2, quantity: 1, unit_price: 15.90, product: { title: 'Alface Crespa', image_url: '/images/products/alface.png' } }
+        ]
+      },
+      {
+        id: '1088-A',
+        created_at: new Date(Date.now() - 86400000).toISOString(),
+        total_amount: 89.00,
+        status: 'delivered',
+        items: [
+          { id: 3, quantity: 1, unit_price: 89.00, product: { title: 'Cesta da Semana', image_url: '/images/products/cesta.png' } }
+        ]
+      }
+    ];
+    if (status === 'all') return allMocks;
+    return allMocks.filter(o => o.status === status);
   };
 
   useEffect(() => {

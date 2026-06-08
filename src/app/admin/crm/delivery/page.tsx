@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Bike, Car, Truck, MapPin, ChevronRight, CheckCircle, Users, Clock, Zap, Filter } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
 import { fetchCRMLeads, syncCRMLead, type CRMLead } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 const etapaBadgeColors: Record<string, string> = {
   prospecto: 'bg-gray-100 text-gray-700',
@@ -110,6 +111,7 @@ export default function DeliveryProspeccaoPage() {
   const [raio, setRaio] = useState(10);
   const [cnh, setCnh] = useState(false);
   const [form, setForm] = useState({ nome: '', telefone: '', cidade: '', veiculo: '', tipoVeiculo: 'Moto', disponibilidade: 'Integral', observacoes: '' });
+  const { showToast } = useToast();
 
   useEffect(() => {
     loadLeads();
@@ -147,7 +149,7 @@ export default function DeliveryProspeccaoPage() {
       setForm({ nome: '', telefone: '', cidade: '', veiculo: '', tipoVeiculo: 'Moto', disponibilidade: 'Integral', observacoes: '' });
       loadLeads();
     } else {
-      alert('Erro ao salvar parceiro.');
+      showToast('Erro ao salvar parceiro.', 'error');
     }
   }
 

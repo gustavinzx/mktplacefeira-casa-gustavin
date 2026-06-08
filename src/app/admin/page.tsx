@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import CarouselHero from '@/components/CarouselHero';
+import { useToast } from '@/components/Toast';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -309,6 +310,7 @@ function WeeklyChart({
 
 export default function AdminDashboardPage() {
   const [range, setRange] = useState<DateRange>('7d');
+  const { showToast } = useToast();
   const [showRangeMenu, setShowRangeMenu] = useState(false);
 
   const [loadingKpi, setLoadingKpi] = useState(true);
@@ -463,7 +465,7 @@ export default function AdminDashboardPage() {
       setApprovals(prev => prev.filter(a => a.id !== id));
       setApprovalDetail(null);
     } catch (e: any) {
-      alert('Erro ao aprovar: ' + e.message);
+      showToast('Erro ao aprovar: ' + e.message, 'error');
     } finally {
       setProcessingId(null);
     }
@@ -480,7 +482,7 @@ export default function AdminDashboardPage() {
       setApprovals(prev => prev.filter(a => a.id !== id));
       setApprovalDetail(null);
     } catch (e: any) {
-      alert('Erro ao rejeitar: ' + e.message);
+      showToast('Erro ao rejeitar: ' + e.message, 'error');
     } finally {
       setProcessingId(null);
     }

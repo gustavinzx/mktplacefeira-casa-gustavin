@@ -454,9 +454,9 @@ export default function CadastroChefPage() {
         
         <div className="flex items-center gap-10">
           <nav className="flex gap-8 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-            <Link href="#" className="hover:text-[#e11d48] transition-colors">Produtos</Link>
-            <Link href="#" className="hover:text-[#e11d48] transition-colors">Receitas</Link>
-            <Link href="#" className="hover:text-[#e11d48] transition-colors">Suporte</Link>
+            <Link href="/" className="hover:text-[#e11d48] transition-colors">Produtos</Link>
+            <Link href="/" className="hover:text-[#e11d48] transition-colors">Receitas</Link>
+            <Link href="/" className="hover:text-[#e11d48] transition-colors">Suporte</Link>
           </nav>
           <div className="text-rose-100">
             <ShieldCheck size={20} />

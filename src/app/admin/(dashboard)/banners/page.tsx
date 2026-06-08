@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useToast } from '@/components/Toast';
 import styles from './page.module.css';
 import { Plus, Edit2, Trash2, Image as ImageIcon } from 'lucide-react';
 
 export default function BannersPage() {
+  const { showToast } = useToast();
   const defaultBanners = [
     { id: 1, title: 'Hero Principal', desc: 'Ativo até 31/12/2024', tag: 'Página Inicial', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2zz9mSEXnF3-SX-ZvYRLKxO6upzzpBNAFtg0YXC4VLErBtqEJmU4cKeIQEPEGFrNmqNLyZXJ6GD9ldqzOgJ7fv_yf9e0EsInTgqvQ7JsC1YcaeTTQDxJLZxERyAEyxRnaZuRe5MCnAMcVtwi052fjM9WD6v3rrThL43O5iQtHeaa7bap4Xzm70qN6QNZFFhqnlrNaur9I0U_fvJQxJ-FK1AD2oWZfGTS7fJAGxF1awu1O37L9mchvfrC_vYEc-wriZJuigH_iydE' },
     { id: 2, title: 'Ofertas da Semana', desc: 'Sempre ativo', tag: 'Lateral', img: '/images/hero.png' },
@@ -76,7 +78,7 @@ export default function BannersPage() {
                     const img = prompt('Nova URL de imagem:', b.img) || b.img;
                     const updated = banners.map(banner => banner.id === b.id ? { ...banner, title, desc, tag, img } : banner);
                     saveBanners(updated);
-                    alert('Banner editado com sucesso!');
+                    showToast('Banner editado com sucesso!', 'success');
                   }}><Edit2 size={16} /></button>
                   <button className={`${styles.btnAction} ${styles.btnDelete}`} title="Excluir" onClick={() => handleDelete(b.id)}><Trash2 size={16} /></button>
                 </div>

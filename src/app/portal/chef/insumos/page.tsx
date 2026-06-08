@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Loader2, ShoppingCart, Search, ChefHat } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function MeusInsumosPage() {
   const [loading, setLoading] = useState(true);
@@ -11,7 +12,8 @@ export default function MeusInsumosPage() {
 
   useEffect(() => {
     const fetchInsumos = async () => {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       if (!token) {
         window.location.href = '/login';
         return;

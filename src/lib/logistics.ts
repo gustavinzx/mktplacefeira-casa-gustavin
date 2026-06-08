@@ -48,7 +48,7 @@ async function ensureValidToken(config: IntegrationConfig): Promise<string | nul
     }
   }
 
-  console.log(`[Logistics] Renovando token para ${config.platform_id}...`);
+  // console.log(`[Logistics] Renovando token para ${config.platform_id}...`);
   
   const authReq = config.requests.find(r => r.id === 'auth');
   if (!authReq) return null;

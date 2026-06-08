@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Loader2, Truck, Package, MapPin } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface OrderItem {
   quantity: number;
@@ -40,8 +41,9 @@ export default function LogisticaPedidosPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('todos');
 
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
+  useEffect(() => { (async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) { setLoading(false); return; }
 
     fetch('/api/orders?limit=50', { headers: { Authorization: `Bearer ${token}` } })
@@ -50,7 +52,7 @@ export default function LogisticaPedidosPage() {
         if (data.success) setOrders(Array.isArray(data.data) ? data.data : (data.data?.orders || []));
       })
       .finally(() => setLoading(false));
-  }, []);
+  })(); }, []);
 
   const filtered = filter === 'todos'
     ? orders

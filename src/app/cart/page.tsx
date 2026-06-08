@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Trash2, Plus, Minus, ArrowRight, Tag, Truck, ShoppingBag, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface CartItem {
   id: string;
@@ -52,11 +53,18 @@ export default function CartPage() {
     }
   }, []);
 
-  const total = subtotal + deliveryFee - discount;
+  const effectiveDiscount = Math.min(discount, subtotal);
+  const total = subtotal - effectiveDiscount + deliveryFee;
 
   // Se o subtotal atualizar (itens removidos/adicionados), recalculamos o frete se já houver um CEP
   useEffect(() => {
-    if (cep.length >= 8 && subtotal > 0) {
+    if (subtotal === 0) {
+      setCoupon('');
+      setDiscount(0);
+      setCouponMsg('');
+      setDeliveryFee(0);
+      setShippingMsg('');
+    } else if (cep.length >= 8) {
       calculateShipping();
     }
   }, [subtotal]);
@@ -97,11 +105,18 @@ export default function CartPage() {
     if (cleanCep.length < 8) return;
     setCalculatingShipping(true);
     try {
-      const res = await fetch(`/api/shipping?cep=${cleanCep}&subtotal=${subtotal}`);
+      const res = await fetch('/api/shipping', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cep: cleanCep, items: items.map(i => ({ quantity: i.quantity, weight: 1 })) })
+      });
       const data = await res.json();
-      if (data.success) {
-        setDeliveryFee(data.data.fee);
-        setShippingMsg(data.data.message);
+      if (data.success && data.data.available) {
+        setDeliveryFee(data.data.price);
+        setShippingMsg(`✅ ${data.data.message} — Entrega em ${data.data.estimatedDays} dia(s)`);
+      } else if (data.success && !data.data.available) {
+        setShippingMsg(`⚠️ ${data.data.message}`);
+        setDeliveryFee(0);
       } else {
         setShippingMsg('❌ Erro ao calcular frete.');
         setDeliveryFee(0);
@@ -119,9 +134,9 @@ export default function CartPage() {
     e.preventDefault();
     if (checkingOut) return;
 
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
 
-    if (!token) {
+    if (!session) {
       router.push('/login?tab=signup');
       return;
     }
@@ -130,7 +145,7 @@ export default function CartPage() {
     try {
       localStorage.setItem('checkout_items', JSON.stringify(items));
       localStorage.setItem('checkout_subtotal', subtotal.toFixed(2));
-      localStorage.setItem('checkout_discount', discount.toFixed(2));
+      localStorage.setItem('checkout_discount', effectiveDiscount.toFixed(2));
       localStorage.setItem('checkout_deliveryFee', deliveryFee.toFixed(2));
       localStorage.setItem('checkout_total', total.toFixed(2));
       localStorage.setItem('checkout_coupon', coupon.toUpperCase());
@@ -142,9 +157,8 @@ export default function CartPage() {
     }
   };
 
-  const handleRemoveItem = (id: string, title: string) => {
-    const confirmed = window.confirm(`Remover "${title}" do carrinho?`);
-    if (confirmed) removeItem(id);
+  const handleRemoveItem = (id: string) => {
+    removeItem(id);
   };
 
   if (!loaded) return null;
@@ -178,7 +192,7 @@ export default function CartPage() {
                     <div className="item-price">
                       R$ {(item.price * item.quantity).toFixed(2)}
                     </div>
-                    <button className="remove-btn" onClick={() => handleRemoveItem(item.id, item.title)} title="Remover item">
+                    <button className="remove-btn" onClick={() => handleRemoveItem(item.id)} title="Remover item">
                       <Trash2 size={18} />
                     </button>
                   </div>
@@ -247,10 +261,10 @@ export default function CartPage() {
                   <span>Frete Estimado</span>
                   <span>R$ {deliveryFee.toFixed(2)}</span>
                 </div>
-                {discount > 0 && (
+                {effectiveDiscount > 0 && (
                   <div className="row" style={{ color: '#1e8e3e' }}>
                     <span>Desconto ({coupon})</span>
-                    <span>- R$ {discount.toFixed(2)}</span>
+                    <span>- R$ {effectiveDiscount.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="row total">

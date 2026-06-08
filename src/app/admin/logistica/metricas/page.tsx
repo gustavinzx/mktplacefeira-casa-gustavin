@@ -19,8 +19,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function AdminLogisticaMetricasPage() {
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
   const [optimizing, setOptimizing] = useState(false);
@@ -99,7 +101,7 @@ export default function AdminLogisticaMetricasPage() {
     setExporting(true);
     setTimeout(() => {
       setExporting(false);
-      alert("Relatório exportado com sucesso! (Download iniciado)");
+      showToast("Relatório exportado com sucesso! (Download iniciado)", 'success');
     }, 1500);
   };
 
@@ -107,7 +109,7 @@ export default function AdminLogisticaMetricasPage() {
     setOptimizing(true);
     setTimeout(() => {
       setOptimizing(false);
-      alert("Rotas otimizadas com sucesso baseadas na frota atual!");
+      showToast("Rotas otimizadas com sucesso baseadas na frota atual!", 'success');
     }, 2500);
   };
 
@@ -241,7 +243,7 @@ export default function AdminLogisticaMetricasPage() {
           <div className="pt-6 border-t border-white/10 relative z-10">
             <button 
               className="w-full py-4 bg-white text-gray-900 rounded-[20px] font-black text-xs hover:bg-green-50 transition-all flex items-center justify-center gap-2 active:scale-95"
-              onClick={() => alert("O mapa ao vivo requer conexão com a API de GPS da frota.")}
+              onClick={() => showToast("O mapa ao vivo requer conexão com a API de GPS da frota.", 'info')}
             >
               <Activity size={16} />
               Ver Mapa em Tempo Real

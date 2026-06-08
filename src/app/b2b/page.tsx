@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 import {
   LayoutDashboard,
   Store,
@@ -199,6 +200,7 @@ function B2bOrderCard({ order }: { order: any }) {
 
 export default function B2BPage() {
   const router = useRouter();
+  const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'dashboard' | 'catalogo' | 'pedidos' | 'faturamento' | 'dados'>('catalogo');
   
   const [products, setProducts] = useState<B2bProduct[]>([]);
@@ -472,7 +474,7 @@ export default function B2BPage() {
                   <button
                     type="button"
                     title="Notificações"
-                    onClick={() => alert('Você não tem novas notificações no momento.')}
+                    onClick={() => showToast('Você não tem novas notificações no momento.', 'info')}
                   >
                     <Bell size={20} />
                   </button>
@@ -860,7 +862,7 @@ export default function B2BPage() {
                          }}>{item.status}</span>
                          
                          <button 
-                           onClick={() => alert(`O download do PDF do boleto #${item.id} foi iniciado com sucesso!`)}
+                           onClick={() => showToast(`O download do PDF do boleto #${item.id} foi iniciado com sucesso!`, 'success')}
                            style={{
                              background: 'transparent',
                              border: '1px solid #d1d5db',

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import { ChefHat, BookOpen, Truck, Star, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 
 const ChefDashboard = () => {
   const [userName, setUserName] = useState('');
@@ -15,22 +16,23 @@ const ChefDashboard = () => {
     const name = localStorage.getItem('user_name');
     if (name) setUserName(name.split(' ')[0]);
 
-    const token = localStorage.getItem('access_token');
-    if (!token) { setLoading(false); return; }
+    const fetchChefData = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { setLoading(false); return; }
 
-    fetch('/api/users/me', { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.json())
-      .then(data => {
-        if (data.success && data.data?.full_name) {
-          setUserName(data.data.full_name.split(' ')[0]);
-          localStorage.setItem('user_name', data.data.full_name);
-        }
-      });
+      fetch('/api/users/me')
+        .then(r => r.json())
+        .then(data => {
+          if (data.success && data.data?.full_name) {
+            setUserName(data.data.full_name.split(' ')[0]);
+            localStorage.setItem('user_name', data.data.full_name);
+          }
+        });
 
-    Promise.all([
-      fetch('/api/recipes', { headers: { Authorization: `Bearer ${token}` } }),
-      fetch('/api/services', { headers: { Authorization: `Bearer ${token}` } })
-    ])
+      Promise.all([
+        fetch('/api/recipes'),
+        fetch('/api/services')
+      ])
       .then(async ([recipesRes, servicesRes]) => {
         const recipesData = await recipesRes.json();
         const servicesData = await servicesRes.json();
@@ -43,7 +45,10 @@ const ChefDashboard = () => {
           setServicesCount(servicesList.length);
         }
       })
-      .finally(() => setLoading(false));
+        .finally(() => setLoading(false));
+    };
+    
+    fetchChefData();
   }, []);
 
   if (loading) {

@@ -4,22 +4,25 @@ import {
   DollarSign, Truck, UserCheck, Wallet, ArrowUpRight,
   TrendingUp, Clock, ChevronRight, AlertCircle
 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function FranchiseeDashboard() {
   const [data, setData] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    fetch('/api/franchisee', { headers: { Authorization: `Bearer ${token}` } })
-      .then(res => res.json())
-      .then(res => {
-        if (res.success) {
-          setData(res.data);
-        }
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const token = session?.access_token;
+      fetch('/api/franchisee', { headers: { Authorization: `Bearer ${token}` } })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            setData(res.data);
+          }
+        })
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    });
   }, []);
 
   const faturamento = data?.faturamento || 0;

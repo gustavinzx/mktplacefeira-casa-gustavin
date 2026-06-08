@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Plus, Loader2, Edit2, Trash2, Package } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 interface Product {
   id: string;
@@ -22,6 +23,7 @@ export default function FeiranteProdutosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [userId, setUserId] = useState('');
+  const { showToast } = useToast();
 
   useEffect(() => {
     let active = true;
@@ -61,7 +63,6 @@ export default function FeiranteProdutosPage() {
   }, [router]);
 
   const handleDelete = async (id: string, title: string) => {
-    if (!window.confirm(`Tem certeza que deseja remover o produto "${title}"? Essa ação é irreversível.`)) return;
 
     try {
       const { error } = await supabase.from(getTableName('products')).delete().eq('id', id);
@@ -70,7 +71,7 @@ export default function FeiranteProdutosPage() {
       setProducts(prev => prev.filter(p => p.id !== id));
     } catch (e: any) {
       console.error('Erro ao deletar produto:', e);
-      alert('Erro de conexão ao tentar remover: ' + (e.message || 'Erro desconhecido.'));
+      showToast('Erro de conexão ao tentar remover: ' + (e.message || 'Erro desconhecido.'), 'error');
     }
   };
 

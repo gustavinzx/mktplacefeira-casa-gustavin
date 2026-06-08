@@ -153,7 +153,7 @@ export default function UserSignup() {
             </button>
 
             <p className={styles.policy}>
-              Ao criar uma conta, você concorda com as <a href="#">Condições de Uso</a> e o <a href="#">Aviso de Privacidade</a> da feira.casa.
+              Ao criar uma conta, você concorda com as <a href="/">Condições de Uso</a> e o <a href="/">Aviso de Privacidade</a> da feira.casa.
             </p>
 
             <div className={styles.divider}>
@@ -169,9 +169,9 @@ export default function UserSignup() {
 
       <footer className={styles.footer}>
         <div className={styles.footerLinks}>
-          <a href="#">Condições de Uso</a>
-          <a href="#">Aviso de Privacidade</a>
-          <a href="#">Ajuda</a>
+          <a href="/">Condições de Uso</a>
+          <a href="/">Aviso de Privacidade</a>
+          <a href="/">Ajuda</a>
         </div>
         <p className={styles.copyright}>© 2024 feira.casa - Conectando o campo à sua mesa.</p>
       </footer>

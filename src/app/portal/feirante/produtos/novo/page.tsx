@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2, ArrowLeft, Check, Wand2 } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 interface Category {
   id: string;
@@ -18,6 +20,7 @@ export default function NovoProdutoPage() {
   const [rewriting, setRewriting] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   const [form, setForm] = useState({
     title: '',
@@ -64,10 +67,10 @@ export default function NovoProdutoPage() {
       if (data.success && data.data.rewritten) {
         setForm(prev => ({ ...prev, description: data.data.rewritten }));
       } else {
-        alert('Erro ao otimizar texto.');
+        showToast('Erro ao otimizar texto.', 'error');
       }
     } catch (err) {
-      alert('Erro de conexão com a IA.');
+      showToast('Erro de conexão com a IA.', 'error');
     } finally {
       setRewriting(false);
     }
@@ -82,7 +85,8 @@ export default function NovoProdutoPage() {
       return;
     }
 
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) {
       setError('Você precisa estar logado.');
       return;

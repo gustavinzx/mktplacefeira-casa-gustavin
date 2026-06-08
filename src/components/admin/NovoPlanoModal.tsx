@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Trash2, ArrowRight, ArrowLeft, Check } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export interface SubscriptionPlan {
   id?: string;
@@ -32,6 +33,7 @@ function fmt(v: number) {
 }
 
 export default function NovoPlanoModal({ onClose, onSave, initialData }: NovoPlanoModalProps) {
+  const { showToast } = useToast();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<Partial<SubscriptionPlan>>({
     name: '',
@@ -61,7 +63,7 @@ export default function NovoPlanoModal({ onClose, onSave, initialData }: NovoPla
 
   const handleSubmit = () => {
     const cleaned = (formData.features ?? []).filter((f: any) => f.trim());
-    if (!cleaned.length) { alert('Adicione pelo menos um benefício.'); return; }
+    if (!cleaned.length) { showToast('Adicione pelo menos um benefício.', 'error'); return; }
     onSave({ ...(formData as SubscriptionPlan), features: cleaned });
   };
 

@@ -18,6 +18,7 @@ import { getCurrentLocale, getDictionary } from "@/lib/i18n/server";
 import { I18nProvider } from "@/lib/i18n/client";
 import BottomNav from "@/components/BottomNav";
 import { ToastProvider, ToastContainer } from "@/components/Toast";
+import CartSync from "@/components/CartSync";
 
 export const metadata: Metadata = {
   title: "Feira Livre Digital - O frescor da feira na sua casa",
@@ -72,6 +73,7 @@ export default async function RootLayout({
           <I18nProvider initialLocale={locale} initialDictionary={dictionary}>
             {children}
             <BottomNav />
+            <CartSync />
           </I18nProvider>
           <ToastContainer />
         </ToastProvider>

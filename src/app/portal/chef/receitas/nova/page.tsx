@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Loader2, Save, Plus, Trash2, Wand2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 export default function NovaReceitaPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [rewriting, setRewriting] = useState(false);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
   
   const [formData, setFormData] = useState({
     title: '',
@@ -38,10 +40,10 @@ export default function NovaReceitaPage() {
       if (data.success && data.data.rewritten) {
         setFormData(prev => ({ ...prev, instructions: data.data.rewritten }));
       } else {
-        alert('Erro ao otimizar texto. Tente novamente.');
+        showToast('Erro ao otimizar texto. Tente novamente.', 'error');
       }
     } catch (err) {
-      alert('Erro de conexão com o simulador de IA.');
+      showToast('Erro de conexão com o simulador de IA.', 'error');
     } finally {
       setRewriting(false);
     }
@@ -67,7 +69,8 @@ export default function NovaReceitaPage() {
     setError('');
 
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       if (!token) {
         setError('Sessão expirada. Faça login novamente.');
         setLoading(false);

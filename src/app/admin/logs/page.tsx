@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 
 
@@ -503,6 +504,7 @@ function TaskModal({
 export default function SystemLogsPage() {
   // ── Logs tab ────────────────────────────────────────────────────────────────
   const [tab, setTab]         = useState<'logs' | 'build'>('logs');
+  const { showToast } = useToast();
   const [logFilter, setLogFilter] = useState('all');
   const [logSearch, setLogSearch] = useState('');
   const [logs, setLogs] = useState<any[]>([]);
@@ -661,7 +663,7 @@ export default function SystemLogsPage() {
       await supabase.from('mktplace_feira_build_tasks').update({ priority: newPriority, updated_at: new Date().toISOString() }).eq('id', id);
     } catch (e: any) {
       console.error('Error updating priority', e);
-      alert('Erro ao atualizar prioridade');
+      showToast('Erro ao atualizar prioridade', 'error');
       fetchTasks(); // rollback on failure
     }
   };

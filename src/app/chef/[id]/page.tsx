@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ChefHat, Star, Calendar, Clock, Loader2, MessageCircle } from 'lucide-react';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ChefPublicProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
@@ -11,6 +13,7 @@ export default function ChefPublicProfilePage({ params }: { params: Promise<{ id
   const [services, setServices] = useState<any[]>([]);
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
   
   // Booking Modal
   const [showModal, setShowModal] = useState(false);
@@ -61,9 +64,10 @@ export default function ChefPublicProfilePage({ params }: { params: Promise<{ id
   const handleBook = async (e: React.FormEvent) => {
     e.preventDefault();
     setBookingLoading(true);
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) {
-      alert('Você precisa estar logado para contratar.');
+      showToast('Você precisa estar logado para contratar.', 'info');
       window.location.href = '/login/b2c';
       return;
     }
@@ -82,16 +86,16 @@ export default function ChefPublicProfilePage({ params }: { params: Promise<{ id
       });
       const data = await res.json();
       if (data.success) {
-        alert('Agendamento solicitado com sucesso! O Chef entrará em contato para confirmar.');
+        showToast('Agendamento solicitado com sucesso! O Chef entrará em contato para confirmar.', 'success');
         setShowModal(false);
         setBookingDate('');
         setBookingTime('');
         setNotes('');
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     } catch (e) {
-      alert('Erro ao agendar.');
+      showToast('Erro ao agendar.', 'error');
     } finally {
       setBookingLoading(false);
     }

@@ -71,7 +71,7 @@ export class PaymentGateway {
    */
   static async createSubscription(data: SubscriptionRequest): Promise<SubscriptionResult> {
     // TODO: Implementar chamada à API do Gateway de Pagamento
-    console.log('[PaymentGateway] Criando assinatura...', data);
+    // console.log('[PaymentGateway] Criando assinatura...', data);
     
     // Mock de resposta
     return new Promise((resolve) => {
@@ -90,7 +90,7 @@ export class PaymentGateway {
    */
   static async processPayment(data: PaymentRequest) {
     // TODO: Implementar chamada à API do Gateway de Pagamento
-    console.log('[PaymentGateway] Processando pagamento único...', data);
+    // console.log('[PaymentGateway] Processando pagamento único...', data);
     
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -107,7 +107,7 @@ export class PaymentGateway {
    * Cancela uma assinatura ativa.
    */
   static async cancelSubscription(subscriptionId: string) {
-    console.log(`[PaymentGateway] Cancelando assinatura ${subscriptionId}...`);
+    // console.log(`[PaymentGateway] Cancelando assinatura ${subscriptionId}...`);
     return { success: true };
   }
 
@@ -115,7 +115,7 @@ export class PaymentGateway {
    * Cria ou atualiza um cliente no gateway de pagamento.
    */
   static async syncCustomer(data: CustomerData) {
-    console.log('[PaymentGateway] Sincronizando cliente...', data);
+    // console.log('[PaymentGateway] Sincronizando cliente...', data);
     return {
       success: true,
       gatewayCustomerId: `cus_${Math.random().toString(36).substring(7)}`
@@ -126,7 +126,7 @@ export class PaymentGateway {
    * Processa o saque do feirante aplicando o Split (Marketplace + Logística).
    */
   static async requestWithdrawalWithSplit(data: WithdrawalRequest) {
-    console.log('[PaymentGateway] Solicitando saque com split (PIX)...', data);
+    // console.log('[PaymentGateway] Solicitando saque com split (PIX)...', data);
 
     const taxaPlataforma = data.grossAmount * (data.marketplaceFeePercent / 100);
     const taxaLogistica = data.logisticsFeeValue;

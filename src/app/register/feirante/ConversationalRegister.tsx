@@ -4,6 +4,7 @@ import React from 'react';
 import ConversationalFlow, { Step } from '@/components/ConversationalFlow';
 import { validateCPF } from '@/lib/validations';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/Toast';
 
 const STEPS: Step[] = [
   {
@@ -72,6 +73,7 @@ const STEPS: Step[] = [
 
 export default function ConversationalRegister() {
   const router = useRouter();
+  const { showToast } = useToast();
 
   const handleComplete = async (formData: any) => {
     try {
@@ -108,7 +110,7 @@ export default function ConversationalRegister() {
 
       router.push('/login?register=success');
     } catch (e: any) {
-      alert('Ocorreu um erro no cadastro: ' + e.message);
+      showToast('Ocorreu um erro no cadastro: ' + e.message, 'error');
     }
   };
 

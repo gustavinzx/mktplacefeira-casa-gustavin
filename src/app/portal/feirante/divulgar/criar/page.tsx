@@ -3,16 +3,18 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Rocket, Save, Loader2, Image as ImageIcon } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function CriarCampanhaPage() {
   const [saving, setSaving] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setTimeout(() => {
       setSaving(false);
-      alert('Campanha criada com sucesso! (Modo de Demonstração)');
+      showToast('Campanha criada com sucesso! (Modo de Demonstração)', 'success');
       window.location.href = '/portal/feirante/divulgar/meus';
     }, 1500);
   };

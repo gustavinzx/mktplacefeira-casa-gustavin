@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { createSupabaseAdmin } from '@/lib/supabase-server';
 
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
-    console.log('[Webhook PickNGo] Notificação recebida:', payload);
+    // console.log('[Webhook PickNGo] Notificação recebida:', payload);
 
     // Aqui você pode processar o status do pedido, por exemplo:
     // if (payload.status === 'Entregue') { ... }

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import { TrendingUp, Package, AlertCircle, Loader2, ShoppingBag, Star } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/components/Toast';
 import { useRouter } from 'next/navigation';
 import { supabase, getTableName } from '@/lib/supabase';
 
@@ -37,6 +38,7 @@ const FeiranteDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   useEffect(() => {
     let active = true;
@@ -98,7 +100,7 @@ const FeiranteDashboard = () => {
       setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
     } catch (e: any) {
       console.error('Erro ao atualizar status:', e);
-      alert('Falha na conexão ao atualizar status: ' + (e.message || 'Erro desconhecido.'));
+      showToast('Falha na conexão ao atualizar status: ' + (e.message || 'Erro desconhecido.'), 'error');
     } finally {
       setUpdatingId(null);
     }

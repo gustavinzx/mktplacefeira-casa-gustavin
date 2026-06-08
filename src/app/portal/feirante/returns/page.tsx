@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { RefreshCw, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import styles from './page.module.css';
+import { supabase } from '@/lib/supabase';
 
 export default function ReturnsPage() {
   const [returns, setReturns] = useState<any[]>([]);
@@ -11,7 +12,8 @@ export default function ReturnsPage() {
   const fetchReturns = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/returns', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -34,7 +36,8 @@ export default function ReturnsPage() {
     if (!confirm(`Deseja realmente ${status === 'approved' ? 'aprovar' : 'rejeitar'} esta devolução?`)) return;
 
     try {
-      const token = localStorage.getItem('access_token');
+      const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
       const res = await fetch('/api/feirante/returns', {
         method: 'PUT',
         headers: {

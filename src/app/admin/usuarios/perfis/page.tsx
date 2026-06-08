@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
 import { fetchRoles, syncRole } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
@@ -310,6 +311,7 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 
 export default function AdminPerfisAcessoPage() {
   const [roles, setRoles] = useState<RoleData[]>([]);
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -371,10 +373,10 @@ export default function AdminPerfisAcessoPage() {
         await loadRoles();
         setIsModalOpen(false);
       } else {
-        alert('Erro ao salvar: ' + result.error);
+        showToast('Erro ao salvar: ' + result.error, 'error');
       }
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     }
   }
 

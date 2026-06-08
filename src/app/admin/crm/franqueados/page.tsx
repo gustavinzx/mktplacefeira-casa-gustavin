@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Users, Map, Building2, TrendingUp, Calendar, ChevronRight, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
 import { fetchCRMLeads, syncCRMLead, type CRMLead } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 interface Territorio {
   nome: string;
@@ -49,6 +50,7 @@ export default function FranqueadosProspeccaoPage() {
   const [selectedFranqueado, setSelectedFranqueado] = useState<CRMLead | null>(null);
   const [novoModal, setNovoModal] = useState(false);
   const [form, setForm] = useState({ nome: '', cidade: '', estado: '', territorioInteresse: '', capacidadeInvestimento: 'R$150k', statusJuridico: 'PF', experienciaAnterior: '', comoConheceu: '' });
+  const { showToast } = useToast();
 
   useEffect(() => {
     loadLeads();
@@ -80,7 +82,7 @@ export default function FranqueadosProspeccaoPage() {
       setForm({ nome: '', cidade: '', estado: '', territorioInteresse: '', capacidadeInvestimento: 'R$150k', statusJuridico: 'PF', experienciaAnterior: '', comoConheceu: '' });
       loadLeads();
     } else {
-      alert('Erro ao salvar candidato.');
+      showToast('Erro ao salvar candidato.', 'error');
     }
   }
 

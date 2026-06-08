@@ -19,7 +19,8 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('access_token');
+        const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
         if (!token) {
           router.push('/login');
           return;

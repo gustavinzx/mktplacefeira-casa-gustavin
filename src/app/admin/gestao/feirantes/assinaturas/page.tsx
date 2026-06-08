@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 type Subscription = {
   id: string;
@@ -61,6 +62,7 @@ type TemplateForm = {
 };
 
 export default function AdminFeiranteAssinaturasPage() {
+  const { showToast } = useToast();
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -136,7 +138,7 @@ export default function AdminFeiranteAssinaturasPage() {
       setIsTemplateModalOpen(false);
       fetchTemplates();
     } catch (e: any) {
-      alert('Erro ao salvar: ' + e.message);
+      showToast('Erro ao salvar: ' + e.message, 'error');
     } finally {
       setSavingTemplate(false);
     }

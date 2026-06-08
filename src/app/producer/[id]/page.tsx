@@ -8,6 +8,8 @@ import ProductCard from '@/components/ProductCard';
 import styles from './page.module.css';
 import { Star, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/components/Toast';
+import { supabase } from '@/lib/supabase';
 
 export default function ProducerPage() {
   const params = useParams();
@@ -18,6 +20,7 @@ export default function ProducerPage() {
   const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   // Rating state
   const [ratingHover, setRatingHover] = useState(0);
@@ -55,7 +58,8 @@ export default function ProducerPage() {
   const handleSubmitReview = async () => {
     if (rating === 0) return;
     setSubmittingReview(true);
-    const token = localStorage.getItem('access_token');
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
     
     try {
       const res = await fetch(`/api/producer/${producerId}/reviews`, {
@@ -74,10 +78,10 @@ export default function ProducerPage() {
         setComment('');
         setTimeout(() => setReviewSuccess(false), 3000);
       } else {
-        alert(data.error || 'Erro ao enviar avaliação');
+        showToast(data.error || 'Erro ao enviar avaliação', 'error');
       }
     } catch {
-      alert('Erro de conexão');
+      showToast('Erro de conexão', 'error');
     } finally {
       setSubmittingReview(false);
     }

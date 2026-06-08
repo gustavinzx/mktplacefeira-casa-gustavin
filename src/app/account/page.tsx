@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 import { Package, Wallet, MapPin, Tag, ArrowRight, Loader2, Clock } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -32,12 +33,10 @@ export default function AccountOverviewPage() {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const token = localStorage.getItem('access_token');
-        if (!token) return;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
 
-        const res = await fetch('/api/account/summary', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const res = await fetch('/api/account/summary');
         const data = await res.json();
         if (data.success) {
           setSummary(data.data);

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Wallet, ArrowDownLeft, ArrowUpRight, Loader2, History } from 'lucide-react';
 import styles from './page.module.css';
+import { supabase } from '@/lib/supabase';
 
 export default function AccountWalletPage() {
   const [walletData, setWalletData] = useState<any>(null);
@@ -12,7 +13,8 @@ export default function AccountWalletPage() {
   useEffect(() => {
     const fetchWallet = async () => {
       try {
-        const token = localStorage.getItem('access_token');
+        const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
         const res = await fetch('/api/account/wallet', {
           headers: { 'Authorization': `Bearer ${token}` }
         });

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -138,6 +139,7 @@ function ChatThread({ messages }: { messages: Message[] }) {
 function TicketModal({ ticket, onClose, onUpdate }: {
   ticket: Devolucao; onClose: () => void; onUpdate: () => Promise<void>;
 }) {
+  const { showToast } = useToast();
   const [tab, setTab] = useState<'info' | 'resolution' | 'messages'>('info');
   const [status, setStatus] = useState(ticket.status);
   const [severity, setSeverity] = useState(ticket.severity);
@@ -161,7 +163,7 @@ function TicketModal({ ticket, onClose, onUpdate }: {
         updated_at: new Date().toISOString(),
       }).eq('id', ticket.id);
       await onUpdate();
-    } catch (e: any) { alert('Erro: ' + e.message); }
+    } catch (e: any) { showToast('Erro: ' + e.message, 'error'); }
     finally { setSaving(false); }
   };
 
@@ -182,7 +184,7 @@ function TicketModal({ ticket, onClose, onUpdate }: {
       setLocalMessages(updated);
       setNewMsg('');
       await onUpdate();
-    } catch (e: any) { alert('Erro: ' + e.message); }
+    } catch (e: any) { showToast('Erro: ' + e.message, 'error'); }
     finally { setSendingMsg(false); }
   };
 
@@ -416,6 +418,7 @@ function TicketModal({ ticket, onClose, onUpdate }: {
 // ── New Ticket Modal ──────────────────────────────────────────────────────────
 
 function NewTicketModal({ onClose, onSave }: { onClose: () => void; onSave: () => void }) {
+  const { showToast } = useToast();
   const [form, setForm] = useState<NewForm>({
     order_number: '', customer_name: '', vendor_name: '',
     reason: REASONS[0], description: '', severity: 'Media',
@@ -439,7 +442,7 @@ function NewTicketModal({ onClose, onSave }: { onClose: () => void; onSave: () =
         messages: [],
       });
       onSave();
-    } catch (e: any) { alert('Erro: ' + e.message); }
+    } catch (e: any) { showToast('Erro: ' + e.message, 'error'); }
     finally { setSaving(false); }
   };
 

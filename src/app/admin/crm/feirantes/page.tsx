@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Phone, Mail, ChevronRight, Users, Calendar, TrendingUp, DollarSign, MapPin, Clock } from 'lucide-react';
 import Modal from '@/components/admin/Modal';
 import { fetchCRMLeads, syncCRMLead, type CRMLead } from '@/lib/database';
+import { useToast } from '@/components/Toast';
 
 const etapas = ['todos', 'prospecto', 'contato', 'proposta', 'negociacao', 'onboarding'];
 const etapaLabels: Record<string, string> = {
@@ -35,6 +36,7 @@ export default function FeirantesProspeccaoPage() {
   const [selectedLead, setSelectedLead] = useState<CRMLead | null>(null);
   const [novoModal, setNovoModal] = useState(false);
   const [form, setForm] = useState({ nome: '', cidade: '', categoria: '', fonte: 'Site', telefone: '', email: '', observacoes: '' });
+  const { showToast } = useToast();
 
   useEffect(() => {
     loadLeads();
@@ -68,7 +70,7 @@ export default function FeirantesProspeccaoPage() {
       setForm({ nome: '', cidade: '', categoria: '', fonte: 'Site', telefone: '', email: '', observacoes: '' });
       loadLeads();
     } else {
-      alert('Erro ao salvar lead.');
+      showToast('Erro ao salvar lead.', 'error');
     }
   }
 
@@ -275,7 +277,7 @@ export default function FeirantesProspeccaoPage() {
             />
           </div>
           <button
-            onClick={() => setNovoModal(false)}
+            onClick={handleCreateLead}
             className="w-full py-4 bg-[#125d30] text-white rounded-[20px] font-black text-sm hover:bg-[#0e4d27] transition-all"
           >
             Criar Lead

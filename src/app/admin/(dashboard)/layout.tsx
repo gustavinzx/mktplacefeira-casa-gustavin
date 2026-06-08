@@ -123,8 +123,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <footer className={styles.footer}>
           <p>© 2024 feira.casa - Cultivando conexões reais.</p>
           <div className={styles.footerLinks}>
-            <Link href="#">Suporte</Link>
-            <Link href="#">Privacidade</Link>
+            <Link href="/">Suporte</Link>
+            <Link href="/">Privacidade</Link>
           </div>
         </footer>
       </div>

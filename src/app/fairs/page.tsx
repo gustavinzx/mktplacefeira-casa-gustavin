@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import styles from './page.module.css';
 import { Search, Calendar, Clock, Navigation, Loader2 } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
+import { useToast } from '@/components/Toast';
 
 import dynamic from 'next/dynamic';
 
@@ -112,10 +113,11 @@ function FairsPageInner() {
   const [searchTerm, setSearchTerm] = useState('');
   const [locating, setLocating] = useState(false);
   const [flyTrigger, setFlyTrigger] = useState(0);
+  const { showToast } = useToast();
 
   const handleLocateUser = () => {
     if (!navigator.geolocation) {
-      alert('Geolocalização não suportada pelo seu navegador.');
+      showToast('Geolocalização não suportada pelo seu navegador.', 'error');
       return;
     }
     setLocating(true);
@@ -128,7 +130,7 @@ function FairsPageInner() {
       },
       (err) => {
         console.error(err);
-        alert('Não foi possível obter sua localização exata.');
+        showToast('Não foi possível obter sua localização exata.', 'error');
         setLocating(false);
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: Infinity }

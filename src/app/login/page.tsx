@@ -102,6 +102,10 @@ function LoginContent() {
               window.location.href = target;
               return;
             }
+          } else if (!profile && active) {
+            // Perfil não existe no banco (trigger de signup pode ter falhado)
+            // Não travar — mostra o form normalmente
+            console.warn("Sessão ativa mas perfil não encontrado. Exibindo formulário.");
           }
         }
       } catch (e) {
@@ -110,7 +114,12 @@ function LoginContent() {
       if (active) setCheckingSession(false);
     };
 
-    checkInitialSession();
+    // Timeout de segurança: nunca ficar travado mais que 5 segundos
+    const safetyTimeout = setTimeout(() => {
+      if (active) setCheckingSession(false);
+    }, 5000);
+
+    checkInitialSession().finally(() => clearTimeout(safetyTimeout));
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === "SIGNED_IN" && session && active) {

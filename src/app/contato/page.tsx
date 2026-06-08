@@ -5,14 +5,41 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
+import { useToast } from '@/components/Toast';
 
 export default function ContatoPage() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const { showToast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => setStatus('success'), 1500);
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+      } else {
+        showToast('Ocorreu um erro ao enviar a mensagem. Tente novamente.', 'error');
+        setStatus('idle');
+      }
+    } catch (err) {
+      showToast('Erro de conexão.', 'error');
+      setStatus('idle');
+    }
   };
 
   return (
@@ -60,25 +87,25 @@ export default function ContatoPage() {
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <div className={styles.formGroup}>
                     <label>Nome</label>
-                    <input type="text" placeholder="Seu nome completo" required />
+                    <input type="text" name="name" placeholder="Seu nome completo" required />
                   </div>
                   <div className={styles.formGroup}>
                     <label>E-mail</label>
-                    <input type="email" placeholder="seu@email.com" required />
+                    <input type="email" name="email" placeholder="seu@email.com" required />
                   </div>
                   <div className={styles.formGroup}>
                     <label>Assunto</label>
-                    <select required>
+                    <select name="subject" required>
                       <option value="">Selecione um assunto</option>
-                      <option value="duvida">Dúvida sobre pedido</option>
-                      <option value="elogio">Sugestão ou Elogio</option>
-                      <option value="reclamacao">Reclamação</option>
-                      <option value="parceria">Quero ser parceiro</option>
+                      <option value="Dúvida">Dúvida sobre pedido</option>
+                      <option value="Elogio">Sugestão ou Elogio</option>
+                      <option value="Reclamação">Reclamação</option>
+                      <option value="Parceria">Quero ser parceiro</option>
                     </select>
                   </div>
                   <div className={styles.formGroup}>
                     <label>Mensagem</label>
-                    <textarea rows={5} placeholder="Como podemos ajudar?" required></textarea>
+                    <textarea name="message" rows={5} placeholder="Como podemos ajudar?" required></textarea>
                   </div>
                   <button type="submit" className={styles.btnSubmit} disabled={status === 'sending'}>
                     {status === 'sending' ? 'Enviando...' : <>Enviar Mensagem <Send size={18} /></>}

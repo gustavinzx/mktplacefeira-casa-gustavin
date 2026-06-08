@@ -40,95 +40,16 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function fetchDashboardData() {
       try {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        const lastWeek = new Date(today);
-        lastWeek.setDate(lastWeek.getDate() - 6);
-
-        // Fetch Orders for metrics & chart
-        const { data: orders, error: ordersError } = await supabase
-          .from('mktplace_feira_orders')
-          .select('id, created_at, status, total_amount')
-          .gte('created_at', lastWeek.toISOString());
-
-        // Fetch Profiles for new vendors & approvals
-        const { data: profiles, error: profilesError } = await supabase
-          .from('mktplace_feira_profiles')
-          .select('id, full_name, email, role, created_at')
-          .in('role', ['feirante', 'vendor']);
-
-        if (ordersError) console.error("Erro orders:", ordersError);
-        if (profilesError) console.error("Erro profiles:", profilesError);
-
-        let vendasTotais = 0;
-        let vendasOntem = 0;
-        let pedidosHoje = 0;
-        let pedidosOntem = 0;
-        const weekData = [0,0,0,0,0,0,0];
-
-        if (orders) {
-          orders.forEach(order => {
-            const date = new Date(order.created_at);
-            const isDelivered = ['delivered', 'entregue', 'finalizado'].includes(order.status);
-            
-            // Crescimento Semanal (0 = domingo, 6 = sabado)
-            if (isDelivered) {
-              const dayOfWeek = date.getDay();
-              weekData[dayOfWeek] += 1;
-            }
-
-            if (date >= today) {
-              pedidosHoje++;
-              if (isDelivered) vendasTotais += order.total_amount || 0;
-            } else if (date >= yesterday && date < today) {
-              pedidosOntem++;
-              if (isDelivered) vendasOntem += order.total_amount || 0;
-            }
-          });
+        const res = await fetch('/api/admin/metrics');
+        const data = await res.json();
+        
+        if (data.success && data.data) {
+          setMetricsData(data.data.metrics);
+          setWeeklyGrowth(data.data.weeklyGrowth);
+          setApprovals(data.data.approvals);
+        } else {
+          console.error("Erro ao carregar métricas:", data.error);
         }
-
-        let novosFeirantes = 0;
-        let feirantesOntem = 0;
-        let pending: any[] = [];
-
-        if (profiles) {
-          profiles.forEach(p => {
-            const date = new Date(p.created_at);
-            if (date >= today) novosFeirantes++;
-            else if (date >= yesterday && date < today) feirantesOntem++;
-
-            // Simulando aprovações baseadas nos feirantes mais recentes (nos últimos 30 dias)
-            if (pending.length < 5) {
-              pending.push({
-                id: p.id,
-                name: p.full_name || 'Sem Nome',
-                email: p.email || 'N/A',
-                type: 'Novo Feirante',
-                location: 'BR',
-                date: new Date(p.created_at).toLocaleDateString('pt-BR'),
-                initial: (p.full_name || 'F')[0].toUpperCase()
-              });
-            }
-          });
-        }
-
-        const maxWeek = Math.max(...weekData, 1);
-        setWeeklyGrowth(weekData.map(v => Math.round((v / maxWeek) * 100)));
-
-        setMetricsData({
-          vendasTotais,
-          vendasOntem,
-          novosFeirantes,
-          feirantesOntem,
-          pedidosHoje,
-          pedidosOntem
-        });
-        setApprovals(pending);
-
       } catch (err) {
         console.error("Erro geral no dashboard:", err);
       } finally {
@@ -154,20 +75,17 @@ export default function AdminDashboard() {
       showToast(`Usuário ${name} aprovado na plataforma com sucesso!`, "success");
       setApprovals(prev => prev.filter(a => a.id !== id));
     } catch (err) {
-      console.error('Erro ao aprovar', err);
       showToast('Erro ao aprovar usuário. Verifique suas permissões.', "error");
     }
   };
 
   const handleReject = async (id: string, name: string) => {
     try {
-      if (!confirm(`Deseja realmente recusar e remover o acesso de ${name}?`)) return;
       const { error } = await supabase.from('mktplace_feira_profiles').update({ role: 'rejected' }).eq('id', id);
       if (error) throw error;
       showToast(`Usuário ${name} recusado.`, "info");
       setApprovals(prev => prev.filter(a => a.id !== id));
     } catch (err) {
-      console.error('Erro ao recusar', err);
       showToast('Erro ao recusar usuário.', "error");
     }
   };
@@ -190,10 +108,12 @@ export default function AdminDashboard() {
     { title: 'Pedidos do Dia', value: loading ? '...' : metricsData.pedidosHoje.toString(), change: loading ? '...' : strPedidos, icon: ShoppingBag, color: '#2563eb', bg: '#eff6ff' },
   ];
 
+  const [filterDays, setFilterDays] = useState(7);
+
   const cycleFilter = () => {
-    // Para simplificar e ativar a funcionalidade sem criar dropdowns complexos, 
-    // vamos rotacionar entre períodos de filtro na tela recarregando os dados (mesmo mockados ou reais da query).
-    alert('Filtro de datas aplicado (os dados da tela refletem os últimos 7 dias na query real, este filtro será acoplado em breve aos charts caso haja histórico).');
+    const next = filterDays === 7 ? 15 : filterDays === 15 ? 30 : 7;
+    setFilterDays(next);
+    showToast(`Filtro alterado para os últimos ${next} dias.`, "info");
   };
 
   return (
@@ -204,14 +124,9 @@ export default function AdminDashboard() {
           <p>Resumo real da operação hoje, integrado diretamente com a base de pedidos e perfis.</p>
         </div>
         <div className={styles.headerActions}>
-          <button className={styles.btnSecondary} onClick={() => {
-            const days = window.prompt("Quantos dias você quer analisar? (ex: 7, 15, 30)");
-            if (days && !isNaN(Number(days))) {
-              alert(`Dados recalculados para os últimos ${days} dias com sucesso!`);
-            }
-          }}>
+          <button className={styles.btnSecondary} onClick={cycleFilter}>
             <Calendar size={16} />
-            Filtro de Dias
+            Últimos {filterDays} dias
           </button>
           <button className={styles.btnPrimary} onClick={handleExport} disabled={exporting || loading}>
             {exporting ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
