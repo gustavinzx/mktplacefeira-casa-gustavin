@@ -163,14 +163,14 @@ export default function CampanhasPage() {
                 <tr key={c.id} className="border-b border-gray-50 hover:bg-gray-50/60 transition-colors">
                   <td className="px-6 py-4 font-bold text-gray-900 text-sm whitespace-nowrap">{c.nome}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1.5 rounded-full text-[11px] font-black capitalize ${tipoBadge[c.tipo]}`}>{c.tipo}</span>
+                    <span className={`px-3 py-1.5 rounded-full text-[11px] font-black capitalize ${tipoBadge[c.tipo as CampTipo]}`}>{c.tipo}</span>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{c.gatilho}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{c.publico}</td>
                   <td className="px-6 py-4 text-sm text-gray-700">{c.impressoes}</td>
                   <td className="px-6 py-4 text-sm font-bold text-gray-900">{c.conversao}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1.5 rounded-full text-[11px] font-black ${statusBadge[c.status]}`}>{c.status}</span>
+                    <span className={`px-3 py-1.5 rounded-full text-[11px] font-black ${statusBadge[c.status as CampStatus]}`}>{c.status}</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">

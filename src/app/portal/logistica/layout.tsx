@@ -12,7 +12,7 @@ export default function LogisticaLayout({
   return (
     <PortalAuthGate portalRole="logistica">
       <div style={{ display: 'flex' }}>
-        <PortalSidebar role="logistica" />
+        <PortalSidebar />
         <div style={{ flex: 1, marginLeft: '280px' }}>{children}</div>
       </div>
     </PortalAuthGate>

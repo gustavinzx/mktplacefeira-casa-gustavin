@@ -84,15 +84,15 @@ CREATE POLICY "Usuario insere os proprios pedidos"
 ON mktplace_feira_orders FOR INSERT 
 WITH CHECK (auth.uid() = user_id);
 
--- Policy: Leitura Vendedor (Feirante/Chef) - Ver pedidos atrelados ao seu vendor_id
+-- Policy: Leitura Vendedor (Feirante/Chef) - Ver pedidos atrelados ao seu producer_id
 CREATE POLICY "Vendedor le pedidos direcionados a ele" 
 ON mktplace_feira_orders FOR SELECT 
-USING (auth.uid() = vendor_id);
+USING (auth.uid() = producer_id);
 
 -- Policy: Atualização Vendedor - Mudar status do pedido
 CREATE POLICY "Vendedor altera pedidos direcionados a ele" 
 ON mktplace_feira_orders FOR UPDATE 
-USING (auth.uid() = vendor_id);
+USING (auth.uid() = producer_id);
 
 
 -- ========================================================================================

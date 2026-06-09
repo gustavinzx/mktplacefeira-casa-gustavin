@@ -71,7 +71,6 @@ export default function FeirantePerfilPage() {
             role: profileData?.role || 'feirante',
             stall_name: producerData?.stall_name || '',
             specialty: producerData?.specialty || '',
-            specialty: producerData?.specialty || '',
             fair_id: producerData?.fair_id || ''
           });
         }

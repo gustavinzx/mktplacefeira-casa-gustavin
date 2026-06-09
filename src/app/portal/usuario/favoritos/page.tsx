@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React from 'react';
 import { Heart } from 'lucide-react';
@@ -7,19 +7,18 @@ import { ProductCard } from '@/components/ProductCard';
 import { supabase } from '@/lib/supabase';
 
 export default function FavoritosPage() {
+  const { id: userId } = useCurrentUser();
   const [favorites, setFavorites] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     async function fetchFavorites() {
-      const { data: { session } } = await supabase.auth.getSession();
-      
       let productIds: string[] = [];
-      if (session) {
+      if (userId) {
         const { data: favs } = await supabase
           .from('mktplace_feira_favorites')
           .select('product_id')
-          .eq('user_id', session.user.id);
+          .eq('user_id', userId);
         if (favs) {
           productIds = favs.map(f => f.product_id);
         }

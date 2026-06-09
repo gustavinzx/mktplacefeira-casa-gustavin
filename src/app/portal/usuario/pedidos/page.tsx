@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -55,16 +55,8 @@ function fmtDate(iso: string) {
 export default function MeusPedidosPage() {
   const [orders, setOrders]   = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId]   = useState<string | null>(null);
+  const { id: userId } = useCurrentUser();
   const [filter, setFilter]   = useState<'todos' | 'em_aberto' | 'entregues' | 'cancelados'>('todos');
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      const uid = data.session?.user.id ?? localStorage.getItem('user_id');
-      if (uid) setUserId(uid);
-      else setLoading(false);
-    });
-  }, []);
 
   const fetchOrders = useCallback(async (uid: string) => {
     setLoading(true);

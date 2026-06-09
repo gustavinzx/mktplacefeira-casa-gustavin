@@ -12,7 +12,7 @@ export default function FeiranteLayout({
   return (
     <PortalAuthGate portalRole="feirante">
       <div style={{ display: 'flex' }}>
-        <PortalSidebar role="feirante" />
+        <PortalSidebar />
         <div style={{ flex: 1, marginLeft: '280px' }}>{children}</div>
       </div>
     </PortalAuthGate>

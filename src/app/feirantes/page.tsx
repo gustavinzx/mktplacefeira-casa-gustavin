@@ -18,7 +18,8 @@ interface Vendor {
   business_name: string | null;
   specialty: string | null;
   avatar_url: string | null;
-  status: string;
+  fair_ids?: string[];
+  status?: string;
   city?: string;
   state?: string;
 }
@@ -55,13 +56,7 @@ export default function FeirantesPage() {
   // map: fair_id → set of partner user_ids
   const [fairVendorMap, setFairVendorMap] = useState<Record<string, Set<string>>>({});
   const [fairDaysMap, setFairDaysMap] = useState<Record<string, string[]>>({});
-  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const [currentUserRole, setCurrentUserRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    setCurrentUserId(localStorage.getItem('user_id'));
-    setCurrentUserRole(localStorage.getItem('user_role'));
-  }, []);
+  const { id: currentUserId, role: currentUserRole } = useCurrentUser();
 
   useEffect(() => {
     async function load() {

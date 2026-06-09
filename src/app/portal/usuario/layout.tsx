@@ -13,7 +13,7 @@ export default function UsuarioLayout({ children }: { children: React.ReactNode 
 
   return (
     <div className="flex min-h-screen bg-[#f8f9f8]">
-      <PortalSidebar role="usuario" isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <PortalSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="flex-1 flex flex-col md:ml-[280px]">
         {/* Topbar */}

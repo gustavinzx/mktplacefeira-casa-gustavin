@@ -61,15 +61,14 @@ async function reverseGeocode(lat: number, lng: number): Promise<{
 
 const Header = () => {
   const router = useRouter();
-  const [isLogged, setIsLogged] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
+  const { role: userRole, name: userName, id: userId } = useCurrentUser();
+  const isLogged = !!userRole;
+  
   const [showMenu, setShowMenu] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
-  const [userId, setUserId] = useState<string | null>(null);
   const [showNotifications, setShowNotifications] = useState(false);
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications(userId);
 
@@ -97,21 +96,6 @@ const Header = () => {
   // Auth + Geolocalização
   useEffect(() => {
     setMounted(true);
-
-    // Auth do localStorage
-    const role = localStorage.getItem('user_role');
-    const name = localStorage.getItem('user_name');
-    if (role) {
-      setTimeout(() => {
-        setIsLogged(true);
-        setUserRole(role);
-        setUserName(name);
-      }, 0);
-    }
-
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) setUserId(data.user.id);
-    });
 
     // Região salva
     const saved = getSavedRegion();
@@ -155,8 +139,6 @@ const Header = () => {
     setIsLoggingOut(true);
     try {
       await clearAuthSession();
-      setIsLogged(false);
-      setUserRole(null);
       useCartStore.getState().clearCart();
       router.push('/login');
     } finally {

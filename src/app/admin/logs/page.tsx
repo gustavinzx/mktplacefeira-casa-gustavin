@@ -619,7 +619,50 @@ export default function SystemLogsPage() {
         description: form.description || null,
         how_to: form.how_to || null,
         solution: form.solution || null,
+        status: form.status,
+        priority: form.priority,
+        area: form.area,
+        updated_at: new Date().toISOString(),
+      };
+      if (editId) {
+        await supabase.from('mktplace_feira_build_tasks').update(payload).eq('id', editId);
+      } else {
+        await supabase.from('mktplace_feira_build_tasks').insert(payload);
+      }
+      setIsModalOpen(false);
+      fetchTasks();
+    } catch (e: any) {
+      console.error(e);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleStatusChange = async (id: string, newStatus: TaskStatus) => {
+    setTasks(prev => prev.map(t => t.id === id ? { ...t, status: newStatus } : t));
     await supabase.from('mktplace_feira_build_tasks').update({ status: newStatus, updated_at: new Date().toISOString() }).eq('id', id);
+  };
+
+  const handleMove = (id: string, direction: 'left' | 'right') => {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    const currentIndex = COLUMNS.findIndex(c => c.id === task.status);
+    const nextIndex = direction === 'left' ? currentIndex - 1 : currentIndex + 1;
+    if (nextIndex >= 0 && nextIndex < COLUMNS.length) {
+      handleStatusChange(id, COLUMNS[nextIndex].id as TaskStatus);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Tem certeza que deseja excluir esta tarefa?')) return;
+    setTasks(prev => prev.filter(t => t.id !== id));
+    try {
+      await supabase.from('mktplace_feira_build_tasks').delete().eq('id', id);
+      showToast('Tarefa excluída', 'success');
+    } catch (e: any) {
+      showToast('Erro ao excluir', 'error');
+      fetchTasks();
+    }
   };
 
   // ── Change Priority ─────────────────────────────────────────────────────────

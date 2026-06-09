@@ -125,6 +125,26 @@ export default function AdminLogisticaTagsPage() {
       setIsModalOpen(false);
       loadTags();
     } else {
+      setDbError(result.error?.message || 'Erro ao salvar a tag.');
+    }
+    setIsSaving(false);
+  };
+
+  const handleDelete = async (tag: LogisticsTag) => {
+    if (window.confirm(`Tem certeza que deseja excluir a tag "${tag.name}"?`)) {
+      const result = await deleteLogisticsTag(tag.id!);
+      if (result.success) {
+        loadTags();
+        showToast('Tag excluída com sucesso!', 'success');
+      } else {
+        showToast(result.error?.message || 'Erro ao excluir tag.', 'error');
+      }
+    }
+  };
+
+  const getTabLabel = (tab: typeof activeTab) => {
+    switch (tab) {
+      case 'tipo_feira': return 'Tipos de Feira';
       case 'modalidade': return 'Modalidades de Venda';
       case 'periodicidade': return 'Periodicidades';
     }
@@ -137,6 +157,12 @@ export default function AdminLogisticaTagsPage() {
       case 'periodicidade': return 'Frequência com que a feira ocorre fisicamente (Ex: Diária, Semanal, Mensal)';
     }
   };
+
+  const filteredTags = tags.filter(tag => {
+    if (tag.group_type !== activeTab) return false;
+    if (searchTerm && !tag.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    return true;
+  });
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">

@@ -29,13 +29,15 @@ export default function PortalAuthGate({
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
-      const role = normalizeRole(localStorage.getItem('user_role'));
+      // using the reactive role from useCurrentUser
 
       if (!token) {
         const next = encodeURIComponent(window.location.pathname);
         router.replace(`/login?next=${next}`);
         return;
       }
+
+      if (loading) return;
 
       const allowed = ALLOWED_ROLES[portalRole];
       if (!allowed.includes(role)) {
@@ -45,7 +47,7 @@ export default function PortalAuthGate({
 
       setReady(true);
     })();
-  }, [portalRole, router]);
+  }, [portalRole, router, role, loading]);
 
   if (!ready) {
     return (

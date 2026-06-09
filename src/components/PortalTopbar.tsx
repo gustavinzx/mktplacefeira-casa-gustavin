@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Bell, Search, HelpCircle, Home, LogOut, Menu, X } from 'lucide-react';
@@ -7,15 +7,14 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
 interface PortalTopbarProps {
-  setSidebarOpen: (open: boolean) => void;
+  setSidebarOpen?: (open: boolean) => void;
   centerContent?: React.ReactNode;
   rightActions?: React.ReactNode;
   hideSearch?: boolean;
 }
 
-export default function PortalTopbar({ setSidebarOpen, centerContent, rightActions, hideSearch }: PortalTopbarProps) {
-  const [userName, setUserName] = useState('');
-  const [userId, setUserId] = useState('');
+export default function PortalTopbar({ setSidebarOpen = () => {}, centerContent, rightActions, hideSearch }: PortalTopbarProps) {
+  const { name: userName, id: userId, role: actualRole } = useCurrentUser();
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
@@ -23,13 +22,6 @@ export default function PortalTopbar({ setSidebarOpen, centerContent, rightActio
   const notifRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const name = localStorage.getItem('user_name') || '';
-    const id = localStorage.getItem('user_id') || '';
-    setUserName(name);
-    setUserId(id);
-  }, []);
 
   const initials = userName
     ? userName
@@ -41,7 +33,6 @@ export default function PortalTopbar({ setSidebarOpen, centerContent, rightActio
     : '?';
 
   const handleLogout = async () => {
-    const actualRole = localStorage.getItem('user_role');
     await supabase.auth.signOut();
     localStorage.clear();
     document.cookie = 'feira_role=; path=/; max-age=0';

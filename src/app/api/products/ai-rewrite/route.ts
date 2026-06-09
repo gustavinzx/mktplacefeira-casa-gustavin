@@ -1,7 +1,10 @@
-import { ok, err } from '@/lib/supabase-server';
+import { getAuthUser, ok, err } from '@/lib/supabase-server';
 
 export async function POST(request: Request) {
   try {
+    const user = await getAuthUser(request);
+    if (!user) return err('Não autorizado', 401);
+
     const { text, title } = await request.json();
     if (!text) return err('Texto é obrigatório', 400);
 

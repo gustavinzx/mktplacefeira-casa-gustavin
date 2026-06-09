@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useEffect, useState } from 'react';
 import styles from './page.module.css';

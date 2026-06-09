@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -33,7 +33,7 @@ export default function UsuarioPerfil() {
   const [form, setForm] = useState({ full_name: '', phone: '', cpf: '' });
   const [senhaForm, setSenhaForm] = useState({ current: '', new: '', confirm: '' });
 
-  const userId = typeof window !== 'undefined' ? localStorage.getItem('user_id') || '' : '';
+  const { id: userId } = useCurrentUser();
 
   useEffect(() => {
     if (!userId) { setLoading(false); return; }

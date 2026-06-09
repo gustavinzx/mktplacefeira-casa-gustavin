@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -34,7 +34,6 @@ interface NavLink {
 }
 
 interface PortalSidebarProps {
-  role: 'feirante' | 'chef' | 'admin' | 'logistica' | 'usuario';
   isOpen?: boolean;
   onClose?: () => void;
 }
@@ -47,14 +46,12 @@ const ROLE_LABEL: Record<string, string> = {
   usuario: 'Comprador',
 };
 
-const PortalSidebar = ({ role, isOpen, onClose }: PortalSidebarProps) => {
+const PortalSidebar = ({ isOpen, onClose }: PortalSidebarProps) => {
   const pathname = usePathname();
-  const { name: userName } = useCurrentUser();
-  const [userName, setUserName] = useState('');
+  const { name: userName, role } = useCurrentUser();
   const [isImpersonating, setIsImpersonating] = useState(false);
 
   useEffect(() => {
-    setUserName(localStorage.getItem('user_name') || '');
     setIsImpersonating(localStorage.getItem('is_impersonating') === 'true');
   }, []);
 

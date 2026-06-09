@@ -39,6 +39,28 @@ export async function POST(request: Request) {
         .eq('payment_intent_id', pi.id);
     }
 
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const orderId = session.metadata?.order_id;
+      if (orderId) {
+        await admin
+          .from(TABLE.orders)
+          .update({ status: 'pago', payment_status: 'paid', paid_at: new Date().toISOString() })
+          .eq('id', orderId);
+      }
+    }
+
+    if (event.type === 'checkout.session.expired') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const orderId = session.metadata?.order_id;
+      if (orderId) {
+        await admin
+          .from(TABLE.orders)
+          .update({ status: 'cancelado', payment_status: 'expired' })
+          .eq('id', orderId);
+      }
+    }
+
     return Response.json({ received: true });
   } catch (error: any) {
     console.error('Erro ao processar webhook do Stripe:', error.message);

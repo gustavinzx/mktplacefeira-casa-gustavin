@@ -94,43 +94,22 @@ const WORKSPACES: Workspace[] = [
 
 export default function PortalHubPage() {
   const router = useRouter();
-  const { role: userRole, name: userName, loading } = useCurrentUser();
-  const [loading, setLoading] = useState(true);
-  const [userRole, setUserRole] = useState<string>('cliente');
-  const [userName, setUserName] = useState<string>('');
-  
+  const { role: rawRole, name: rawName, loading } = useCurrentUser();
+
+  // Normalização
+  const normalized: Record<string, string> = { b2c: 'cliente', customer: 'cliente' };
+  const userRole = normalized[rawRole || 'cliente'] || rawRole || 'cliente';
+  const userName = rawName || 'Usuário';
+
   useEffect(() => {
     const fetchUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      if (!session && !loading) {
         router.replace('/login?next=/portal');
-        return;
       }
-
-      // Tenta pegar metadados do auth
-      const user = session.user;
-      let name = user.user_metadata?.full_name || user.user_metadata?.name || 'Usuário';
-      let role = user.user_metadata?.role || user.user_metadata?.user_role || 'cliente';
-
-      // Fallback para localStorage
-      if (!role && typeof window !== 'undefined') {
-        role = localStorage.getItem('user_role') || 'cliente';
-      }
-      if (name === 'Usuário' && typeof window !== 'undefined') {
-        name = localStorage.getItem('user_name') || 'Usuário';
-      }
-
-      // Normalização
-      const normalized: Record<string, string> = { b2c: 'cliente', customer: 'cliente' };
-      role = normalized[role] || role;
-
-      setUserName(name);
-      setUserRole(role);
-      setLoading(false);
     };
-
     fetchUser();
-  }, [router]);
+  }, [router, loading]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

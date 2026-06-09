@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
@@ -8,14 +8,13 @@ import { CheckCircle, Truck, Package, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 const ConfirmationPage = () => {
+  const { name } = useCurrentUser();
   const [orderId, setOrderId] = useState('');
-  const [userName, setUserName] = useState('');
+  const userName = name ? name.split(' ')[0] : '';
 
   useEffect(() => {
     const id = localStorage.getItem('last_order_id');
-    const name = localStorage.getItem('user_name');
     if (id) setOrderId(id.slice(0, 8).toUpperCase());
-    if (name) setUserName(name.split(' ')[0]);
   }, []);
 
   return (

@@ -2,6 +2,18 @@ import { NextResponse } from 'next/server';
 import { createSupabaseAdmin } from '@/lib/supabase-server';
 
 export async function POST(request: Request) {
+  const secret = request.headers.get('x-pickngo-secret') || 
+                 request.headers.get('authorization')?.replace('Bearer ', '');
+  const expectedSecret = process.env.PICKNGO_WEBHOOK_SECRET;
+  
+  if (expectedSecret && secret !== expectedSecret) {
+    return Response.json({ error: 'Webhook não autorizado' }, { status: 401 });
+  }
+  // Se não há secret configurado, aceitar (modo dev)
+  if (!expectedSecret) {
+    console.warn('[PickNGo Webhook] PICKNGO_WEBHOOK_SECRET não configurado — aceitando sem verificação');
+  }
+
   try {
     const payload = await request.json();
     // console.log('[Webhook PickNGo] Notificação recebida:', payload);

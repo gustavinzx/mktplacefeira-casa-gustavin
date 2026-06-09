@@ -1,5 +1,5 @@
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -50,32 +50,10 @@ function fmtDate(iso: string) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function UsuarioDashboard() {
-  const [userName, setUserName]       = useState('');
+  const { name: userName = '', id: userId } = useCurrentUser();
   const [orders, setOrders]           = useState<Order[]>([]);
   const [loadingOrders, setLoading]   = useState(false);
   const [totalOrders, setTotalOrders] = useState(0);
-  const [userId, setUserId]           = useState<string | null>(null);
-
-  // ── Load user from Supabase session ─────────────────────────────────────────
-  useEffect(() => {
-    const cached = localStorage.getItem('user_name') || 'Comprador';
-    setUserName(cached);
-
-    supabase.auth.getSession().then(({ data }) => {
-      const user = data.session?.user;
-      if (user) {
-        const meta  = user.user_metadata;
-        const name  = meta?.full_name || meta?.name || cached;
-        setUserName(name);
-        setUserId(user.id);
-        localStorage.setItem('user_name', name);
-        localStorage.setItem('user_id',   user.id);
-      } else {
-        const id = localStorage.getItem('user_id');
-        if (id) setUserId(id);
-      }
-    });
-  }, []);
 
   // ── Fetch orders ─────────────────────────────────────────────────────────────
   const fetchOrders = useCallback(async (uid: string) => {

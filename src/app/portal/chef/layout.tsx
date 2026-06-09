@@ -12,7 +12,7 @@ export default function ChefLayout({
   return (
     <PortalAuthGate portalRole="chef">
       <div style={{ display: 'flex' }}>
-        <PortalSidebar role="chef" />
+        <PortalSidebar />
         <div style={{ flex: 1, marginLeft: '280px' }}>{children}</div>
       </div>
     </PortalAuthGate>
