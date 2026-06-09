@@ -51,54 +51,75 @@ export default function FeiranteProfilePage() {
     if (!id) return;
 
     async function load() {
-      const { data: partner } = await supabase
-        .from(getTableName('partners'))
-        .select('id, full_name, business_name, specialty, avatar_url, status, phone, created_at')
+      // A ID passada agora é o producer_id, e não o user_id
+      const { data: producer } = await supabase
+        .from('mktplace_feira_producers')
+        .select(`
+          id,
+          stall_name,
+          specialty,
+          created_at,
+          profile:mktplace_feira_profiles (
+            full_name,
+            avatar_url,
+            phone
+          )
+        `)
         .eq('id', id)
         .maybeSingle();
 
-      if (!partner) { setLoading(false); return; }
-      setVendor(partner);
+      if (!producer) { setLoading(false); return; }
 
-      // Load producer record
-      const { data: producer } = await supabase
-        .from(getTableName('producers'))
-        .select('id')
-        .eq('user_id', id)
-        .maybeSingle();
+      setVendor({
+        id: producer.id,
+        full_name: producer.profile?.full_name || null,
+        business_name: producer.stall_name,
+        specialty: producer.specialty,
+        avatar_url: producer.profile?.avatar_url || null,
+        status: 'approved',
+        phone: producer.profile?.phone || null,
+        created_at: producer.created_at
+      });
 
-      if (producer) {
-        // Load products
-        const { data: prods } = await supabase
-          .from(getTableName('products'))
-          .select('id, title, image_url, price, promotion_price, unit, is_active')
-          .eq('producer_id', producer.id)
-          .eq('is_active', true)
-          .limit(12);
-        setProducts(prods || []);
+      // Load products
+      const { data: prods, error: prodsError } = await supabase
+        .from('mktplace_feira_products')
+        .select('id, title, image_url, price, unit, is_organic')
+        .eq('producer_id', producer.id)
+        .limit(12);
+      
+      if (prodsError) {
+        console.error('Error fetching products:', prodsError);
+      }
+      
+      setProducts(prods || []);
 
-        // Load fairs via pos chain
-        const { data: posRows } = await supabase
-          .from(getTableName('pos'))
-          .select('id')
-          .eq('producer_id', producer.id);
+      // Load fairs from mktplace_feira_producer_fairs and main fair_id
+      const { data: pfRows } = await supabase
+        .from('mktplace_feira_producer_fairs')
+        .select('fair_id')
+        .eq('producer_id', producer.id);
 
-        if (posRows && posRows.length > 0) {
-          const posIds = posRows.map((p: any) => p.id);
-          const { data: posFairs } = await supabase
-            .from(getTableName('pos_fairs'))
-            .select('fair_id')
-            .in('pos_id', posIds);
+      const fairIds = new Set<string>();
+      pfRows?.forEach(r => fairIds.add(r.fair_id));
 
-          if (posFairs && posFairs.length > 0) {
-            const fairIds = [...new Set(posFairs.map((pf: any) => pf.fair_id))];
-            const { data: fairs } = await supabase
-              .from(getTableName('fairs'))
-              .select('id, name, city, state')
-              .in('id', fairIds);
-            setVendorFairs(fairs || []);
-          }
-        }
+      // Obter feira principal se não veio junto
+      const { data: mainProducer } = await supabase
+        .from('mktplace_feira_producers')
+        .select('fair_id')
+        .eq('id', producer.id)
+        .single();
+        
+      if (mainProducer?.fair_id) {
+        fairIds.add(mainProducer.fair_id);
+      }
+
+      if (fairIds.size > 0) {
+        const { data: fairs } = await supabase
+          .from('mktplace_feira_fairs')
+          .select('id, name, city, state')
+          .in('id', Array.from(fairIds));
+        setVendorFairs(fairs || []);
       }
 
       setLoading(false);
@@ -183,7 +204,7 @@ export default function FeiranteProfilePage() {
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 14 }}>
                 {products.map(p => {
-                  const price = p.price ?? p.promotion_price;
+                  const price = p.price;
                   return (
                     <div key={p.id} style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid #efefef', background: '#fafafa' }}>
                       <div style={{ height: 100, background: '#e8f5e9', overflow: 'hidden' }}>
