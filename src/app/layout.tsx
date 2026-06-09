@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   title: "Feira Livre Digital - O frescor da feira na sua casa",
   description: "Conectando você aos melhores produtores regionais com a conveniência do digital. Compre frutas, verduras e orgânicos frescos direto do feirante.",
   applicationName: "Feira.Casa",
-  themeColor: "#125d30",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -40,7 +39,11 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     type: "website",
   },
-};
+}
+export const viewport = {
+  themeColor: '#125d30',
+}
+;
 
 export default async function RootLayout({
   children,

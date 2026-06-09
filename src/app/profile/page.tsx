@@ -117,7 +117,9 @@ export default function ProfilePage() {
       setMessage({ type: 'success', text: 'Perfil atualizado com sucesso!' });
       
       // Atualiza o nome no localStorage para refletir no Header
-      localStorage.setItem('user_name', formData.full_name);
+      await supabase.auth.updateUser({
+      data: { full_name: formData.full_name }
+    });
       
       // Limpa a mensagem após 3 segundos
       setTimeout(() => setMessage({ type: '', text: '' }), 3000);

@@ -67,7 +67,7 @@ export default function UsuarioPerfil() {
       .eq('id', userId);
     if (!error) {
       setProfile(prev => prev ? { ...prev, ...form } : prev);
-      localStorage.setItem('user_name', form.full_name);
+      await supabase.auth.updateUser({ data: { full_name: form.full_name } })
       showToast('Dados atualizados com sucesso!');
       setModal(null);
     }
