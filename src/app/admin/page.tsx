@@ -327,52 +327,26 @@ export default function AdminDashboardPage() {
   const fetchKpi = useCallback(async () => {
     setLoadingKpi(true);
     try {
-      const from = rangeFrom(range);
-      const prevFrom = prevRangeFrom(range);
-
-      const [
-        { data: b2cCurr },
-        { data: b2cPrev },
-        { count: lojCurr },
-        { count: lojPrev },
-      ] = await Promise.all([
-        supabase.from('mktplace_feira_orders').select('total_amount').gte('created_at', from),
-        supabase.from('mktplace_feira_orders').select('total_amount').gte('created_at', prevFrom).lt('created_at', from),
-        supabase.from('mktplace_feira_producers').select('id', { count: 'exact', head: true }).gte('created_at', from),
-        supabase.from('mktplace_feira_producers').select('id', { count: 'exact', head: true }).gte('created_at', prevFrom).lt('created_at', from),
-      ]);
-
-      const sum = (rows: any[], col: string) =>
-        (rows ?? []).reduce((s: number, r: any) => s + Number(r[col] ?? 0), 0);
-
-      setKpi({
-        vendasB2C: sum(b2cCurr ?? [], 'total_amount'),
-        vendasB2B: 0,
-        novosLojistas: lojCurr ?? 0,
-        prevB2C: sum(b2cPrev ?? [], 'total_amount'),
-        prevB2B: 0,
-        prevLojistas: lojPrev ?? 0,
-      });
-
-      // Weekly chart — always last 7 days
-      const bars: WeekBar[] = [];
-      const today = new Date();
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(today);
-        d.setDate(d.getDate() - i);
-        const start = new Date(d); start.setHours(0, 0, 0, 0);
-        const end = new Date(d); end.setHours(23, 59, 59, 999);
-        const [{ data: db2c }] = await Promise.all([
-          supabase.from('mktplace_feira_orders').select('total_amount')
-            .gte('created_at', start.toISOString()).lte('created_at', end.toISOString()),
-        ]);
-        bars.push({
-          day: WEEK_DAYS[d.getDay()],
-          b2c: sum(db2c ?? [], 'total_amount'),
-          b2b: 0,
+      const res = await fetch('/api/admin/overview');
+      const data = await res.json();
+      if (data.success) {
+        setKpi({
+          vendasB2C: data.data.vendasB2C,
+          vendasB2B: data.data.vendasB2B,
+          novosLojistas: data.data.novosLojistas,
+          prevB2C: 0,
+          prevB2B: 0,
+          prevLojistas: 0,
         });
+        
+        // weekData mapping from `desempenhoSemanal`
+        const mappedBars = data.data.desempenhoSemanal.map((b: any) => ({
+          day: b.day,
+          b2c: b.h1,
+          b2b: b.h2
+        }));
+        setWeekData(mappedBars);
       }
-      setWeekData(bars);
     } catch (e) {
       console.error('fetchKpi error', e);
     } finally {

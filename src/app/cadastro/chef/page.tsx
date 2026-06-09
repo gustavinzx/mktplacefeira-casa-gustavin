@@ -151,10 +151,10 @@ export default function CadastroChefPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffcfc] flex flex-col font-['Be_Vietnam_Pro'] text-[#404940]">
+    <div className="min-h-screen bg-[#fffcfc] flex flex-col font-sans text-[#404940]">
       {/* Header */}
       <header className="w-full px-10 py-8 flex justify-between items-center bg-transparent">
-        <Link href="/" className="text-2xl font-bold text-[#e11d48] font-['Plus_Jakarta_Sans']">
+        <Link href="/" className="text-2xl font-bold text-[#e11d48] font-sans">
           feira.casa
         </Link>
         <div className="bg-white p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-colors shadow-sm">
@@ -185,7 +185,7 @@ export default function CadastroChefPage() {
                 <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6 inline-block">
                   Comunidade de Chefs
                 </span>
-                <h1 className="text-[48px] font-black leading-[1] mb-6 font-['Plus_Jakarta_Sans'] tracking-tight">
+                <h1 className="text-[48px] font-black leading-[1] mb-6 font-sans tracking-tight">
                   Insumos Reais <br /> para Chefs Reais.
                 </h1>
                 <p className="text-lg opacity-90 max-w-[380px] font-medium leading-relaxed">
@@ -230,7 +230,7 @@ export default function CadastroChefPage() {
             <div className="max-w-[420px] mx-auto w-full">
               {view === 'signup' && (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-sans tracking-tighter">
                     Entre para o Time
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -334,7 +334,7 @@ export default function CadastroChefPage() {
 
               {view === 'forgot' && (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-sans tracking-tighter">
                     Recuperar senha
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -385,7 +385,7 @@ export default function CadastroChefPage() {
 
               {view === 'login' && (
                 <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#e11d48] mb-2 font-sans tracking-tighter">
                     Bem-vindo, Chef
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -448,7 +448,7 @@ export default function CadastroChefPage() {
       {/* Footer */}
       <footer className="w-full px-12 py-10 border-t border-rose-50 flex flex-col md:flex-row justify-between items-center bg-white/50 backdrop-blur-md">
         <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-bold text-[#e11d48] text-xl font-['Plus_Jakarta_Sans'] tracking-tighter">feira.casa</span>
+          <span className="font-bold text-[#e11d48] text-xl font-sans tracking-tighter">feira.casa</span>
           <p className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">© 2024 Portal do Chef - Insumos de origem com alma.</p>
         </div>
         

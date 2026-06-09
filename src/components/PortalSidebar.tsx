@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -48,6 +49,7 @@ const ROLE_LABEL: Record<string, string> = {
 
 const PortalSidebar = ({ role, isOpen, onClose }: PortalSidebarProps) => {
   const pathname = usePathname();
+  const { name: userName } = useCurrentUser();
   const [userName, setUserName] = useState('');
   const [isImpersonating, setIsImpersonating] = useState(false);
 

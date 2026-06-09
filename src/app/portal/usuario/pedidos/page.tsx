@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
@@ -101,7 +102,7 @@ export default function MeusPedidosPage() {
   });
 
   return (
-    <div className="p-8 pb-32 max-w-4xl mx-auto animate-in fade-in duration-500 font-['Plus_Jakarta_Sans']">
+    <div className="p-8 pb-32 max-w-4xl mx-auto animate-in fade-in duration-500 font-sans">
 
       {/* Header */}
       <div className="mb-8">

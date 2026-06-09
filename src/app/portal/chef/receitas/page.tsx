@@ -15,14 +15,14 @@ export default function ChefReceitasPage() {
   useEffect(() => {
     const fetchRecipes = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-    const token = session?.access_token;
-      if (!token) {
+      const token = session?.access_token;
+      if (!token || !session?.user) {
         window.location.href = '/login';
         return;
       }
 
       try {
-        const res = await fetch('/api/recipes', {
+        const res = await fetch('/api/recipes?chef_id=' + session.user.id, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -30,7 +30,6 @@ export default function ChefReceitasPage() {
         if (data.success) {
           setRecipes(Array.isArray(data.data) ? data.data : []);
         } else if (data.error === 'Não autenticado') {
-          localStorage.removeItem('access_token');
           window.location.href = '/login';
         } else {
           setError(data.error || 'Erro ao carregar receitas');
@@ -47,8 +46,6 @@ export default function ChefReceitasPage() {
   }, []);
 
   const handleDelete = async (id: string) => {
-
-    
     const { data: { session } } = await supabase.auth.getSession();
     const token = session?.access_token;
     if (!token) return;

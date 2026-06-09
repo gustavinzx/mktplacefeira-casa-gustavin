@@ -108,7 +108,7 @@ export default function OrderTrackingModal({ isOpen, onClose, orderStatus, vendo
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 font-['Plus_Jakarta_Sans']">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 font-sans">
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}

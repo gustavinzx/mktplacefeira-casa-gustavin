@@ -16,6 +16,7 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import Link from 'next/link';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 interface Workspace {
   id: string;
@@ -93,6 +94,7 @@ const WORKSPACES: Workspace[] = [
 
 export default function PortalHubPage() {
   const router = useRouter();
+  const { role: userRole, name: userName, loading } = useCurrentUser();
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState<string>('cliente');
   const [userName, setUserName] = useState<string>('');

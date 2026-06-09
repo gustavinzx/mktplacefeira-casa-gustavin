@@ -1,6 +1,9 @@
-import { createSupabaseAdmin, TABLE, ok, err } from '@/lib/supabase-server';
+import { getAuthUser, createSupabaseAdmin, TABLE, ok, err } from '@/lib/supabase-server';
 
 export async function GET(request: Request) {
+  const user = await getAuthUser(request);
+  if (!user) return err('Não autorizado', 401);
+
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code')?.trim().toUpperCase();
 

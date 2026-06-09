@@ -1,4 +1,4 @@
-import { createSupabaseAdmin, TABLE, ok, err } from '@/lib/supabase-server';
+import { getAuthUser, createSupabaseAdmin, TABLE, ok, err } from '@/lib/supabase-server';
 
 export const dynamic = 'force-dynamic';
 

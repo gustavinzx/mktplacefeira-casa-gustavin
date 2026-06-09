@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
@@ -114,7 +115,7 @@ export default function UsuarioDashboard() {
 
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
-    <div className="p-8 pb-32 max-w-6xl mx-auto animate-in fade-in duration-500 font-['Plus_Jakarta_Sans']">
+    <div className="p-8 pb-32 max-w-6xl mx-auto animate-in fade-in duration-500 font-sans">
 
       {/* Header & Metrics */}
       <div className="mb-10 flex flex-col lg:flex-row justify-between lg:items-end gap-6">

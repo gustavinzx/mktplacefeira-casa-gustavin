@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { MapPin, Loader2 } from 'lucide-react';
+import { useGeolocation } from '@/hooks/useGeolocation';
 
 interface LocationButtonProps {
   onLocationFound?: (address: string, details?: any) => void;
@@ -12,76 +13,45 @@ export default function LocationButton({ onLocationFound }: LocationButtonProps)
   const [locationText, setLocationText] = useState('Usar minha localização atual');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const requestLocation = () => {
-    setErrorMsg('');
-    
-    // 1. Verifica se o navegador suporta a API
-    if (!navigator.geolocation) {
-      setErrorMsg('Geolocalização não é suportada pelo seu navegador.');
-      return;
-    }
+  const { locate } = useGeolocation();
 
+  const requestLocation = async () => {
+    setErrorMsg('');
     setLoading(true);
     setLocationText('Buscando sinal GPS...');
 
-    // 2. Chama a API Nativa do HTML5
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Sucesso na captura do GPS
-        const { latitude, longitude } = position.coords;
-        
-        try {
-          setLocationText('Identificando bairro...');
-          
-          // 3. Envia para o nosso Backend em Next.js
-          const response = await fetch('/api/location', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ latitude, longitude })
-          });
-          
-          const data = await response.json();
-          
-          if (data.success) {
-            setLocationText(data.address); // Ex: Recanto das Emas, Brasília - DF
-            if (onLocationFound) onLocationFound(data.address, data.details);
-          } else {
-            setErrorMsg(data.error || 'Erro ao identificar local.');
-            setLocationText('Tentar novamente');
-          }
-        } catch (err) {
-          setErrorMsg('Falha na comunicação com o servidor.');
-          setLocationText('Tentar novamente');
-        } finally {
-          setLoading(false);
-        }
-      },
-      (error) => {
-        // Tratamento de erros detalhado
-        setLoading(false);
+    const pos = await locate();
+    if (!pos) {
+      setLoading(false);
+      setErrorMsg('Erro ao obter localização. GPS desativado ou negado.');
+      setLocationText('Tentar novamente');
+      return;
+    }
+
+    try {
+      setLocationText('Identificando bairro...');
+      
+      const response = await fetch('/api/location', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ latitude: pos.lat, longitude: pos.lng })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setLocationText(data.address);
+        if (onLocationFound) onLocationFound(data.address, data.details);
+      } else {
+        setErrorMsg(data.error || 'Erro ao identificar local.');
         setLocationText('Tentar novamente');
-        
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            setErrorMsg('Permissão negada. Ative o GPS nas configurações do seu navegador ou celular.');
-            break;
-          case error.POSITION_UNAVAILABLE:
-            setErrorMsg('Sinal de GPS/Wi-Fi indisponível no momento.');
-            break;
-          case error.TIMEOUT:
-            setErrorMsg('A busca pelo GPS demorou muito e expirou.');
-            break;
-          default:
-            setErrorMsg('Ocorreu um erro desconhecido ao buscar localização.');
-            break;
-        }
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: Infinity
       }
-    );
+    } catch (err) {
+      setErrorMsg('Falha na comunicação com o servidor.');
+      setLocationText('Tentar novamente');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

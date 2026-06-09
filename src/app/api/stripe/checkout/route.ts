@@ -1,3 +1,4 @@
+import { createSupabaseAdmin, getAuthUser, ok, err } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
@@ -6,6 +7,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 });
 
 export async function POST(req: Request) {
+  const user = await getAuthUser(req);
+  if (!user) return err('Não autorizado', 401);
+
   try {
     const body = await req.json();
     const { items, customer_email, order_id } = body;

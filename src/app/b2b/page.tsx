@@ -1,7 +1,9 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Header from '@/components/Header';
+import { SkeletonCard } from '@/components/Skeleton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
@@ -530,9 +532,12 @@ export default function B2BPage() {
               </div>
 
               {loading ? (
-                <p className={styles.statusMsg}>
-                  <Loader2 size={22} className={styles.spin} color="#0e6b17" /> Carregando produtos…
-                </p>
+                <div className={styles.productGrid}>
+                  <SkeletonCard />
+                  <SkeletonCard />
+                  <SkeletonCard />
+                  <SkeletonCard />
+                </div>
               ) : filtered.length === 0 ? (
                 <p className={styles.statusMsg}>
                   Nenhum produto encontrado.{' '}

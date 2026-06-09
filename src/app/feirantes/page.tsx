@@ -10,6 +10,7 @@ import {
   Filter, X, Pencil,
 } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 interface Vendor {
   id: string;

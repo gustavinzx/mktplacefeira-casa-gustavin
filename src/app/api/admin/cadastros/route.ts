@@ -1,9 +1,21 @@
+import { createSupabaseAdmin, getAuthUser, ok, err } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: Request) {
+  const user = await getAuthUser(req);
+  if (!user) return err('Não autorizado', 401);
+
+  const admin = createSupabaseAdmin();
+  const { data: profile } = await admin
+    .from('mktplace_feira_profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single();
+  if (profile?.role !== 'admin') return err('Sem permissão', 403);
+
   try {
     const { searchParams } = new URL(req.url);
     const role = searchParams.get('role');

@@ -5,6 +5,7 @@ import Modal from './Modal';
 import { useRouter } from 'next/navigation';
 import { MapPin, Search, Navigation, Loader2 } from 'lucide-react';
 import { formatCep, saveRegion, type SavedRegion } from '@/lib/region';
+import { useGeolocation } from '@/hooks/useGeolocation';
 
 interface RegionModalProps {
   isOpen: boolean;
@@ -104,50 +105,44 @@ const RegionModal = ({ isOpen, onClose, onSelect }: RegionModalProps) => {
     }
   };
 
-  const handleGeolocation = () => {
-    if (!navigator.geolocation) {
-      setError('Seu navegador não suporta localização.');
+  const { locate } = useGeolocation();
+
+  const handleGeolocation = async () => {
+    setError('');
+    setLoading(true);
+
+    const pos = await locate();
+    if (!pos) {
+      setError('Permissão de localização negada ou não suportada.');
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
-    setError('');
-
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        const { latitude, longitude } = pos.coords;
-        try {
-          const res = await fetch('/api/location', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ latitude, longitude })
-          });
-          const data = await res.json();
-          
-          if (data.success && data.details) {
-            selectRegion({
-              label: data.address,
-              city: data.details.city,
-              state: data.details.state,
-              lat: latitude,
-              lng: longitude,
-            });
-          } else {
-            setError(data.error || 'Erro ao identificar local.');
-          }
-        } catch (e) {
-          console.warn('Erro geoloc', e);
-          setError('Falha na comunicação com o servidor.');
-        } finally {
-          setLoading(false);
-        }
-      },
-      () => {
-        setError('Permissão de localização negada.');
-        setLoading(false);
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: Infinity }
-    );
+    try {
+      const res = await fetch('/api/location', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ latitude: pos.lat, longitude: pos.lng })
+      });
+      const data = await res.json();
+      
+      if (data.success && data.details) {
+        selectRegion({
+          label: data.address,
+          city: data.details.city,
+          state: data.details.state,
+          lat: pos.lat,
+          lng: pos.lng,
+        });
+      } else {
+        setError(data.error || 'Erro ao identificar local.');
+      }
+    } catch (e) {
+      console.warn('Erro geoloc', e);
+      setError('Falha na comunicação com o servidor.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

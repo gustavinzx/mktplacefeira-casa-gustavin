@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import { Search, Map, Filter, MapPin, Clock, ArrowRight, Loader2 } from 'lucide-
 import Link from 'next/link';
 
 export default function FeirasPage() {
+  const { role: userRole } = useCurrentUser();
   const [fairs, setFairs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');

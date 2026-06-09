@@ -1,152 +1,175 @@
-/**
- * Feira.Casa - Payment Gateway Integrations
- * 
- * Este módulo serve como um adaptador genérico para integrar a plataforma
- * aos gateways de pagamento (ex: Pagar.me, Asaas, Mercado Pago, Stripe).
- * Isso permite usar as mesmas funções para cobrar assinaturas e vendas no marketplace.
- */
+import Stripe from 'stripe';
 
-export interface CustomerData {
-  id?: string;
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' as any }) // Use a valid API version or cast to any for this version
+  : null;
+
+interface PaymentRequest {
+  amount: number;
+  customerId?: string;
+  items: Array<{ id: string }>;
+}
+
+interface SubscriptionRequest {
+  planId: string;
+  customerData?: { name: string; email: string };
+}
+
+interface WithdrawalRequest {
+  grossAmount: number;
+  marketplaceFeePercent: number;
+  logisticsFeeValue: number;
+  pixKey: string;
+}
+
+interface CustomerData {
   name: string;
   email: string;
-  document: string; // CPF ou CNPJ
-  phone?: string;
 }
 
-export interface CardData {
-  number: string;
-  holderName: string;
-  expirationMonth: string;
-  expirationYear: string;
-  cvv: string;
-}
-
-export interface SubscriptionRequest {
-  planId: string;
-  customerId: string;
-  customerData?: CustomerData; // Pode vir preenchido se o cliente for novo
-  paymentMethod: 'credit_card' | 'pix' | 'boleto';
-  cardData?: CardData; 
-}
-
-export interface SubscriptionResult {
-  success: boolean;
-  subscriptionId?: string;
-  status?: 'active' | 'pending' | 'failed';
-  pixCode?: string; // Payload do PIX copia e cola se o método for PIX
-  pixQrCodeUrl?: string;
-  message?: string;
-}
-
-export interface PaymentRequest {
-  amount: number;
-  customerId: string;
-  paymentMethod: 'credit_card' | 'pix' | 'boleto';
-  items: Array<{
-    id: string;
-    title: string;
-    quantity: number;
-    unitPrice: number;
-  }>;
-  cardData?: CardData;
-}
-
-export interface WithdrawalRequest {
-  feiranteId: string;
-  pixKey: string;
-  grossAmount: number;
-  marketplaceFeePercent: number; // Ex: 15%
-  logisticsFeeValue: number; // Ex: 10.50
-}
-
-/**
- * Classe principal do Gateway de Pagamento.
- * Aqui implementaremos as chamadas para a API do banco selecionado (Asaas/Pagar.me/etc).
- */
 export class PaymentGateway {
-  
-  /**
-   * Cria uma assinatura recorrente.
-   */
-  static async createSubscription(data: SubscriptionRequest): Promise<SubscriptionResult> {
-    // TODO: Implementar chamada à API do Gateway de Pagamento
-    // console.log('[PaymentGateway] Criando assinatura...', data);
-    
-    // Mock de resposta
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          subscriptionId: `sub_${Math.random().toString(36).substring(7)}`,
-          status: 'active'
-        });
-      }, 1500);
-    });
-  }
 
-  /**
-   * Processa uma transação única (compra no marketplace).
-   */
   static async processPayment(data: PaymentRequest) {
-    // TODO: Implementar chamada à API do Gateway de Pagamento
-    // console.log('[PaymentGateway] Processando pagamento único...', data);
-    
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          transactionId: `txn_${Math.random().toString(36).substring(7)}`,
-          status: 'paid'
+    if (!stripe) {
+      // MOCK MODE — sem chave Stripe configurada
+      console.warn('[PAYMENT MOCK] Stripe não configurado — usando simulação');
+      return {
+        success: true,
+        transactionId: `mock_${Date.now()}`,
+        status: 'paid',
+        mock: true
+      };
+    }
+
+    // REAL MODE — Stripe real
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(data.amount * 100), // Stripe usa centavos
+        currency: 'brl',
+        payment_method_types: ['card', 'pix'],
+        metadata: {
+          customerId: data.customerId || '',
+          items: JSON.stringify(data.items.map(i => i.id))
+        }
+      });
+
+      return {
+        success: true,
+        transactionId: paymentIntent.id,
+        clientSecret: paymentIntent.client_secret,
+        status: paymentIntent.status
+      };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro no pagamento';
+      return { success: false, message };
+    }
+  }
+
+  static async createSubscription(data: SubscriptionRequest) {
+    if (!stripe) {
+      console.warn('[PAYMENT MOCK] Stripe não configurado — usando simulação');
+      return {
+        success: true,
+        subscriptionId: `mock_sub_${Date.now()}`,
+        status: 'active' as const,
+        mock: true
+      };
+    }
+
+    try {
+      // Criar ou buscar customer no Stripe
+      const customers = await stripe.customers.list({ email: data.customerData?.email, limit: 1 });
+      let customerId = customers.data[0]?.id;
+
+      if (!customerId && data.customerData) {
+        const customer = await stripe.customers.create({
+          name: data.customerData.name,
+          email: data.customerData.email,
         });
-      }, 1500);
-    });
+        customerId = customer.id;
+      }
+
+      const subscription = await stripe.subscriptions.create({
+        customer: customerId!,
+        items: [{ price: data.planId }],
+        payment_behavior: 'default_incomplete',
+        expand: ['latest_invoice.payment_intent'],
+      });
+
+      return {
+        success: true,
+        subscriptionId: subscription.id,
+        status: subscription.status as 'active' | 'pending' | 'failed',
+      };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro na assinatura';
+      return { success: false, message };
+    }
   }
 
-  /**
-   * Cancela uma assinatura ativa.
-   */
-  static async cancelSubscription(subscriptionId: string) {
-    // console.log(`[PaymentGateway] Cancelando assinatura ${subscriptionId}...`);
-    return { success: true };
-  }
-
-  /**
-   * Cria ou atualiza um cliente no gateway de pagamento.
-   */
-  static async syncCustomer(data: CustomerData) {
-    // console.log('[PaymentGateway] Sincronizando cliente...', data);
-    return {
-      success: true,
-      gatewayCustomerId: `cus_${Math.random().toString(36).substring(7)}`
-    };
-  }
-
-  /**
-   * Processa o saque do feirante aplicando o Split (Marketplace + Logística).
-   */
   static async requestWithdrawalWithSplit(data: WithdrawalRequest) {
-    // console.log('[PaymentGateway] Solicitando saque com split (PIX)...', data);
+    if (!stripe) {
+      const taxaPlataforma = data.grossAmount * (data.marketplaceFeePercent / 100);
+      const taxaLogistica = data.logisticsFeeValue;
+      const valorLiquido = data.grossAmount - taxaPlataforma - taxaLogistica;
+      console.warn('[PAYMENT MOCK] Saque simulado');
+      return {
+        success: true,
+        transferId: `mock_trf_${Date.now()}`,
+        status: 'processing',
+        details: { grossAmount: data.grossAmount, platformFee: taxaPlataforma,
+                   logisticsFee: taxaLogistica, netAmountToFeirante: valorLiquido }
+      };
+    }
 
-    const taxaPlataforma = data.grossAmount * (data.marketplaceFeePercent / 100);
-    const taxaLogistica = data.logisticsFeeValue;
-    const valorLiquido = data.grossAmount - taxaPlataforma - taxaLogistica;
+    // Stripe Connect Transfer real
+    try {
+      const taxaPlataforma = data.grossAmount * (data.marketplaceFeePercent / 100);
+      const taxaLogistica = data.logisticsFeeValue;
+      const valorLiquido = data.grossAmount - taxaPlataforma - taxaLogistica;
 
-    // Simulação do comportamento da API de Split
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          transferId: `trf_${Math.random().toString(36).substring(7)}`,
-          status: 'processing',
-          details: {
-            grossAmount: data.grossAmount,
-            platformFee: taxaPlataforma,
-            logisticsFee: taxaLogistica,
-            netAmountToFeirante: valorLiquido
-          }
-        });
-      }, 1500);
-    });
+      const transfer = await stripe.transfers.create({
+        amount: Math.round(valorLiquido * 100),
+        currency: 'brl',
+        destination: data.pixKey, // Na prática seria o stripe_account_id do feirante
+      });
+
+      return {
+        success: true,
+        transferId: transfer.id,
+        status: 'processing',
+        details: { grossAmount: data.grossAmount, platformFee: taxaPlataforma,
+                   logisticsFee: taxaLogistica, netAmountToFeirante: valorLiquido }
+      };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro no saque';
+      return { success: false, message };
+    }
+  }
+
+  static async syncCustomer(data: CustomerData) {
+    if (!stripe) return { success: true, gatewayCustomerId: `mock_cus_${Date.now()}` };
+    try {
+      const existing = await stripe.customers.list({ email: data.email, limit: 1 });
+      if (existing.data[0]) {
+        return { success: true, gatewayCustomerId: existing.data[0].id };
+      }
+      const customer = await stripe.customers.create({ name: data.name, email: data.email });
+      return { success: true, gatewayCustomerId: customer.id };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro';
+      return { success: false, message };
+    }
+  }
+
+  static async cancelSubscription(subscriptionId: string) {
+    if (!stripe || subscriptionId.startsWith('mock_')) return { success: true };
+    try {
+      await stripe.subscriptions.cancel(subscriptionId);
+      return { success: true };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro';
+      return { success: false, message };
+    }
   }
 }

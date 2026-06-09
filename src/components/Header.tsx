@@ -7,6 +7,8 @@ import styles from './Header.module.css';
 import RegionModal from '@/components/RegionModal';
 import { getSavedRegion, saveRegion, regionButtonLabel, type SavedRegion } from '@/lib/region';
 import { clearAuthSession } from '@/lib/profile';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useGeolocation } from '@/hooks/useGeolocation';
 import { useCartStore } from '@/store/useCartStore';
 import { 
   Search, 
@@ -76,6 +78,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [region, setRegion] = useState<SavedRegion | null>(null);
   const [showRegionModal, setShowRegionModal] = useState(false);
+  const { locate } = useGeolocation();
 
   // Fechar dropdown ao clicar fora
   useEffect(() => {
@@ -116,43 +119,29 @@ const Header = () => {
 
     // Auto-detectar localização se ainda não tiver
     if (!saved?.lat) {
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            try {
-              const { latitude, longitude } = position.coords;
+      locate().then(async (pos) => {
+        if (!pos) return;
+        try {
+          const { lat, lng } = pos;
+          const geo = await reverseGeocode(lat, lng);
 
-              // Busca bairro/cidade real via Nominatim
-              const geo = await reverseGeocode(latitude, longitude);
+          const newRegion: SavedRegion = {
+            label: geo.label,
+            neighborhood: geo.neighborhood || undefined,
+            city: geo.city,
+            state: geo.state,
+            lat,
+            lng,
+            radius: 30,
+            timestamp: Date.now(),
+          };
 
-              const newRegion: SavedRegion = {
-                label: geo.label,
-                neighborhood: geo.neighborhood || undefined,
-                city: geo.city,
-                state: geo.state,
-                lat: latitude,
-                lng: longitude,
-                radius: 30,
-                timestamp: Date.now(),
-              };
-
-              // Salva usando a função centralizada (cuida das duas chaves)
-              saveRegion(newRegion);
-              setRegion(newRegion);
-            } catch (err) {
-              console.warn('[Header] Erro ao detectar localização:', err);
-            }
-          },
-          () => {
-            // GPS negado — usuário pode definir manualmente pelo modal
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: Infinity, // Permite usar cache do navegador para maior precisão
-          }
-        );
-      }
+          saveRegion(newRegion);
+          setRegion(newRegion);
+        } catch (err) {
+          console.warn('[Header] Erro ao detectar localização:', err);
+        }
+      });
     }
 
     // Ouvir mudanças de região feitas pelo modal

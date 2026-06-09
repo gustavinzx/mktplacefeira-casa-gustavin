@@ -55,7 +55,7 @@ export default function CadastrosPage() {
       {/* PAGE HEADER */}
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-[32px] font-black text-[#1b1c19] font-['Plus_Jakarta_Sans'] tracking-tight">Gerenciamento de Cadastros</h2>
+          <h2 className="text-[32px] font-black text-[#1b1c19] font-sans tracking-tight">Gerenciamento de Cadastros</h2>
           <p className="text-[#707a6f] font-medium">Controle e validação de todos os perfis do ecossistema feira.casa.</p>
         </div>
         <button className="bg-green-600 text-white px-8 py-4 rounded-2xl text-sm font-black flex items-center gap-2 hover:bg-[#0a4f11] transition-all shadow-lg shadow-[#0e6b17]/20">
@@ -112,7 +112,7 @@ export default function CadastrosPage() {
               <Users size={40} />
             </div>
             <div>
-              <h4 className="text-xl font-black font-['Plus_Jakarta_Sans']">Nenhum cadastro encontrado</h4>
+              <h4 className="text-xl font-black font-sans">Nenhum cadastro encontrado</h4>
               <p className="text-[#707a6f] font-medium max-w-sm mx-auto mt-2">Não há usuários registrados para esta categoria.</p>
             </div>
           </div>

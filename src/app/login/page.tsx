@@ -333,7 +333,7 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-screen relative font-['Plus_Jakarta_Sans'] text-white overflow-hidden flex flex-col md:flex-row">
+    <div className="min-h-screen relative font-sans text-white overflow-hidden flex flex-col md:flex-row">
       
       {/* HEADER LOGO ABSOLUTO (TOP LEFT) */}
       <div className="absolute top-8 left-8 lg:top-12 lg:left-12 z-50">

@@ -17,7 +17,7 @@ export default function ConteudoPage() {
       {/* PAGE HEADER */}
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-[32px] font-black text-[#1b1c19] font-['Plus_Jakarta_Sans'] tracking-tight">Conteúdo e Comunicação</h2>
+          <h2 className="text-[32px] font-black text-[#1b1c19] font-sans tracking-tight">Conteúdo e Comunicação</h2>
           <p className="text-[#707a6f] font-medium">Gestão de toda a comunicação visual e estratégica do marketplace.</p>
         </div>
         <div className="flex gap-4">
@@ -41,7 +41,7 @@ export default function ConteudoPage() {
                 <Icon size={24} />
               </div>
               <div>
-                <h4 className="text-lg font-black font-['Plus_Jakarta_Sans'] mb-2">{tool.title}</h4>
+                <h4 className="text-lg font-black font-sans mb-2">{tool.title}</h4>
                 <p className="text-xs text-[#707a6f] font-medium leading-relaxed">{tool.desc}</p>
               </div>
               <div className="mt-auto flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-green-600 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
@@ -62,17 +62,17 @@ export default function ConteudoPage() {
               <BarChart3 className="text-[#9ef892]" size={32} />
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#9ef892]">Performance de Mídia</span>
             </div>
-            <h3 className="text-3xl font-black font-['Plus_Jakarta_Sans'] mb-4 leading-tight">Geração de receita com anúncios.</h3>
+            <h3 className="text-3xl font-black font-sans mb-4 leading-tight">Geração de receita com anúncios.</h3>
             <p className="text-white/60 text-sm font-medium leading-relaxed">Este mês, a venda de espaços publicitários para parceiros gerou um incremento de 18% no faturamento bruto da plataforma.</p>
           </div>
           <div className="flex gap-4">
             <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/10 min-w-[160px]">
               <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-2">Impressões</p>
-              <p className="text-2xl font-black font-['Plus_Jakarta_Sans']">1.2M</p>
+              <p className="text-2xl font-black font-sans">1.2M</p>
             </div>
             <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/10 min-w-[160px]">
               <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-2">ROI Médio</p>
-              <p className="text-2xl font-black font-['Plus_Jakarta_Sans']">4.8x</p>
+              <p className="text-2xl font-black font-sans">4.8x</p>
             </div>
           </div>
         </div>

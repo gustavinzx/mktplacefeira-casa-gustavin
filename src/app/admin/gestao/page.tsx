@@ -46,7 +46,7 @@ export default function GestaoAdmPage() {
       {/* PAGE HEADER */}
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-[32px] font-black text-[#1b1c19] font-['Plus_Jakarta_Sans'] tracking-tight">Gestão Administrativa</h2>
+          <h2 className="text-[32px] font-black text-[#1b1c19] font-sans tracking-tight">Gestão Administrativa</h2>
           <p className="text-[#707a6f] font-medium">Controle de departamentos, parcerias e integridade documental.</p>
         </div>
         <div className="flex gap-4">
@@ -63,7 +63,7 @@ export default function GestaoAdmPage() {
         <div className="bg-white p-8 rounded-[32px] border border-[#bfc9bd]/20 shadow-sm flex flex-col">
           <div className="flex items-center gap-3 mb-8">
             <Building className="text-green-600" size={24} />
-            <h3 className="text-xl font-black font-['Plus_Jakarta_Sans']">Departamentos</h3>
+            <h3 className="text-xl font-black font-sans">Departamentos</h3>
           </div>
           <div className="space-y-4">
             {departments.map(dept => (
@@ -86,7 +86,7 @@ export default function GestaoAdmPage() {
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-3">
               <FolderKanban className="text-[#0066cc]" size={24} />
-              <h3 className="text-xl font-black font-['Plus_Jakarta_Sans']">Arquivos e Anexos</h3>
+              <h3 className="text-xl font-black font-sans">Arquivos e Anexos</h3>
             </div>
             <button className="text-[10px] font-black text-[#0066cc] uppercase tracking-widest hover:underline">Ver Drive Admin</button>
           </div>
@@ -120,7 +120,7 @@ export default function GestaoAdmPage() {
           <div className="flex items-center gap-3">
             <Users2 className="text-[#a63b00]" size={28} />
             <div>
-              <h3 className="text-2xl font-black font-['Plus_Jakarta_Sans'] mb-1">Parcerias e Convênios</h3>
+              <h3 className="text-2xl font-black font-sans mb-1">Parcerias e Convênios</h3>
               <p className="text-sm text-[#707a6f] font-medium">Gestão de contratos com prefeituras, associações e sindicatos.</p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function GestaoAdmPage() {
               <div className={`w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm ${parceria.color}`}>
                 <parceria.icon size={20} />
               </div>
-              <h4 className="text-lg font-black font-['Plus_Jakarta_Sans']">{parceria.name}</h4>
+              <h4 className="text-lg font-black font-sans">{parceria.name}</h4>
               <p className="text-xs text-[#707a6f] font-medium leading-relaxed">{parceria.desc}</p>
               <span className={`mt-auto inline-block px-3 py-1 text-[9px] font-black rounded-full uppercase self-start ${parceria.status === 'Ativo' ? 'bg-[#9ef892] text-[#002202]' : 'bg-[#efeee9] text-[#707a6f]'}`}>
                 {parceria.status}

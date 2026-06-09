@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
 
   if (!isUnlocked) {
     return (
-      <div className="min-h-screen bg-[#faf9f4] flex flex-col items-center justify-center font-['Plus_Jakarta_Sans'] text-[#1b1c19] p-6">
+      <div className="min-h-screen bg-[#faf9f4] flex flex-col items-center justify-center font-sans text-[#1b1c19] p-6">
         <div className="max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-red-100 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-red-600"></div>
           <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -124,7 +124,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen relative font-['Plus_Jakarta_Sans'] text-white overflow-hidden flex flex-col md:flex-row">
+    <div className="min-h-screen relative font-sans text-white overflow-hidden flex flex-col md:flex-row">
       
       {/* HEADER LOGO ABSOLUTO (TOP LEFT) */}
       <div className="absolute top-8 left-8 lg:top-12 lg:left-12 z-50">

@@ -1,3 +1,4 @@
+import { createSupabaseAdmin, getAuthUser, ok, err } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import { getTable, saveTable } from '@/lib/json-db';
 
@@ -13,6 +14,17 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const user = await getAuthUser(req);
+  if (!user) return err('Não autorizado', 401);
+
+  const admin = createSupabaseAdmin();
+  const { data: profile } = await admin
+    .from('mktplace_feira_profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single();
+  if (profile?.role !== 'admin') return err('Sem permissão', 403);
+
   try {
     const body = await req.json();
     saveTable(DB_KEY, body);

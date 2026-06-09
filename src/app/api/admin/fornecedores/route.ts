@@ -1,5 +1,5 @@
 import { getTable } from '@/lib/json-db';
-import { ok, err } from '@/lib/supabase-server';
+import { getAuthUser, createSupabaseAdmin, ok, err } from '@/lib/supabase-server';
 
 export async function GET() {
   try {

@@ -194,10 +194,10 @@ export default function CadastroFeirantePage() {
 
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f8f9f8] flex flex-col font-['Be_Vietnam_Pro'] text-[#404940]">
+    <div className="min-h-screen bg-[#f8f9f8] flex flex-col font-sans text-[#404940]">
       {/* Header */}
       <header className="w-full px-10 py-8 flex justify-between items-center bg-transparent">
-        <Link href="/" className="text-2xl font-bold text-[#125d30] font-['Plus_Jakarta_Sans']">
+        <Link href="/" className="text-2xl font-bold text-[#125d30] font-sans">
           feira.casa
         </Link>
         <div className="bg-white p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-colors shadow-sm">
@@ -224,7 +224,7 @@ export default function CadastroFeirantePage() {
                 <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6 inline-block">
                   Canal do Produtor
                 </span>
-                <h1 className="text-[48px] font-black leading-[1] mb-6 font-['Plus_Jakarta_Sans'] tracking-tight">
+                <h1 className="text-[48px] font-black leading-[1] mb-6 font-sans tracking-tight">
                   Sua banca <br /> agora é digital.
                 </h1>
                 <p className="text-lg opacity-90 max-w-[380px] font-medium leading-relaxed">
@@ -258,7 +258,7 @@ export default function CadastroFeirantePage() {
               {/* ── CADASTRO ── */}
               {view === 'signup' && (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-sans tracking-tighter">
                     Comece a vender
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -355,7 +355,7 @@ export default function CadastroFeirantePage() {
                     <Mail size={40} className="text-green-600" />
                   </div>
                   <div>
-                    <h2 className="text-[32px] font-black text-gray-900 font-['Plus_Jakarta_Sans'] tracking-tighter mb-3">
+                    <h2 className="text-[32px] font-black text-gray-900 font-sans tracking-tighter mb-3">
                       Confirme seu e-mail
                     </h2>
                     <p className="text-gray-500 font-medium leading-relaxed">
@@ -390,7 +390,7 @@ export default function CadastroFeirantePage() {
               {/* ── RECUPERAR SENHA ── */}
               {view === 'forgot' && (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-sans tracking-tighter">
                     Recuperar senha
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -446,7 +446,7 @@ export default function CadastroFeirantePage() {
               {/* ── LOGIN ── */}
               {view === 'login' && (
                 <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#125d30] mb-2 font-sans tracking-tighter">
                     Acessar Painel
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -510,7 +510,7 @@ export default function CadastroFeirantePage() {
       {/* Footer */}
       <footer className="w-full px-12 py-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center bg-white/50 backdrop-blur-md">
         <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-bold text-[#125d30] text-xl font-['Plus_Jakarta_Sans'] tracking-tighter">feira.casa</span>
+          <span className="font-bold text-[#125d30] text-xl font-sans tracking-tighter">feira.casa</span>
           <p className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">© 2024 Canal do Produtor — Fortalecendo a economia local.</p>
         </div>
         <div className="flex items-center gap-10">

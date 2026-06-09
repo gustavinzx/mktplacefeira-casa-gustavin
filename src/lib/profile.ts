@@ -37,7 +37,7 @@ export function persistAuthSession(
   accessToken: string,
   profile?: { role?: string | null; full_name?: string | null },
 ) {
-  localStorage.setItem('access_token', accessToken);
+  // APENAS cache de UI — auth real é pelo cookie Supabase
   if (profile) {
     localStorage.setItem('user_role', normalizeRole(profile.role));
     localStorage.setItem('user_name', profile.full_name || '');

@@ -285,7 +285,7 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen bg-[var(--background)] font-['Plus_Jakarta_Sans'] selection:bg-green-100 selection:text-green-900 isolate">
+    <div className="flex h-screen bg-[var(--background)] font-sans selection:bg-green-100 selection:text-green-900 isolate">
       
       {/* Sidebar */}
       <aside className="w-72 bg-white border-r border-gray-100 flex flex-col z-50">

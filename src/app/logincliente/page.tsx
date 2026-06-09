@@ -144,10 +144,10 @@ export default function LoginClientePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfaf5] flex flex-col font-['Be_Vietnam_Pro'] text-[#404940]">
+    <div className="min-h-screen bg-[#fbfaf5] flex flex-col font-sans text-[#404940]">
       {/* Header */}
       <header className="w-full px-10 py-8 flex justify-between items-center bg-transparent">
-        <Link href="/" className="text-2xl font-bold text-[#0e6b17] font-['Plus_Jakarta_Sans']">
+        <Link href="/" className="text-2xl font-bold text-[#0e6b17] font-sans">
           feira.casa
         </Link>
         <div className="bg-[#f0f0e8] p-2 rounded-full cursor-pointer hover:bg-[#e0e0d8] transition-colors">
@@ -185,7 +185,7 @@ export default function LoginClientePage() {
             <div style={{ position: 'absolute', top: '50px', left: '50px', right: '50px', zIndex: 20 }}>
               <h1 
                 style={{ color: 'white', textShadow: '0 4px 12px rgba(0,0,0,0.5)', margin: 0 }}
-                className="text-[40px] font-black leading-[1.1] mb-6 font-['Plus_Jakarta_Sans']"
+                className="text-[40px] font-black leading-[1.1] mb-6 font-sans"
               >
                 O frescor da feira <br /> na sua mesa.
               </h1>
@@ -203,7 +203,7 @@ export default function LoginClientePage() {
             <div className="max-w-[420px] mx-auto w-full">
               {view === 'login' ? (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[40px] font-extrabold text-[#0e6b17] mb-4 font-['Plus_Jakarta_Sans'] tracking-tight">
+                  <h2 className="text-[40px] font-extrabold text-[#0e6b17] mb-4 font-sans tracking-tight">
                     Acesse sua conta
                   </h2>
                   <p className="text-[#707a6f] text-base mb-14 font-medium">
@@ -341,7 +341,7 @@ export default function LoginClientePage() {
                 </div>
               ) : view === 'forgot' ? (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-extrabold text-[#0e6b17] mb-2 font-['Plus_Jakarta_Sans'] tracking-tight">
+                  <h2 className="text-[36px] font-extrabold text-[#0e6b17] mb-2 font-sans tracking-tight">
                     Recuperar senha
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-8 font-medium">
@@ -400,7 +400,7 @@ export default function LoginClientePage() {
                 </div>
               ) : (
                 <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-                  <h2 className="text-[36px] font-extrabold text-[#0e6b17] mb-2 font-['Plus_Jakarta_Sans'] tracking-tight">
+                  <h2 className="text-[36px] font-extrabold text-[#0e6b17] mb-2 font-sans tracking-tight">
                     Criar minha conta
                   </h2>
                   <p className="text-[#707a6f] text-sm mb-10 font-medium">
@@ -513,7 +513,7 @@ export default function LoginClientePage() {
       {/* Footer - Matching screenshot exactly */}
       <footer className="w-full px-12 py-10 border-t border-[#bfc9bd]/20 flex flex-col md:flex-row justify-between items-center bg-[#fbfaf5]">
         <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-bold text-[#0e6b17] text-xl font-['Plus_Jakarta_Sans']">feira.casa</span>
+          <span className="font-bold text-[#0e6b17] text-xl font-sans">feira.casa</span>
           <p className="text-[11px] font-bold text-[#bfc9bd]">© 2024 Feira Viva - Conectando o campo à sua mesa.</p>
         </div>
         

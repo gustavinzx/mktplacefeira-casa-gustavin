@@ -100,7 +100,7 @@ export default function DetalhesPedido() {
 
   if (notFound || !order) {
     return (
-      <div className="p-8 pb-32 max-w-3xl mx-auto font-['Plus_Jakarta_Sans']">
+      <div className="p-8 pb-32 max-w-3xl mx-auto font-sans">
         <Link href="/portal/usuario/pedidos" className="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-green-700 mb-6 transition-colors w-fit">
           <ArrowLeft size={15} /> Meus Pedidos
         </Link>
@@ -116,7 +116,7 @@ export default function DetalhesPedido() {
   const subtotal   = order.total_amount - (order.delivery_fee ?? 0);
 
   return (
-    <div className="p-8 pb-32 max-w-3xl mx-auto animate-in fade-in duration-500 font-['Plus_Jakarta_Sans']">
+    <div className="p-8 pb-32 max-w-3xl mx-auto animate-in fade-in duration-500 font-sans">
 
       {/* Header */}
       <div className="mb-8">

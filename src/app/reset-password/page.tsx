@@ -139,7 +139,7 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="min-h-screen bg-[#fbfaf5] flex items-center justify-center p-6 font-['Be_Vietnam_Pro']">
+    <div className="min-h-screen bg-[#fbfaf5] flex items-center justify-center p-6 font-sans">
       <div className="w-full max-w-md bg-white rounded-[32px] shadow-2xl border border-[#bfc9bd]/20 p-10">
         <div className="mb-8">
           <Link href="/" className="text-xl font-black text-[#0e6b17]">feira.casa</Link>

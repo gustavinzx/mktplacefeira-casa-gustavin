@@ -7,16 +7,14 @@ import styles from './page.module.css';
 import { Search, Calendar, Clock, Navigation, Loader2 } from 'lucide-react';
 import { supabase, getTableName } from '@/lib/supabase';
 import { useToast } from '@/components/Toast';
+import { useGeolocation } from '@/hooks/useGeolocation';
+import { SkeletonCard, Skeleton } from '@/components/Skeleton';
 
 import dynamic from 'next/dynamic';
 
 const FairsMap = dynamic(() => import('@/components/FairsMap'), {
   ssr: false,
-  loading: () => (
-    <div style={{ width: '100%', height: '100%', background: '#e0e0e0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      Carregando mapa interativo...
-    </div>
-  ),
+  loading: () => <Skeleton width="100%" height="100%" className="rounded-2xl" />,
 });
 
 interface DBFair {
@@ -111,30 +109,19 @@ function FairsPageInner() {
   const [fairs, setFairs] = useState<DBFair[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [locating, setLocating] = useState(false);
   const [flyTrigger, setFlyTrigger] = useState(0);
   const { showToast } = useToast();
+  const { locate, locating, error: geoError } = useGeolocation();
 
-  const handleLocateUser = () => {
-    if (!navigator.geolocation) {
-      showToast('Geolocalização não suportada pelo seu navegador.', 'error');
-      return;
+  const handleLocateUser = async () => {
+    const pos = await locate();
+    if (geoError) {
+      showToast(geoError, 'error');
+    } else if (pos) {
+      setUserLat(pos.lat);
+      setUserLng(pos.lng);
+      setFlyTrigger(prev => prev + 1);
     }
-    setLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setUserLat(pos.coords.latitude);
-        setUserLng(pos.coords.longitude);
-        setLocating(false);
-        setFlyTrigger(prev => prev + 1);
-      },
-      (err) => {
-        console.error(err);
-        showToast('Não foi possível obter sua localização exata.', 'error');
-        setLocating(false);
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: Infinity }
-    );
   };
 
   useEffect(() => {
@@ -258,9 +245,10 @@ function FairsPageInner() {
 
           <div className={styles.list}>
             {loading ? (
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px', gap: '12px' }}>
-                <Loader2 className="animate-spin text-primary" />
-                <p>Carregando feiras...</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <SkeletonCard />
+                <SkeletonCard />
+                <SkeletonCard />
               </div>
             ) : filteredFairs.length > 0 ? (
               filteredFairs.map(fair => (

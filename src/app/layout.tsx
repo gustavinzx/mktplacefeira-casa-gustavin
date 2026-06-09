@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Be_Vietnam_Pro } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const beVietnamPro = Be_Vietnam_Pro({
-  variable: "--font-be-vietnam",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 import { getCurrentLocale, getDictionary } from "@/lib/i18n/server";
@@ -59,14 +53,15 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${plusJakartaSans.variable} ${beVietnamPro.variable}`}
+      className={`${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body
-        style={{ fontFamily: 'var(--font-be-vietnam), sans-serif' }}
+        className="font-sans antialiased"
+        style={{ fontFamily: 'var(--font-inter), sans-serif' }}
         suppressHydrationWarning
       >
         <ToastProvider>

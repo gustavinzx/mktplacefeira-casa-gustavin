@@ -88,9 +88,9 @@ export async function POST(request: Request) {
           '00000000000000',                              // CNPJ emissor (placeholder)
           '55',                                          // modelo NF-e
           '001',                                         // série
-          String(Math.floor(Math.random() * 999999999)).padStart(9, '0'), // número
+          String(Date.now()).slice(-9), // número sequencial simulado
           '1',                                           // tipo emissão
-          String(Math.floor(Math.random() * 99999999)).padStart(8, '0'),  // código
+          String(Date.now()).slice(-8),  // código de verificação simulado
         ].join('');
 
         // Upsert correto: tenta inserir, se já existe faz update

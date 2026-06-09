@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createSupabaseAdmin } from '@/lib/supabase-server';
+import { err, ok, getAuthUser, createSupabaseAdmin } from '@/lib/supabase-server';
 
 /**
  * Detecção de Anomalias Antifraude

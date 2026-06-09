@@ -119,10 +119,10 @@ export default function CadastroB2BPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f1f5f9] flex flex-col font-['Be_Vietnam_Pro'] text-[#1e293b]">
+    <div className="min-h-screen bg-[#f1f5f9] flex flex-col font-sans text-[#1e293b]">
       {/* Header */}
       <header className="w-full px-10 py-8 flex justify-between items-center bg-transparent">
-        <Link href="/" className="text-2xl font-bold text-[#0f172a] font-['Plus_Jakarta_Sans']">
+        <Link href="/" className="text-2xl font-bold text-[#0f172a] font-sans">
           feira.casa <span className="text-blue-600 font-black">B2B</span>
         </Link>
         <div className="bg-white p-2 rounded-full cursor-pointer hover:bg-gray-200 transition-colors shadow-sm">
@@ -152,7 +152,7 @@ export default function CadastroB2BPage() {
                 <span className="bg-blue-600 text-white text-[10px] font-black px-4 py-2 rounded-lg uppercase tracking-widest mb-8 inline-block">
                   Atacado & Distribuição
                 </span>
-                <h1 className="text-[52px] font-black leading-[1] mb-8 font-['Plus_Jakarta_Sans'] tracking-tight">
+                <h1 className="text-[52px] font-black leading-[1] mb-8 font-sans tracking-tight">
                   Escalabilidade <br /> para seu negócio.
                 </h1>
                 <p className="text-xl opacity-80 max-w-[420px] font-medium leading-relaxed">
@@ -190,7 +190,7 @@ export default function CadastroB2BPage() {
             <div className="max-w-[450px] mx-auto w-full">
               {view === 'signup' ? (
                 <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#0f172a] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#0f172a] mb-2 font-sans tracking-tighter">
                     Abra sua Conta PJ
                   </h2>
                   <p className="text-[#64748b] text-sm mb-10 font-medium">
@@ -294,7 +294,7 @@ export default function CadastroB2BPage() {
                 </div>
               ) : (
                 <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-                  <h2 className="text-[36px] font-black text-[#0f172a] mb-2 font-['Plus_Jakarta_Sans'] tracking-tighter">
+                  <h2 className="text-[36px] font-black text-[#0f172a] mb-2 font-sans tracking-tighter">
                     Login Corporativo
                   </h2>
                   <p className="text-[#64748b] text-sm mb-10 font-medium">
@@ -356,7 +356,7 @@ export default function CadastroB2BPage() {
       {/* Footer */}
       <footer className="w-full px-12 py-10 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center bg-white/50 backdrop-blur-md">
         <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-bold text-[#0f172a] text-xl font-['Plus_Jakarta_Sans'] tracking-tighter">feira.casa <span className="text-blue-600 font-black text-sm">B2B</span></span>
+          <span className="font-bold text-[#0f172a] text-xl font-sans tracking-tighter">feira.casa <span className="text-blue-600 font-black text-sm">B2B</span></span>
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">© 2024 Corporate Solutions - Soluções inteligentes para sua cadeia de suprimentos.</p>
         </div>
         

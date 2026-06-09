@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getHomePathForRole, normalizeRole } from '@/lib/profile';
 import { supabase } from '@/lib/supabase';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 export type PortalRole = 'feirante' | 'chef' | 'logistica';
 
@@ -21,6 +22,7 @@ export default function PortalAuthGate({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const { role, loading } = useCurrentUser();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -47,8 +49,14 @@ export default function PortalAuthGate({
 
   if (!ready) {
     return (
-      <div style={{ padding: 48, textAlign: 'center', color: '#707a6b' }}>
-        Carregando painel…
+      <div className="p-8 max-w-6xl mx-auto space-y-6 animate-pulse">
+        <div className="h-10 bg-gray-200 rounded-lg w-1/4"></div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="h-32 bg-gray-200 rounded-2xl"></div>
+          <div className="h-32 bg-gray-200 rounded-2xl"></div>
+          <div className="h-32 bg-gray-200 rounded-2xl"></div>
+        </div>
+        <div className="h-64 bg-gray-200 rounded-2xl"></div>
       </div>
     );
   }
