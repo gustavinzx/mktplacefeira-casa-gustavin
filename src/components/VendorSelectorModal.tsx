@@ -33,6 +33,7 @@ interface Vendor {
 interface VendorSelectorModalProps {
   isOpen: boolean;
   onClose: () => void;
+  productId: string;
   productName: string;
   productDescription?: string;
   productImage?: string;
@@ -44,6 +45,7 @@ interface VendorSelectorModalProps {
 const VendorSelectorModal: React.FC<VendorSelectorModalProps> = ({ 
   isOpen, 
   onClose, 
+  productId,
   productName, 
   productDescription,
   productImage,
@@ -195,7 +197,7 @@ const VendorSelectorModal: React.FC<VendorSelectorModalProps> = ({
                 // Add to cart logic
                 if (activeVendor) {
                   useCartStore.getState().addItem({
-                    id: Math.random().toString(36).substring(7),
+                    id: productId, // Usa o ID real do produto!
                     title: productName,
                     price: activeVendor.price,
                     unit: activeVendor.unit,

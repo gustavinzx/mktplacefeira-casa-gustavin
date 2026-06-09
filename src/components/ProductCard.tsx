@@ -186,6 +186,7 @@ export function ProductCard({
       <VendorSelectorModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        productId={id}
         productName={title}
         productImage={imageUrl}
         productDescription={`${title} fresquinho, selecionado com carinho pelos nossos produtores locais.`}

@@ -21,14 +21,23 @@ export async function POST(request: Request) {
     const fallbackProducerId = defaultFeirante?.id || user.id;
 
     // Buscar preços REAIS do banco para evitar fraudes (manipulação do preço no frontend)
+    // Verifica se há IDs inválidos (ex: mock antigo que não é UUID)
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     const productIds = items.map((i: any) => i.id);
+    const hasInvalidIds = productIds.some((id: string) => !uuidRegex.test(id));
+    
+    if (hasInvalidIds) {
+      return err('Seu carrinho contém produtos da versão antiga do site. Por favor, limpe o carrinho e adicione novamente.', 400);
+    }
+
     const { data: realProducts, error: realProductsError } = await admin
       .from('mktplace_feira_products')
       .select('id, price, producer_id, stock')
       .in('id', productIds);
 
     if (realProductsError || !realProducts) {
-      return err('Erro ao validar produtos.', 500);
+      console.error('realProductsError:', realProductsError, 'productIds:', productIds);
+      return err(`Erro ao validar produtos. DB Error: ${realProductsError?.message || 'Nenhum produto'}`, 500);
     }
 
     let globalSubtotal = 0;
